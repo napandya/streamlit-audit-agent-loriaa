@@ -171,7 +171,7 @@ def render_findings_summary(findings: List[AuditFinding]):
     df = df.sort_values('Total', ascending=False)
     
     st.dataframe(
-        df.style.background_gradient(subset=['Total'], cmap='YlOrRd'),
+        df,
         hide_index=True,
         use_container_width=True
     )

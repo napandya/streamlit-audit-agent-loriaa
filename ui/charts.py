@@ -210,9 +210,9 @@ def render_lease_cliff_heatmap(findings: List):
     
     df = pd.DataFrame(heatmap_data)
     
-    # Display as table with color coding
+    # Display as table
     st.dataframe(
-        df.style.background_gradient(subset=['Drop %'], cmap='Reds'),
+        df,
         hide_index=True,
         use_container_width=True
     )
