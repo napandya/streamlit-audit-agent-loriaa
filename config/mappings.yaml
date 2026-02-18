@@ -1,0 +1,70 @@
+# Category Mappings for Data Normalization
+# Maps various charge descriptions to canonical categories
+
+rent_categories:
+  - "Rent"
+  - "Base Rent"
+  - "Monthly Rent"
+  - "Apartment Rent"
+  - "Unit Rent"
+
+concession_categories:
+  - "Concession"
+  - "Concessions"
+  - "Rent Concession"
+  - "Move-in Concession"
+  - "Promotional Concession"
+  - "Discount"
+  - "Employee Allowance"
+
+fee_categories:
+  billing_fee:
+    - "Billing Fee"
+    - "Admin Fee"
+  cable:
+    - "Cable"
+    - "Cable TV"
+    - "Internet & Cable"
+  cam:
+    - "CAM"
+    - "Common Area Maintenance"
+  hoa:
+    - "HOA"
+    - "HOA Fee"
+    - "Association Fee"
+  trash:
+    - "Trash"
+    - "Garbage"
+    - "Waste"
+  valet_trash:
+    - "Valet Trash"
+    - "Valet Service"
+  package_locker:
+    - "Package Locker"
+    - "Parcel Locker"
+  pest_control:
+    - "Pest Control"
+    - "Pest Service"
+
+credit_categories:
+  - "Credit"
+  - "Account Credit"
+  - "Adjustment"
+  - "Refund"
+
+# Status mappings
+finding_status:
+  - "Open"
+  - "Reviewed"
+  - "Overridden"
+  - "Closed"
+
+# Rule categories
+rule_types:
+  lease_cliff: "Lease Cliff Detection"
+  rent_proration: "Rent Proration Mismatch"
+  concession_misaligned: "Concession Misaligned"
+  excessive_concession: "Excessive Concession"
+  missing_recurring_charge: "Missing Recurring Charge"
+  fee_amount_mismatch: "Fee Amount Mismatch"
+  double_discount: "Double Discount Risk"
