@@ -1,28 +1,21 @@
-STREAMLIT AUDIT APP ARCHITECTURE
+# STREAMLIT AUDIT APP ARCHITECTURE
 
-Property Recurring Transaction & Concession Audit System
+## Property Recurring Transaction & Concession Audit System
 
-1. Purpose
+## 1. Purpose
 
 This Streamlit application enables a COO / Auditor to:
 
-Analyze recurring rent, credits, concessions, and fees
+- Analyze recurring rent, credits, concessions, and fees
+- Detect anomalies across a selected date range
+- Identify lease cliffs and revenue decay
+- Flag concession mismatches
+- Validate recurring charge templates
+- Drill down to unit-level evidence
+- Override findings with audit trail
+- Export evidence packages
 
-Detect anomalies across a selected date range
-
-Identify lease cliffs and revenue decay
-
-Flag concession mismatches
-
-Validate recurring charge templates
-
-Drill down to unit-level evidence
-
-Override findings with audit trail
-
-Export evidence packages
-
-Supported Data Sources
+### Supported Data Sources
 
 ✅ Direct ResMan API sync
 
@@ -30,7 +23,9 @@ Supported Data Sources
 
 ✅ Ad-hoc Excel report uploads
 
-2. Overall Architecture
+## 2. Overall Architecture
+
+```mermaid
 graph TB
     %% Actors
     AUD["👤 COO / Auditor"]
@@ -112,8 +107,11 @@ graph TB
 
     KPI --> EXPORT
     UNIT_VIEW --> EXPORT
+```
 
-3. Sequence Diagram – COO/Auditor Workflow
+## 3. Sequence Diagram – COO/Auditor Workflow
+
+```mermaid
 sequenceDiagram
     actor COO as COO / Auditor
     participant UI as Streamlit UI
@@ -152,36 +150,36 @@ sequenceDiagram
     COO->>UI: Export findings
     UI->>EXP: Generate export bundle
     EXP-->>UI: Download link
+```
 
-4. Analytical Engine (Derived from Real Report Findings)
+## 4. Analytical Engine (Derived from Real Report Findings)
 
 Based on the Village Green recurring projection analysis:
 
-A. Lease Cliff Detection
+### A. Lease Cliff Detection
 
 Revenue dropped dramatically over the projection period.
 
+```
 Rule
 IF monthly_rent_drop > 20%
 FLAG: LEASE_CLIFF_RISK
-
+```
 
 Output:
 
-Lease expiration heatmap
+- Lease expiration heatmap
+- Month-over-month revenue decay chart
 
-Month-over-month revenue decay chart
-
-B. Concession Misalignment
+### B. Concession Misalignment
 
 Observed pattern:
 
-Rent changed unexpectedly
+- Rent changed unexpectedly
+- Concession applied in wrong month
+- Partial rent without expected proration
 
-Concession applied in wrong month
-
-Partial rent without expected proration
-
+```
 Rules
 IF rent_amount != lease_contract_rent
 AND no valid proration
@@ -192,53 +190,60 @@ FLAG: CONCESSION_MISALIGNED
 
 IF concession_amount > 50% of rent
 FLAG: EXCESSIVE_CONCESSION
+```
 
-C. Recurring Fee Template Validation
+### C. Recurring Fee Template Validation
 
 Standard recurring template:
 
-Billing Fee: $5
-
-Cable: $55
-
-CAM: $10
-
-HOA: $2.50
-
-Trash: $10
-
-Valet Trash: $35
-
-Package Locker: $9
-
-Pest Control: $8
-
+| Fee | Amount |
+|-----|--------|
+| Billing Fee | $5 |
+| Cable | $55 |
+| CAM | $10 |
+| HOA | $2.50 |
+| Trash | $10 |
+| Valet Trash | $35 |
+| Package Locker | $9 |
+| Pest Control | $8 |
+|
+```
 Rules
 IF recurring_fee_missing AND lease_active
 FLAG: MISSING_RECURRING_CHARGE
 
 IF recurring_fee_amount != template_amount
 FLAG: FEE_AMOUNT_MISMATCH
+```
 
-D. Employee Unit vs Concession Conflict
+### D. Employee Unit vs Concession Conflict
+
+```
 IF employee_unit == TRUE
 AND concession_present == TRUE
 FLAG: DOUBLE_DISCOUNT_RISK
+```
 
-5. Canonical Data Model
-fact_recurring_transactions
+## 5. Canonical Data Model
+
+**fact_recurring_transactions**
 
 | unit_id | category | amount | month | source |
+|---------|----------|--------|-------|--------|
 
-fact_lease_terms
+**fact_lease_terms**
 
 | unit_id | lease_start | lease_end | rent | concession_amount |
+|---------|-------------|-----------|------|-------------------|
 
-audit_findings
+**audit_findings**
 
 | finding_id | unit_id | rule_id | severity | month | delta | evidence_json | status | notes |
+|------------|---------|---------|----------|-------|-------|---------------|--------|-------|
 
-6. Recommended Code Structure
+## 6. Recommended Code Structure
+
+```
 streamlit-audit-app/
 │
 ├── app.py
@@ -278,63 +283,53 @@ streamlit-audit-app/
 └── utils/
     ├── helpers.py
     └── validations.py
+```
 
-7. Date Range Analytics Design
+## 7. Date Range Analytics Design
 
 The Date Range Engine:
 
 Filters canonical table by:
 
-start_month
-
-end_month
+- `start_month`
+- `end_month`
 
 Aggregates:
 
-Gross Rent
-
-Credits
-
-Net Rent
-
-Concession %
+- Gross Rent
+- Credits
+- Net Rent
+- Concession %
 
 Produces:
 
-Revenue waterfall
+- Revenue waterfall
+- Concession ratio trend
+- Lease expiration heatmap
+- Flag density by month
 
-Concession ratio trend
+## 8. Architectural Design Principles
 
-Lease expiration heatmap
-
-Flag density by month
-
-8. Architectural Design Principles
-Concern	Layer
-Data retrieval	ingestion/
-Standardization	models/
-Business rules	engine/
-UI rendering	ui/
-Persistence	storage/
+| Concern | Layer |
+|---------|-------|
+| Data retrieval | `ingestion/` |
+| Standardization | `models/` |
+| Business rules | `engine/` |
+| UI rendering | `ui/` |
+| Persistence | `storage/` |
 
 This separation allows:
 
-Switching between PDF, Excel, and ResMan without changing validation logic
+- Switching between PDF, Excel, and ResMan without changing validation logic
+- Reusing rule engine in Loriaa backend
+- Converting into nightly batch job
+- Scaling to multi-property portfolio
 
-Reusing rule engine in Loriaa backend
-
-Converting into nightly batch job
-
-Scaling to multi-property portfolio
-
-9. Future Evolution
+## 9. Future Evolution
 
 This standalone app can evolve into:
 
-FastAPI backend service
-
-Celery nightly audit job
-
-Loriaa Audit Agent integration
-
-Portfolio-level analytics
+- FastAPI backend service
+- Celery nightly audit job
+- Loriaa Audit Agent integration
+- Portfolio-level analytics
