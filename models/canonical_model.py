@@ -44,12 +44,7 @@ class CanonicalModel:
         """
         description_lower = description.lower().strip()
         
-        # Check rent categories
-        for rent_term in self.mappings.get('rent_categories', []):
-            if rent_term.lower() in description_lower:
-                return ('rent', None)
-        
-        # Check concession categories
+        # Check concession categories first (they have higher priority)
         for conc_term in self.mappings.get('concession_categories', []):
             if conc_term.lower() in description_lower:
                 return ('concession', None)
@@ -58,6 +53,11 @@ class CanonicalModel:
         for credit_term in self.mappings.get('credit_categories', []):
             if credit_term.lower() in description_lower:
                 return ('credit', None)
+        
+        # Check rent categories
+        for rent_term in self.mappings.get('rent_categories', []):
+            if rent_term.lower() in description_lower:
+                return ('rent', None)
         
         # Check fee categories
         fee_cats = self.mappings.get('fee_categories', {})

@@ -46,63 +46,85 @@ class PDFParser:
     
     def _process_table(self, table: List[List[str]], canonical_model: CanonicalModel):
         """Process a table extracted from the PDF"""
-        if not table or len(table) < 2:
+        if not table or len(table) < 1:
             return
         
-        # First row typically contains headers (months)
-        header_row = table[0]
-        month_columns = self._extract_month_columns(header_row)
+        # Check if this table has the format: Unit, Unit Type, Category, Month1, Month2, ...
+        # The ResMan format has columns like: Unit | Unit Type | Category | Feb 2026 | Mar 2026 | ...
         
-        # Process each subsequent row
-        current_unit = None
-        current_resident = None
-        
-        for row in table[1:]:
-            if not row or len(row) < 2:
+        for row in table:
+            if not row or len(row) < 4:
                 continue
             
-            # Check if this is a unit header row
-            unit_match = self._extract_unit_info(row[0] if row[0] else "")
-            if unit_match:
-                current_unit = unit_match['unit_number']
-                current_resident = unit_match['resident_name']
+            # Check if first column contains unit info
+            unit_info = self._extract_unit_info(row[0] if row[0] else "")
+            
+            if unit_info and len(row) >= 4:
+                unit_number = unit_info['unit_number']
+                resident_name = unit_info['resident_name']
                 
-                # Create Unit object
+                # Skip summary rows (like "Concession", "Employee Unit Rent Allowance", etc.)
+                if not unit_number.isdigit():
+                    continue
+                
+                # Create or update Unit object
                 unit = Unit(
-                    unit_id=f"unit_{current_unit}",
-                    unit_number=current_unit,
-                    resident_name=clean_resident_name(current_resident) if current_resident else None,
-                    is_employee_unit=is_employee_unit(current_resident) if current_resident else False
+                    unit_id=f"unit_{unit_number}",
+                    unit_number=unit_number,
+                    resident_name=clean_resident_name(resident_name) if resident_name else None,
+                    is_employee_unit=is_employee_unit(resident_name) if resident_name else False
                 )
                 canonical_model.add_unit(unit)
-                continue
-            
-            # Process charge row if we have a current unit
-            if current_unit and len(row) > 0:
-                charge_description = row[0] if row[0] else ""
+                
+                # Column 1 is unit type (skip it)
+                # Column 2 is category/description
+                charge_description = row[2] if len(row) > 2 else ""
+                
+                if not charge_description:
+                    continue
                 
                 # Normalize category
                 category, subcategory = canonical_model.normalize_category(charge_description)
                 
-                # Process amounts for each month
-                for month_idx, month_date in month_columns.items():
-                    if month_idx < len(row):
-                        amount_str = row[month_idx]
-                        amount = parse_currency(amount_str)
+                # Columns 3+ are monthly amounts
+                # We need to figure out which months these represent
+                # For now, assume they start with current month and go forward
+                from datetime import date
+                start_month = date(2026, 2, 1)  # Feb 2026 from PDF header
+                
+                for idx in range(3, len(row)):
+                    amount_str = row[idx]
+                    amount = parse_currency(amount_str)
+                    
+                    if amount != 0:  # Only add non-zero transactions
+                        # Calculate month offset
+                        month_offset = idx - 3
+                        month = start_month.month + month_offset
+                        year = start_month.year
                         
-                        if amount != 0:  # Only add non-zero transactions
-                            transaction = RecurringTransaction(
-                                transaction_id=generate_id("txn"),
-                                unit_id=f"unit_{current_unit}",
-                                unit_number=current_unit,
-                                category=category,
-                                subcategory=subcategory,
-                                amount=amount,
-                                month=month_date,
-                                description=charge_description,
-                                source="pdf"
-                            )
-                            canonical_model.add_transaction(transaction)
+                        # Handle year rollover
+                        while month > 12:
+                            month -= 12
+                            year += 1
+                        
+                        month_date = date(year, month, 1)
+                        
+                        # Make concessions and credits negative
+                        if category in ['concession', 'credit']:
+                            amount = -abs(amount)
+                        
+                        transaction = RecurringTransaction(
+                            transaction_id=generate_id("txn"),
+                            unit_id=f"unit_{unit_number}",
+                            unit_number=unit_number,
+                            category=category,
+                            subcategory=subcategory,
+                            amount=amount,
+                            month=month_date,
+                            description=charge_description,
+                            source="pdf"
+                        )
+                        canonical_model.add_transaction(transaction)
     
     def _extract_month_columns(self, header_row: List[str]) -> Dict[int, date]:
         """
@@ -122,16 +144,22 @@ class PDFParser:
     def _extract_unit_info(self, cell_text: str) -> Optional[Dict[str, str]]:
         """
         Extract unit number and resident name from a cell
-        Example: "Unit 0205 - Victoria Braden" or "0205 - *Clayton Curtis"
+        Examples: 
+        - "0201 - Luis Garcia"
+        - "0202 - *Clayton Curtis" (employee unit)
+        - "0203 - Marvin Hunt,\nJacquelyn Hunt" (multi-line)
         """
         if not cell_text:
             return None
         
-        # Pattern: optional "Unit" prefix, unit number, dash, resident name
+        # Clean up multi-line text
+        cell_text = cell_text.replace('\n', ' ').strip()
+        
+        # Pattern: unit number (3-4 digits), dash, resident name
         patterns = [
-            r'(?:Unit\s+)?(\d+)\s*[-–]\s*(.+)',  # "Unit 0205 - Name" or "0205 - Name"
+            r'^(\d{3,4})\s*[-–]\s*(.+)$',  # "0205 - Name" or "0202 - Name"
+            r'(?:Unit\s+)?(\d+)\s*[-–]\s*(.+)',  # "Unit 0205 - Name"
             r'(?:Unit\s+)?([A-Za-z0-9]+)\s*[-–]\s*(.+)',  # Alphanumeric unit
-            r'Unit\s+(\d+)',  # Just "Unit 0205"
         ]
         
         for pattern in patterns:

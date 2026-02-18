@@ -16,6 +16,8 @@ concession_categories:
   - "Promotional Concession"
   - "Discount"
   - "Employee Allowance"
+  - "Employee Unit Rent Allowance"
+  - "Rent Concession Credit"
 
 fee_categories:
   billing_fee:
