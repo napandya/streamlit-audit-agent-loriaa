@@ -1,0 +1,6 @@
+__pycache__
+.git
+.env
+*.pyc
+tests/
+data/samples/*.pdf
