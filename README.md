@@ -6,6 +6,10 @@ A comprehensive Streamlit application for auditing property recurring transactio
 ![KPI Dashboard](https://github.com/user-attachments/assets/c1fe0627-e3ca-4039-b19f-a99e03e8d8f4)
 ![Audit Findings](https://github.com/user-attachments/assets/4861ef42-880a-403c-8b84-c8de888e99d0)
 
+## Prerequisites
+
+- Python 3.13+
+
 ## Quick Start
 
 ```bash

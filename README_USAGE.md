@@ -69,7 +69,7 @@ The system implements comprehensive validation rules:
 
 ## 📋 Requirements
 
-- Python 3.8+
+- Python 3.13+
 - See `requirements.txt` for full dependency list
 
 ## 🛠️ Installation
