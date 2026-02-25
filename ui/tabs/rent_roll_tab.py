@@ -34,17 +34,19 @@ def render_rent_roll_tab(parsed_doc: Optional[ParsedDocument]) -> None:
     processor = DataProcessor()
     df = processor.normalize_columns(parsed_doc.dataframe.copy())
 
-    # --- KPI row ---
-    total = len(df)
-    vacant_mask = df.get("status", pd.Series()).astype(str).str.upper().isin(["VACANT", "V"])
-    ue_mask = df.get("status", pd.Series()).astype(str).str.upper() == "UE"
-    ntv_mask = df.get("status", pd.Series()).astype(str).str.upper() == "NTV"
-    mtm_mask = df.get("status", pd.Series()).astype(str).str.upper() == "MTM"
+    # Deduplicate to one row per unit for KPI computation so that multi-charge
+    # rows (rent + fees + concessions) don't inflate unit/occupancy counts.
+    unit_df = df
+    if "unit_id" in df.columns:
+        unit_df = df.drop_duplicates(subset=["unit_id"], keep="first")
 
-    vacant_count = int(vacant_mask.sum())
-    ue_count = int(ue_mask.sum())
-    ntv_count = int(ntv_mask.sum())
-    mtm_count = int(mtm_mask.sum())
+    # --- KPI row ---
+    total = len(unit_df)
+    status_series = unit_df.get("status", pd.Series(dtype=str)).astype(str).str.upper()
+    vacant_count = int(status_series.isin(["VACANT", "V"]).sum())
+    ue_count = int((status_series == "UE").sum())
+    ntv_count = int((status_series == "NTV").sum())
+    mtm_count = int((status_series == "MTM").sum())
     occupied = total - vacant_count
     occ_pct = (occupied / total * 100) if total else 0
 

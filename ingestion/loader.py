@@ -32,7 +32,6 @@ class FileLoader:
         "xls": (ExcelParser, parse_excel),
         "csv": (ExcelParser, parse_csv),
         "docx": (WordParser, parse_docx),
-        "doc": (WordParser, parse_docx),
     }
 
     def __init__(self):

@@ -19,19 +19,16 @@ def _read_csv_resilient(file_path: str) -> pd.DataFrame:
 
 def _skip_metadata_rows(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Drop rows where most columns are empty or the first non-empty cell looks
-    like property name / date metadata (not tabular data).
+    Drop rows where most columns are empty (i.e., only one or zero non-empty
+    cells), which typically represent blank separator or title rows in
+    property-management exports.
     """
     if df.empty:
         return df
 
-    threshold = max(1, len(df.columns) // 2)
-
     def _is_metadata_row(row) -> bool:
         non_empty = row.dropna().astype(str).str.strip().str.len() > 0
-        if non_empty.sum() <= 1:
-            return True  # Almost empty row
-        return False
+        return non_empty.sum() <= 1  # Almost empty row
 
     mask = df.apply(_is_metadata_row, axis=1)
     cleaned = df[~mask].reset_index(drop=True)

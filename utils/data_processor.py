@@ -11,7 +11,9 @@ from ingestion.parsers import ParsedDocument
 _COLUMN_MAP = {
     "rent": "monthly_rent",
     "monthly rent": "monthly_rent",
-    "market rent": "monthly_rent",
+    "amount": "monthly_rent",
+    "rent amount": "monthly_rent",
+    "market rent": "market_rent",
     "unit": "unit_id",
     "unit #": "unit_id",
     "unit number": "unit_id",
@@ -115,28 +117,43 @@ class DataProcessor:
             return "\n".join(lines)
 
         df = self.normalize_columns(df)
-        total = len(df)
-        lines.append(f"Total rows: {total}")
+        total_rows = len(df)
+        lines.append(f"Total rows: {total_rows}")
 
-        # Status counts
-        if "status" in df.columns:
-            status_counts = df["status"].value_counts().to_dict()
+        # Deduplicate to unit level for KPI counting so that multi-charge rows
+        # (e.g., Rent + Pet Fee + Concession for the same unit) don't inflate counts.
+        unit_df = df
+        if "unit_id" in df.columns:
+            unit_df = (
+                df.sort_values("unit_id")
+                .drop_duplicates(subset=["unit_id"], keep="first")
+            )
+            total_units = len(unit_df)
+            lines.append(f"Total units (unique): {total_units}")
+        else:
+            total_units = total_rows
+
+        # Status counts (based on unique units, not raw rows)
+        if "status" in unit_df.columns:
+            status_counts = unit_df["status"].value_counts().to_dict()
             lines.append(f"Status breakdown: {status_counts}")
 
-            vacant = df["status"].astype(str).str.upper().isin(["VACANT", "V"]).sum()
-            occupied = total - int(vacant)
-            lines.append(f"Occupied: {occupied}  |  Vacant: {int(vacant)}")
+            status_series = unit_df["status"].astype(str).str.upper()
+            vacant = int(status_series.isin(["VACANT", "V"]).sum())
+            occupied = total_units - vacant
+            lines.append(f"Occupied: {occupied}  |  Vacant: {vacant}")
 
-            ue = df["status"].astype(str).str.upper().isin(["UE"]).sum()
-            ntv = df["status"].astype(str).str.upper().isin(["NTV"]).sum()
-            mtm = df["status"].astype(str).str.upper().isin(["MTM"]).sum()
-            lines.append(f"UE (under eviction): {int(ue)}  |  NTV: {int(ntv)}  |  MTM: {int(mtm)}")
+            ue = int(status_series.isin(["UE"]).sum())
+            ntv = int(status_series.isin(["NTV"]).sum())
+            mtm = int(status_series.isin(["MTM"]).sum())
+            lines.append(f"UE (under eviction): {ue}  |  NTV: {ntv}  |  MTM: {mtm}")
 
-        # Balance anomalies
-        if "balance" in df.columns:
+        # Balance anomalies (report per unit)
+        if "balance" in unit_df.columns:
             try:
-                df["_balance_num"] = pd.to_numeric(df["balance"], errors="coerce")
-                high_balance = df[df["_balance_num"] > 1000]
+                unit_df = unit_df.copy()
+                unit_df["_balance_num"] = pd.to_numeric(unit_df["balance"], errors="coerce")
+                high_balance = unit_df[unit_df["_balance_num"] > 1000]
                 if not high_balance.empty:
                     lines.append(f"\nUnits with balance > $1,000: {len(high_balance)}")
                     for _, row in high_balance.head(10).iterrows():
@@ -147,13 +164,14 @@ class DataProcessor:
             except Exception:
                 pass
 
-        # Zero rent
-        if "monthly_rent" in df.columns:
+        # Zero charged rent (use monthly_rent if available, else skip)
+        if "monthly_rent" in unit_df.columns:
             try:
-                df["_rent_num"] = pd.to_numeric(df["monthly_rent"], errors="coerce")
-                zero_rent = df[(df["_rent_num"] == 0) | df["_rent_num"].isna()]
+                unit_df = unit_df.copy()
+                unit_df["_rent_num"] = pd.to_numeric(unit_df["monthly_rent"], errors="coerce")
+                zero_rent = unit_df[(unit_df["_rent_num"] == 0) | unit_df["_rent_num"].isna()]
                 if not zero_rent.empty:
-                    lines.append(f"\nUnits with zero/missing rent: {len(zero_rent)}")
+                    lines.append(f"\nUnits with zero/missing charged rent: {len(zero_rent)}")
             except Exception:
                 pass
 

@@ -27,13 +27,45 @@ def identify_rent_roll_anomalies(data_summary: str) -> str:
     still occupied, statistical outliers (>3σ), UE tenants with high balances,
     rent above market rent, multiple pet fees for the same unit.
     """
-    return (
-        f"Rent roll anomaly analysis complete. "
-        f"Examined summary:\n{data_summary}\n"
-        "Checks performed: missing fields, zero/negative rent, duplicate units, "
-        "expired leases still occupied, statistical outliers (>3σ on rent amounts), "
-        "UE tenants with high balances, rent above market rent, multiple pet fees."
+    findings: list[str] = []
+    lines = data_summary.splitlines()
+
+    for line in lines:
+        lower = line.lower()
+        # UE tenants with high balances
+        if "ue" in lower and "balance" in lower:
+            findings.append(f"CRITICAL: UE (under-eviction) tenant with outstanding balance — {line.strip()}")
+        # Zero or missing rent
+        if "zero" in lower and "rent" in lower:
+            findings.append(f"CRITICAL: Unit(s) with zero/missing charged rent detected — {line.strip()}")
+        # High balance
+        if "balance > $1,000" in lower or "high balance" in lower:
+            findings.append(f"HIGH: Unit(s) with balance exceeding $1,000 — {line.strip()}")
+        # NTV tenants
+        if "ntv" in lower and (":" in lower or "ntv:" in lower):
+            findings.append(f"MEDIUM: Notice-to-vacate (NTV) tenants may indicate upcoming vacancy risk — {line.strip()}")
+        # MTM tenants
+        if "mtm" in lower and (":" in lower or "mtm:" in lower):
+            findings.append(f"MEDIUM: Month-to-month (MTM) tenants present — higher turnover risk — {line.strip()}")
+        # Vacant units
+        if "vacant:" in lower or "vacant =" in lower:
+            findings.append(f"LOW: Vacant units detected — {line.strip()}")
+
+    if not findings:
+        findings.append(
+            "No obvious anomalies detected from summary heuristics. "
+            "LLM should review the full data for statistical outliers (>3σ on rent), "
+            "duplicate unit entries, expired leases still marked occupied, "
+            "rent above market rent, and multiple pet fees per unit."
+        )
+
+    header = (
+        "=== Rent Roll Anomaly Analysis ===\n"
+        "Checks applied: missing fields, zero/negative rent, duplicate units, "
+        "expired leases still occupied, >3σ outliers, UE with high balances, "
+        "rent above market, multiple pet fees.\n\nFindings:\n"
     )
+    return header + "\n".join(f"- {f}" for f in findings)
 
 
 @tool
@@ -43,12 +75,56 @@ def identify_projection_anomalies(data_summary: str) -> str:
     Checks: lease cliffs (many leases expiring same month), month-to-month tenants,
     revenue drop patterns.
     """
-    return (
-        f"Projection anomaly analysis complete. "
-        f"Examined summary:\n{data_summary}\n"
-        "Checks performed: lease cliffs (many leases expiring same month), "
-        "month-to-month tenants, revenue drop patterns."
+    findings: list[str] = []
+    lines = data_summary.splitlines()
+
+    month_totals: dict[str, float] = {}
+    for line in lines:
+        lower = line.lower()
+        # Parse "  Feb 2026: $87,500.00" style lines
+        if line.strip().startswith("Feb ") or line.strip().startswith("Mar ") \
+                or line.strip().startswith("Apr ") or line.strip().startswith("May ") \
+                or line.strip().startswith("Jun ") or line.strip().startswith("Jul ") \
+                or line.strip().startswith("Aug ") or line.strip().startswith("Sep ") \
+                or line.strip().startswith("Oct ") or line.strip().startswith("Nov ") \
+                or line.strip().startswith("Dec ") or line.strip().startswith("Jan "):
+            try:
+                parts = line.strip().split(":")
+                if len(parts) == 2:
+                    month = parts[0].strip()
+                    amount = float(parts[1].strip().replace("$", "").replace(",", ""))
+                    month_totals[month] = amount
+            except Exception:
+                pass
+        # MTM detection
+        if "mtm" in lower or "month-to-month" in lower:
+            findings.append(f"MEDIUM: Month-to-month tenants present — {line.strip()}")
+
+    # Check for revenue drops between consecutive months
+    if len(month_totals) >= 2:
+        months = list(month_totals.keys())
+        for i in range(1, len(months)):
+            prev_rev = month_totals[months[i - 1]]
+            curr_rev = month_totals[months[i]]
+            if prev_rev > 0 and curr_rev < prev_rev * 0.9:
+                drop_pct = (prev_rev - curr_rev) / prev_rev * 100
+                findings.append(
+                    f"HIGH: Revenue drop of {drop_pct:.1f}% from {months[i-1]} to {months[i]} "
+                    f"(${prev_rev:,.0f} → ${curr_rev:,.0f}) — potential lease cliff."
+                )
+
+    if not findings:
+        findings.append(
+            "No obvious revenue-drop anomalies detected from monthly totals. "
+            "LLM should review for lease cliffs and concentrated lease expirations."
+        )
+
+    header = (
+        "=== Projection Anomaly Analysis ===\n"
+        "Checks applied: lease cliffs (≥10% month-over-month revenue drop), "
+        "month-to-month tenants, revenue drop patterns.\n\nFindings:\n"
     )
+    return header + "\n".join(f"- {f}" for f in findings)
 
 
 @tool
@@ -58,13 +134,42 @@ def identify_concession_anomalies(data_summary: str) -> str:
     Checks: concessions that reduce rent below $999 threshold, duplicate concession
     descriptions, unusual concession amounts, military discounts, employee unit allowances.
     """
-    return (
-        f"Concession anomaly analysis complete. "
-        f"Examined summary:\n{data_summary}\n"
-        "Checks performed: concessions reducing rent below $999 threshold, "
-        "duplicate concession descriptions, unusual concession amounts, "
-        "military discounts, employee unit allowances."
+    findings: list[str] = []
+    lines = data_summary.splitlines()
+    seen_descriptions: dict[str, int] = {}
+
+    for line in lines:
+        lower = line.lower()
+        # Military discount
+        if "military" in lower:
+            findings.append(f"MEDIUM: Military discount concession detected — {line.strip()}")
+        # Employee allowance
+        if "employee" in lower and ("allowance" in lower or "unit" in lower):
+            findings.append(f"MEDIUM: Employee unit allowance concession detected — {line.strip()}")
+        # $999 special pattern — concession brings effective rent to ≤$999
+        if "999" in line:
+            findings.append(f"HIGH: Possible $999 special detected (concession reducing effective rent to ≤$999) — {line.strip()}")
+        # Duplicate description tracking
+        if "concession" in lower or "discount" in lower or "credit" in lower:
+            desc_key = line.strip().lower()
+            seen_descriptions[desc_key] = seen_descriptions.get(desc_key, 0) + 1
+
+    for desc, count in seen_descriptions.items():
+        if count > 1:
+            findings.append(f"MEDIUM: Duplicate concession description appears {count} times — '{desc}'")
+
+    if not findings:
+        findings.append(
+            "No obvious concession anomalies detected from heuristics. "
+            "LLM should verify no unusual amounts or policy violations."
+        )
+
+    header = (
+        "=== Concession Anomaly Analysis ===\n"
+        "Checks applied: $999 threshold, duplicate descriptions, "
+        "military discounts, employee allowances, unusual amounts.\n\nFindings:\n"
     )
+    return header + "\n".join(f"- {f}" for f in findings)
 
 
 @tool

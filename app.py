@@ -145,9 +145,9 @@ def render_new_sidebar():
     st.sidebar.subheader("📤 Upload Files")
     uploaded_files = st.sidebar.file_uploader(
         "Upload audit documents",
-        type=["csv", "xlsx", "xls", "pdf", "docx", "doc"],
+        type=["csv", "xlsx", "xls", "pdf", "docx"],
         accept_multiple_files=True,
-        help="Supported: CSV, Excel, PDF, Word",
+        help="Supported: CSV, Excel, PDF, Word (.docx)",
     )
 
     # Show detected document types
