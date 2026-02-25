@@ -6,39 +6,11 @@ A Streamlit application for auditing property recurring transactions and concess
 ![KPI Dashboard](https://github.com/user-attachments/assets/c1fe0627-e3ca-4039-b19f-a99e03e8d8f4)
 ![Audit Findings](https://github.com/user-attachments/assets/4861ef42-880a-403c-8b84-c8de888e99d0)
 
----
+## Prerequisites
 
-## 📋 Prerequisites
+- Python 3.13+
 
-Make sure the following are installed **before** cloning the repository:
-
-| Prerequisite | Minimum Version | Notes |
-|---|---|---|
-| Python | 3.11+ | The Dockerfile uses `python:3.11-slim`; 3.8+ may work locally |
-| pip | bundled with Python | Used to install dependencies |
-| Git | any recent version | To clone the repo |
-| Docker *(optional)* | 20.10+ | Only needed if running via container |
-| OpenAI API key | — | Required for the LangGraph / LangChain AI agent (`langchain-openai`) |
-
----
-
-## 🛠️ Installation (Local)
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/napandya/streamlit-audit-agent-loriaa.git
-cd streamlit-audit-agent-loriaa
-```
-
-### 2. Create and activate a virtual environment (recommended)
-
-```bash
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-```
-
-### 3. Install dependencies
+## Quick Start
 
 ```bash
 pip install -r requirements.txt
