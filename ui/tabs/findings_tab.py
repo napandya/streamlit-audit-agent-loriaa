@@ -27,6 +27,24 @@ def render_findings_tab(audit_result: Optional[AuditResult]) -> None:
     st.markdown("---")
 
     anomalies = audit_result.anomalies
+
+    # --- Summary banner for key risk categories ---
+    if anomalies:
+        df_all = pd.DataFrame(anomalies)
+        if "category" in df_all.columns:
+            conc_count = int((df_all["category"] == "Concession").sum())
+            mtm_count = int((df_all["category"] == "MTM").sum())
+            cliff_count = int((df_all["category"] == "Lease Cliff").sum())
+            if conc_count or mtm_count or cliff_count:
+                st.info(
+                    f"📊 **Risk Summary** — "
+                    f"🏷️ Concession units: **{conc_count}** | "
+                    f"🔄 MTM tenants: **{mtm_count}** | "
+                    f"📉 Revenue cliff months: **{cliff_count}**"
+                )
+
+    st.markdown("---")
+
     if not anomalies:
         st.success("No structured anomalies extracted. See Full Report tab for narrative findings.")
         return

@@ -29,8 +29,21 @@ def render_projection_tab(parsed_doc: Optional[ParsedDocument]) -> None:
         return
 
     # --- Revenue trend line chart ---
+    # Prefer the "Property Total" row to avoid double-counting individual unit rows.
     try:
-        totals = {col: pd.to_numeric(df[col], errors="coerce").sum() for col in month_cols}
+        first_col = df.columns[0]
+        total_mask = df[first_col].astype(str).str.lower().str.contains(
+            "property total", na=False
+        )
+        if total_mask.any():
+            total_row = df[total_mask].iloc[0]
+            totals = {
+                col: pd.to_numeric(total_row[col], errors="coerce")
+                for col in month_cols
+            }
+        else:
+            totals = {col: pd.to_numeric(df[col], errors="coerce").sum() for col in month_cols}
+
         trend_df = pd.DataFrame(
             {"Month": list(totals.keys()), "Total Charges": list(totals.values())}
         )
@@ -49,23 +62,33 @@ def render_projection_tab(parsed_doc: Optional[ParsedDocument]) -> None:
 
     # --- MTM fee tracker ---
     st.subheader("MTM Fee Tracker")
-    if "Description" in df.columns or "description" in df.columns:
-        desc_col = "Description" if "Description" in df.columns else "description"
-        mtm_rows = df[df[desc_col].astype(str).str.lower().str.contains("mtm|month-to-month", na=False)]
+    # Support both ResMan "Category" column and generic "Description" column.
+    cat_col = next(
+        (c for c in df.columns if c.lower() in ("category", "description")), None
+    )
+    if cat_col:
+        mtm_rows = df[
+            df[cat_col].astype(str).str.lower().str.contains(
+                r"mtm|month.to.month|month to month", na=False
+            )
+        ]
         if not mtm_rows.empty:
-            st.dataframe(mtm_rows[([desc_col] + month_cols)], use_container_width=True)
+            st.dataframe(mtm_rows[[cat_col] + month_cols], use_container_width=True)
         else:
             st.info("No MTM fee rows detected.")
     else:
-        st.info("No description column found to detect MTM fees.")
+        st.info("No category/description column found to detect MTM fees.")
 
     st.markdown("---")
 
     # --- Concession credit trend ---
     st.subheader("Concession Credit Trend")
-    if "Description" in df.columns or "description" in df.columns:
-        desc_col = "Description" if "Description" in df.columns else "description"
-        conc_rows = df[df[desc_col].astype(str).str.lower().str.contains("concession|credit|discount", na=False)]
+    if cat_col:
+        conc_rows = df[
+            df[cat_col].astype(str).str.lower().str.contains(
+                "concession|credit|discount", na=False
+            )
+        ]
         if not conc_rows.empty:
             conc_totals = {
                 col: pd.to_numeric(conc_rows[col], errors="coerce").sum() for col in month_cols
@@ -78,4 +101,4 @@ def render_projection_tab(parsed_doc: Optional[ParsedDocument]) -> None:
         else:
             st.info("No concession rows detected.")
     else:
-        st.info("No description column found to detect concessions.")
+        st.info("No category/description column found to detect concessions.")
