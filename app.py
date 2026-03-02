@@ -9,6 +9,9 @@ from pathlib import Path
 from datetime import datetime
 from typing import List, Optional
 
+# Import audit engine
+from audit_engine import compute_metrics
+
 # Import models and engines (existing)
 from models.canonical_model import CanonicalModel
 from engine.date_range_engine import DateRangeEngine
@@ -283,6 +286,39 @@ def main():
     if has_projection:
         with tabs[tab_idx]:
             render_projection_tab(projection_doc)
+
+            # --- Portfolio risk metrics ---
+            if (
+                projection_doc is not None
+                and projection_doc.dataframe is not None
+                and not projection_doc.dataframe.empty
+            ):
+                rent_roll_df = (
+                    rent_roll_doc.dataframe
+                    if rent_roll_doc is not None and rent_roll_doc.dataframe is not None
+                    else None
+                )
+                try:
+                    filtered_df = compute_metrics(projection_doc.dataframe, rent_roll_df)
+                    if not filtered_df.empty:
+                        st.markdown("---")
+                        st.subheader("📊 Portfolio Risk Metrics")
+                        m1, m2, m3 = st.columns(3)
+                        m1.metric(
+                            "Monthly Leakage",
+                            f"${filtered_df['Monthly_Projection'].abs().sum():,.2f}",
+                        )
+                        m2.metric(
+                            "Units Tracked",
+                            f"{len(filtered_df)}",
+                        )
+                        m3.metric(
+                            "Total Portfolio Risk",
+                            f"${filtered_df['Total_Lease_Loss'].abs().sum():,.2f}",
+                        )
+                except Exception as e:
+                    st.warning(f"Could not compute portfolio risk metrics: {e}")
+
         tab_idx += 1
 
     if has_concessions:
