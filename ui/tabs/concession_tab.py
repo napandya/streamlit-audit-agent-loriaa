@@ -14,7 +14,7 @@ from engine.concession_audit import (
     SEVERITY_COLORS,
     SEVERITY_ORDER,
     ConcessionAuditor,
-    _worst_severity,
+    worst_severity,
 )
 from ingestion.parsers import ParsedDocument
 
@@ -24,7 +24,7 @@ from ingestion.parsers import ParsedDocument
 # ---------------------------------------------------------------------------
 
 def _row_color(flags: list[str]) -> str:
-    sev = _worst_severity(flags)
+    sev = worst_severity(flags)
     if sev:
         return SEVERITY_COLORS[sev]
     return ""
@@ -154,7 +154,7 @@ def render_concession_tab(
         st.info(
             "ℹ️ No ResMan Transaction List CSVs were found in the `data/` directory. "
             "Place files matching `*Transaction List (Credits)*.csv` in the `data/` folder "
-            "and restart the app, or upload files via the sidebar."
+            "and restart the app."
         )
         return
 

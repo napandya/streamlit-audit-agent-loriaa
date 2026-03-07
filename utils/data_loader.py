@@ -47,6 +47,12 @@ def load_resman_csvs_from_data_dir(
             results.append((property_name, df))
             logger.info("data_loader: loaded '%s' → %s (%d rows)", csv_file.name, property_name, len(df))
         except Exception as exc:  # noqa: BLE001
-            logger.warning("data_loader: failed to parse '%s': %s", csv_file.name, exc)
+            logger.warning(
+                "data_loader: failed to parse '%s' (full path: '%s'): %s",
+                csv_file.name,
+                csv_file,
+                exc,
+                exc_info=True,
+            )
 
     return results

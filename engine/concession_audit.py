@@ -43,12 +43,16 @@ _MI_KEYWORDS: list[str] = ["$99", "m/i", "move in", "move-in", "special", "free"
 _MI_PATTERN = re.compile("|".join(re.escape(kw) for kw in _MI_KEYWORDS), re.IGNORECASE)
 
 
-def _worst_severity(flags: list[str]) -> str | None:
+def worst_severity(flags: list[str]) -> str | None:
     """Return the highest severity string from a list of flag IDs."""
     for sev in SEVERITY_ORDER:
         if any(f.endswith(f"_{sev}") for f in flags):
             return sev
     return None
+
+
+# Keep a private alias for backward compat with any existing code.
+_worst_severity = worst_severity
 
 
 class ConcessionAuditor:
