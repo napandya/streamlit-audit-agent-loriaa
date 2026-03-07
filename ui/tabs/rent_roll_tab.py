@@ -39,6 +39,11 @@ def render_rent_roll_tab(parsed_doc: Optional[ParsedDocument]) -> None:
     unit_df = df
     if "unit_id" in df.columns:
         unit_df = df.drop_duplicates(subset=["unit_id"], keep="first")
+    elif len(df.columns) > 0:
+        # Fallback: deduplicate on the first column (typically the unit identifier
+        # in ResMan exports where column normalisation didn't find "unit_id").
+        first_col = df.columns[0]
+        unit_df = df.drop_duplicates(subset=[first_col], keep="first")
 
     # --- KPI row ---
     total = len(unit_df)

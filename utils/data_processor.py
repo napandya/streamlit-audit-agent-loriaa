@@ -31,6 +31,11 @@ _COLUMN_MAP = {
     "balance": "balance",
     "deposit": "deposit",
     "deposits": "deposit",
+    # ResMan-specific aliases
+    "sq. feet": "sqft",
+    "sq ft": "sqft",
+    "sq.ft": "sqft",
+    "sqft": "sqft",
 }
 
 
@@ -194,11 +199,23 @@ class DataProcessor:
         month_cols = [c for c in df.columns if parse_month(str(c)) is not None]
         if month_cols:
             lines.append(f"\nProjection months detected: {month_cols}")
-            # Revenue totals per month
+
+            # Use "Property Total" row if present to avoid double-counting individual
+            # unit rows alongside aggregate totals.
+            first_col = df.columns[0]
+            total_mask = df[first_col].astype(str).str.lower().str.contains(
+                "property total", na=False
+            )
+            property_total_row = df[total_mask].iloc[0] if total_mask.any() else None
+
             for col in month_cols:
                 try:
-                    total = pd.to_numeric(df[col], errors="coerce").sum()
-                    lines.append(f"  {col}: ${total:,.2f}")
+                    if property_total_row is not None:
+                        val = pd.to_numeric(property_total_row[col], errors="coerce")
+                    else:
+                        val = pd.to_numeric(df[col], errors="coerce").sum()
+                    if pd.notna(val):
+                        lines.append(f"  {col}: ${val:,.2f}")
                 except Exception:
                     pass
         else:
