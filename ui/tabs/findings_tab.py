@@ -7,11 +7,69 @@ from typing import Optional
 import io
 
 from agents.audit_agent import AuditResult
+from ingestion.parsers import ParsedDocument
+from utils.helpers import parse_month, find_property_total_row
 
 
-def render_findings_tab(audit_result: Optional[AuditResult]) -> None:
+def _render_summary_banner(parsed_docs: list) -> None:
+    """Show a quick-glance banner with concession, MTM, and cliff counts."""
+    concession_units = 0
+    mtm_units = 0
+    cliff_months = 0
+
+    for doc in parsed_docs:
+        if not isinstance(doc, ParsedDocument):
+            continue
+        df = doc.dataframe
+        if df is None or df.empty:
+            continue
+
+        # Find a text column for category/description detection
+        text_col = None
+        for candidate in ("Category", "category", "Description", "description"):
+            if candidate in df.columns:
+                text_col = candidate
+                break
+        if text_col is None:
+            continue
+
+        lower_vals = df[text_col].astype(str).str.lower()
+
+        concession_units += int(lower_vals.str.contains("concession", na=False).sum())
+        mtm_units += int(
+            lower_vals.str.contains("mtm|month-to-month|month to month", na=False).sum()
+        )
+
+        # Revenue cliff: ≥10% MoM drop in Property Total row
+        month_cols = [c for c in df.columns if parse_month(str(c)) is not None]
+        if month_cols:
+            total_row = find_property_total_row(df)
+            if total_row is not None and not total_row.empty:
+                prev = None
+                for mc in month_cols:
+                    cur = pd.to_numeric(total_row[mc], errors="coerce").sum()
+                    if prev is not None and prev > 0 and cur < prev * 0.9:
+                        cliff_months += 1
+                    prev = cur
+
+    if concession_units or mtm_units or cliff_months:
+        col1, col2, col3 = st.columns(3)
+        col1.metric("🎟️ Concession Rows", concession_units)
+        col2.metric("📅 MTM Rows", mtm_units)
+        col3.metric("📉 Revenue Cliff Months", cliff_months)
+        st.markdown("---")
+
+
+def render_findings_tab(
+    audit_result: Optional[AuditResult],
+    parsed_docs: Optional[list] = None,
+) -> None:
     """Render the AI Findings tab."""
     st.subheader("🔍 AI Findings")
+
+    # --- Summary banner from parsed projection data ---
+    if parsed_docs:
+        _render_summary_banner(parsed_docs)
 
     if audit_result is None:
         st.info("Run the audit to see AI-generated findings.")

@@ -30,7 +30,14 @@ def render_projection_tab(parsed_doc: Optional[ParsedDocument]) -> None:
 
     # --- Revenue trend line chart ---
     try:
-        totals = {col: pd.to_numeric(df[col], errors="coerce").sum() for col in month_cols}
+        # Prefer the "Property Total" row for an accurate overall trend;
+        # fall back to summing all rows when that row is absent.
+        from utils.helpers import find_property_total_row
+        total_row = find_property_total_row(df)
+        if total_row is not None and not total_row.empty:
+            totals = {col: pd.to_numeric(total_row[col], errors="coerce").sum() for col in month_cols}
+        else:
+            totals = {col: pd.to_numeric(df[col], errors="coerce").sum() for col in month_cols}
         trend_df = pd.DataFrame(
             {"Month": list(totals.keys()), "Total Charges": list(totals.values())}
         )
@@ -49,22 +56,26 @@ def render_projection_tab(parsed_doc: Optional[ParsedDocument]) -> None:
 
     # --- MTM fee tracker ---
     st.subheader("MTM Fee Tracker")
-    if "Description" in df.columns or "description" in df.columns:
-        desc_col = "Description" if "Description" in df.columns else "description"
-        mtm_rows = df[df[desc_col].astype(str).str.lower().str.contains("mtm|month-to-month", na=False)]
+    desc_col = None
+    for candidate in ("Category", "category", "Description", "description"):
+        if candidate in df.columns:
+            desc_col = candidate
+            break
+
+    if desc_col is not None:
+        mtm_rows = df[df[desc_col].astype(str).str.lower().str.contains("mtm|month-to-month|month to month", na=False)]
         if not mtm_rows.empty:
             st.dataframe(mtm_rows[([desc_col] + month_cols)], use_container_width=True)
         else:
             st.info("No MTM fee rows detected.")
     else:
-        st.info("No description column found to detect MTM fees.")
+        st.info("No description/category column found to detect MTM fees.")
 
     st.markdown("---")
 
     # --- Concession credit trend ---
     st.subheader("Concession Credit Trend")
-    if "Description" in df.columns or "description" in df.columns:
-        desc_col = "Description" if "Description" in df.columns else "description"
+    if desc_col is not None:
         conc_rows = df[df[desc_col].astype(str).str.lower().str.contains("concession|credit|discount", na=False)]
         if not conc_rows.empty:
             conc_totals = {
@@ -78,4 +89,4 @@ def render_projection_tab(parsed_doc: Optional[ParsedDocument]) -> None:
         else:
             st.info("No concession rows detected.")
     else:
-        st.info("No description column found to detect concessions.")
+        st.info("No description/category column found to detect concessions.")

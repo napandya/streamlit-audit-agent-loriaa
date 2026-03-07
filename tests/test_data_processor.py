@@ -55,6 +55,21 @@ class TestNormalizeColumns:
         result = processor.normalize_columns(df)
         assert "move_in_date" in result.columns
 
+    def test_sqft_alias(self, processor):
+        df = pd.DataFrame({"Sq. Feet": [750]})
+        result = processor.normalize_columns(df)
+        assert "sqft" in result.columns
+
+    def test_sq_ft_alias(self, processor):
+        df = pd.DataFrame({"Sq Ft": [900]})
+        result = processor.normalize_columns(df)
+        assert "sqft" in result.columns
+
+    def test_type_alias(self, processor):
+        df = pd.DataFrame({"Type": ["A1"]})
+        result = processor.normalize_columns(df)
+        assert "unit_type" in result.columns
+
 
 # ---------------------------------------------------------------------------
 # produce_summary
