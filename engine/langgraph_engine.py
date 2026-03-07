@@ -9,9 +9,9 @@ from typing import Optional, List
 import pandas as pd
 
 from models.canonical_model import CanonicalModel
-from agents.audit_agent import AuditResult, run_audit, _parse_severity
+from agents.audit_agent import AuditResult, run_audit
 from utils.data_processor import DataProcessor
-from utils.helpers import parse_month
+from utils.helpers import parse_month, find_property_total_row
 from ingestion.parsers import ParsedDocument
 
 
@@ -163,15 +163,9 @@ class LangGraphEngine:
                     "source": "deterministic",
                 })
 
-        # Revenue cliffs (≥10 % MoM drop in Property Total row)
+        # Revenue cliffs (≥10% MoM drop in Property Total row)
         if month_cols and text_col:
-            total_row = None
-            for tc in (text_col, unit_col):
-                if tc and tc in df.columns:
-                    mask = df[tc].astype(str).str.lower().str.contains("property total", na=False)
-                    if mask.any():
-                        total_row = df.loc[mask]
-                        break
+            total_row = find_property_total_row(df)
 
             if total_row is not None and not total_row.empty:
                 prev_month = None

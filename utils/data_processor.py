@@ -201,13 +201,8 @@ class DataProcessor:
             lines.append(f"\nProjection months detected: {month_cols}")
 
             # Prefer the "Property Total" row for per-month values
-            total_row = None
-            for text_col in ("Unit", "Unit type", "Unit Type", "Description", "Category"):
-                if text_col in df.columns:
-                    mask = df[text_col].astype(str).str.lower().str.contains("property total", na=False)
-                    if mask.any():
-                        total_row = df.loc[mask]
-                        break
+            from utils.helpers import find_property_total_row
+            total_row = find_property_total_row(df)
 
             source = total_row if (total_row is not None and not total_row.empty) else df
             for col in month_cols:

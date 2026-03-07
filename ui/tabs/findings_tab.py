@@ -8,7 +8,7 @@ import io
 
 from agents.audit_agent import AuditResult
 from ingestion.parsers import ParsedDocument
-from utils.helpers import parse_month
+from utils.helpers import parse_month, find_property_total_row
 
 
 def _render_summary_banner(parsed_docs: list) -> None:
@@ -43,13 +43,7 @@ def _render_summary_banner(parsed_docs: list) -> None:
         # Revenue cliff: ≥10% MoM drop in Property Total row
         month_cols = [c for c in df.columns if parse_month(str(c)) is not None]
         if month_cols:
-            total_row = None
-            for tc in ("Unit", "Unit type", "Unit Type", "Description", "Category"):
-                if tc in df.columns:
-                    mask = df[tc].astype(str).str.lower().str.contains("property total", na=False)
-                    if mask.any():
-                        total_row = df.loc[mask]
-                        break
+            total_row = find_property_total_row(df)
             if total_row is not None and not total_row.empty:
                 prev = None
                 for mc in month_cols:

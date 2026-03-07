@@ -154,3 +154,17 @@ def generate_id(prefix: str = "") -> str:
     if prefix:
         return f"{prefix}_{unique}"
     return unique
+
+
+def find_property_total_row(df: 'pd.DataFrame') -> 'Optional[pd.DataFrame]':
+    """
+    Locate the "Property Total" row in a DataFrame by checking common text columns.
+
+    Returns a single-row DataFrame if found, or ``None`` otherwise.
+    """
+    for col in ("Unit", "Unit type", "Unit Type", "Description", "Category"):
+        if col in df.columns:
+            mask = df[col].astype(str).str.lower().str.contains("property total", na=False)
+            if mask.any():
+                return df.loc[mask]
+    return None

@@ -32,13 +32,8 @@ def render_projection_tab(parsed_doc: Optional[ParsedDocument]) -> None:
     try:
         # Prefer the "Property Total" row for an accurate overall trend;
         # fall back to summing all rows when that row is absent.
-        total_row = None
-        for text_col in ("Unit", "Unit type", "Unit Type", "Description", "Category"):
-            if text_col in df.columns:
-                mask = df[text_col].astype(str).str.lower().str.contains("property total", na=False)
-                if mask.any():
-                    total_row = df.loc[mask]
-                    break
+        from utils.helpers import find_property_total_row
+        total_row = find_property_total_row(df)
         if total_row is not None and not total_row.empty:
             totals = {col: pd.to_numeric(total_row[col], errors="coerce").sum() for col in month_cols}
         else:
