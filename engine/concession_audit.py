@@ -35,6 +35,10 @@ RULE_META: dict[str, tuple[str, str]] = {
     "R6": ("Generic Description", "LOW"),
 }
 
+# Rule thresholds
+MOVE_IN_SPECIAL_THRESHOLD: float = 795.0
+EXCESSIVE_CONCESSION_THRESHOLD: float = 1000.0
+
 _MI_KEYWORDS: list[str] = ["$99", "m/i", "move in", "move-in", "special", "free"]
 _MI_PATTERN = re.compile("|".join(re.escape(kw) for kw in _MI_KEYWORDS), re.IGNORECASE)
 
@@ -100,15 +104,15 @@ class ConcessionAuditor:
                     f"Concession reversed on {reverse_date} — confirm if re-applied correctly"
                 )
 
-            # Rule 2 — Move-In Special ≥ $795 (HIGH)
-            if amount >= 795 and _MI_PATTERN.search(desc_lower):
+            # Rule 2 — Move-In Special ≥ MOVE_IN_SPECIAL_THRESHOLD (HIGH)
+            if amount >= MOVE_IN_SPECIAL_THRESHOLD and _MI_PATTERN.search(desc_lower):
                 flags.append("R2_HIGH")
                 reasons.append(
                     f"Large move-in special of ${amount:,.2f} — verify lease agreement and approval"
                 )
 
-            # Rule 3 — Excessive Concession > $1,000 (CRITICAL)
-            if amount > 1000:
+            # Rule 3 — Excessive Concession > EXCESSIVE_CONCESSION_THRESHOLD (CRITICAL)
+            if amount > EXCESSIVE_CONCESSION_THRESHOLD:
                 flags.append("R3_CRITICAL")
                 reasons.append(
                     f"Concession of ${amount:,.2f} exceeds $1,000 threshold — requires COO approval"

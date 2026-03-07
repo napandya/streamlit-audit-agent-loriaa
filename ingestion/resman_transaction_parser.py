@@ -22,28 +22,19 @@ def parse_resman_transaction_csv(file_path: str) -> tuple[str, pd.DataFrame]:
     * clean_dataframe – real transaction rows with numeric Amount / charge columns
     """
     # --- Read property name from row 0, column 0 ---
-    for enc in ("utf-8", "latin-1"):
-        try:
-            with open(file_path, encoding=enc) as fh:
-                first_line = fh.readline()
-            break
-        except UnicodeDecodeError:
-            continue
-    else:
+    # Try UTF-8 first, fall back to latin-1 for Windows-1252-encoded files
+    encoding = "utf-8"
+    try:
+        with open(file_path, encoding="utf-8") as fh:
+            first_line = fh.readline()
+    except UnicodeDecodeError:
+        encoding = "latin-1"
         with open(file_path, encoding="latin-1") as fh:
             first_line = fh.readline()
     property_name = first_line.split(",")[0].strip().strip('"')
 
     # --- Read CSV skipping the 6 metadata rows; row 6 becomes the header ---
-    # Try UTF-8 first, fall back to latin-1 for Windows-1252-encoded files
-    for encoding in ("utf-8", "latin-1"):
-        try:
-            df = pd.read_csv(file_path, skiprows=6, dtype=str, on_bad_lines="skip", encoding=encoding)
-            break
-        except UnicodeDecodeError:
-            continue
-    else:
-        df = pd.read_csv(file_path, skiprows=6, dtype=str, on_bad_lines="skip", encoding="latin-1")
+    df = pd.read_csv(file_path, skiprows=6, dtype=str, on_bad_lines="skip", encoding=encoding)
 
     # Normalise column names (strip surrounding whitespace)
     df.columns = [str(c).strip() for c in df.columns]
