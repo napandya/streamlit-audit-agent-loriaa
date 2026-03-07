@@ -61,6 +61,50 @@ def test_csv_parser_minimal():
         os.unlink(tmp_path)
 
 
+def test_csv_parser_resman_multirow_header():
+    """CSV parser detects the true header row in a ResMan-style multi-row CSV."""
+    content = (
+        "Village Green of Bear Creek,,,,\n"
+        "LiveNJoy Residential LLC,,,,\n"
+        "Recurring Transaction Projection,,,,\n"
+        "February 2026,,,,\n"
+        ",,,,\n"
+        "Unit,Unit type,Category,Feb 2026,Mar 2026\n"
+        "0201,A2,Billing Fee,5.00,0.00\n"
+        "0201,A2,Rent,1250.00,1250.00\n"
+    )
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False, encoding="utf-8") as f:
+        f.write(content)
+        tmp_path = f.name
+    try:
+        doc = parse_csv(tmp_path)
+        assert doc.dataframe is not None
+        cols = [str(c) for c in doc.dataframe.columns]
+        # Should detect the correct header row with "Unit", "Feb 2026", etc.
+        assert "Unit" in cols or "unit" in [c.lower() for c in cols]
+        assert any("Feb" in c for c in cols)
+        assert any("Mar" in c for c in cols)
+        # Data rows should be the actual unit rows, not metadata
+        assert len(doc.dataframe) >= 2
+    finally:
+        os.unlink(tmp_path)
+
+
+def test_csv_parser_plain_csv_unchanged():
+    """Plain CSV without multi-row headers still parses correctly."""
+    content = "Unit,Status,Rent,Feb 2026,Mar 2026\n101,C,1250,1250,1250\n102,NTV,1300,1300,1300\n"
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False, encoding="utf-8") as f:
+        f.write(content)
+        tmp_path = f.name
+    try:
+        doc = parse_csv(tmp_path)
+        assert doc.dataframe is not None
+        assert len(doc.dataframe) == 2
+        assert "Unit" in doc.dataframe.columns
+    finally:
+        os.unlink(tmp_path)
+
+
 # ---------------------------------------------------------------------------
 # PDF parser tests
 # ---------------------------------------------------------------------------

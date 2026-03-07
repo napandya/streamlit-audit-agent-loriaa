@@ -21,6 +21,11 @@ _COLUMN_MAP = {
     "residents": "resident_name",
     "tenant": "resident_name",
     "status": "status",
+    "type": "unit_type",
+    "unit type": "unit_type",
+    "sq. feet": "sqft",
+    "sq ft": "sqft",
+    "sq feet": "sqft",
     "move in": "move_in_date",
     "move-in": "move_in_date",
     "move in date": "move_in_date",
@@ -194,10 +199,20 @@ class DataProcessor:
         month_cols = [c for c in df.columns if parse_month(str(c)) is not None]
         if month_cols:
             lines.append(f"\nProjection months detected: {month_cols}")
-            # Revenue totals per month
+
+            # Prefer the "Property Total" row for per-month values
+            total_row = None
+            for text_col in ("Unit", "Unit type", "Unit Type", "Description", "Category"):
+                if text_col in df.columns:
+                    mask = df[text_col].astype(str).str.lower().str.contains("property total", na=False)
+                    if mask.any():
+                        total_row = df.loc[mask]
+                        break
+
+            source = total_row if (total_row is not None and not total_row.empty) else df
             for col in month_cols:
                 try:
-                    total = pd.to_numeric(df[col], errors="coerce").sum()
+                    total = pd.to_numeric(source[col], errors="coerce").sum()
                     lines.append(f"  {col}: ${total:,.2f}")
                 except Exception:
                     pass
