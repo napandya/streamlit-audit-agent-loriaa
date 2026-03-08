@@ -13,7 +13,14 @@ def render_report_tab(audit_result: Optional[AuditResult], audit_timestamp: Opti
     st.subheader("📄 Full Audit Report")
 
     if audit_result is None:
-        st.info("Run the audit to generate a full report.")
+        st.warning(
+            "🤖 **No AI audit report available yet.**\n\n"
+            "This tab will display a full narrative audit report once you run the AI audit. "
+            "Click **🚀 Run AI Audit** in the sidebar to generate it.\n\n"
+            "The Concession Check tab (auto-populated) shows rule-based flags — "
+            "this report adds AI-driven analysis on top of that.",
+            icon="⏳",
+        )
         return
 
     if audit_timestamp:

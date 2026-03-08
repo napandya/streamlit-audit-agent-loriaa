@@ -201,10 +201,28 @@ def main():
     audit_log: AuditLog = st.session_state.audit_log
 
     st.title(f"{settings.APP_ICON} {settings.APP_TITLE}")
-    st.markdown("---")
 
     uploaded_files = sidebar["uploaded_files"]
     resman_docs = st.session_state.get("resman_concession_docs", [])
+
+    # --- Audit status banner ---
+    audit_result = st.session_state.get("audit_result")
+    if resman_docs or uploaded_files:
+        status_cols = st.columns([1, 1, 2])
+        with status_cols[0]:
+            st.success("✅ **Step 1 — Rule-Based Check:** Complete", icon="✅")
+        with status_cols[1]:
+            if audit_result:
+                st.success("✅ **Step 2 — AI Audit:** Complete", icon="🤖")
+            else:
+                st.warning("⏳ **Step 2 — AI Audit:** Not yet run", icon="⏳")
+        with status_cols[2]:
+            if not audit_result:
+                st.info(
+                    "👈 Click **Run AI Audit** in the sidebar to get AI-powered findings and a full narrative report.",
+                    icon="💡",
+                )
+    st.markdown("---")
 
     # Welcome screen — only when no uploaded files AND no auto-loaded concession data
     if not uploaded_files and not resman_docs:
@@ -278,7 +296,7 @@ def main():
     audit_result = st.session_state.get("audit_result")
 
     # --- Tab structure — Concession Audit always first ---
-    tabs_labels: List[str] = ["🏠 Concession Audit"]
+    tabs_labels: List[str] = ["🏠 Rule-Based Concession Check"]
     if has_rent_roll:
         tabs_labels.append("📋 Rent Roll")
     if has_projection:

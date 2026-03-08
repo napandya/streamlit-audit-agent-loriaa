@@ -72,7 +72,14 @@ def render_findings_tab(
         _render_summary_banner(parsed_docs)
 
     if audit_result is None:
-        st.info("Run the audit to see AI-generated findings.")
+        st.warning(
+            "🤖 **AI audit has not been run yet.**\n\n"
+            "The Concession Check tab shows rule-based flags that run automatically. "
+            "To get AI-powered findings (deeper pattern analysis, narrative explanations, "
+            "and severity scoring), click **🚀 Run AI Audit** in the sidebar.\n\n"
+            "You'll need an OpenAI API key to proceed.",
+            icon="⏳",
+        )
         return
 
     counts = audit_result.severity_counts

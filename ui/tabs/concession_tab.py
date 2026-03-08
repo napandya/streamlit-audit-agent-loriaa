@@ -146,7 +146,12 @@ def render_concession_tab(
         List of ``(property_name, dataframe)`` tuples auto-loaded from
         ``data/``.
     """
-    st.subheader("🏠 Concession Audit")
+    st.subheader("🏠 Rule-Based Concession Check")
+    st.caption(
+        "This is an **automated rule-based pre-check** that runs instantly on loaded data. "
+        "It flags common anomalies using deterministic rules (duplicate concessions, missing reverse dates, etc.). "
+        "For deeper AI-powered analysis, click **🚀 Run AI Audit** in the sidebar."
+    )
 
     effective_resman: list[tuple[str, pd.DataFrame]] = list(resman_docs or [])
 
