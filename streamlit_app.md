@@ -1,102 +1,114 @@
 # STREAMLIT AUDIT APP ARCHITECTURE
 
-## Property Recurring Transaction & Concession Audit System
+## LiveNJoy LLC — Concession Audit System
 
 ## 1. Purpose
 
 This Streamlit application enables a COO / Auditor to:
 
-- Analyze recurring rent, credits, concessions, and fees
-- Detect anomalies across a selected date range
-- Identify lease cliffs and revenue decay
-- Flag concession mismatches
-- Validate recurring charge templates
-- Drill down to unit-level evidence
-- Override findings with audit trail
-- Export evidence packages
+- Audit ResMan Transaction List (Credits) CSVs across a multi-property portfolio
+- Detect concession anomalies using a **hybrid deterministic + AI pipeline**
+- Surface high/critical findings with row-level evidence
+- Generate narrative audit reports powered by OpenAI o3
+- Drill down to unit-level evidence per property
+- Export findings for review
 
 ### Supported Data Sources
 
-✅ Direct ResMan API sync
+✅ ResMan Transaction List (Credits) CSV files (auto-loaded from `data/`)
 
-✅ Ad-hoc PDF uploads
+✅ Ad-hoc PDF, Excel, and Word uploads (rent rolls, projections)
 
-✅ Ad-hoc Excel report uploads
-
-## 2. Overall Architecture
+## 2. Overall Architecture (Hybrid Pipeline)
 
 ```mermaid
 graph TB
     %% Actors
     AUD["👤 COO / Auditor"]
-    ST["🧩 Streamlit App"]
+    ST["🧩 Streamlit App<br/>(app.py)"]
 
     %% Data Sources
     subgraph INPUTS["Data Sources"]
-        RESMAN["🌐 ResMan API"]
-        PDF["📄 PDF Upload"]
-        XLS["📊 Excel Upload"]
+        CSV["📊 ResMan Transaction List<br/>(Credits) CSVs"]
+        UPLOAD["📄 Ad-hoc Upload<br/>(PDF · Excel · Word)"]
     end
 
     %% Ingestion Layer
     subgraph INGEST["Ingestion Layer"]
-        RES_CLIENT["ResMan Client"]
-        PDF_PARSER["PDF Parser"]
-        XLS_PARSER["Excel Parser"]
+        AUTO_LOAD["Auto-Loader<br/>(data/ directory scan)"]
+        CSV_PARSER["CSV Parser"]
+        PARSERS["PDF / Excel / Word<br/>Parsers"]
     end
 
-    %% Normalization
-    subgraph CANON["Canonical Model Layer"]
-        MAPPER["Category Mapping"]
-        NORMALIZER["Data Normalizer"]
-        FACT_TABLES["Fact Tables<br/>Units · Charges · Credits · Leases"]
+    %% Deterministic Engine
+    subgraph DET_ENGINE["Deterministic Pre-Scan"]
+        CONC_RULES["ConcessionRulesEngine<br/>(engine/concession_rules.py)"]
+        RULES_LIST["8 Rules: CONC-001 … CONC-008"]
+        FINDINGS["Structured Findings<br/>(ConcessionFinding)"]
+        STATS["Per-Property Stats<br/>(PropertyStats)"]
     end
 
-    %% Processing Engine
-    subgraph ENGINE["Validation & Analytics Engine"]
-        DATE_RANGE["Date Range Engine"]
-        RULES["Validation Rules Engine"]
-        ANOMALY["Anomaly Detector"]
-        EXPLAIN["Explainability Layer"]
+    %% AI Layer
+    subgraph AI_LAYER["AI Narration Layer"]
+        FMT["format_for_llm()<br/>Stats + ≤5 evidence rows / finding"]
+        AGENT["LangGraph ReAct Agent<br/>(OpenAI o3, 16 384 tokens)"]
+        TOOLS["4 Tools<br/>rent_roll · projection<br/>concession · report"]
     end
 
-    %% Storage
-    subgraph STORAGE["Persistence"]
-        DB["DuckDB / SQLite"]
-        LOG["Audit Log"]
-    end
+    %% Merge
+    MERGE["Merge & Dedup<br/>(LangGraphEngine._merge_results)"]
 
-    %% UI Layer
+    %% Output
     subgraph OUTPUT["Dashboard"]
-        KPI["KPI Overview"]
-        TREND["Revenue Trend & Lease Cliff View"]
-        UNIT_VIEW["Unit Drilldown"]
-        OVERRIDE["Override Panel"]
-        EXPORT["Export Engine"]
+        FINDINGS_TAB["Findings Tab<br/>(severity table)"]
+        REPORT_TAB["Report Tab<br/>(AI narrative)"]
+    end
+
+    %% Persistence
+    subgraph STORAGE["Persistence (Optional)"]
+        DB["DuckDB"]
+        LOG["Audit Log (JSONL)"]
     end
 
     %% Flow
     AUD --> ST
     ST --> INPUTS
 
-    RESMAN --> RES_CLIENT
-    PDF --> PDF_PARSER
-    XLS --> XLS_PARSER
+    CSV --> AUTO_LOAD
+    UPLOAD --> PARSERS
 
-    RES_CLIENT --> NORMALIZER
-    PDF_PARSER --> NORMALIZER
-    XLS_PARSER --> NORMALIZER
+    AUTO_LOAD --> CSV_PARSER
+    CSV_PARSER --> CONC_RULES
 
-    NORMALIZER --> MAPPER
-    MAPPER --> FACT_TABLES
+    CONC_RULES --> RULES_LIST
+    RULES_LIST --> FINDINGS
+    RULES_LIST --> STATS
 
-    FACT_TABLES --> DATE_RANGE
-    DATE_RANGE --> RULES
-    RULES --> ANOMALY
-    ANOMALY --> EXPLAIN
+    FINDINGS --> FMT
+    STATS --> FMT
+    FMT --> AGENT
+    AGENT --> TOOLS
 
-    EXPLAIN --> DB
-    EXPLAIN --> LOG
+    PARSERS --> AGENT
+
+    AGENT --> MERGE
+    FINDINGS --> MERGE
+
+    MERGE --> OUTPUT
+    MERGE --> STORAGE
+
+    FINDINGS_TAB --> LOG
+    REPORT_TAB --> LOG
+```
+
+### Key Design Decisions
+
+| Decision | Rationale |
+|----------|-----------|
+| Deterministic rules run **before** the LLM | Reduces token usage ~35 %; ensures every anomaly is caught regardless of LLM hallucination |
+| Only stats + ≤ 5 evidence rows sent to AI | LLM narrates findings, it doesn't re-scan raw data |
+| No API key → deterministic-only fallback | App is still useful without an OpenAI key |
+| Auto-load CSVs from `data/` | Zero-click startup for auditors; no manual upload required |
 
     EXPLAIN --> KPI
     EXPLAIN --> TREND
@@ -109,227 +121,251 @@ graph TB
     UNIT_VIEW --> EXPORT
 ```
 
-## 3. Sequence Diagram – COO/Auditor Workflow
+## 3. Sequence Diagram – Hybrid Audit Pipeline
 
 ```mermaid
 sequenceDiagram
     actor COO as COO / Auditor
     participant UI as Streamlit UI
-    participant SRC as Source Selector
-    participant RES as ResMan Client
-    participant PARSE as Parser Layer
-    participant CANON as Canonical Model
-    participant RULES as Validation Engine
-    participant LOG as Audit Log
-    participant EXP as Export Service
+    participant LOAD as Auto-Loader
+    participant PARSE as CSV Parser
+    participant DET as ConcessionRulesEngine
+    participant FMT as format_for_llm()
+    participant LGE as LangGraphEngine
+    participant AGENT as LangGraph ReAct Agent<br/>(OpenAI o3)
+    participant DB as DuckDB / Audit Log
 
-    COO->>UI: Select Property + Date Range
-    COO->>UI: Choose Data Source
+    COO->>UI: Open app (http://localhost:8501)
+    UI->>LOAD: Scan data/ for *Transaction List (Credits)*.csv
+    LOAD-->>PARSE: 7 CSV files found
 
-    UI->>SRC: Initialize source
-
-    alt ResMan Sync
-        SRC->>RES: Authenticate + Pull Recurring Transactions
-        RES-->>SRC: Raw data
-        SRC->>CANON: Normalize data
-    else PDF/Excel Upload
-        COO->>UI: Upload file
-        UI->>PARSE: Parse file
-        PARSE-->>UI: Structured tables
-        UI->>CANON: Normalize
+    loop Each CSV file
+        PARSE->>PARSE: pd.read_csv → ParsedDocument
     end
 
-    CANON->>RULES: Run date-range validation
-    RULES-->>CANON: Flags + Evidence
+    PARSE-->>UI: 7 ParsedDocuments (concession type)
 
-    CANON-->>UI: Render dashboard
+    COO->>UI: Enter API key + click "Run AI Audit"
 
-    COO->>UI: Click flagged unit
-    UI->>LOG: Save override + notes
+    UI->>LGE: run(canonical_model, parsed_docs, prompt)
 
-    COO->>UI: Export findings
-    UI->>EXP: Generate export bundle
-    EXP-->>UI: Download link
+    Note over LGE: Step 1 — Split docs by type
+    LGE->>LGE: Separate concession vs other docs
+
+    Note over LGE: Step 2 — Deterministic pre-scan
+    LGE->>DET: run_all(property_dfs)
+
+    loop Each property CSV
+        DET->>DET: Apply CONC-001 … CONC-008
+    end
+
+    DET-->>LGE: List[ConcessionFinding], List[PropertyStats]
+
+    Note over LGE: Step 3 — Build LLM summary
+    LGE->>FMT: format_for_llm(findings, stats)
+    FMT-->>LGE: Text summary (stats + ≤5 evidence rows/finding)
+
+    Note over LGE: Step 4 — AI narration
+    LGE->>AGENT: run_audit(summary, api_key, prompt)
+    AGENT->>AGENT: ReAct loop (tools → observations → answer)
+    AGENT-->>LGE: AuditResult (report, anomalies)
+
+    Note over LGE: Step 5 — Merge
+    LGE->>LGE: _merge_results(det_findings, llm_result)
+    LGE-->>UI: Final AuditResult
+
+    UI->>DB: Persist findings + audit log
+    UI-->>COO: Render Findings Tab + Report Tab
 ```
 
-## 4. Analytical Engine (Derived from Real Report Findings)
+## 4. Sequence Diagram – No API Key Fallback
 
-Based on the Village Green recurring projection analysis:
+```mermaid
+sequenceDiagram
+    actor COO as COO / Auditor
+    participant UI as Streamlit UI
+    participant LGE as LangGraphEngine
+    participant DET as ConcessionRulesEngine
 
-### A. Lease Cliff Detection
-
-Revenue dropped dramatically over the projection period.
-
-```
-Rule
-IF monthly_rent_drop > 20%
-FLAG: LEASE_CLIFF_RISK
-```
-
-Output:
-
-- Lease expiration heatmap
-- Month-over-month revenue decay chart
-
-### B. Concession Misalignment
-
-Observed pattern:
-
-- Rent changed unexpectedly
-- Concession applied in wrong month
-- Partial rent without expected proration
-
-```
-Rules
-IF rent_amount != lease_contract_rent
-AND no valid proration
-FLAG: RENT_PRORATION_MISMATCH
-
-IF concession_month NOT aligned with lease incentive
-FLAG: CONCESSION_MISALIGNED
-
-IF concession_amount > 50% of rent
-FLAG: EXCESSIVE_CONCESSION
+    COO->>UI: Click "Run AI Audit" (no API key)
+    UI->>LGE: run(canonical_model, parsed_docs)
+    LGE->>DET: run_all(property_dfs)
+    DET-->>LGE: 45 deterministic findings
+    LGE->>LGE: _build_deterministic_result(findings)
+    LGE-->>UI: AuditResult (deterministic only)
+    UI-->>COO: Render Findings Tab (no AI narrative)
 ```
 
-### C. Recurring Fee Template Validation
+## 5. Deterministic Concession Rules (engine/concession_rules.py)
 
-Standard recurring template:
+Eight rules run on every ResMan Transaction List (Credits) CSV:
 
-| Fee | Amount |
-|-----|--------|
-| Billing Fee | $5 |
-| Cable | $55 |
-| CAM | $10 |
-| HOA | $2.50 |
-| Trash | $10 |
-| Valet Trash | $35 |
-| Package Locker | $9 |
-| Pest Control | $8 |
-|
+| Rule ID | Name | Severity | Logic |
+|---------|------|----------|-------|
+| CONC-001 | Excessive single concession | HIGH | Amount > $1 000 threshold |
+| CONC-002 | $999 special-rate concession | HIGH | Amount == $999 (common special-pricing pattern) |
+| CONC-003 | Move-in special | MEDIUM | Description contains "$99 move-in" or "$0 move-in" |
+| CONC-004 | Reversed concession | MEDIUM/HIGH | Reverse Date column is populated; HIGH if reversed % > threshold |
+| CONC-005 | Duplicate unit concession | MEDIUM | Same Unit appears in multiple rows within the period |
+| CONC-006 | Generic / vague description | LOW | Description is "Concession - Rent" with no further detail |
+| CONC-007 | High property-level total | HIGH | Property total concession amount > 2× median across all properties |
+| CONC-008 | Negative amount | MEDIUM | Amount < 0 (possible data-entry or reversal error) |
+
+### Rule Output
+
+Each rule produces a `ConcessionFinding` with:
+- `rule_id`, `severity`, `description`
+- `property_name`, `source_file`
+- `units` — list of affected unit numbers
+- `rows` — list of affected row indices
+- `evidence` — up to 5 sample rows as dicts
+- `detail` — pre-formatted narrative string
+
+Per-property `PropertyStats` include: total rows, total/avg/max/min amount, reversed count, unique units, multi-concession units, $999 count, move-in count, generic description count, large concession count, negative amount count.
+
+## 6. Data Models
+
+### ConcessionFinding (dataclass)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| rule_id | str | CONC-001 … CONC-008 |
+| rule_name | str | Human-readable rule name |
+| severity | str | critical / high / medium / low |
+| description | str | Human-readable summary |
+| property_name | str | Property name extracted from filename |
+| source_file | str | CSV filename |
+| units | List[str] | Affected unit numbers |
+| rows | List[int] | Affected row indices |
+| evidence | List[dict] | Up to 5 sample rows |
+| detail | str | Pre-formatted narrative |
+
+### PropertyStats (dataclass)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| property_name | str | Property name |
+| total_rows | int | Row count in CSV |
+| total_amount | float | Sum of concession amounts |
+| avg_amount | float | Mean concession |
+| unique_units | int | Distinct units with concessions |
+| reversed_count | int | Rows with Reverse Date populated |
+| specials_999_count | int | $999 special rows |
+| … | … | 10+ additional pre-computed metrics |
+
+### AuditResult (dataclass)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| report | str | AI-generated narrative or deterministic summary |
+| anomalies | List[dict] | Merged findings list |
+| severity_counts | dict | {critical: N, high: N, …} |
+| raw_output | str | Raw LLM response |
+| prompt_used | str | Prompt sent to AI |
+
+## 7. Project Structure
+
 ```
-Rules
-IF recurring_fee_missing AND lease_active
-FLAG: MISSING_RECURRING_CHARGE
-
-IF recurring_fee_amount != template_amount
-FLAG: FEE_AMOUNT_MISMATCH
-```
-
-### D. Employee Unit vs Concession Conflict
-
-```
-IF employee_unit == TRUE
-AND concession_present == TRUE
-FLAG: DOUBLE_DISCOUNT_RISK
-```
-
-## 5. Canonical Data Model
-
-**fact_recurring_transactions**
-
-| unit_id | category | amount | month | source |
-|---------|----------|--------|-------|--------|
-
-**fact_lease_terms**
-
-| unit_id | lease_start | lease_end | rent | concession_amount |
-|---------|-------------|-----------|------|-------------------|
-
-**audit_findings**
-
-| finding_id | unit_id | rule_id | severity | month | delta | evidence_json | status | notes |
-|------------|---------|---------|----------|-------|-------|---------------|--------|-------|
-
-## 6. Recommended Code Structure
-
-```
-streamlit-audit-app/
+streamlit-audit-agent-loriaa/
 │
-├── app.py
+├── app.py                          # Main Streamlit application
+├── audit_engine.py                 # Metrics computation helpers
+├── requirements.txt                # Python dependencies
+├── Dockerfile                      # Container build definition
+│
+├── agents/
+│   └── audit_agent.py              # LangGraph ReAct agent (4 tools, o3)
 │
 ├── config/
-│   ├── settings.py
-│   └── mappings.yaml
+│   ├── settings.py                 # Application configuration
+│   └── mappings.yaml               # Category mappings
 │
-├── ingestion/
-│   ├── resman_client.py
-│   ├── pdf_parser.py
-│   ├── excel_parser.py
-│   └── loader.py
-│
-├── models/
-│   ├── canonical_model.py
-│   ├── unit.py
-│   ├── recurring_transaction.py
-│   └── lease.py
+├── data/
+│   ├── *.csv                       # 7 ResMan Transaction List CSVs
+│   ├── audit.duckdb                # Optional DuckDB persistence
+│   └── audit_log.jsonl             # Audit trail
 │
 ├── engine/
-│   ├── date_range_engine.py
-│   ├── rules.py
-│   ├── anomaly_detector.py
-│   └── explainability.py
+│   ├── concession_rules.py         # ★ Deterministic rules (CONC-001 … CONC-008)
+│   ├── langgraph_engine.py         # ★ Hybrid pipeline orchestrator
+│   ├── date_range_engine.py        # Date filtering and aggregation
+│   ├── rules.py                    # Legacy rules engine
+│   ├── anomaly_detector.py         # Anomaly detection orchestrator
+│   └── explainability.py           # Human-readable explanations
+│
+├── ingestion/
+│   ├── loader.py                   # Unified file loader
+│   ├── resman_client.py            # ResMan API client (stub)
+│   └── parsers/
+│       ├── csv_parser.py           # CSV parsing logic
+│       ├── pdf_parser.py           # PDF parsing logic
+│       ├── excel_parser.py         # Excel/CSV parsing
+│       └── docx_parser.py          # Word document parsing
+│
+├── models/
+│   ├── unit.py                     # Unit, Transaction, Lease, Finding models
+│   └── canonical_model.py          # Data normalization
 │
 ├── storage/
-│   ├── database.py
-│   └── audit_log.py
+│   ├── database.py                 # DuckDB persistence
+│   └── audit_log.py                # Audit trail logging
 │
 ├── ui/
-│   ├── dashboard.py
-│   ├── unit_view.py
-│   ├── filters.py
-│   └── export.py
+│   ├── filters.py                  # Sidebar filters
+│   ├── dashboard.py                # KPI overview
+│   ├── charts.py                   # Revenue trend charts
+│   ├── unit_view.py                # Unit drilldown
+│   ├── findings.py                 # Audit findings table
+│   ├── override.py                 # Override panel
+│   ├── export.py                   # Export functionality
+│   └── tabs/
+│       ├── findings_tab.py         # Findings tab (severity table)
+│       ├── report_tab.py           # Report tab (AI narrative)
+│       ├── rent_roll_tab.py        # Rent roll tab
+│       ├── projection_tab.py       # Projection tab
+│       └── concession_tab.py       # Concession tab
 │
-└── utils/
-    ├── helpers.py
-    └── validations.py
+├── utils/
+│   ├── helpers.py                  # Utility functions
+│   ├── data_processor.py           # Data summary producer
+│   └── validations.py              # Input validation
+│
+└── tests/                          # pytest test suite
 ```
 
-## 7. Date Range Analytics Design
+## 8. Token Optimization Strategy
 
-The Date Range Engine:
+The hybrid pipeline sends **only** the following to the LLM (via `format_for_llm()`):
 
-Filters canonical table by:
+1. **Per-property stats block** — total rows, total amount, average, max, min, reversed count, unique units, etc.
+2. **Per-finding summary** — rule ID, severity, description, count of affected units/rows
+3. **Up to 5 evidence rows per finding** — actual CSV row data as key-value pairs
 
-- `start_month`
-- `end_month`
+This replaces sending all raw CSV rows (393 total across 7 properties), resulting in ~35% token reduction while giving the AI **better** context because each row is already classified.
 
-Aggregates:
-
-- Gross Rent
-- Credits
-- Net Rent
-- Concession %
-
-Produces:
-
-- Revenue waterfall
-- Concession ratio trend
-- Lease expiration heatmap
-- Flag density by month
-
-## 8. Architectural Design Principles
+## 9. Architectural Design Principles
 
 | Concern | Layer |
 |---------|-------|
 | Data retrieval | `ingestion/` |
-| Standardization | `models/` |
-| Business rules | `engine/` |
+| Deterministic audit | `engine/concession_rules.py` |
+| AI narration | `agents/audit_agent.py` + `engine/langgraph_engine.py` |
+| Pipeline orchestration | `engine/langgraph_engine.py` |
 | UI rendering | `ui/` |
 | Persistence | `storage/` |
 
 This separation allows:
 
-- Switching between PDF, Excel, and ResMan without changing validation logic
-- Reusing rule engine in Loriaa backend
-- Converting into nightly batch job
-- Scaling to multi-property portfolio
+- Running deterministic audit without an API key
+- Swapping the LLM model without touching rule logic
+- Adding new CONC rules without modifying the AI prompt
+- Scaling to additional property types or data sources
+- Converting into a nightly batch job or FastAPI service
 
-## 9. Future Evolution
+## 10. Future Evolution
 
-This standalone app can evolve into:
-
-- FastAPI backend service
-- Celery nightly audit job
+- FastAPI backend service for headless audits
+- Celery nightly audit jobs
 - Loriaa Audit Agent integration
-- Portfolio-level analytics
+- Portfolio-level cross-property analytics
+- Additional rule families (rent roll, projection) in the deterministic engine
