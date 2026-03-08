@@ -40,7 +40,6 @@ from ui.export import render_export_panel
 # Import new tabbed UI
 from ui.tabs.rent_roll_tab import render_rent_roll_tab
 from ui.tabs.projection_tab import render_projection_tab
-from ui.tabs.concession_tab import render_concession_tab
 from ui.tabs.findings_tab import render_findings_tab
 from ui.tabs.report_tab import render_report_tab
 
@@ -459,8 +458,8 @@ def main():
 
     audit_result = st.session_state.get("audit_result")
 
-    # --- Tab structure — Concession Audit always first ---
-    tabs_labels: List[str] = ["🏠 Rule-Based Concession Check"]
+    # --- Tab structure ---
+    tabs_labels: List[str] = []
     if has_rent_roll:
         tabs_labels.append("📋 Rent Roll")
     if has_projection:
@@ -471,11 +470,6 @@ def main():
 
     tabs = st.tabs(tabs_labels)
     tab_idx = 0
-
-    # Concession Audit tab — always present
-    with tabs[tab_idx]:
-        render_concession_tab(parsed_docs, resman_docs=resman_docs)
-    tab_idx += 1
 
     if has_rent_roll:
         with tabs[tab_idx]:

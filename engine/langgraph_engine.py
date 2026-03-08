@@ -141,19 +141,44 @@ class LangGraphEngine:
             conc_mask = lower_vals.str.contains("concession", na=False)
             for idx in df.index[conc_mask]:
                 unit = str(df.at[idx, unit_col]) if unit_col else "?"
-                amounts = []
-                for mc in month_cols:
+                # Build detail from actual concession columns
+                parts = []
+                if "Amount" in df.columns:
                     try:
-                        v = float(str(df.at[idx, mc]).replace(",", "").replace("$", ""))
-                        if v != 0:
-                            amounts.append(f"{mc}: ${v:,.2f}")
+                        amt = float(str(df.at[idx, "Amount"]).replace(",", "").replace("$", ""))
+                        parts.append(f"${amt:,.2f}")
                     except (ValueError, TypeError):
                         pass
-                detail = ", ".join(amounts[:3]) if amounts else "see data"
+                if "Description" in df.columns:
+                    desc = str(df.at[idx, "Description"]).strip()
+                    if desc and desc != "nan":
+                        parts.append(desc)
+                if "Name" in df.columns:
+                    name = str(df.at[idx, "Name"]).strip()
+                    if name and name != "nan":
+                        parts.append(name)
+                reverse_date = ""
+                if "Reverse Date" in df.columns:
+                    rd = str(df.at[idx, "Reverse Date"]).strip()
+                    if rd and rd not in ("nan", "0", "0.0"):
+                        parts.append(f"Reversed: {rd}")
+                        reverse_date = rd
+                # Fallback to month columns for projection-style data
+                if not parts:
+                    for mc in month_cols:
+                        try:
+                            v = float(str(df.at[idx, mc]).replace(",", "").replace("$", ""))
+                            if v != 0:
+                                parts.append(f"{mc}: ${v:,.2f}")
+                        except (ValueError, TypeError):
+                            pass
+                detail = " | ".join(parts[:4]) if parts else "—"
                 concession_hits.append({
                     "unit": unit,
                     "row": int(idx) + 2,
                     "detail": detail,
+                    "amount": parts[0] if parts else "",
+                    "reversed": reverse_date,
                 })
 
             # MTM tenants
