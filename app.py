@@ -57,6 +57,89 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# ---------------------------------------------------------------------------
+# Custom theme / CSS
+# ---------------------------------------------------------------------------
+st.markdown("""
+<style>
+/* ── Sidebar ── */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+[data-testid="stSidebar"] * {
+    color: #e0e0e0 !important;
+}
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    color: #ffffff !important;
+}
+[data-testid="stSidebar"] .stSelectbox label,
+[data-testid="stSidebar"] .stTextInput label,
+[data-testid="stSidebar"] .stFileUploader label {
+    color: #c0c8d8 !important;
+    font-weight: 500;
+}
+[data-testid="stSidebar"] .stSelectbox [data-baseweb="select"],
+[data-testid="stSidebar"] .stTextInput input {
+    background-color: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: #d0d0d0 !important;
+}
+[data-testid="stSidebar"] .stSelectbox [data-baseweb="select"] * {
+    color: #d0d0d0 !important;
+}
+[data-testid="stSidebar"] .stTextInput input::placeholder {
+    color: #808898 !important;
+}
+[data-testid="stSidebar"] [data-testid="stFileUploader"] {
+    background-color: rgba(255,255,255,0.06) !important;
+    border: 1px dashed rgba(255,255,255,0.2) !important;
+    border-radius: 8px;
+    padding: 8px;
+}
+[data-testid="stSidebar"] [data-testid="stFileUploader"] button {
+    background-color: rgba(255,255,255,0.1) !important;
+    color: #c0c8d8 !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+}
+[data-testid="stSidebar"] .stButton > button {
+    background: linear-gradient(135deg, #e94560 0%, #c23152 100%);
+    color: #ffffff !important;
+    border: none;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: all 0.2s;
+}
+[data-testid="stSidebar"] .stButton > button:hover {
+    background: linear-gradient(135deg, #ff6b81 0%, #e94560 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(233,69,96,0.4);
+}
+[data-testid="stSidebar"] hr {
+    border-color: rgba(255,255,255,0.12) !important;
+}
+[data-testid="stSidebar"] .stMarkdown p {
+    color: #b0b8c8 !important;
+}
+
+/* ── Main area subtle improvements ── */
+[data-testid="stAppViewContainer"] {
+    background-color: #f0f2f6;
+}
+[data-testid="stMain"] {
+    background-color: #e8eaef;
+}
+.stTabs [data-baseweb="tab-list"] {
+    gap: 4px;
+}
+.stTabs [data-baseweb="tab"] {
+    padding: 8px 16px;
+    border-radius: 8px 8px 0 0;
+}
+</style>
+""", unsafe_allow_html=True)
+
 
 # ---------------------------------------------------------------------------
 # Session state helpers
@@ -76,6 +159,7 @@ def initialize_session_state():
         "_resman_docs_loaded": False,
         "audit_prompt": None,
         "custom_prompt": None,
+        "saved_api_key": os.environ.get("OPENAI_API_KEY", ""),
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -134,12 +218,29 @@ def render_new_sidebar():
     # OpenAI API key
     st.sidebar.subheader("🔑 OpenAI API Key")
     env_key = os.environ.get("OPENAI_API_KEY", "")
-    api_key = st.sidebar.text_input(
+    saved_key = st.session_state.get("saved_api_key", env_key)
+    api_key_input = st.sidebar.text_input(
         "API Key (or set OPENAI_API_KEY env var)",
-        value=env_key,
+        value=saved_key,
         type="password",
         help="Required to run the AI audit agent.",
     )
+
+    # Save / Cancel buttons
+    btn_col1, btn_col2 = st.sidebar.columns(2)
+    with btn_col1:
+        if st.button("💾 Save", key="save_api_key"):
+            if api_key_input.strip():
+                st.session_state["saved_api_key"] = api_key_input.strip()
+                st.sidebar.success("Saved OpenAI key for this session")
+            else:
+                st.sidebar.warning("Please enter an API key first")
+    with btn_col2:
+        if st.button("✖ Cancel", key="cancel_api_key"):
+            st.session_state["saved_api_key"] = env_key
+            st.rerun()
+
+    api_key = st.session_state.get("saved_api_key", api_key_input)
 
     # Model selector
     model = st.sidebar.selectbox(
@@ -191,30 +292,28 @@ def render_new_sidebar():
 # ---------------------------------------------------------------------------
 
 _DEFAULT_AUDIT_PROMPT = (
-    "You are a senior property management audit expert analyzing ResMan Transaction List "
-    "CSV files for concession anomalies. You have data from MULTIPLE properties.\n\n"
-    "CRITICAL REQUIREMENT — PER-FILE ANALYSIS:\n"
-    "You MUST analyze EACH CSV file SEPARATELY and produce a dedicated section for each.\n"
-    "For each file, create a section with:\n"
-    "  ## <Property Name> — <filename>\n\n"
-    "Then within each section, list every finding with:\n"
-    "  ### Finding: <short title>\n"
+    "You are a senior property management audit expert.\n\n"
+    "CONTEXT — HYBRID AUDIT PIPELINE:\n"
+    "A deterministic rules engine has ALREADY pre-scanned every concession CSV.\n"
+    "The DATA SUMMARY contains per-property stats and flagged findings with evidence rows.\n"
+    "For non-concession docs (rent rolls, projections): full summary data is included.\n\n"
+    "YOUR JOB:\n"
+    "1. Review every deterministic finding and provide expert narrative analysis.\n"
+    "2. Identify cross-property PATTERNS the rules engine cannot detect.\n"
+    "3. Assess business risk and prioritise findings by real-world impact.\n\n"
+    "PER-PROPERTY SECTIONS:\n"
+    "  ## <Property Name> — <filename>\n"
+    "  ### Finding: <title>\n"
     "  **Severity:** 🔴 Critical / 🟠 High / 🟡 Medium / 🟢 Low\n"
     "  **Affected Units:** <unit numbers>\n"
     "  **Citation:** [Source: <filename>, Row <number>]\n"
     "  **Description:** <what was found>\n"
     "  **Reasoning:** <complete chain of reasoning>\n"
-    "  **Recommended Action:** <specific corrective action>\n\n"
-    "WHAT TO LOOK FOR IN EACH FILE:\n"
-    "1. $999 Specials — concessions reducing rent to exactly $999.\n"
-    "2. Excessive concessions > $1,000.\n"
-    "3. Reversed concessions (rows with Reverse Date).\n"
-    "4. Move-in specials ($99 / $0 deals).\n"
-    "5. Duplicate unit concessions in one period.\n"
-    "6. Generic 'Concession - Rent' descriptions.\n"
-    "7. Large total concession amounts per property.\n"
-    "8. Active vs reversed ratio anomalies.\n\n"
-    "Start with an Executive Summary, then one section per CSV, end with Recommendations."
+    "  **Recommended Action:** <corrective action>\n\n"
+    "DETERMINISTIC RULES: CONC-001 (>$1K), CONC-002 ($999), CONC-003 (move-in), "
+    "CONC-004 (reversed), CONC-005 (duplicate units), CONC-006 (generic desc), "
+    "CONC-007 (high property total), CONC-008 (negative amounts).\n\n"
+    "Start with an Executive Summary, then one section per property, end with Recommendations."
 )
 
 
@@ -349,20 +448,13 @@ def main():
     # --- Audit status banner ---
     audit_result = st.session_state.get("audit_result")
     if resman_docs or uploaded_files:
-        status_cols = st.columns([1, 1, 2])
-        with status_cols[0]:
-            st.success("✅ **Step 1 — Rule-Based Check:** Complete", icon="✅")
-        with status_cols[1]:
-            if audit_result:
-                st.success("✅ **Step 2 — AI Audit:** Complete", icon="🤖")
-            else:
-                st.warning("⏳ **Step 2 — AI Audit:** Not yet run", icon="⏳")
-        with status_cols[2]:
-            if not audit_result:
-                st.info(
-                    "👈 Click **Run AI Audit** in the sidebar to get AI-powered findings and a full narrative report.",
-                    icon="💡",
-                )
+        if audit_result:
+            st.success("✅ **AI Audit Complete** — Review findings in the tabs below.", icon="🤖")
+        else:
+            st.info(
+                "📂 **Data loaded.** Click **🚀 Run AI Audit** in the sidebar to analyze all CSV files.",
+                icon="💡",
+            )
     st.markdown("---")
 
     # Welcome screen — only when no uploaded files AND no auto-loaded concession data

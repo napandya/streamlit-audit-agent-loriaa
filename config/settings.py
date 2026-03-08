@@ -10,7 +10,7 @@ RESMAN_API_KEY = os.getenv("RESMAN_API_KEY", "")
 RESMAN_PROPERTY_ID = os.getenv("RESMAN_PROPERTY_ID", "")
 
 # Application Settings
-APP_TITLE = "Village Green Property Audit System"
+APP_TITLE = "LiveNJoy LLC Audit"
 APP_ICON = "🏢"
 DEFAULT_PROPERTY = "Village Green"
 
