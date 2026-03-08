@@ -1,0 +1,99 @@
+"""
+Parser for ResMan Transaction List (Credits) CSV exports.
+
+Each file has a 6-row metadata header followed by the real column header
+on row 7 (index 6).  Category sub-header rows and Total rows are dropped
+so only actual transaction rows are returned.
+
+Only rows belonging to "Concession" sections are kept to avoid including
+non-concession credits (e.g. employee allowances, resident referrals) that
+would produce false positives in the concession audit.
+"""
+from __future__ import annotations
+
+import pandas as pd
+
+
+def parse_resman_transaction_csv(file_path: str) -> tuple[str, pd.DataFrame]:
+    """
+    Parse a ResMan Transaction List (Credits) CSV.
+
+    Returns
+    -------
+    (property_name, clean_dataframe)
+
+    * property_name  – read from row 0, column 0
+    * clean_dataframe – concession transaction rows only, with numeric Amount /
+      charge columns and a ``Category`` column recording the section name.
+    """
+    # --- Read property name from row 0, column 0 ---
+    # Try UTF-8 first, fall back to latin-1 for Windows-1252-encoded files
+    encoding = "utf-8"
+    try:
+        with open(file_path, encoding="utf-8") as fh:
+            first_line = fh.readline()
+    except UnicodeDecodeError:
+        encoding = "latin-1"
+        with open(file_path, encoding="latin-1") as fh:
+            first_line = fh.readline()
+    property_name = first_line.split(",")[0].strip().strip('"')
+
+    # --- Read CSV skipping the 6 metadata rows; row 6 becomes the header ---
+    df = pd.read_csv(file_path, skiprows=6, dtype=str, on_bad_lines="skip", encoding=encoding)
+
+    # Normalise column names (strip surrounding whitespace)
+    df.columns = [str(c).strip() for c in df.columns]
+
+    if "Date" not in df.columns:
+        return property_name, pd.DataFrame()
+
+    # --- Tag each row with its section category via forward-fill ---
+    # Section header rows have the category name (e.g. "Credit - Concession - Rent")
+    # in the Date column and all other columns empty.
+    section_mask = df["Date"].str.contains(r"^Credit\s*-|^Debit\s*-", na=False, regex=True)
+    df["Category"] = df["Date"].where(section_mask).ffill().fillna("")
+
+    # --- Drop repeated header rows (appear between sections) ---
+    df = df[df["Date"].str.strip() != "Date"].reset_index(drop=True)
+
+    # --- Drop category sub-header rows (recompute mask on current index) ---
+    section_mask = df["Date"].str.contains(r"^Credit\s*-|^Debit\s*-", na=False, regex=True)
+    df = df[~section_mask]
+
+    # --- Drop total rows ---
+    df = df[~df["Date"].str.startswith("Total:", na=False)]
+
+    # --- Filter to concession sections only ---
+    df = df[df["Category"].str.contains("Concession", case=False, na=False)]
+
+    # --- Keep only rows that have a non-empty Unit value ---
+    if "Unit" in df.columns:
+        df = df[df["Unit"].notna() & (df["Unit"].str.strip() != "")]
+
+    # --- Convert numeric columns (amounts may have comma thousands-separators) ---
+    numeric_cols = [
+        "Amount",
+        "Gross Payments",
+        "In Period Reversal",
+        "Out Of Period Reversal",
+        "Period Charges",
+        "Prior Charges",
+        "Post Charges",
+    ]
+    for col in numeric_cols:
+        if col in df.columns:
+            df[col] = (
+                df[col]
+                .str.replace(",", "", regex=False)
+                .pipe(pd.to_numeric, errors="coerce")
+                .fillna(0.0)
+            )
+
+    # --- Fill string columns so NaN becomes empty string ---
+    str_fill_cols = ["Reverse Date", "Reference", "Notes", "Description", "Name", "Related"]
+    for col in str_fill_cols:
+        if col in df.columns:
+            df[col] = df[col].fillna("")
+
+    df = df.reset_index(drop=True)
+    return property_name, df

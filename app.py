@@ -44,6 +44,9 @@ from ui.tabs.concession_tab import render_concession_tab
 from ui.tabs.findings_tab import render_findings_tab
 from ui.tabs.report_tab import render_report_tab
 
+# Import data loader
+from utils.data_loader import load_resman_csvs_from_data_dir
+
 # Import config
 from config import settings
 
@@ -70,6 +73,8 @@ def initialize_session_state():
         "parsed_docs": [],
         "audit_result": None,
         "audit_timestamp": None,
+        "resman_concession_docs": [],
+        "_resman_docs_loaded": False,
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -184,6 +189,13 @@ def render_new_sidebar():
 
 def main():
     initialize_session_state()
+
+    # Auto-load ResMan concession CSVs from data/ at startup (once per session)
+    if not st.session_state["_resman_docs_loaded"]:
+        with st.spinner("Loading concession data from data/ directory…"):
+            st.session_state["resman_concession_docs"] = load_resman_csvs_from_data_dir()
+        st.session_state["_resman_docs_loaded"] = True
+
     sidebar = render_new_sidebar()
     canonical_model: CanonicalModel = st.session_state.canonical_model
     audit_log: AuditLog = st.session_state.audit_log
@@ -192,9 +204,10 @@ def main():
     st.markdown("---")
 
     uploaded_files = sidebar["uploaded_files"]
+    resman_docs = st.session_state.get("resman_concession_docs", [])
 
-    # Welcome screen
-    if not uploaded_files:
+    # Welcome screen — only when no uploaded files AND no auto-loaded concession data
+    if not uploaded_files and not resman_docs:
         st.info(
             "👆 **Get started:** Upload one or more files using the sidebar, then click **Run AI Audit**.\n\n"
             "Supported file types: CSV, Excel (.xlsx/.xls), PDF, Word (.docx)\n\n"
@@ -214,7 +227,7 @@ def main():
         canonical_model.clear()
         st.session_state.parsed_docs = []
 
-    if not st.session_state.data_loaded:
+    if not st.session_state.data_loaded and uploaded_files:
         with st.spinner("Parsing uploaded files…"):
             ok_count, errors, parsed_docs = load_files(uploaded_files, canonical_model, audit_log)
         if ok_count > 0:
@@ -230,7 +243,6 @@ def main():
     doc_types = {d.document_type for d in parsed_docs}
     has_rent_roll = "rent_roll" in doc_types
     has_projection = "projection" in doc_types
-    has_concessions = "concession" in doc_types
 
     rent_roll_doc: Optional[ParsedDocument] = next(
         (d for d in parsed_docs if d.document_type == "rent_roll"), None
@@ -265,18 +277,23 @@ def main():
 
     audit_result = st.session_state.get("audit_result")
 
-    # --- Content-aware tabs ---
-    tabs_labels: List[str] = []
+    # --- Tab structure — Concession Audit always first ---
+    tabs_labels: List[str] = ["🏠 Concession Audit"]
     if has_rent_roll:
         tabs_labels.append("📋 Rent Roll")
     if has_projection:
         tabs_labels.append("📊 Projections")
-    if has_concessions:
-        tabs_labels.append("💰 Concessions")
-    tabs_labels += ["🔍 AI Findings", "📄 Full Report", "🗂️ Raw Data"]
+    tabs_labels += ["🔍 AI Findings", "📄 Full Report"]
+    if parsed_docs:
+        tabs_labels.append("🗂️ Raw Data")
 
     tabs = st.tabs(tabs_labels)
     tab_idx = 0
+
+    # Concession Audit tab — always present
+    with tabs[tab_idx]:
+        render_concession_tab(parsed_docs, resman_docs=resman_docs)
+    tab_idx += 1
 
     if has_rent_roll:
         with tabs[tab_idx]:
@@ -321,11 +338,6 @@ def main():
 
         tab_idx += 1
 
-    if has_concessions:
-        with tabs[tab_idx]:
-            render_concession_tab(parsed_docs)
-        tab_idx += 1
-
     with tabs[tab_idx]:
         render_findings_tab(audit_result)
     tab_idx += 1
@@ -334,14 +346,15 @@ def main():
         render_report_tab(audit_result, st.session_state.get("audit_timestamp"))
     tab_idx += 1
 
-    with tabs[tab_idx]:
-        st.subheader("🗂️ Raw Data")
-        for doc in parsed_docs:
-            with st.expander(f"{doc.file_name} ({doc.document_type})", expanded=False):
-                if doc.dataframe is not None and not doc.dataframe.empty:
-                    st.dataframe(doc.dataframe, use_container_width=True)
-                else:
-                    st.text(doc.raw_text[:3000] if doc.raw_text else "No content extracted.")
+    if parsed_docs:
+        with tabs[tab_idx]:
+            st.subheader("🗂️ Raw Data")
+            for doc in parsed_docs:
+                with st.expander(f"{doc.file_name} ({doc.document_type})", expanded=False):
+                    if doc.dataframe is not None and not doc.dataframe.empty:
+                        st.dataframe(doc.dataframe, use_container_width=True)
+                    else:
+                        st.text(doc.raw_text[:3000] if doc.raw_text else "No content extracted.")
 
     st.markdown("---")
     st.caption(f"{settings.APP_TITLE} | {datetime.now().strftime('%Y-%m-%d %H:%M')}")
