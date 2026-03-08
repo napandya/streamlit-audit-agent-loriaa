@@ -75,6 +75,8 @@ def initialize_session_state():
         "audit_timestamp": None,
         "resman_concession_docs": [],
         "_resman_docs_loaded": False,
+        "audit_prompt": None,
+        "custom_prompt": None,
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -143,8 +145,9 @@ def render_new_sidebar():
     # Model selector
     model = st.sidebar.selectbox(
         "Model",
-        options=["gpt-4o", "gpt-4o-mini", "gpt-4-turbo", "gpt-3.5-turbo"],
+        options=["o3", "o4-mini", "gpt-4.1", "gpt-4.1-mini", "gpt-4o", "gpt-4o-mini"],
         index=0,
+        help="o3 = best reasoning; o4-mini = fast reasoning; gpt-4.1 = latest GPT",
     )
 
     st.sidebar.markdown("---")
@@ -173,7 +176,8 @@ def render_new_sidebar():
             st.sidebar.markdown(f"{badge} `{uf.name}` → **{dtype}**")
 
     st.sidebar.markdown("---")
-    run_audit_btn = st.sidebar.button("🚀 Run AI Audit", type="primary", disabled=not uploaded_files)
+    has_data = bool(uploaded_files) or bool(st.session_state.get("resman_concession_docs"))
+    run_audit_btn = st.sidebar.button("🚀 Run AI Audit", type="primary", disabled=not has_data)
 
     return {
         "api_key": api_key,
@@ -181,6 +185,146 @@ def render_new_sidebar():
         "uploaded_files": uploaded_files or [],
         "run_audit": run_audit_btn,
     }
+
+
+# ---------------------------------------------------------------------------
+# Default audit prompt (used as starting point for the editor)
+# ---------------------------------------------------------------------------
+
+_DEFAULT_AUDIT_PROMPT = (
+    "You are a senior property management audit expert analyzing ResMan Transaction List "
+    "CSV files for concession anomalies. You have data from MULTIPLE properties.\n\n"
+    "CRITICAL REQUIREMENT — PER-FILE ANALYSIS:\n"
+    "You MUST analyze EACH CSV file SEPARATELY and produce a dedicated section for each.\n"
+    "For each file, create a section with:\n"
+    "  ## <Property Name> — <filename>\n\n"
+    "Then within each section, list every finding with:\n"
+    "  ### Finding: <short title>\n"
+    "  **Severity:** 🔴 Critical / 🟠 High / 🟡 Medium / 🟢 Low\n"
+    "  **Affected Units:** <unit numbers>\n"
+    "  **Citation:** [Source: <filename>, Row <number>]\n"
+    "  **Description:** <what was found>\n"
+    "  **Reasoning:** <complete chain of reasoning>\n"
+    "  **Recommended Action:** <specific corrective action>\n\n"
+    "WHAT TO LOOK FOR IN EACH FILE:\n"
+    "1. $999 Specials — concessions reducing rent to exactly $999.\n"
+    "2. Excessive concessions > $1,000.\n"
+    "3. Reversed concessions (rows with Reverse Date).\n"
+    "4. Move-in specials ($99 / $0 deals).\n"
+    "5. Duplicate unit concessions in one period.\n"
+    "6. Generic 'Concession - Rent' descriptions.\n"
+    "7. Large total concession amounts per property.\n"
+    "8. Active vs reversed ratio anomalies.\n\n"
+    "Start with an Executive Summary, then one section per CSV, end with Recommendations."
+)
+
+
+# ---------------------------------------------------------------------------
+# Prompt Editor tab
+# ---------------------------------------------------------------------------
+
+def _render_prompt_editor_tab(audit_result):
+    """Render the prompt editor tab with the prompt used and ability to edit/re-run."""
+    st.subheader("⚙️ Audit Prompt Editor")
+    st.caption(
+        "View and customize the prompt sent to the AI audit agent. "
+        "Edit the prompt below, then click **Re-run Audit with Custom Prompt** in the sidebar."
+    )
+
+    # Show the prompt that was used for the last audit
+    last_prompt = st.session_state.get("audit_prompt")
+    if last_prompt:
+        with st.expander("📋 Prompt used in last audit run", expanded=False):
+            st.code(last_prompt, language="markdown")
+
+    # Editable prompt
+    st.markdown("### ✏️ Edit Prompt")
+    st.markdown(
+        "Modify the instructions below to change what the AI looks for. "
+        "The **DATA SUMMARY** (your CSV data) is automatically appended — "
+        "you only need to edit the instructions."
+    )
+
+    current_custom = st.session_state.get("custom_prompt") or ""
+    default_value = current_custom if current_custom else _DEFAULT_AUDIT_PROMPT
+
+    edited_prompt = st.text_area(
+        "Audit prompt (instructions to the AI agent)",
+        value=default_value,
+        height=400,
+        key="prompt_editor_textarea",
+    )
+
+    col1, col2, col3 = st.columns([1, 1, 2])
+    with col1:
+        if st.button("💾 Save Custom Prompt", type="primary"):
+            st.session_state.custom_prompt = edited_prompt
+            st.success("Custom prompt saved. Click **🚀 Run AI Audit** in the sidebar to use it.")
+    with col2:
+        if st.button("🔄 Reset to Default"):
+            st.session_state.custom_prompt = None
+            st.rerun()
+
+    st.markdown("---")
+
+    # Quick prompt suggestions
+    st.markdown("### 💡 Prompt Templates")
+    st.markdown("Click to load a pre-built prompt into the editor:")
+
+    templates = {
+        "🔍 Deep Concession Analysis": (
+            "You are a forensic property auditor specializing in concession analysis. "
+            "Examine every concession in the data. For each one:\n"
+            "1. Identify the type (move-in special, rent reduction, employee allowance, etc.)\n"
+            "2. Calculate the effective rent after concession\n"
+            "3. Flag any concession that reduces rent below $999\n"
+            "4. Flag duplicate concessions on the same unit\n"
+            "5. Flag reversed concessions that may not have been properly re-applied\n"
+            "6. Check if employee units have additional unauthorized concessions\n\n"
+            "For EVERY finding, provide:\n"
+            "- Citation: `[Source: <filename>, Row <number>]`\n"
+            "- Why: Complete reasoning chain explaining the issue\n"
+            "- Impact: Estimated monthly revenue impact\n"
+            "- Action: Specific recommended next step\n\n"
+            "Format as a structured Markdown report grouped by severity."
+        ),
+        "📊 Revenue Risk Focus": (
+            "You are a property management CFO reviewing concession data for revenue leakage. "
+            "Focus specifically on:\n"
+            "1. Total concession dollar amount by property\n"
+            "2. Concessions as a percentage of gross rent\n"
+            "3. Units with the largest absolute concession amounts\n"
+            "4. Patterns that suggest systemic pricing issues (e.g., many $999 specials)\n"
+            "5. Concessions without reverse dates (permanent revenue loss)\n\n"
+            "For EVERY finding, provide:\n"
+            "- Citation: `[Source: <filename>, Row <number>]`\n"
+            "- Why: Complete reasoning chain\n"
+            "- Financial impact: Dollar amount at risk\n\n"
+            "Format as a Markdown report with an executive summary, "
+            "findings by severity, and specific dollar-amount recommendations."
+        ),
+        "🏢 Compliance & Policy Check": (
+            "You are an internal auditor checking for policy compliance in property concessions. "
+            "Verify the following policies:\n"
+            "1. All concessions must have proper descriptions (flag generic ones)\n"
+            "2. Move-in specials should not exceed one month's rent\n"
+            "3. Employee unit allowances must be documented and limited\n"
+            "4. No unit should have more than 2 active concessions\n"
+            "5. All concessions over $500 must have notes explaining the reason\n"
+            "6. Reversed concessions must have a matching original entry\n\n"
+            "For EVERY finding, provide:\n"
+            "- Citation: `[Source: <filename>, Row <number>]`\n"
+            "- Policy violated: Which rule was broken\n"
+            "- Why: Evidence and reasoning\n"
+            "- Remediation: Specific corrective action\n\n"
+            "Format as a Markdown report suitable for a compliance review meeting."
+        ),
+    }
+
+    for label, template in templates.items():
+        if st.button(label, key=f"template_{label}"):
+            st.session_state.custom_prompt = template
+            st.rerun()
 
 
 # ---------------------------------------------------------------------------
@@ -199,8 +343,6 @@ def main():
     sidebar = render_new_sidebar()
     canonical_model: CanonicalModel = st.session_state.canonical_model
     audit_log: AuditLog = st.session_state.audit_log
-
-    st.title(f"{settings.APP_ICON} {settings.APP_TITLE}")
 
     uploaded_files = sidebar["uploaded_files"]
     resman_docs = st.session_state.get("resman_concession_docs", [])
@@ -257,6 +399,22 @@ def main():
 
     parsed_docs: List[ParsedDocument] = st.session_state.parsed_docs
 
+    # Convert auto-loaded resman CSVs into ParsedDocument objects so the AI
+    # engine can analyse them (resman_docs are (property_name, df) tuples).
+    if resman_docs and not any(d.document_type == "concession" for d in parsed_docs):
+        import pandas as pd
+        for prop_name, rdf in resman_docs:
+            parsed_docs.append(
+                ParsedDocument(
+                    file_name=f"{prop_name} Transaction List (Credits) - Feb 2026.csv",
+                    file_type="csv",
+                    raw_text=rdf.to_string(index=False),
+                    dataframe=rdf,
+                    document_type="concession",
+                )
+            )
+        st.session_state.parsed_docs = parsed_docs
+
     # Detect content types
     doc_types = {d.document_type for d in parsed_docs}
     has_rent_roll = "rent_roll" in doc_types
@@ -279,12 +437,18 @@ def main():
             )
         else:
             os.environ["AUDIT_MODEL"] = sidebar["model"]
+            custom_prompt = st.session_state.get("custom_prompt")
             with st.spinner("🤖 Running AI audit agent… this may take a minute…"):
                 try:
                     engine = LangGraphEngine(api_key=api_key)
-                    result = engine.run(canonical_model, parsed_docs=parsed_docs)
+                    result = engine.run(
+                        canonical_model,
+                        parsed_docs=parsed_docs,
+                        custom_prompt=custom_prompt,
+                    )
                     st.session_state.audit_result = result
                     st.session_state.audit_timestamp = datetime.now()
+                    st.session_state.audit_prompt = result.prompt_used
                     st.success(
                         f"✅ Audit complete at {st.session_state.audit_timestamp.strftime('%Y-%m-%d %H:%M:%S')}"
                     )
@@ -301,7 +465,7 @@ def main():
         tabs_labels.append("📋 Rent Roll")
     if has_projection:
         tabs_labels.append("📊 Projections")
-    tabs_labels += ["🔍 AI Findings", "📄 Full Report"]
+    tabs_labels += ["🔍 AI Findings", "📄 Full Report", "⚙️ Prompt Editor"]
     if parsed_docs:
         tabs_labels.append("🗂️ Raw Data")
 
@@ -357,11 +521,16 @@ def main():
         tab_idx += 1
 
     with tabs[tab_idx]:
-        render_findings_tab(audit_result)
+        render_findings_tab(audit_result, parsed_docs=parsed_docs)
     tab_idx += 1
 
     with tabs[tab_idx]:
         render_report_tab(audit_result, st.session_state.get("audit_timestamp"))
+    tab_idx += 1
+
+    # --- Prompt Editor tab ---
+    with tabs[tab_idx]:
+        _render_prompt_editor_tab(audit_result)
     tab_idx += 1
 
     if parsed_docs:

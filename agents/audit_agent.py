@@ -17,6 +17,7 @@ class AuditResult:
     anomalies: List[dict] = field(default_factory=list)
     severity_counts: dict = field(default_factory=dict)
     raw_output: str = ""
+    prompt_used: str = ""
 
 
 @tool
@@ -131,43 +132,177 @@ def identify_projection_anomalies(data_summary: str) -> str:
 def identify_concession_anomalies(data_summary: str) -> str:
     """
     Analyze concession data for anomalies.
-    Checks: concessions that reduce rent below $999 threshold, duplicate concession
-    descriptions, unusual concession amounts, military discounts, employee unit allowances.
+    Checks: excessive amounts (>$1,000), $999 specials, reversed concessions,
+    move-in specials, duplicate units, generic descriptions, high totals.
     """
     findings: list[str] = []
     lines = data_summary.splitlines()
-    seen_descriptions: dict[str, int] = {}
+
+    current_file = ""
+    total_amount = 0.0
+    row_count = 0
+    reversed_count = 0
+    active_count = 0
+    large_concessions: list[str] = []
+    specials_999: list[str] = []
+    movein_specials: list[str] = []
+    generic_descs: list[str] = []
+    duplicate_units: list[str] = []
 
     for line in lines:
-        lower = line.lower()
-        # Military discount
-        if "military" in lower:
-            findings.append(f"MEDIUM: Military discount concession detected — {line.strip()}")
-        # Employee allowance
-        if "employee" in lower and ("allowance" in lower or "unit" in lower):
-            findings.append(f"MEDIUM: Employee unit allowance concession detected — {line.strip()}")
-        # $999 special pattern — concession brings effective rent to ≤$999
-        if "999" in line:
-            findings.append(f"HIGH: Possible $999 special detected (concession reducing effective rent to ≤$999) — {line.strip()}")
-        # Duplicate description tracking
-        if "concession" in lower or "discount" in lower or "credit" in lower:
-            desc_key = line.strip().lower()
-            seen_descriptions[desc_key] = seen_descriptions.get(desc_key, 0) + 1
+        stripped = line.strip()
 
-    for desc, count in seen_descriptions.items():
-        if count > 1:
-            findings.append(f"MEDIUM: Duplicate concession description appears {count} times — '{desc}'")
+        # Detect file boundary
+        if stripped.startswith("=== Concession Document:"):
+            if current_file and row_count > 0:
+                # Flush findings for the previous file
+                findings.append(f"\n--- {current_file} ---")
+                findings.append(f"Total rows: {row_count}, Total amount: ${total_amount:,.2f}")
+                findings.append(f"Reversed: {reversed_count}, Active: {active_count}")
+                if large_concessions:
+                    findings.append(f"CRITICAL: {len(large_concessions)} concession(s) > $1,000:")
+                    for lc in large_concessions[:10]:
+                        findings.append(f"  {lc}")
+                if specials_999:
+                    findings.append(f"HIGH: {len(specials_999)} $999 special(s):")
+                    for s in specials_999[:10]:
+                        findings.append(f"  {s}")
+                if movein_specials:
+                    findings.append(f"HIGH: {len(movein_specials)} move-in special(s):")
+                    for m in movein_specials[:10]:
+                        findings.append(f"  {m}")
+                if generic_descs:
+                    findings.append(f"MEDIUM: {len(generic_descs)} generic description(s) (audit risk)")
+                if duplicate_units:
+                    findings.append(f"MEDIUM: Duplicate unit entries: {', '.join(duplicate_units[:10])}")
+
+            # Reset for new file
+            current_file = stripped.replace("=== Concession Document:", "").replace("===", "").strip()
+            total_amount = 0.0
+            row_count = 0
+            reversed_count = 0
+            active_count = 0
+            large_concessions = []
+            specials_999 = []
+            movein_specials = []
+            generic_descs = []
+            duplicate_units = []
+            continue
+
+        # Parse stats
+        lower = stripped.lower()
+        if "total concession amount:" in lower:
+            try:
+                total_amount = float(lower.split("$")[-1].replace(",", ""))
+            except (ValueError, IndexError):
+                pass
+        if "total concession line items:" in lower:
+            try:
+                row_count = int(stripped.split(":")[-1].strip())
+            except ValueError:
+                pass
+        if "reversed concessions:" in lower:
+            try:
+                reversed_count = int(stripped.split(":")[-1].strip())
+            except ValueError:
+                pass
+        if "active (not reversed)" in lower:
+            try:
+                active_count = int(stripped.split(":")[-1].strip())
+            except ValueError:
+                pass
+        if "concessions > $1,000:" in lower:
+            try:
+                cnt = int(stripped.split(":")[-1].strip())
+                if cnt > 0:
+                    large_concessions.append(f"{cnt} found")
+            except ValueError:
+                pass
+        if "$999 specials detected:" in lower:
+            try:
+                cnt = int(stripped.split(":")[-1].strip())
+                if cnt > 0:
+                    specials_999.append(f"{cnt} found")
+            except ValueError:
+                pass
+        if "move-in specials detected:" in lower:
+            try:
+                cnt = int(stripped.split(":")[-1].strip())
+                if cnt > 0:
+                    movein_specials.append(f"{cnt} found")
+            except ValueError:
+                pass
+        if "generic" in lower and "concession - rent" in lower:
+            try:
+                cnt = int(stripped.split(":")[-1].strip())
+                if cnt > 0:
+                    generic_descs.append(f"{cnt} found")
+            except ValueError:
+                pass
+        if "units with multiple concessions:" in lower:
+            try:
+                cnt = int(stripped.split(":")[-1].strip())
+                if cnt > 0:
+                    duplicate_units.append(f"{cnt} units")
+            except ValueError:
+                pass
+
+        # Parse individual data rows
+        if stripped.startswith("[Row "):
+            lower_row = stripped.lower()
+            # Large concession (>$1,000)
+            import re as _re
+            amt_match = _re.findall(r'\b(\d{1,3}(?:,\d{3})*(?:\.\d+)?)\b', stripped)
+            for amt_str in amt_match:
+                try:
+                    v = float(amt_str.replace(",", ""))
+                    if v > 1000:
+                        large_concessions.append(stripped[:120])
+                        break
+                except ValueError:
+                    pass
+            # $999 special
+            if "999" in stripped and ("special" in lower_row or "reduce" in lower_row):
+                specials_999.append(stripped[:120])
+            # Move-in special
+            if any(kw in lower_row for kw in ["$99 total", "move in", "move-in", "m/i"]):
+                movein_specials.append(stripped[:120])
+            # Generic description
+            if "concession - rent" in lower_row and "reduce" not in lower_row and "special" not in lower_row:
+                generic_descs.append(stripped[:120])
+
+    # Flush last file
+    if current_file and row_count > 0:
+        findings.append(f"\n--- {current_file} ---")
+        findings.append(f"Total rows: {row_count}, Total amount: ${total_amount:,.2f}")
+        findings.append(f"Reversed: {reversed_count}, Active: {active_count}")
+        if large_concessions:
+            findings.append(f"CRITICAL: {len(large_concessions)} concession(s) > $1,000:")
+            for lc in large_concessions[:10]:
+                findings.append(f"  {lc}")
+        if specials_999:
+            findings.append(f"HIGH: {len(specials_999)} $999 special(s):")
+            for s in specials_999[:10]:
+                findings.append(f"  {s}")
+        if movein_specials:
+            findings.append(f"HIGH: {len(movein_specials)} move-in special(s):")
+            for m in movein_specials[:10]:
+                findings.append(f"  {m}")
+        if generic_descs:
+            findings.append(f"MEDIUM: {len(generic_descs)} generic description(s) (audit risk)")
+        if duplicate_units:
+            findings.append(f"MEDIUM: Duplicate unit entries: {', '.join(duplicate_units[:10])}")
 
     if not findings:
         findings.append(
-            "No obvious concession anomalies detected from heuristics. "
-            "LLM should verify no unusual amounts or policy violations."
+            "No concession data found in the summary. Verify that concession CSV files "
+            "were included in the data."
         )
 
     header = (
         "=== Concession Anomaly Analysis ===\n"
-        "Checks applied: $999 threshold, duplicate descriptions, "
-        "military discounts, employee allowances, unusual amounts.\n\nFindings:\n"
+        "Checks applied: excessive amounts (>$1,000), $999 specials, reversed concessions, "
+        "move-in specials, duplicate units, generic descriptions.\n\nFindings:\n"
     )
     return header + "\n".join(f"- {f}" for f in findings)
 
@@ -176,16 +311,35 @@ def identify_concession_anomalies(data_summary: str) -> str:
 def generate_audit_report(findings_summary: str) -> str:
     """
     Generate a structured markdown audit report from the findings summary.
+    Return a professional, well-formatted markdown report with sections.
     """
     return (
-        f"# Property Audit Report\n\n"
-        f"## Executive Summary\n\n"
+        "# Property Audit Report\n\n"
+        "## Executive Summary\n\n"
         f"{findings_summary}\n\n"
-        f"## Findings\n\n"
-        f"See detailed anomaly sections below.\n\n"
-        f"## Recommendations\n\n"
-        f"Review all Critical and High severity findings immediately.\n"
-        f"Schedule a follow-up audit within 30 days.\n"
+        "---\n\n"
+        "## Findings Detail\n\n"
+        "The following anomalies were identified during the audit analysis. "
+        "Each finding is categorised by severity level.\n\n"
+        "### 🔴 Critical Findings\n\n"
+        "Issues requiring **immediate** attention — potential revenue loss or policy violations.\n\n"
+        "### 🟠 High Severity Findings\n\n"
+        "Significant risks that should be addressed within the current review cycle.\n\n"
+        "### 🟡 Medium Severity Findings\n\n"
+        "Items warranting attention but not posing an immediate financial risk.\n\n"
+        "### 🟢 Low Severity Findings\n\n"
+        "Minor observations and informational items.\n\n"
+        "---\n\n"
+        "## Recommendations\n\n"
+        "1. **Immediate:** Review all Critical and High severity findings with the property manager.\n"
+        "2. **Short-term (7 days):** Resolve open concession discrepancies and verify reverse-date accuracy.\n"
+        "3. **Follow-up (30 days):** Schedule a re-audit to confirm corrective actions are in place.\n\n"
+        "---\n\n"
+        "## Methodology\n\n"
+        "This report was generated using a combination of deterministic rule-based checks "
+        "and AI-powered analysis. Rule-based checks cover duplicate concessions, missing "
+        "reverse dates, $999 specials, and employee-unit anomalies. AI analysis provides "
+        "deeper pattern recognition, revenue-cliff detection, and narrative explanations.\n"
     )
 
 
@@ -209,16 +363,22 @@ def _parse_severity(text: str) -> str:
     return "low"
 
 
-def run_audit(data_summary: str, api_key: str | None = None) -> AuditResult:
+def run_audit(
+    data_summary: str,
+    api_key: str | None = None,
+    custom_prompt: str | None = None,
+) -> AuditResult:
     """
     Run the LangGraph ReAct audit agent against the provided data summary.
 
     Args:
         data_summary: Structured text summary of parsed document(s).
         api_key: OpenAI API key. Falls back to OPENAI_API_KEY env var.
+        custom_prompt: Optional user-edited prompt. When provided, it replaces
+                       the default system prompt (DATA SUMMARY is still appended).
 
     Returns:
-        AuditResult with report, anomalies, severity_counts, raw_output.
+        AuditResult with report, anomalies, severity_counts, raw_output, prompt_used.
 
     Raises:
         ValueError: If no API key is available.
@@ -230,8 +390,8 @@ def run_audit(data_summary: str, api_key: str | None = None) -> AuditResult:
             "Set the OPENAI_API_KEY environment variable or pass api_key=... to run_audit()."
         )
 
-    model_name = os.environ.get("AUDIT_MODEL", "gpt-4o")
-    max_tokens = int(os.environ.get("AUDIT_MAX_TOKENS", "4096"))
+    model_name = os.environ.get("AUDIT_MODEL", "o3")
+    max_tokens = int(os.environ.get("AUDIT_MAX_TOKENS", "16384"))
 
     llm = ChatOpenAI(
         model=model_name,
@@ -242,12 +402,42 @@ def run_audit(data_summary: str, api_key: str | None = None) -> AuditResult:
 
     agent = create_react_agent(llm, _TOOLS)
 
-    prompt = (
-        "You are a property management audit expert. "
-        "Analyze the following data summary using the available tools. "
-        "Identify all anomalies, then generate a comprehensive audit report.\n\n"
-        f"DATA SUMMARY:\n{data_summary}"
+    default_instructions = (
+        "You are a senior property management audit expert analyzing ResMan Transaction List "
+        "CSV files for concession anomalies. You have data from MULTIPLE properties.\n\n"
+        "CRITICAL REQUIREMENT — PER-FILE ANALYSIS:\n"
+        "You MUST analyze EACH CSV file SEPARATELY and produce a dedicated section for each.\n"
+        "For each file, create a section with:\n"
+        "  ## <Property Name> — <filename>\n\n"
+        "Then within each section, list every finding with:\n"
+        "  ### Finding: <short title>\n"
+        "  **Severity:** 🔴 Critical / 🟠 High / 🟡 Medium / 🟢 Low\n"
+        "  **Affected Units:** <unit numbers>\n"
+        "  **Citation:** [Source: <filename>, Row <number>]\n"
+        "  **Description:** <what was found>\n"
+        "  **Reasoning:** <complete chain of reasoning — what data you examined, "
+        "what threshold or rule was applied, what pattern you detected, and why it matters>\n"
+        "  **Recommended Action:** <specific corrective action>\n\n"
+        "WHAT TO LOOK FOR IN EACH FILE:\n"
+        "1. **$999 Specials** — concessions that reduce rent to exactly $999.\n"
+        "2. **Excessive concessions** — any single concession > $1,000.\n"
+        "3. **Reversed concessions** — rows with a Reverse Date (investigate if re-applied).\n"
+        "4. **Move-in specials** — $99 or $0 move-in deals; verify duration and policy compliance.\n"
+        "5. **Duplicate unit concessions** — same unit appearing multiple times in one period.\n"
+        "6. **Generic descriptions** — 'Concession - Rent' with no further detail (audit risk).\n"
+        "7. **Large totals per property** — flag if total concession amount is unusually high.\n"
+        "8. **Active vs reversed ratio** — properties with high reversal rates.\n\n"
+        "OUTPUT STRUCTURE:\n"
+        "Start with an **Executive Summary** (2-3 sentences covering all properties).\n"
+        "Then one ## section per CSV file with all findings.\n"
+        "End with a **Cross-Property Comparison** table and **Recommendations** section.\n\n"
+        "Use the available tools to analyze the data. Be thorough — examine every row.\n"
+        "Do NOT say 'No anomalies detected' unless you have genuinely checked every row.\n"
+        "Do NOT include raw data dumps in your response."
     )
+
+    instructions = custom_prompt if custom_prompt else default_instructions
+    prompt = f"{instructions}\n\nDATA SUMMARY:\n{data_summary}"
 
     result = agent.invoke({"messages": [("user", prompt)]})
 
@@ -263,18 +453,136 @@ def run_audit(data_summary: str, api_key: str | None = None) -> AuditResult:
     anomalies: List[dict] = []
     severity_counts: Dict[str, int] = {"critical": 0, "high": 0, "medium": 0, "low": 0}
 
+    import re
+    source_pattern = re.compile(r'\[Source:\s*([^,\]]+?)(?:,\s*Row\s*([\d,\s]+))?\]', re.IGNORECASE)
+    # Detect file section headers like "## Crossings at Irving — CAI Transaction..."
+    file_section_pattern = re.compile(
+        r'^#{1,3}\s+(.+?)\s*(?:—|--|-)?\s*(.+?Transaction List.+?\.csv)',
+        re.IGNORECASE,
+    )
+    # Detect finding sub-headers like "### Finding: $999 Specials"
+    finding_header_pattern = re.compile(r'^#{1,4}\s+(?:Finding:?\s*)?(.+)', re.IGNORECASE)
+
+    current_source_file = ""
+    current_finding_title = ""
+    current_severity = ""
+    current_description_lines: list[str] = []
+    current_reasoning = ""
+    current_units = ""
+    current_citation_file = ""
+    current_citation_row = ""
+
+    def _flush_finding():
+        nonlocal current_finding_title, current_severity, current_description_lines
+        nonlocal current_reasoning, current_units, current_citation_file, current_citation_row
+        if current_finding_title:
+            desc = current_finding_title
+            if current_description_lines:
+                desc += " — " + " ".join(current_description_lines)
+            sev = current_severity or _parse_severity(desc)
+            src = current_citation_file or current_source_file
+            anomalies.append({
+                "description": desc.strip(),
+                "severity": sev,
+                "unit": current_units,
+                "source": src,
+                "row": current_citation_row,
+                "reasoning": current_reasoning,
+            })
+            severity_counts[sev] += 1
+        current_finding_title = ""
+        current_severity = ""
+        current_description_lines = []
+        current_reasoning = ""
+        current_units = ""
+        current_citation_file = ""
+        current_citation_row = ""
+
     for line in raw_output.splitlines():
-        line = line.strip()
-        if line.startswith(("- ", "* ", "•")) or (line and line[0].isdigit() and ". " in line):
-            clean = line.lstrip("-*•0123456789. ").strip()
-            if clean:
+        stripped = line.strip()
+        if not stripped:
+            continue
+
+        # Check for file section header
+        file_match = file_section_pattern.match(stripped)
+        if file_match:
+            _flush_finding()
+            current_source_file = file_match.group(2).strip()
+            continue
+
+        # Check for finding header
+        if stripped.startswith("#"):
+            header_match = finding_header_pattern.match(stripped)
+            if header_match:
+                _flush_finding()
+                title = header_match.group(1).strip()
+                # Skip generic section headers
+                if title.lower() not in (
+                    "executive summary", "recommendations", "cross-property comparison",
+                    "methodology", "findings detail",
+                ):
+                    current_finding_title = title
+            continue
+
+        # Extract structured fields
+        lower = stripped.lower()
+        if lower.startswith("**severity:**") or lower.startswith("severity:"):
+            raw_sev = stripped.split(":", 1)[1].strip().strip("*").strip().lower()
+            if "critical" in raw_sev:
+                current_severity = "critical"
+            elif "high" in raw_sev:
+                current_severity = "high"
+            elif "medium" in raw_sev:
+                current_severity = "medium"
+            else:
+                current_severity = "low"
+            continue
+
+        if lower.startswith("**affected units:**") or lower.startswith("affected units:"):
+            current_units = stripped.split(":", 1)[1].strip().strip("*").strip()
+            continue
+
+        if lower.startswith("**reasoning:**") or lower.startswith("reasoning:"):
+            current_reasoning = stripped.split(":", 1)[1].strip().strip("*").strip()
+            continue
+
+        if lower.startswith("**description:**") or lower.startswith("description:"):
+            current_description_lines.append(stripped.split(":", 1)[1].strip().strip("*").strip())
+            continue
+
+        # Extract source citations from any line
+        source_match = source_pattern.search(stripped)
+        if source_match:
+            current_citation_file = source_match.group(1).strip()
+            if source_match.group(2):
+                current_citation_row = source_match.group(2).strip()
+            continue
+
+        # Fallback: bullet-point findings (for less structured output)
+        if stripped.startswith(("- ", "* ", "• ")) or (stripped and stripped[0].isdigit() and ". " in stripped):
+            clean = stripped.lstrip("-*•0123456789. ").strip()
+            if clean and not current_finding_title:
                 sev = _parse_severity(clean)
-                anomalies.append({"description": clean, "severity": sev, "unit": ""})
+                src_match = source_pattern.search(clean)
+                source_file = src_match.group(1).strip() if src_match else current_source_file
+                source_row = src_match.group(2).strip() if src_match and src_match.group(2) else ""
+                anomalies.append({
+                    "description": clean,
+                    "severity": sev,
+                    "unit": "",
+                    "source": source_file,
+                    "row": source_row,
+                    "reasoning": "",
+                })
                 severity_counts[sev] += 1
+
+    # Flush last finding
+    _flush_finding()
 
     return AuditResult(
         report=raw_output,
         anomalies=anomalies,
         severity_counts=severity_counts,
         raw_output=raw_output,
+        prompt_used=instructions,
     )

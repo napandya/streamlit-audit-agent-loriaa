@@ -226,9 +226,61 @@ class DataProcessor:
             lines.append(f"\nRaw text preview:\n{doc.raw_text[:1000]}")
             return "\n".join(lines)
 
+        lines.append(f"Source file: {doc.file_name}")
         lines.append(f"Total concession line items: {len(df)}")
         lines.append(f"Columns: {list(df.columns)}")
-        lines.append("\nAll concession rows:")
-        lines.append(df.to_string(index=False, max_rows=50))
+
+        # --- Pre-computed statistics the LLM should use ---
+        if "Amount" in df.columns:
+            amounts = pd.to_numeric(
+                df["Amount"].astype(str).str.replace(",", "").str.replace("$", ""),
+                errors="coerce",
+            ).fillna(0)
+            lines.append(f"\nTotal concession amount: ${amounts.sum():,.2f}")
+            lines.append(f"Average concession: ${amounts.mean():,.2f}")
+            lines.append(f"Max single concession: ${amounts.max():,.2f}")
+            lines.append(f"Min single concession: ${amounts.min():,.2f}")
+            large = (amounts > 1000).sum()
+            if large:
+                lines.append(f"⚠ Concessions > $1,000: {large}")
+
+        if "Unit" in df.columns:
+            unique_units = df["Unit"].nunique()
+            dup_units = df["Unit"].value_counts()
+            dup_units = dup_units[dup_units > 1]
+            lines.append(f"\nUnique units with concessions: {unique_units}")
+            if not dup_units.empty:
+                lines.append(f"⚠ Units with MULTIPLE concessions: {len(dup_units)}")
+                for unit, count in dup_units.head(10).items():
+                    lines.append(f"  Unit {unit}: {count} entries")
+
+        if "Description" in df.columns:
+            desc_lower = df["Description"].astype(str).str.lower()
+            n999 = desc_lower.str.contains("999|\\$999", na=False, regex=True).sum()
+            n_movein = desc_lower.str.contains("move.?in|m/i|\\$99 total", na=False, regex=True).sum()
+            n_generic = (df["Description"].astype(str).str.strip() == "Concession - Rent").sum()
+            if n999:
+                lines.append(f"⚠ $999 specials detected: {n999}")
+            if n_movein:
+                lines.append(f"⚠ Move-in specials detected: {n_movein}")
+            if n_generic:
+                lines.append(f"⚠ Generic 'Concession - Rent' (no detail): {n_generic}")
+
+        if "Reverse Date" in df.columns:
+            rev_col = df["Reverse Date"].astype(str).str.strip()
+            reversed_count = ((rev_col != "") & (rev_col != "nan") & (rev_col != "0")).sum()
+            not_reversed = len(df) - reversed_count
+            lines.append(f"\nReversed concessions: {reversed_count}")
+            lines.append(f"Active (not reversed) concessions: {not_reversed}")
+
+        # Provide row-numbered concession data so the LLM can cite specific rows
+        lines.append(f"\nDetailed concession rows (with CSV row numbers from {doc.file_name}):")
+        for i, (_idx, row) in enumerate(df.iterrows()):
+            row_num = i + 2  # +2 for 1-indexed header row in CSV
+            row_vals = " | ".join(str(v) for v in row.values if str(v) != "nan")
+            lines.append(f"  [Row {row_num}] {row_vals}")
+            if i >= 150:
+                lines.append(f"  ... ({len(df) - 150} more rows omitted)")
+                break
 
         return "\n".join(lines)
