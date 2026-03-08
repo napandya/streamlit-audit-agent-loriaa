@@ -1,8 +1,16 @@
 """
 LangGraph engine layer — wires the ReAct audit agent into the engine architecture.
 
-When no OpenAI API key is available the engine falls back to deterministic
-DataFrame-driven checks so the user still gets actionable findings.
+Hybrid design:
+1. Deterministic ``ConcessionRulesEngine`` pre-scans every concession CSV
+   and produces structured findings + per-property stats.
+2. Only the pre-scan summary (stats + flagged rows) is sent to the LLM —
+   **not** the raw CSV data — which dramatically reduces token usage and
+   improves AI accuracy.
+3. For non-concession documents (rent rolls, projections) the full summary
+   is still sent because those files are already compact.
+4. When no API key is available the engine returns the deterministic findings
+   alone so the user still gets actionable results.
 """
 from typing import Optional, List
 
@@ -10,6 +18,12 @@ import pandas as pd
 
 from models.canonical_model import CanonicalModel
 from agents.audit_agent import AuditResult, run_audit
+from engine.concession_rules import (
+    ConcessionRulesEngine,
+    ConcessionFinding,
+    PropertyStats,
+    format_for_llm,
+)
 from utils.data_processor import DataProcessor
 from utils.helpers import parse_month, find_property_total_row
 from ingestion.parsers import ParsedDocument
@@ -33,29 +47,66 @@ class LangGraphEngine:
         custom_prompt: Optional[str] = None,
     ) -> AuditResult:
         """
-        Run the LangGraph audit agent.
+        Run the hybrid audit pipeline.
 
-        Args:
-            canonical_model: Populated CanonicalModel instance.
-            parsed_docs: Optional list of ParsedDocument objects from the new parsers.
-            extra_summary: Optional additional context to include in the prompt.
-            custom_prompt: Optional user-edited prompt override.
+        1. Separate parsed docs into *concession* vs *other* (rent roll / projection).
+        2. Run ``ConcessionRulesEngine`` on all concession docs → deterministic
+           findings + per-property stats.
+        3. Build the LLM summary:
+           - Concession docs → ``format_for_llm()`` (stats + flagged rows only).
+           - Other docs → full ``DataProcessor.produce_summary()``.
+        4. Call the LLM agent with the combined summary.
+        5. Merge deterministic findings with LLM findings (dedup by category).
 
         Returns:
             AuditResult with report, anomalies, severity_counts, raw_output.
         """
-        # Always run deterministic checks regardless of API key availability
-        det_findings = self._run_deterministic_checks(parsed_docs or [])
+        docs = parsed_docs or []
 
+        # --- Split by type ---
+        concession_docs: list[ParsedDocument] = []
+        other_docs: list[ParsedDocument] = []
+        for doc in docs:
+            if not isinstance(doc, ParsedDocument):
+                continue
+            if doc.document_type == "concession":
+                concession_docs.append(doc)
+            else:
+                other_docs.append(doc)
+
+        # --- Step 1: Deterministic concession pre-scan ---
+        conc_findings: List[ConcessionFinding] = []
+        conc_stats: List[PropertyStats] = []
+        if concession_docs:
+            engine = ConcessionRulesEngine()
+            property_dfs = [
+                (doc.file_name, doc.file_name, doc.dataframe)
+                for doc in concession_docs
+            ]
+            conc_findings, conc_stats = engine.run_all(property_dfs)
+
+        # Convert ConcessionFindings to the flat dict format used everywhere
+        det_findings = self._concession_findings_to_dicts(conc_findings)
+
+        # Also run the legacy projection checks on non-concession docs
+        for doc in other_docs:
+            if doc.dataframe is not None and not doc.dataframe.empty:
+                det_findings.extend(
+                    self._check_projection(doc.dataframe, file_name=doc.file_name)
+                )
+
+        # --- Step 2: Build LLM summary ---
         summary_parts: list[str] = []
 
-        # Build summary from ParsedDocuments if provided
-        if parsed_docs:
-            for doc in parsed_docs:
-                if isinstance(doc, ParsedDocument):
-                    summary_parts.append(self._processor.produce_summary(doc))
+        # Concession docs → pre-scan summary only (NOT raw CSV rows)
+        if conc_findings or conc_stats:
+            summary_parts.append(format_for_llm(conc_findings, conc_stats))
 
-        # Fallback: build a summary from the canonical model
+        # Other docs → full summary (rent roll, projection, etc.)
+        for doc in other_docs:
+            summary_parts.append(self._processor.produce_summary(doc))
+
+        # Fallback to canonical model if nothing else
         if not summary_parts:
             summary_parts.append(self._build_canonical_summary(canonical_model))
 
@@ -64,7 +115,7 @@ class LangGraphEngine:
 
         combined_summary = "\n\n".join(summary_parts)
 
-        # Try the LLM-based agent; fall back to deterministic-only on error
+        # --- Step 3: LLM agent ---
         resolved_key = self.api_key
         if resolved_key:
             try:
@@ -73,7 +124,6 @@ class LangGraphEngine:
                     api_key=resolved_key,
                     custom_prompt=custom_prompt,
                 )
-                # Merge deterministic findings into the LLM result
                 return self._merge_results(det_findings, llm_result)
             except Exception:
                 pass  # fall through to deterministic-only
@@ -85,25 +135,29 @@ class LangGraphEngine:
     # Deterministic checks
     # ------------------------------------------------------------------
 
-    def _run_deterministic_checks(
-        self, parsed_docs: list
+    # ------------------------------------------------------------------
+    # Convert ConcessionFinding → flat dict
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def _concession_findings_to_dicts(
+        findings: List[ConcessionFinding],
     ) -> List[dict]:
-        """
-        Scan actual DataFrames for concessions, MTM tenants, revenue cliffs,
-        and employee-unit rows without needing an LLM.
-        """
-        findings: List[dict] = []
-
-        for doc in parsed_docs:
-            if not isinstance(doc, ParsedDocument):
-                continue
-            df = doc.dataframe
-            if df is None or df.empty:
-                continue
-
-            findings.extend(self._check_projection(df, file_name=doc.file_name))
-
-        return findings
+        """Convert structured ConcessionFinding objects to the flat dict
+        format used by the rest of the pipeline (merge, UI, export)."""
+        result: list[dict] = []
+        for f in findings:
+            result.append({
+                "description": f.description,
+                "severity": f.severity,
+                "unit": ", ".join(f.units[:15]) if f.units else "",
+                "source": f.source_file,
+                "row": ", ".join(str(r) for r in f.rows[:15]),
+                "evidence": f.evidence,
+                "rule_id": f.rule_id,
+                "reasoning": f.detail,
+            })
+        return result
 
     def _check_projection(self, df: pd.DataFrame, file_name: str = "") -> List[dict]:
         """Detect concessions, MTM tenants, revenue cliffs, employee units.
@@ -141,19 +195,44 @@ class LangGraphEngine:
             conc_mask = lower_vals.str.contains("concession", na=False)
             for idx in df.index[conc_mask]:
                 unit = str(df.at[idx, unit_col]) if unit_col else "?"
-                amounts = []
-                for mc in month_cols:
+                # Build detail from actual concession columns
+                parts = []
+                if "Amount" in df.columns:
                     try:
-                        v = float(str(df.at[idx, mc]).replace(",", "").replace("$", ""))
-                        if v != 0:
-                            amounts.append(f"{mc}: ${v:,.2f}")
+                        amt = float(str(df.at[idx, "Amount"]).replace(",", "").replace("$", ""))
+                        parts.append(f"${amt:,.2f}")
                     except (ValueError, TypeError):
                         pass
-                detail = ", ".join(amounts[:3]) if amounts else "see data"
+                if "Description" in df.columns:
+                    desc = str(df.at[idx, "Description"]).strip()
+                    if desc and desc != "nan":
+                        parts.append(desc)
+                if "Name" in df.columns:
+                    name = str(df.at[idx, "Name"]).strip()
+                    if name and name != "nan":
+                        parts.append(name)
+                reverse_date = ""
+                if "Reverse Date" in df.columns:
+                    rd = str(df.at[idx, "Reverse Date"]).strip()
+                    if rd and rd not in ("nan", "0", "0.0"):
+                        parts.append(f"Reversed: {rd}")
+                        reverse_date = rd
+                # Fallback to month columns for projection-style data
+                if not parts:
+                    for mc in month_cols:
+                        try:
+                            v = float(str(df.at[idx, mc]).replace(",", "").replace("$", ""))
+                            if v != 0:
+                                parts.append(f"{mc}: ${v:,.2f}")
+                        except (ValueError, TypeError):
+                            pass
+                detail = " | ".join(parts[:4]) if parts else "—"
                 concession_hits.append({
                     "unit": unit,
                     "row": int(idx) + 2,
                     "detail": detail,
+                    "amount": parts[0] if parts else "",
+                    "reversed": reverse_date,
                 })
 
             # MTM tenants

@@ -1,22 +1,172 @@
-# 🏢 Village Green Property Audit System
+# LiveNJoy LLC — Concession Audit System
 
-A Streamlit application for auditing property recurring transactions and concessions, powered by a LangGraph ReAct agent. It helps COOs and Auditors detect anomalies, validate fee structures, and identify revenue risks across property management portfolios.
+A Streamlit application that audits ResMan Transaction List (Credits) CSVs using a **hybrid deterministic + AI pipeline**. A deterministic rules engine pre-scans every CSV for 8 anomaly patterns, then a LangGraph ReAct agent (OpenAI o3) narrates the findings into an executive audit report.
 
-![App Screenshot](https://github.com/user-attachments/assets/60f13b2c-94d9-435b-9408-28001afd414a)
-![KPI Dashboard](https://github.com/user-attachments/assets/c1fe0627-e3ca-4039-b19f-a99e03e8d8f4)
-![Audit Findings](https://github.com/user-attachments/assets/4861ef42-880a-403c-8b84-c8de888e99d0)
+Built for COOs and Auditors managing multi-property portfolios.
+
+---
+
+## How It Works
+
+```
+CSV files (data/)
+    │
+    ▼
+ConcessionRulesEngine          ← 8 rules (CONC-001 … CONC-008)
+    │
+    ├─► Structured findings
+    └─► Per-property stats
+            │
+            ▼
+      format_for_llm()         ← stats + ≤5 evidence rows / finding
+            │
+            ▼
+   LangGraph ReAct Agent       ← OpenAI o3, 16 384 tokens
+            │
+            ▼
+      Merge & Dedup
+            │
+            ▼
+   Findings Tab + Report Tab
+```
+
+### Deterministic Rules
+
+| Rule | Severity | Description |
+|------|----------|-------------|
+| CONC-001 | HIGH | Excessive single concession (> $1 000) |
+| CONC-002 | HIGH | $999 special-rate concession |
+| CONC-003 | MEDIUM | Move-in special ($99 / $0) |
+| CONC-004 | MEDIUM/HIGH | Reversed concession (Reverse Date populated) |
+| CONC-005 | MEDIUM | Duplicate unit concession in same period |
+| CONC-006 | LOW | Generic / vague description |
+| CONC-007 | HIGH | Property total > 2× median across all properties |
+| CONC-008 | MEDIUM | Negative amount (data-entry error) |
+
+---
 
 ## Prerequisites
 
-- Python 3.13+
+- **Python 3.13+**
+- **OpenAI API key** (required for AI narration; deterministic audit works without it)
 
-## Quick Start
+---
 
-```bash
+## Quick Start — Windows (PowerShell)
+
+```powershell
+# Clone the repository
+git clone https://github.com/napandya/streamlit-audit-agent-loriaa.git
+cd streamlit-audit-agent-loriaa
+
+# Create and activate a virtual environment
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+
+# Install dependencies
 pip install -r requirements.txt
+
+# Run the app
+streamlit run app.py
 ```
 
-Key packages installed:
+Then open **http://localhost:8501** in your browser.
+
+> **Note:** If PowerShell blocks the activate script, run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` first.
+
+---
+
+## Quick Start — macOS / Linux (Bash)
+
+```bash
+# Clone the repository
+git clone https://github.com/napandya/streamlit-audit-agent-loriaa.git
+cd streamlit-audit-agent-loriaa
+
+# Create and activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the app
+streamlit run app.py
+```
+
+Then open **http://localhost:8501** in your browser.
+
+---
+
+## Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `OPENAI_API_KEY` | For AI audit | OpenAI API key (can also be entered in the sidebar at runtime) |
+
+Set it before launching:
+
+```powershell
+# Windows PowerShell
+$env:OPENAI_API_KEY = "sk-..."
+```
+
+```bash
+# macOS / Linux
+export OPENAI_API_KEY="sk-..."
+```
+
+---
+
+## Running with Docker
+
+```bash
+# Build the image
+docker build -t streamlit-audit-agent .
+
+# Run the container
+docker run -p 8501:8501 \
+  -e OPENAI_API_KEY="sk-..." \
+  streamlit-audit-agent
+```
+
+Then open **http://localhost:8501**.
+
+> The Dockerfile uses `python:3.13-slim`, exposes port 8501, and includes a health check at `/_stcore/health`.
+
+---
+
+## Deploying to Streamlit Community Cloud (Free)
+
+1. Push this repository to GitHub (public or private).
+
+2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub.
+
+3. Click **New app** and select:
+   - **Repository:** `napandya/streamlit-audit-agent-loriaa`
+   - **Branch:** `main`
+   - **Main file path:** `app.py`
+
+4. Under **Advanced settings → Secrets**, add:
+   ```toml
+   OPENAI_API_KEY = "sk-..."
+   ```
+
+5. Click **Deploy**. The app will be live at `https://<your-app>.streamlit.app`.
+
+> **Data:** The 7 CSV files in `data/` are committed to the repo and auto-loaded on startup — no manual upload needed.
+
+---
+
+## Running the Test Suite
+
+```bash
+pytest tests/
+```
+
+---
+
+## Key Packages
 
 | Package(s) | Purpose |
 |---|---|
@@ -25,201 +175,55 @@ Key packages installed:
 | `pdfplumber` | PDF parsing |
 | `python-docx` | Word document parsing |
 | `plotly` | Interactive charts |
-| `langgraph`, `langchain`, `langchain-openai`, `langchain-core` | AI audit agent |
+| `langgraph`, `langchain`, `langchain-openai`, `langchain-core` | LangGraph ReAct agent |
 | `duckdb` | Optional local persistence |
 | `reportlab` | PDF report generation |
 | `pytest`, `pytest-mock` | Test suite |
 
 ---
 
-## 🔐 Environment Variables / Secrets
-
-Before running the app, export the following environment variables (or add them to a `.env` file):
-
-```bash
-export OPENAI_API_KEY="sk-..."           # Required for the AI agent
-
-# Optional — only if connecting to ResMan API:
-export RESMAN_API_URL="https://api.resman.com/v1"
-export RESMAN_API_KEY="your-api-key"
-export RESMAN_PROPERTY_ID="your-property-id"
-```
-
----
-
-## 🚀 Running the App (Local)
-
-```bash
-streamlit run app.py
-```
-
-Then open **http://localhost:8501** in your browser.
-
-> **Sample data included:** A sample PDF (`Recurring Transaction Projection (2).pdf`) is included in the repo. Upload it on first launch to see the app with real data (245 units, 12 months, 7,990 transactions).
-
----
-
-## 🐳 Running with Docker
-
-```bash
-# Build the image
-docker build -t streamlit-audit-agent .
-
-# Run the container (pass your OpenAI key)
-docker run -p 8501:8501 \
-  -e OPENAI_API_KEY="sk-..." \
-  streamlit-audit-agent
-```
-
-Then open **http://localhost:8501**.
-
-> The Dockerfile already exposes port 8501 and includes a health-check endpoint at `/_stcore/health`.
-
----
-
-## 🧪 Running the Test Suite
-
-```bash
-pytest tests/
-```
-
----
-
-## ✨ Features
-
-### 📤 Data Ingestion
-- **Multi-format file upload**: Support for PDF, Excel (`.xlsx`, `.xls`, `.csv`), and Word (`.docx`) files
-- **ResMan API integration**: Direct sync from ResMan property management system (stub ready for production)
-- **Intelligent parsing**: Automatic detection and parsing of ResMan recurring transaction projection reports
-
-### 🔍 Audit Rules Engine
-
-| Rule | Description |
-|---|---|
-| **Lease Cliff Detection** | Identifies revenue drops > 20% between months; risk scoring 0–100 |
-| **Concession Misalignment** | Detects rent proration mismatches, concession timing issues, and excessive concessions (>50% of rent) |
-| **Fee Template Validation** | Validates charges against the Village Green fee schedule; flags missing or mismatched fees |
-| **Employee Unit Conflicts** | Flags employee units with additional concessions (double discount risk) |
-
-### 📊 Analytics & Reporting
-- **KPI Overview** — total revenue, net revenue, concession rate, finding severity breakdown, lease cliff indicators
-- **Revenue Trend Analysis** — month-over-month trends with visual lease cliff detection
-- **Unit Drilldown** — search/filter by unit or resident; detailed transaction history
-- **Audit Findings** — severity-based categorisation (Critical → Low) with expandable details
-- **Override Panel** — mark findings as Reviewed / Overridden / Closed; complete audit trail
-- **Export** — Excel (multi-sheet), CSV, and executive summary PDF
-
----
-
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 streamlit-audit-agent-loriaa/
-├── app.py                          # Main Streamlit application
+├── app.py                          # Main Streamlit entry point
+├── audit_engine.py                 # Metrics computation helpers
 ├── requirements.txt                # Python dependencies
-├── Dockerfile                      # Container build definition
+├── Dockerfile                      # Container build
+├── agents/
+│   └── audit_agent.py              # LangGraph ReAct agent (4 tools, o3)
 ├── config/
-│   ├── settings.py                 # Application configuration
+│   ├── settings.py                 # App configuration
 │   └── mappings.yaml               # Category mappings
-├── ingestion/
-│   ├── pdf_parser.py               # PDF parsing logic
-│   ├── excel_parser.py             # Excel/CSV parsing
-│   ├── word_parser.py              # Word document parsing
-│   ├── resman_client.py            # ResMan API client (stub)
-│   └── loader.py                   # Unified file loader
-├── models/
-│   ├── unit.py                     # Data models (Unit, Transaction, Lease, Finding)
-│   └── canonical_model.py          # Data normalization
+├── data/
+│   └── *.csv                       # 7 ResMan Transaction List CSVs
 ├── engine/
-│   ├── date_range_engine.py        # Date filtering and aggregation
-│   ├── rules.py                    # Audit rules implementation
-│   ├── anomaly_detector.py         # Anomaly detection orchestrator
+│   ├── concession_rules.py         # ★ Deterministic rules (CONC-001 … CONC-008)
+│   ├── langgraph_engine.py         # ★ Hybrid pipeline orchestrator
+│   ├── rules.py                    # Legacy rules engine
+│   ├── anomaly_detector.py         # Anomaly detection
 │   └── explainability.py           # Human-readable explanations
-├── agents/                         # LangGraph ReAct agent definitions
-├── storage/
-│   ├── database.py                 # DuckDB persistence (optional)
-│   └── audit_log.py                # Audit trail logging
+├── ingestion/
+│   ├── loader.py                   # Unified file loader
+│   └── parsers/                    # CSV, PDF, Excel, Word parsers
+├── models/                         # Unit, Transaction, Canonical models
+├── storage/                        # DuckDB + audit log
 ├── ui/
-│   ├── filters.py                  # Sidebar filters
-│   ├── dashboard.py                # KPI overview
-│   ├── charts.py                   # Revenue trend charts
-│   ├── unit_view.py                # Unit drilldown
-│   ├── findings.py                 # Audit findings table
-│   ├── override.py                 # Override panel
-│   └── export.py                   # Export functionality
-├── utils/
-│   ├── helpers.py                  # Utility functions
-│   └── validations.py              # Input validation
+│   ├── tabs/                       # Findings, Report, Rent Roll, Projection
+│   └── *.py                        # Dashboard, charts, filters, export
+├── utils/                          # Helpers, data processor, validations
 └── tests/                          # pytest test suite
 ```
 
 ---
 
-## 🔧 Configuration
+## Architecture Diagram
 
-### ResMan API Setup
-
-Set the following environment variables to connect to a live ResMan instance:
-
-```bash
-export RESMAN_API_URL="https://api.resman.com/v1"
-export RESMAN_API_KEY="your-api-key"
-export RESMAN_PROPERTY_ID="your-property-id"
-```
-
-Or update `config/settings.py` directly.
-
-### Fee Template Customisation
-
-Edit `config/settings.py` to modify the recurring fee template:
-
-```python
-RECURRING_FEE_TEMPLATE = {
-    "Billing Fee": 5.00,
-    "Cable": 55.00,
-    "CAM": 10.00,
-    # ... add more fees
-}
-```
-
-### Category Mapping
-
-Edit `config/mappings.yaml` to customise charge category detection:
-
-```yaml
-rent_categories:
-  - "Rent"
-  - "Base Rent"
-  - "Monthly Rent"
-
-concession_categories:
-  - "Concession"
-  - "Discount"
-  # ... add more variations
-```
+See [streamlit_app.md](streamlit_app.md) for full Mermaid architecture and sequence diagrams.
 
 ---
 
-## 🔍 Troubleshooting
-
-**PDF not parsing correctly**
-- Ensure the PDF is a ResMan recurring transaction projection report.
-- Check that the format matches the expected structure: `Unit | Type | Category | Months…`
-
-**Large files taking too long**
-- The app can handle files up to 200 MB.
-- For very large datasets, apply date range filters before uploading.
-
-**Findings seem incorrect**
-- Review the audit rules in `engine/rules.py`.
-- Check category mappings in `config/mappings.yaml`.
-- Verify the fee template in `config/settings.py`.
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome!
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/my-change`)
@@ -228,6 +232,6 @@ Contributions are welcome!
 
 ---
 
-## 📝 License
+## License
 
 This project is licensed under the Apache License 2.0 — see the [LICENSE](LICENSE) file for details.
