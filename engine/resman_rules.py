@@ -796,7 +796,7 @@ def run_daniels_engine(
                             prop, unit, resident, "Concession >$500 for 2+ Months",
                             f"${amt:.2f}/mo for {months} months (>2 months above "
                             f"${CONCESSION_HIGH_AMT}).",
-                            amt * months, src,
+                            amt, src,
                         )
                     )
 
@@ -1085,6 +1085,15 @@ def calculate_exposure(flags_df: pd.DataFrame) -> dict:
                 "Total_Units_Audited": df["Unit"].nunique(),
                 "Total_Exceptions": len(df),
                 "Total_Exposure": round(df["Amount_Impact"].sum(), 2),
+                # Deduplicated exposure: take the max Amount_Impact per (Property, Unit)
+                # to avoid counting the same concession dollar multiple times when
+                # multiple rules (e.g. John's R3 and Daniel's Stage-1 "Recurring >$700")
+                # flag the same unit. max() captures the highest single-flag risk for
+                # that unit rather than summing all flags, which would double-count the
+                # same underlying dollar amount.
+                "Deduped_Exposure": round(
+                    df.groupby(["Property", "Unit"])["Amount_Impact"].max().sum(), 2
+                ),
                 "Critical_Flags": (df["Risk_Level"] == RISK_CRITICAL).sum(),
                 "High_Flags": (df["Risk_Level"] == RISK_HIGH).sum(),
                 "Medium_Flags": (df["Risk_Level"] == RISK_MEDIUM).sum(),

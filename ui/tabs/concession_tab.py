@@ -40,6 +40,7 @@ def _render_johns_flags(johns_flags: pd.DataFrame) -> None:
         "Critical Flags",
         int((johns_flags["Risk_Level"] == "CRITICAL").sum()),
     )
+    st.caption("Financial Exposure is the raw sum of Amount_Impact across all John's rule flags (a single unit may be counted by multiple rules).")
 
     st.divider()
     st.subheader("Rule Summary")

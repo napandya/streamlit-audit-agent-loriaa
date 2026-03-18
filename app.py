@@ -221,7 +221,10 @@ def render_new_sidebar():
 
         st.markdown("**Approved Concession Codes**")
         for code in sorted(_APPROVED_CODES):
-            st.markdown(f"- `{code}`")
+            st.markdown(
+                f"- <code style='background:rgba(255,255,255,0.1); color:inherit; padding:2px 6px; border-radius:4px;'>{code}</code>",
+                unsafe_allow_html=True,
+            )
         st.divider()
 
         run_forensic_btn = st.button(
@@ -474,7 +477,7 @@ def main():
                 c1, c2, c3, c4, c5 = st.columns(5)
                 c1.metric("Units Audited", int(row.get("Total_Units_Audited", 0)))
                 c2.metric("Total Exceptions", int(row.get("Total_Exceptions", 0)))
-                c3.metric("Financial Exposure", f"${row.get('Total_Exposure', 0):,.2f}")
+                c3.metric("Financial Exposure", f"${row.get('Deduped_Exposure', row.get('Total_Exposure', 0)):,.2f}")
                 c4.metric("Error Rate", f"{row.get('Error_Pct', 0):.1f}%")
                 c5.metric("Critical Flags", int(row.get("Critical_Flags", 0)))
                 st.divider()
