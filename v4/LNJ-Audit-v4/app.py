@@ -150,9 +150,15 @@ with tab1:
         c1, c2, c3, c4, c5 = st.columns(5)
         c1.metric("Units Audited",        int(row.get("Total_Units_Audited", 0)))
         c2.metric("Total Exceptions",     int(row.get("Total_Exceptions", 0)))
-        c3.metric("Financial Exposure",   f"${row.get('Total_Exposure', 0):,.2f}")
-        c4.metric("Error Rate",           f"{row.get('Error_Pct', 0):.1f}%")
+        c3.metric("Financial Exposure",   f"${row.get('Deduped_Exposure', row.get('Total_Exposure', 0)):,.2f}")
+        c4.metric("Avg Flags / Unit",     f"{row.get('Avg_Flags_Per_Unit', 0):.1f}")
         c5.metric("Critical Flags",       int(row.get("Critical_Flags", 0)))
+        st.caption(
+            f"Financial Exposure shows the conservative deduped figure "
+            f"(max impact per unit across all engines: "
+            f"**${row.get('Deduped_Exposure', row.get('Total_Exposure', 0)):,.2f}**). "
+            f"Raw sum across all flags: **${row.get('Total_Exposure', 0):,.2f}**."
+        )
 
         st.divider()
         st.subheader("Flags by Risk Level")
@@ -216,7 +222,11 @@ with tab2:
         st.divider()
         st.subheader("Unit-Level Flags")
         st.dataframe(styled_df(johns_flags), use_container_width=True, hide_index=True)
-        st.caption(f"Total Exposure: **${johns_flags['Amount_Impact'].sum():,.2f}**")
+        st.caption(
+            f"John's rules exposure (raw sum): **${johns_flags['Amount_Impact'].sum():,.2f}**. "
+            "Note: some units may also appear in Daniel's engine — the Executive Summary "
+            "deduplicates by taking the max impact per unit."
+        )
 
 
 # ══════════════════════════════════════════════════════════════════════════════

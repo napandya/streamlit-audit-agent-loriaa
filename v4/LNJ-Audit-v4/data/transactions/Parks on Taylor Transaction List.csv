@@ -2,7 +2,7 @@ Parks on Taylor Apartment Homes,,,,,,
 LiveNJoy Residential LLC,,,,,,
 Transaction List,,,,,,
 March 2026,,,,,,
-Printed 3/11/2026 1:05:50 PM,,,,,,
+Printed 3/18/2026 11:06:22 AM,,,,,,
 Parks on Taylor Apartment Homes,,,,,,
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Accelerated Rent Charges,,,,,,
@@ -17,7 +17,10 @@ Charge - Administrative Fee,,,,,,
 03/09/2026,,0203,"Sapphire Jackson, Antoine Johnson",Administrative Fee,,49.00
 03/11/2026,,2140,Marrissa Edd,Administrative Fee,,49.00
 03/11/2026,,0228,"Shelbi Butler, Cameron Vanstavern",Administrative Fee,,49.00
-Total: 6,,,,,,196.00
+03/12/2026,,0204,Tahya Phillips,Administrative Fee,,49.00
+03/14/2026,,0107,"RICHARD GUNN, SAMANTHA GUNN",Administrative Fee,,49.00
+03/18/2026,,HoldingUnit,Carla Key,Administrative Fee,,49.00
+Total: 9,,,,,,343.00
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Application Fee,,,,,,
 03/02/2026,,2128,Dallas Leae,Application Fee,Dallas Leae,50.00
@@ -29,7 +32,22 @@ Charge - Application Fee,,,,,,
 03/11/2026,,2140,Marrissa Edd,Application Fee,Marrissa Edd,50.00
 03/11/2026,,0228,"Shelbi Butler, Cameron Vanstavern",Application Fee,Shelbi Butler,50.00
 03/11/2026,,0228,"Shelbi Butler, Cameron Vanstavern",Application Fee,Cameron Vanstavern,50.00
-Total: 9,,,,,,350.00
+03/12/2026,,0204,Tahya Phillips,Application Fee,Tahya Phillips,50.00
+03/14/2026,,0107,"RICHARD GUNN, SAMANTHA GUNN",Application Fee,RICHARD GUNN,50.00
+03/14/2026,,0107,"RICHARD GUNN, SAMANTHA GUNN",Application Fee,SAMANTHA GUNN,50.00
+03/14/2026,,0107,"RICHARD GUNN, SAMANTHA GUNN",Application Fee,SAMANTHA GUNN,50.00
+03/14/2026,,0107,"RICHARD GUNN, SAMANTHA GUNN",Reversed Application Fee,,-50.00
+03/18/2026,,HoldingUnit,Carla Key,Application Fee,Carla Key,50.00
+Total: 15,,,,,,550.00
+Date,Reference,Unit,Name,Description,Notes,Amount
+Charge - Attorney / Court & Eviction Fees,,,,,,
+03/13/2026,,2135,Chamia Bills,Attorney / Court & Eviction Fees,Court cost,164.00
+03/13/2026,,0240,"Yeliah Houston, Bryson Jacobs",Attorney / Court & Eviction Fees,Court cost,274.00
+03/17/2026,,0237,Cara Braden,Attorney / Court & Eviction Fees,,164.00
+03/17/2026,,2334,Shamea *Bowen,Attorney / Court & Eviction Fees,,164.00
+03/17/2026,,0143,Caroline *Groff,Attorney / Court & Eviction Fees,,164.00
+03/17/2026,,0338,"Paige Jason, Nehemiah White",Attorney / Court & Eviction Fees,,274.00
+Total: 6,,,,,,"1,204.00"
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Bad Debt Collection,,,,,,
 03/01/2026,,0132,Gerardo Castillo,Resident Final Account Fee,,10.00
@@ -37,8 +55,8 @@ Charge - Bad Debt Collection,,,,,,
 03/01/2026,,0132,Gerardo Castillo,Water / Sewer - 5/19/2025 - 6/18/2025,,79.29
 03/01/2026,,0132,Gerardo Castillo,Water / Sewer - 6/19/2025 - 7/14/2025,,66.50
 03/01/2026,,0132,Gerardo Castillo,Resident Final Account Fee,,10.00
-03/01/2026,,0132,Gerardo Castillo,Water / Sewer - 4/18/2025 - 5/19/2025,,78.29
 03/01/2026,,0132,Gerardo Castillo,broken window,,174.54
+03/01/2026,,0132,Gerardo Castillo,Water / Sewer - 4/18/2025 - 5/19/2025,,78.29
 03/01/2026,,0132,Gerardo Castillo,Water / Sewer - 4/18/2025 - 5/19/2025,,78.29
 03/01/2026,,0132,Gerardo Castillo,Water / Sewer - 5/19/2025 - 6/18/2025,,79.29
 03/01/2026,,0132,Gerardo Castillo,Insufficient Notice Penalty (Reletting Fee),,96.25
@@ -47,180 +65,195 @@ Charge - Bad Debt Collection,,,,,,
 03/01/2026,,0132,Gerardo Castillo,Insufficient Notice Penalty (Reletting Fee),,29.75
 03/01/2026,,0132,Gerardo Castillo,Resident Final Account Fee,,10.00
 03/01/2026,,0132,Gerardo Castillo,Insufficient Notice Penalty (Reletting Fee),,579.17
-Total: 15,,,,,,"1,434.37"
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections Resident Final Account Fee,,-10.00
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections Resident Final Account Fee,,-10.00
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections Insufficient Notice Penalty (Reletting Fee),,-96.25
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections Water / Sewer - 6/19/2025 - 7/14/2025,,-66.50
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections Insufficient Notice Penalty (Reletting Fee),,-579.17
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections Insufficient Notice Penalty (Reletting Fee),,-29.75
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections Resident Final Account Fee,,-10.00
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections Water / Sewer - 4/18/2025 - 5/19/2025,,-78.29
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections Water / Sewer - 6/19/2025 - 7/14/2025,,-66.50
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections Resident Final Account Fee,,-10.00
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections Water / Sewer - 5/19/2025 - 6/18/2025,,-79.29
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections Water / Sewer - 5/19/2025 - 6/18/2025,,-79.29
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections Water / Sewer - 6/19/2025 - 7/14/2025,,-66.50
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections broken window,,-174.54
+03/12/2026,,0132,Gerardo Castillo,Reversed to collections Water / Sewer - 4/18/2025 - 5/19/2025,,-78.29
+Total: 30,,,,,,0.00
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Billing Fee,,,,,,
-03/01/2026,,2117,Christina Black,Billing Fee,,5.00
-03/01/2026,,0137,Karenthiea Calvin,Billing Fee,,5.00
-03/01/2026,,2208,Jade *Brady,Billing Fee,,5.00
-03/01/2026,,0107,"Nathaniel Allman, Traciona Preston",Billing Fee,,2.00
-03/01/2026,,0215,Haley Dixon,Billing Fee,,5.00
-03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",Billing Fee,,5.00
-03/01/2026,,2234,Kevin Barrera,Billing Fee,,5.00
-03/01/2026,,2105,"BreShaun Luper, Julius Wilson",Billing Fee,,5.00
-03/01/2026,,2232,LaJaida * Diamond,Billing Fee,,5.00
-03/01/2026,,2338,Jason Tillberg,Billing Fee,,5.00
-03/01/2026,,0117,Anthony *Byers,Billing Fee,,5.00
-03/01/2026,,2127,BreeAnna * Hallman,Billing Fee,,5.00
 03/01/2026,,0202,Martin Guevara,Billing Fee,,5.00
-03/01/2026,,0221,Michelle *Hughes,Billing Fee,,5.00
+03/01/2026,,0137,Karenthiea Calvin,Billing Fee,,5.00
 03/01/2026,,0129,Charles *DeHorney,Billing Fee,,5.00
-03/01/2026,,2111,tanya * Lamb,Billing Fee,,5.00
+03/01/2026,,2339,Juan Mendoza,Billing Fee,,5.00
 03/01/2026,,2144,"Luis *Gomez, Telma *Palma",Billing Fee,,5.00
 03/01/2026,,0141,Vanessa Crawford,Billing Fee,,5.00
-03/01/2026,,2139,Leaneasha * Crowell,Billing Fee,,5.00
+03/01/2026,,0215,Haley Dixon,Billing Fee,,5.00
+03/01/2026,,2207,Jared Bullard,Billing Fee,,5.00
 03/01/2026,,2116,Guy Hall,Billing Fee,,5.00
 03/01/2026,,0241,Antonio Woodard,Billing Fee,,5.00
-03/01/2026,,2207,Jared Bullard,Billing Fee,,5.00
-03/01/2026,,2219,Brandon Butler,Billing Fee,,5.00
-03/01/2026,,0135,Pamela Bennett,Billing Fee,,5.00
-03/01/2026,,0337,Montasia Jones,Billing Fee,,2.00
-03/01/2026,,0336,"Alena Dupire, Seth Snyder",Billing Fee,,5.00
-03/01/2026,,0110,Christle Cox,Billing Fee,,5.00
-03/01/2026,,2236,Shaizavia *Bailey,Billing Fee,,5.00
-03/01/2026,,2108,Margaret Sanders,Billing Fee,,5.00
+03/01/2026,,0107,"Nathaniel Allman, Traciona Preston",Billing Fee,,2.00
 03/01/2026,,2212,Rick Kennedy,Billing Fee,,5.00
-03/01/2026,,0105,Toni Reed*,Billing Fee,,5.00
 03/01/2026,,2240,Charles Foster,Billing Fee,,5.00
-03/01/2026,,0206,Diane Barefield*,Billing Fee,,5.00
-03/01/2026,,2135,Chamia Bills,Billing Fee,,5.00
-03/01/2026,,2339,Juan Mendoza,Billing Fee,,5.00
-03/01/2026,,0211,"Blake Bounds, Alyssa Cox",Billing Fee,,5.00
+03/01/2026,,0337,Montasia Jones,Billing Fee,,2.00
 03/01/2026,,0101,Trushondra Edd*,Billing Fee,,5.00
+03/01/2026,,2105,"BreShaun Luper, Julius Wilson",Billing Fee,,5.00
+03/01/2026,,2234,Kevin Barrera,Billing Fee,,5.00
+03/01/2026,,0105,Toni Reed*,Billing Fee,,5.00
+03/01/2026,,2108,Margaret Sanders,Billing Fee,,5.00
+03/01/2026,,0221,Michelle *Hughes,Billing Fee,,5.00
+03/01/2026,,2232,LaJaida * Diamond,Billing Fee,,5.00
+03/01/2026,,2111,tanya * Lamb,Billing Fee,,5.00
+03/01/2026,,2139,Leaneasha * Crowell,Billing Fee,,5.00
+03/01/2026,,0117,Anthony *Byers,Billing Fee,,5.00
+03/01/2026,,2338,Jason Tillberg,Billing Fee,,5.00
+03/01/2026,,0135,Pamela Bennett,Billing Fee,,5.00
+03/01/2026,,2208,Jade *Brady,Billing Fee,,5.00
+03/01/2026,,2117,Christina Black,Billing Fee,,5.00
+03/01/2026,,0206,Diane Barefield*,Billing Fee,,5.00
+03/01/2026,,2219,Brandon Butler,Billing Fee,,5.00
+03/01/2026,,0336,"Alena Dupire, Seth Snyder",Billing Fee,,5.00
+03/01/2026,,2236,Shaizavia *Bailey,Billing Fee,,5.00
+03/01/2026,,2127,BreeAnna * Hallman,Billing Fee,,5.00
+03/01/2026,,0110,Christle Cox,Billing Fee,,5.00
+03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",Billing Fee,,5.00
+03/01/2026,,2135,Chamia Bills,Billing Fee,,5.00
+03/01/2026,,0211,"Blake Bounds, Alyssa Cox",Billing Fee,,5.00
 03/01/2026,,2123,John * Rodriguez,Billing Fee,,5.00
-03/01/2026,,0343,Kenneth Crocker,Billing Fee,,5.00
-03/01/2026,,2209,Amy Roberts,Billing Fee,,5.00
-03/01/2026,,0132,Bibiana * David Julian,Billing Fee,,5.00
-03/01/2026,,2124,McKenzie Smith,Billing Fee,,5.00
-03/01/2026,,0342,Ishmael Corral,Billing Fee,,5.00
-03/01/2026,,0113,"Aaron Azlin, Stephanie Lukash",Billing Fee,,5.00
-03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",Billing Fee,,5.00
-03/01/2026,,0244,Jarrett Wilson,Billing Fee,,5.00
 03/01/2026,,0205,Jouen *Baggs,Billing Fee,,5.00
-03/01/2026,,0237,Cara Braden,Billing Fee,,5.00
-03/01/2026,,2122,Jorge Gispanski,Billing Fee,,5.00
-03/01/2026,,2118,Brian Perry*,Billing Fee,,5.00
+03/01/2026,,0244,Jarrett Wilson,Billing Fee,,5.00
 03/01/2026,,2238,Kimberly * Alvarez,Billing Fee,,5.00
-03/01/2026,,0121,Otelia McMillan*,Billing Fee,,5.00
 03/01/2026,,0118,Amber Livingston,Billing Fee,,5.00
-03/01/2026,,2206,Elizabeth Tobar,Billing Fee,,5.00
-03/01/2026,,2213,Adam Cunningham,Billing Fee,,5.00
-03/01/2026,,0143,Caroline *Groff,Billing Fee,,5.00
-03/01/2026,,2237,Dikevous Whatley,Billing Fee,,5.00
-03/01/2026,,0239,Kit Kong Hospitality LLC,Billing Fee,,5.00
-03/01/2026,,0130,Virgina Hill *,Billing Fee,,5.00
-03/01/2026,,2101,Dianne Runnels,Billing Fee,,5.00
-03/01/2026,,2227,"Jordyn *Soto, Logan *Anderson",Billing Fee,,5.00
-03/01/2026,,2103,Jane Porter,Billing Fee,,5.00
+03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",Billing Fee,,5.00
+03/01/2026,,0113,"Aaron Azlin, Stephanie Lukash",Billing Fee,,5.00
+03/01/2026,,0121,Otelia McMillan*,Billing Fee,,5.00
+03/01/2026,,2122,Jorge Gispanski,Billing Fee,,5.00
+03/01/2026,,0237,Cara Braden,Billing Fee,,5.00
+03/01/2026,,2118,Brian Perry*,Billing Fee,,5.00
 03/01/2026,,0139,Connie *Whitten,Billing Fee,,5.00
+03/01/2026,,2227,"Jordyn *Soto, Logan *Anderson",Billing Fee,,5.00
+03/01/2026,,2214,Emma Evans,Billing Fee,,5.00
+03/01/2026,,2103,Jane Porter,Billing Fee,,5.00
+03/01/2026,,2209,Amy Roberts,Billing Fee,,5.00
+03/01/2026,,2124,McKenzie Smith,Billing Fee,,5.00
+03/01/2026,,0132,Bibiana * David Julian,Billing Fee,,5.00
 03/01/2026,,0216,Anthony Bradshaw Jr,Billing Fee,,5.00
 03/01/2026,,2130,"Kendrick *Barrett, Kerby *Craddock",Billing Fee,,5.00
-03/01/2026,,2214,Emma Evans,Billing Fee,,5.00
-03/01/2026,,2223,Adrienne Gelinas,Billing Fee,,5.00
 03/01/2026,,2119,Christopher Bruce,Billing Fee,,5.00
-03/01/2026,,2107,Jerome *Sutter,Billing Fee,,5.00
-03/01/2026,,2235,Dweh Wayne,Billing Fee,,5.00
-03/01/2026,,0223,Adam * Grimes,Billing Fee,,5.00
-03/01/2026,,2104,"Karen * Schloff, Bradley * Winquist",Billing Fee,,5.00
-03/01/2026,,2333,"Amanda Sanders, Tiffany Sanders",Billing Fee,,5.00
-03/01/2026,,2243,Reginald Williams,Billing Fee,,5.00
-03/01/2026,,0103,Rebecca Mcknight,Billing Fee,,5.00
-03/01/2026,,0133,Darold Tucker,Billing Fee,,5.00
-03/01/2026,,0338,"Paige Jason, Nehemiah White",Billing Fee,,5.00
-03/01/2026,,0116,Elizabeth Gaffney*,Billing Fee,,5.00
-03/01/2026,,2129,Guillermo Rivera,Billing Fee,,5.00
-03/01/2026,,2215,Rosamond Williams,Billing Fee,,5.00
-03/01/2026,,2145,Deonte * Wilson,Billing Fee,,5.00
+03/01/2026,,0342,Ishmael Corral,Billing Fee,,5.00
+03/01/2026,,2223,Adrienne Gelinas,Billing Fee,,5.00
+03/01/2026,,0130,Virgina Hill *,Billing Fee,,5.00
+03/01/2026,,2237,Dikevous Whatley,Billing Fee,,5.00
+03/01/2026,,0143,Caroline *Groff,Billing Fee,,5.00
+03/01/2026,,2101,Dianne Runnels,Billing Fee,,5.00
+03/01/2026,,2206,Elizabeth Tobar,Billing Fee,,5.00
+03/01/2026,,0343,Kenneth Crocker,Billing Fee,,5.00
+03/01/2026,,2213,Adam Cunningham,Billing Fee,,5.00
+03/01/2026,,0239,Kit Kong Hospitality LLC,Billing Fee,,5.00
 03/01/2026,,2137,Jerry Cheshier,Billing Fee,,5.00
-03/01/2026,,2225,Tony *Davis,Billing Fee,,5.00
 03/01/2026,,2335,Heaven *Brown,Billing Fee,,5.00
-03/01/2026,,2131,Osman Hernandez,Billing Fee,,5.00
-03/01/2026,,2210,Jamie Cook*,Billing Fee,,5.00
-03/01/2026,,2343,Pamela Norris*,Billing Fee,,5.00
 03/01/2026,,0138,James Dyer,Billing Fee,,5.00
-03/01/2026,,2110,"Emma Madden*, Charles Madden",Billing Fee,,5.00
-03/01/2026,,2136,Kyle Kanzig,Billing Fee,,5.00
-03/01/2026,,0212,Kayla *Isaac,Billing Fee,,5.00
+03/01/2026,,2210,Jamie Cook*,Billing Fee,,5.00
+03/01/2026,,2243,Reginald Williams,Billing Fee,,5.00
+03/01/2026,,0338,"Paige Jason, Nehemiah White",Billing Fee,,5.00
+03/01/2026,,0223,Adam * Grimes,Billing Fee,,5.00
+03/01/2026,,2343,Pamela Norris*,Billing Fee,,5.00
 03/01/2026,,2334,Shamea *Bowen,Billing Fee,,5.00
 03/01/2026,,0201,"Tracy Cormier, Camreon Kinchen",Billing Fee,,5.00
+03/01/2026,,2104,"Karen * Schloff, Bradley * Winquist",Billing Fee,,5.00
+03/01/2026,,0212,Kayla *Isaac,Billing Fee,,5.00
+03/01/2026,,2235,Dweh Wayne,Billing Fee,,5.00
+03/01/2026,,0103,Rebecca Mcknight,Billing Fee,,5.00
 03/01/2026,,2242,"Jose Mejia, Olbin Rapalo Mejia",Billing Fee,,5.00
-03/01/2026,,0109,Krystal Jackson,Billing Fee,,5.00
-03/01/2026,,0213,"Brianna Garcia, Lorenzo Garcia",Billing Fee,,5.00
-03/01/2026,,0340,"Jose Murillo, Martha Murillo Pavon",Billing Fee,,5.00
-03/01/2026,,2228,"Kaeson *Griffin-McClaskey, Angelina *Vaughan",Billing Fee,,5.00
-03/01/2026,,2102,"Donna Cason, Michael Sinks",Billing Fee,,5.00
+03/01/2026,,2136,Kyle Kanzig,Billing Fee,,5.00
+03/01/2026,,2333,"Amanda Sanders, Tiffany Sanders",Billing Fee,,5.00
 03/01/2026,,0227,"Brandon Kennedy, Korina Stanton",Billing Fee,,5.00
-03/01/2026,,0209,Luke * Hampton,Billing Fee,,5.00
+03/01/2026,,2131,Osman Hernandez,Billing Fee,,5.00
+03/01/2026,,2225,Tony *Davis,Billing Fee,,5.00
+03/01/2026,,2107,Jerome *Sutter,Billing Fee,,5.00
+03/01/2026,,0133,Darold Tucker,Billing Fee,,5.00
+03/01/2026,,2110,"Emma Madden*, Charles Madden",Billing Fee,,5.00
+03/01/2026,,2215,Rosamond Williams,Billing Fee,,5.00
+03/01/2026,,2145,Deonte * Wilson,Billing Fee,,5.00
+03/01/2026,,0340,"Jose Murillo, Martha Murillo Pavon",Billing Fee,,5.00
+03/01/2026,,0109,Krystal Jackson,Billing Fee,,5.00
 03/01/2026,,0111,william * Witcher,Billing Fee,,5.00
+03/01/2026,,2228,"Kaeson *Griffin-McClaskey, Angelina *Vaughan",Billing Fee,,5.00
+03/01/2026,,0116,Elizabeth Gaffney*,Billing Fee,,5.00
 03/01/2026,,2340,"Ashley *Aviles, Jose *Aviles Gutierrez, Ma Guadalupe *Mojica Pineda",Billing Fee,,5.00
-03/01/2026,,0131,Jo Jo Parker,Billing Fee,,5.00
-03/01/2026,,2126,Kathleen Davlin,Billing Fee,,5.00
+03/01/2026,,2129,Guillermo Rivera,Billing Fee,,5.00
+03/01/2026,,0213,"Brianna Garcia, Lorenzo Garcia",Billing Fee,,5.00
+03/01/2026,,0209,Luke * Hampton,Billing Fee,,5.00
+03/01/2026,,2102,"Donna Cason, Michael Sinks",Billing Fee,,5.00
 03/01/2026,,0123,Kaytee *Wells,Billing Fee,,5.00
-03/01/2026,,2138,Carmon Bertrand (EV),Billing Fee,,2.00
-03/01/2026,,0128,"Dylan Orr, Cameron Ruebeck",Billing Fee,,5.00
+03/01/2026,,2126,Kathleen Davlin,Billing Fee,,5.00
 03/01/2026,,2218,Tlaysia * Hughes,Billing Fee,,5.00
-03/01/2026,,0219,Nicholas * Hayes,Billing Fee,,5.00
-03/01/2026,,2231,Tessa Bench,Billing Fee,,5.00
-03/01/2026,,0136,Whitney George,Billing Fee,,5.00
-03/01/2026,,0104,bobbi * Dowd,Billing Fee,,5.00
-03/01/2026,,0208,Jeannie Henderson,Billing Fee,,5.00
 03/01/2026,,0228,Kyler Faustner,Billing Fee,,5.00
-03/01/2026,,2241,Ava * Russell,Billing Fee,,5.00
-03/01/2026,,2233,Javier Hernandez,Billing Fee,,5.00
-03/01/2026,,0218,Jazmin Aviles,Billing Fee,,5.00
-03/01/2026,,0214,Dalea *Myles,Billing Fee,,5.00
-03/01/2026,,0126,Bianca Martinez,Billing Fee,,5.00
-03/01/2026,,0115,Bobby Howard,Billing Fee,,5.00
-03/01/2026,,2211,"Jody Fowler, Damon Moore",Billing Fee,,5.00
-03/01/2026,,0226,Gerardo Deleon Vaga,Billing Fee,,5.00
-03/01/2026,,2141,Jeramiah *Thornock,Billing Fee,,5.00
-03/01/2026,,2224,Nicholas Falcon,Billing Fee,,5.00
-03/01/2026,,0207,Zachary * Baquis,Billing Fee,,5.00
-03/01/2026,,0122,Charneice Ford,Billing Fee,,5.00
 03/01/2026,,0341,"Shelbi Cheek, Jaylon Morgan",Billing Fee,,5.00
+03/01/2026,,2138,Carmon Bertrand (EV),Billing Fee,,2.00
+03/01/2026,,0104,bobbi * Dowd,Billing Fee,,5.00
+03/01/2026,,2222,Maria * Garcia,Billing Fee,,5.00
+03/01/2026,,0208,Jeannie Henderson,Billing Fee,,5.00
+03/01/2026,,2241,Ava * Russell,Billing Fee,,5.00
+03/01/2026,,0122,Charneice Ford,Billing Fee,,5.00
+03/01/2026,,0128,"Dylan Orr, Cameron Ruebeck",Billing Fee,,5.00
+03/01/2026,,0134,Akasha *Taylor-Poitier,Billing Fee,,5.00
+03/01/2026,,0219,Nicholas * Hayes,Billing Fee,,5.00
+03/01/2026,,2239,Lakeisha Taylor,Billing Fee,,5.00
+03/01/2026,,0207,Zachary * Baquis,Billing Fee,,5.00
+03/01/2026,,2233,Javier Hernandez,Billing Fee,,5.00
 03/01/2026,,0217,Anna Douglas,Billing Fee,,5.00
 03/01/2026,,2133,"Patrick * Prince, Heaven * Swartout",Billing Fee,,5.00
-03/01/2026,,0243,Beau Wastier,Billing Fee,,5.00
-03/01/2026,,0335,"CARLOS * GOMEZ, Selin * Gomes",Billing Fee,,5.00
-03/01/2026,,0134,Akasha *Taylor-Poitier,Billing Fee,,5.00
 03/01/2026,,0238,Scheane Brown,Billing Fee,,5.00
-03/01/2026,,2239,Lakeisha Taylor,Billing Fee,,5.00
+03/01/2026,,2224,Nicholas Falcon,Billing Fee,,5.00
+03/01/2026,,2231,Tessa Bench,Billing Fee,,5.00
+03/01/2026,,0136,Whitney George,Billing Fee,,5.00
 03/01/2026,,2114,Pamela * Gutierrez,Billing Fee,,5.00
-03/01/2026,,2222,Maria * Garcia,Billing Fee,,5.00
-03/01/2026,,0106,William JR. Walker*,Billing Fee,,5.00
+03/01/2026,,0335,"CARLOS * GOMEZ, Selin * Gomes",Billing Fee,,5.00
+03/01/2026,,2211,"Jody Fowler, Damon Moore",Billing Fee,,5.00
+03/01/2026,,2141,Jeramiah *Thornock,Billing Fee,,5.00
+03/01/2026,,0243,Beau Wastier,Billing Fee,,5.00
+03/01/2026,,0115,Bobby Howard,Billing Fee,,5.00
+03/01/2026,,0126,Bianca Martinez,Billing Fee,,5.00
+03/01/2026,,0218,Jazmin Aviles,Billing Fee,,5.00
+03/01/2026,,0214,Dalea *Myles,Billing Fee,,5.00
+03/01/2026,,0226,Gerardo Deleon Vaga,Billing Fee,,5.00
 03/01/2026,,2217,Joseph *Williams,Billing Fee,,5.00
+03/01/2026,,0106,William JR. Walker*,Billing Fee,,5.00
+03/01/2026,,0131,Jo Jo Parker,Billing Fee,,5.00
 03/01/2026,,2244,Katherine Spencer,Billing Fee,,5.00
-03/01/2026,,2125,Jason Allen,Billing Fee,,5.00
-03/01/2026,,2115,Pearl Cross*,Billing Fee,,5.00
-03/01/2026,,2220,Jesus * Tovar Martinez,Billing Fee,,5.00
-03/01/2026,,2216,Clayton *Lewis,Billing Fee,,5.00
-03/01/2026,,2109,Zaida * Zuniga,Billing Fee,,5.00
-03/01/2026,,2226,Ron * Vaughan,Billing Fee,,5.00
-03/01/2026,,2336,Kit Kong Hospitality LLC,Billing Fee,,5.00
-03/01/2026,,0112,Richard Revels Jr,Billing Fee,,5.00
-03/01/2026,,2230,Kit Kong Hospitality LLC,Billing Fee,,5.00
-03/01/2026,,2106,Laura *Rojas Ortiz,Billing Fee,,5.00
-03/01/2026,,0236,Jessica Hardcastle,Billing Fee,,5.00
-03/01/2026,,2132,Nicholas Poindexter,Billing Fee,,5.00
-03/01/2026,,0233,Jayla Goodman,Billing Fee,,5.00
-03/01/2026,,2113,Pamela *Lewis,Billing Fee,,5.00
-03/01/2026,,0229,Julie Larson*,Billing Fee,,5.00
-03/01/2026,,2204,Shirley * Wiley-maze,Billing Fee,,5.00
 03/01/2026,,0114,Emmanuel * Brockelman,Billing Fee,,5.00
-03/01/2026,,2143,Nichole * Rushing,Billing Fee,,5.00
-03/01/2026,,2112,Otis Bursey Jr*,Billing Fee,,5.00
-03/01/2026,,0240,"Yeliah Houston, Bryson Jacobs",Billing Fee,,5.00
-03/01/2026,,0225,Sydney Moore,Billing Fee,,5.00
-03/01/2026,,0334,"Herrera * Alan Leonel, Yesica * Rivas Flores",Billing Fee,,5.00
-03/01/2026,,2344,Athena *Cantu,Billing Fee,,5.00
-03/01/2026,,0119,Shelly Pillars*,Billing Fee,,5.00
-03/01/2026,,0102,Xerius *Jackson,Billing Fee,,5.00
+03/01/2026,,2204,Shirley * Wiley-maze,Billing Fee,,5.00
+03/01/2026,,2132,Nicholas Poindexter,Billing Fee,,5.00
+03/01/2026,,2115,Pearl Cross*,Billing Fee,,5.00
 03/01/2026,,0127,Latreesha Green*,Billing Fee,,5.00
 03/01/2026,,0231,Elijah Mureithi,Billing Fee,,5.00
+03/01/2026,,2113,Pamela *Lewis,Billing Fee,,5.00
+03/01/2026,,2125,Jason Allen,Billing Fee,,5.00
+03/01/2026,,2106,Laura *Rojas Ortiz,Billing Fee,,5.00
+03/01/2026,,2230,Kit Kong Hospitality LLC,Billing Fee,,5.00
+03/01/2026,,0229,Julie Larson*,Billing Fee,,5.00
+03/01/2026,,2226,Ron * Vaughan,Billing Fee,,5.00
+03/01/2026,,0112,Richard Revels Jr,Billing Fee,,5.00
+03/01/2026,,0233,Jayla Goodman,Billing Fee,,5.00
+03/01/2026,,2216,Clayton *Lewis,Billing Fee,,5.00
+03/01/2026,,2220,Jesus * Tovar Martinez,Billing Fee,,5.00
+03/01/2026,,2109,Zaida * Zuniga,Billing Fee,,5.00
+03/01/2026,,2344,Athena *Cantu,Billing Fee,,5.00
+03/01/2026,,0119,Shelly Pillars*,Billing Fee,,5.00
+03/01/2026,,0236,Jessica Hardcastle,Billing Fee,,5.00
+03/01/2026,,0240,"Yeliah Houston, Bryson Jacobs",Billing Fee,,5.00
+03/01/2026,,0225,Sydney Moore,Billing Fee,,5.00
+03/01/2026,,2336,Kit Kong Hospitality LLC,Billing Fee,,5.00
+03/01/2026,,2143,Nichole * Rushing,Billing Fee,,5.00
+03/01/2026,,0334,"Herrera * Alan Leonel, Yesica * Rivas Flores",Billing Fee,,5.00
 03/01/2026,,0108,Erik Ojeda,Billing Fee,,5.00
-03/01/2026,,0210,Betty Tucker,Billing Fee,,5.00
+03/01/2026,,0102,Xerius *Jackson,Billing Fee,,5.00
+03/01/2026,,2112,Otis Bursey Jr*,Billing Fee,,5.00
 03/01/2026,,2134,Samuel First,Billing Fee,,5.00
 03/01/2026,,0124,Alice Hammonds,Billing Fee,,5.00
+03/01/2026,,0210,Betty Tucker,Billing Fee,,5.00
 03/01/2026,,2221,Deja Oliver,Billing Fee,,5.00
 03/01/2026,,2121,"Debra Loving, Odell Hansen",Billing Fee,,5.00
 03/01/2026,,0230,Kyle Strohecker,Billing Fee,,5.00
@@ -244,183 +277,193 @@ Charge - Billing Fee,,,,,,
 03/06/2026,,0228,Kyler Faustner,Billing Fee,,1.00
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",Reversed Billing Fee,Billing Fee,-5.00
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",Billing Fee,,1.00
-Total: 194,,,,,,862.00
+03/12/2026,,0202,Martin Guevara,Reversed Billing Fee,Billing Fee,-5.00
+03/12/2026,,0202,Martin Guevara,Billing Fee,,2.00
+03/15/2026,,2232,LaJaida * Diamond,Reversed Billing Fee,Billing Fee,-5.00
+03/15/2026,,2232,LaJaida * Diamond,Billing Fee,,2.00
+03/16/2026,,0118,Amber Livingston,Reversed Billing Fee,Billing Fee,-5.00
+03/16/2026,,0118,Amber Livingston,Billing Fee,,3.00
+03/16/2026,,0216,Anthony Bradshaw Jr,Reversed Billing Fee,Billing Fee,-5.00
+03/16/2026,,0216,Anthony Bradshaw Jr,Billing Fee,,3.00
+03/16/2026,,2141,Jeramiah *Thornock,Reversed Billing Fee,Billing Fee,-5.00
+03/16/2026,,2141,Jeramiah *Thornock,Billing Fee,,3.00
+Total: 204,,,,,,850.00
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - CAM : Community Fee,,,,,,
-03/01/2026,,2130,"Kendrick *Barrett, Kerby *Craddock",CAM : Community Fee,,10.00
-03/01/2026,,2141,Jeramiah *Thornock,CAM : Community Fee,,10.00
-03/01/2026,,2110,"Emma Madden*, Charles Madden",CAM : Community Fee,,10.00
-03/01/2026,,2333,"Amanda Sanders, Tiffany Sanders",CAM : Community Fee,,10.00
-03/01/2026,,2114,Pamela * Gutierrez,CAM : Community Fee,,10.00
-03/01/2026,,0205,Jouen *Baggs,CAM : Community Fee,,10.00
-03/01/2026,,0139,Connie *Whitten,CAM : Community Fee,,10.00
-03/01/2026,,2217,Joseph *Williams,CAM : Community Fee,,10.00
-03/01/2026,,2123,John * Rodriguez,CAM : Community Fee,,10.00
-03/01/2026,,0244,Jarrett Wilson,CAM : Community Fee,,10.00
-03/01/2026,,0119,Shelly Pillars*,CAM : Community Fee,,10.00
-03/01/2026,,0230,Kyle Strohecker,CAM : Community Fee,,10.00
-03/01/2026,,0115,Bobby Howard,CAM : Community Fee,,10.00
-03/01/2026,,2242,"Jose Mejia, Olbin Rapalo Mejia",CAM : Community Fee,,10.00
-03/01/2026,,2132,Nicholas Poindexter,CAM : Community Fee,,10.00
-03/01/2026,,2336,Kit Kong Hospitality LLC,CAM : Community Fee,,10.00
-03/01/2026,,0239,Kit Kong Hospitality LLC,CAM : Community Fee,,10.00
-03/01/2026,,2215,Rosamond Williams,CAM : Community Fee,,10.00
-03/01/2026,,2210,Jamie Cook*,CAM : Community Fee,,10.00
-03/01/2026,,0108,Erik Ojeda,CAM : Community Fee,,10.00
-03/01/2026,,0240,"Yeliah Houston, Bryson Jacobs",CAM : Community Fee,,10.00
-03/01/2026,,0227,"Brandon Kennedy, Korina Stanton",CAM : Community Fee,,10.00
-03/01/2026,,2231,Tessa Bench,CAM : Community Fee,,10.00
+03/01/2026,,2107,Jerome *Sutter,CAM : Community Fee,,10.00
 03/01/2026,,2223,Adrienne Gelinas,CAM : Community Fee,,10.00
 03/01/2026,,0208,Jeannie Henderson,CAM : Community Fee,,10.00
-03/01/2026,,0201,"Tracy Cormier, Camreon Kinchen",CAM : Community Fee,,10.00
+03/01/2026,,2114,Pamela * Gutierrez,CAM : Community Fee,,10.00
+03/01/2026,,0205,Jouen *Baggs,CAM : Community Fee,,10.00
+03/01/2026,,2231,Tessa Bench,CAM : Community Fee,,10.00
+03/01/2026,,0230,Kyle Strohecker,CAM : Community Fee,,10.00
+03/01/2026,,2333,"Amanda Sanders, Tiffany Sanders",CAM : Community Fee,,10.00
 03/01/2026,,0238,Scheane Brown,CAM : Community Fee,,10.00
-03/01/2026,,2107,Jerome *Sutter,CAM : Community Fee,,10.00
+03/01/2026,,0201,"Tracy Cormier, Camreon Kinchen",CAM : Community Fee,,10.00
 03/01/2026,,2206,Elizabeth Tobar,CAM : Community Fee,,10.00
+03/01/2026,,2336,Kit Kong Hospitality LLC,CAM : Community Fee,,10.00
 03/01/2026,,0143,Caroline *Groff,CAM : Community Fee,,10.00
-03/01/2026,,2244,Katherine Spencer,CAM : Community Fee,,10.00
-03/01/2026,,2212,Rick Kennedy,CAM : Community Fee,,10.00
-03/01/2026,,2218,Tlaysia * Hughes,CAM : Community Fee,,10.00
-03/01/2026,,2145,Deonte * Wilson,CAM : Community Fee,,10.00
-03/01/2026,,0334,"Herrera * Alan Leonel, Yesica * Rivas Flores",CAM : Community Fee,,10.00
-03/01/2026,,2104,"Karen * Schloff, Bradley * Winquist",CAM : Community Fee,,10.00
-03/01/2026,,0340,"Jose Murillo, Martha Murillo Pavon",CAM : Community Fee,,10.00
-03/01/2026,,2235,Dweh Wayne,CAM : Community Fee,,10.00
-03/01/2026,,0107,"Nathaniel Allman, Traciona Preston",CAM : Community Fee,,3.00
-03/01/2026,,2102,"Donna Cason, Michael Sinks",CAM : Community Fee,,10.00
-03/01/2026,,2144,"Luis *Gomez, Telma *Palma",CAM : Community Fee,,10.00
-03/01/2026,,2216,Clayton *Lewis,CAM : Community Fee,,10.00
-03/01/2026,,0212,Kayla *Isaac,CAM : Community Fee,,10.00
-03/01/2026,,0122,Charneice Ford,CAM : Community Fee,,10.00
-03/01/2026,,0129,Charles *DeHorney,CAM : Community Fee,,10.00
-03/01/2026,,2126,Kathleen Davlin,CAM : Community Fee,,10.00
-03/01/2026,,2137,Jerry Cheshier,CAM : Community Fee,,10.00
+03/01/2026,,2141,Jeramiah *Thornock,CAM : Community Fee,,10.00
+03/01/2026,,2110,"Emma Madden*, Charles Madden",CAM : Community Fee,,10.00
+03/01/2026,,2132,Nicholas Poindexter,CAM : Community Fee,,10.00
+03/01/2026,,2123,John * Rodriguez,CAM : Community Fee,,10.00
+03/01/2026,,2130,"Kendrick *Barrett, Kerby *Craddock",CAM : Community Fee,,10.00
+03/01/2026,,2217,Joseph *Williams,CAM : Community Fee,,10.00
+03/01/2026,,0139,Connie *Whitten,CAM : Community Fee,,10.00
+03/01/2026,,0108,Erik Ojeda,CAM : Community Fee,,10.00
+03/01/2026,,0115,Bobby Howard,CAM : Community Fee,,10.00
+03/01/2026,,2242,"Jose Mejia, Olbin Rapalo Mejia",CAM : Community Fee,,10.00
+03/01/2026,,0119,Shelly Pillars*,CAM : Community Fee,,10.00
+03/01/2026,,0227,"Brandon Kennedy, Korina Stanton",CAM : Community Fee,,10.00
+03/01/2026,,0239,Kit Kong Hospitality LLC,CAM : Community Fee,,10.00
+03/01/2026,,2215,Rosamond Williams,CAM : Community Fee,,10.00
+03/01/2026,,0240,"Yeliah Houston, Bryson Jacobs",CAM : Community Fee,,10.00
+03/01/2026,,0244,Jarrett Wilson,CAM : Community Fee,,10.00
+03/01/2026,,2210,Jamie Cook*,CAM : Community Fee,,10.00
 03/01/2026,,2113,Pamela *Lewis,CAM : Community Fee,,10.00
-03/01/2026,,0141,Vanessa Crawford,CAM : Community Fee,,10.00
-03/01/2026,,0106,William JR. Walker*,CAM : Community Fee,,10.00
-03/01/2026,,2338,Jason Tillberg,CAM : Community Fee,,10.00
-03/01/2026,,0126,Bianca Martinez,CAM : Community Fee,,10.00
-03/01/2026,,0241,Antonio Woodard,CAM : Community Fee,,10.00
-03/01/2026,,2219,Brandon Butler,CAM : Community Fee,,10.00
-03/01/2026,,0211,"Blake Bounds, Alyssa Cox",CAM : Community Fee,,10.00
-03/01/2026,,2111,tanya * Lamb,CAM : Community Fee,,10.00
-03/01/2026,,2109,Zaida * Zuniga,CAM : Community Fee,,10.00
-03/01/2026,,2125,Jason Allen,CAM : Community Fee,,10.00
-03/01/2026,,2207,Jared Bullard,CAM : Community Fee,,10.00
-03/01/2026,,2129,Guillermo Rivera,CAM : Community Fee,,10.00
 03/01/2026,,0214,Dalea *Myles,CAM : Community Fee,,10.00
-03/01/2026,,0229,Julie Larson*,CAM : Community Fee,,10.00
-03/01/2026,,0209,Luke * Hampton,CAM : Community Fee,,10.00
+03/01/2026,,2218,Tlaysia * Hughes,CAM : Community Fee,,10.00
+03/01/2026,,2212,Rick Kennedy,CAM : Community Fee,,10.00
+03/01/2026,,2129,Guillermo Rivera,CAM : Community Fee,,10.00
+03/01/2026,,0141,Vanessa Crawford,CAM : Community Fee,,10.00
+03/01/2026,,2219,Brandon Butler,CAM : Community Fee,,10.00
+03/01/2026,,0212,Kayla *Isaac,CAM : Community Fee,,10.00
+03/01/2026,,0106,William JR. Walker*,CAM : Community Fee,,10.00
+03/01/2026,,0126,Bianca Martinez,CAM : Community Fee,,10.00
+03/01/2026,,0107,"Nathaniel Allman, Traciona Preston",CAM : Community Fee,,3.00
 03/01/2026,,0112,Richard Revels Jr,CAM : Community Fee,,10.00
-03/01/2026,,0225,Sydney Moore,CAM : Community Fee,,10.00
-03/01/2026,,2134,Samuel First,CAM : Community Fee,,10.00
+03/01/2026,,2126,Kathleen Davlin,CAM : Community Fee,,10.00
+03/01/2026,,2111,tanya * Lamb,CAM : Community Fee,,10.00
+03/01/2026,,0211,"Blake Bounds, Alyssa Cox",CAM : Community Fee,,10.00
 03/01/2026,,0117,Anthony *Byers,CAM : Community Fee,,10.00
 03/01/2026,,2239,Lakeisha Taylor,CAM : Community Fee,,10.00
-03/01/2026,,0101,Trushondra Edd*,CAM : Community Fee,,10.00
-03/01/2026,,0236,Jessica Hardcastle,CAM : Community Fee,,10.00
-03/01/2026,,0341,"Shelbi Cheek, Jaylon Morgan",CAM : Community Fee,,10.00
-03/01/2026,,0218,Jazmin Aviles,CAM : Community Fee,,10.00
+03/01/2026,,2216,Clayton *Lewis,CAM : Community Fee,,10.00
+03/01/2026,,2207,Jared Bullard,CAM : Community Fee,,10.00
+03/01/2026,,2125,Jason Allen,CAM : Community Fee,,10.00
+03/01/2026,,2137,Jerry Cheshier,CAM : Community Fee,,10.00
+03/01/2026,,2109,Zaida * Zuniga,CAM : Community Fee,,10.00
+03/01/2026,,0229,Julie Larson*,CAM : Community Fee,,10.00
+03/01/2026,,2102,"Donna Cason, Michael Sinks",CAM : Community Fee,,10.00
+03/01/2026,,2338,Jason Tillberg,CAM : Community Fee,,10.00
+03/01/2026,,0241,Antonio Woodard,CAM : Community Fee,,10.00
+03/01/2026,,2244,Katherine Spencer,CAM : Community Fee,,10.00
+03/01/2026,,2134,Samuel First,CAM : Community Fee,,10.00
+03/01/2026,,0334,"Herrera * Alan Leonel, Yesica * Rivas Flores",CAM : Community Fee,,10.00
+03/01/2026,,2235,Dweh Wayne,CAM : Community Fee,,10.00
+03/01/2026,,0129,Charles *DeHorney,CAM : Community Fee,,10.00
+03/01/2026,,0209,Luke * Hampton,CAM : Community Fee,,10.00
+03/01/2026,,0122,Charneice Ford,CAM : Community Fee,,10.00
+03/01/2026,,2104,"Karen * Schloff, Bradley * Winquist",CAM : Community Fee,,10.00
+03/01/2026,,2145,Deonte * Wilson,CAM : Community Fee,,10.00
+03/01/2026,,2144,"Luis *Gomez, Telma *Palma",CAM : Community Fee,,10.00
+03/01/2026,,0225,Sydney Moore,CAM : Community Fee,,10.00
+03/01/2026,,0340,"Jose Murillo, Martha Murillo Pavon",CAM : Community Fee,,10.00
 03/01/2026,,2108,Margaret Sanders,CAM : Community Fee,,10.00
-03/01/2026,,2236,Shaizavia *Bailey,CAM : Community Fee,,10.00
+03/01/2026,,2138,Carmon Bertrand (EV),CAM : Community Fee,,3.00
+03/01/2026,,2240,Charles Foster,CAM : Community Fee,,10.00
+03/01/2026,,2226,Ron * Vaughan,CAM : Community Fee,,10.00
+03/01/2026,,0123,Kaytee *Wells,CAM : Community Fee,,10.00
 03/01/2026,,2221,Deja Oliver,CAM : Community Fee,,10.00
-03/01/2026,,0335,"CARLOS * GOMEZ, Selin * Gomes",CAM : Community Fee,,10.00
-03/01/2026,,0102,Xerius *Jackson,CAM : Community Fee,,10.00
-03/01/2026,,0216,Anthony Bradshaw Jr,CAM : Community Fee,,10.00
-03/01/2026,,2230,Kit Kong Hospitality LLC,CAM : Community Fee,,10.00
-03/01/2026,,0127,Latreesha Green*,CAM : Community Fee,,10.00
-03/01/2026,,2208,Jade *Brady,CAM : Community Fee,,10.00
-03/01/2026,,2220,Jesus * Tovar Martinez,CAM : Community Fee,,10.00
-03/01/2026,,0243,Beau Wastier,CAM : Community Fee,,10.00
-03/01/2026,,0226,Gerardo Deleon Vaga,CAM : Community Fee,,10.00
-03/01/2026,,2211,"Jody Fowler, Damon Moore",CAM : Community Fee,,10.00
-03/01/2026,,0136,Whitney George,CAM : Community Fee,,10.00
-03/01/2026,,2135,Chamia Bills,CAM : Community Fee,,10.00
+03/01/2026,,2236,Shaizavia *Bailey,CAM : Community Fee,,10.00
 03/01/2026,,0128,"Dylan Orr, Cameron Ruebeck",CAM : Community Fee,,10.00
+03/01/2026,,2234,Kevin Barrera,CAM : Community Fee,,10.00
+03/01/2026,,2143,Nichole * Rushing,CAM : Community Fee,,10.00
+03/01/2026,,2127,BreeAnna * Hallman,CAM : Community Fee,,10.00
+03/01/2026,,2204,Shirley * Wiley-maze,CAM : Community Fee,,10.00
+03/01/2026,,0218,Jazmin Aviles,CAM : Community Fee,,10.00
+03/01/2026,,0342,Ishmael Corral,CAM : Community Fee,,10.00
+03/01/2026,,0210,Betty Tucker,CAM : Community Fee,,10.00
+03/01/2026,,0335,"CARLOS * GOMEZ, Selin * Gomes",CAM : Community Fee,,10.00
+03/01/2026,,2237,Dikevous Whatley,CAM : Community Fee,,10.00
+03/01/2026,,0341,"Shelbi Cheek, Jaylon Morgan",CAM : Community Fee,,10.00
+03/01/2026,,0216,Anthony Bradshaw Jr,CAM : Community Fee,,10.00
+03/01/2026,,0228,Kyler Faustner,CAM : Community Fee,,10.00
+03/01/2026,,0136,Whitney George,CAM : Community Fee,,10.00
+03/01/2026,,2211,"Jody Fowler, Damon Moore",CAM : Community Fee,,10.00
+03/01/2026,,0101,Trushondra Edd*,CAM : Community Fee,,10.00
+03/01/2026,,2220,Jesus * Tovar Martinez,CAM : Community Fee,,10.00
+03/01/2026,,0226,Gerardo Deleon Vaga,CAM : Community Fee,,10.00
+03/01/2026,,0243,Beau Wastier,CAM : Community Fee,,10.00
+03/01/2026,,0236,Jessica Hardcastle,CAM : Community Fee,,10.00
+03/01/2026,,0102,Xerius *Jackson,CAM : Community Fee,,10.00
+03/01/2026,,2118,Brian Perry*,CAM : Community Fee,,10.00
+03/01/2026,,2224,Nicholas Falcon,CAM : Community Fee,,10.00
+03/01/2026,,2344,Athena *Cantu,CAM : Community Fee,,10.00
+03/01/2026,,2208,Jade *Brady,CAM : Community Fee,,10.00
+03/01/2026,,2121,"Debra Loving, Odell Hansen",CAM : Community Fee,,10.00
 03/01/2026,,0137,Karenthiea Calvin,CAM : Community Fee,,10.00
+03/01/2026,,2135,Chamia Bills,CAM : Community Fee,,10.00
+03/01/2026,,0127,Latreesha Green*,CAM : Community Fee,,10.00
+03/01/2026,,2230,Kit Kong Hospitality LLC,CAM : Community Fee,,10.00
+03/01/2026,,2214,Emma Evans,CAM : Community Fee,,10.00
+03/01/2026,,0110,Christle Cox,CAM : Community Fee,,10.00
 03/01/2026,,0104,bobbi * Dowd,CAM : Community Fee,,10.00
 03/01/2026,,0124,Alice Hammonds,CAM : Community Fee,,10.00
 03/01/2026,,2339,Juan Mendoza,CAM : Community Fee,,10.00
-03/01/2026,,2204,Shirley * Wiley-maze,CAM : Community Fee,,10.00
-03/01/2026,,2127,BreeAnna * Hallman,CAM : Community Fee,,10.00
-03/01/2026,,0123,Kaytee *Wells,CAM : Community Fee,,10.00
-03/01/2026,,2224,Nicholas Falcon,CAM : Community Fee,,10.00
-03/01/2026,,2121,"Debra Loving, Odell Hansen",CAM : Community Fee,,10.00
-03/01/2026,,0228,Kyler Faustner,CAM : Community Fee,,10.00
-03/01/2026,,2240,Charles Foster,CAM : Community Fee,,10.00
-03/01/2026,,2138,Carmon Bertrand (EV),CAM : Community Fee,,3.00
-03/01/2026,,0342,Ishmael Corral,CAM : Community Fee,,10.00
-03/01/2026,,0210,Betty Tucker,CAM : Community Fee,,10.00
-03/01/2026,,2118,Brian Perry*,CAM : Community Fee,,10.00
-03/01/2026,,2344,Athena *Cantu,CAM : Community Fee,,10.00
-03/01/2026,,2143,Nichole * Rushing,CAM : Community Fee,,10.00
-03/01/2026,,2214,Emma Evans,CAM : Community Fee,,10.00
-03/01/2026,,0110,Christle Cox,CAM : Community Fee,,10.00
-03/01/2026,,2226,Ron * Vaughan,CAM : Community Fee,,10.00
-03/01/2026,,2234,Kevin Barrera,CAM : Community Fee,,10.00
-03/01/2026,,2237,Dikevous Whatley,CAM : Community Fee,,10.00
-03/01/2026,,0233,Jayla Goodman,CAM : Community Fee,,10.00
-03/01/2026,,0206,Diane Barefield*,CAM : Community Fee,,10.00
-03/01/2026,,0116,Elizabeth Gaffney*,CAM : Community Fee,,10.00
-03/01/2026,,0135,Pamela Bennett,CAM : Community Fee,,10.00
-03/01/2026,,2115,Pearl Cross*,CAM : Community Fee,,10.00
+03/01/2026,,2117,Christina Black,CAM : Community Fee,,10.00
+03/01/2026,,0103,Rebecca Mcknight,CAM : Community Fee,,10.00
+03/01/2026,,2139,Leaneasha * Crowell,CAM : Community Fee,,10.00
+03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",CAM : Community Fee,,10.00
 03/01/2026,,2335,Heaven *Brown,CAM : Community Fee,,10.00
+03/01/2026,,0133,Darold Tucker,CAM : Community Fee,,10.00
+03/01/2026,,0113,"Aaron Azlin, Stephanie Lukash",CAM : Community Fee,,10.00
+03/01/2026,,0206,Diane Barefield*,CAM : Community Fee,,10.00
+03/01/2026,,2122,Jorge Gispanski,CAM : Community Fee,,10.00
+03/01/2026,,2115,Pearl Cross*,CAM : Community Fee,,10.00
+03/01/2026,,2119,Christopher Bruce,CAM : Community Fee,,10.00
+03/01/2026,,2213,Adam Cunningham,CAM : Community Fee,,10.00
+03/01/2026,,0231,Elijah Mureithi,CAM : Community Fee,,10.00
+03/01/2026,,2103,Jane Porter,CAM : Community Fee,,10.00
+03/01/2026,,2116,Guy Hall,CAM : Community Fee,,10.00
+03/01/2026,,0109,Krystal Jackson,CAM : Community Fee,,10.00
+03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",CAM : Community Fee,,10.00
+03/01/2026,,0202,Martin Guevara,CAM : Community Fee,,10.00
 03/01/2026,,2243,Reginald Williams,CAM : Community Fee,,10.00
 03/01/2026,,0221,Michelle *Hughes,CAM : Community Fee,,10.00
-03/01/2026,,2122,Jorge Gispanski,CAM : Community Fee,,10.00
-03/01/2026,,0114,Emmanuel * Brockelman,CAM : Community Fee,,10.00
-03/01/2026,,0132,Bibiana * David Julian,CAM : Community Fee,,10.00
-03/01/2026,,0113,"Aaron Azlin, Stephanie Lukash",CAM : Community Fee,,10.00
-03/01/2026,,0133,Darold Tucker,CAM : Community Fee,,10.00
-03/01/2026,,0103,Rebecca Mcknight,CAM : Community Fee,,10.00
-03/01/2026,,0202,Martin Guevara,CAM : Community Fee,,10.00
-03/01/2026,,2117,Christina Black,CAM : Community Fee,,10.00
-03/01/2026,,0231,Elijah Mureithi,CAM : Community Fee,,10.00
-03/01/2026,,2119,Christopher Bruce,CAM : Community Fee,,10.00
-03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",CAM : Community Fee,,10.00
-03/01/2026,,2139,Leaneasha * Crowell,CAM : Community Fee,,10.00
-03/01/2026,,2213,Adam Cunningham,CAM : Community Fee,,10.00
-03/01/2026,,0336,"Alena Dupire, Seth Snyder",CAM : Community Fee,,10.00
-03/01/2026,,0130,Virgina Hill *,CAM : Community Fee,,10.00
+03/01/2026,,0135,Pamela Bennett,CAM : Community Fee,,10.00
 03/01/2026,,2106,Laura *Rojas Ortiz,CAM : Community Fee,,10.00
-03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",CAM : Community Fee,,10.00
-03/01/2026,,2103,Jane Porter,CAM : Community Fee,,10.00
-03/01/2026,,0109,Krystal Jackson,CAM : Community Fee,,10.00
-03/01/2026,,2116,Guy Hall,CAM : Community Fee,,10.00
-03/01/2026,,0118,Amber Livingston,CAM : Community Fee,,10.00
-03/01/2026,,2222,Maria * Garcia,CAM : Community Fee,,10.00
+03/01/2026,,0233,Jayla Goodman,CAM : Community Fee,,10.00
+03/01/2026,,0116,Elizabeth Gaffney*,CAM : Community Fee,,10.00
+03/01/2026,,0336,"Alena Dupire, Seth Snyder",CAM : Community Fee,,10.00
+03/01/2026,,0132,Bibiana * David Julian,CAM : Community Fee,,10.00
+03/01/2026,,0114,Emmanuel * Brockelman,CAM : Community Fee,,10.00
+03/01/2026,,0130,Virgina Hill *,CAM : Community Fee,,10.00
 03/01/2026,,0111,william * Witcher,CAM : Community Fee,,10.00
-03/01/2026,,2334,Shamea *Bowen,CAM : Community Fee,,10.00
-03/01/2026,,2124,McKenzie Smith,CAM : Community Fee,,10.00
-03/01/2026,,0337,Montasia Jones,CAM : Community Fee,,3.00
-03/01/2026,,2340,"Ashley *Aviles, Jose *Aviles Gutierrez, Ma Guadalupe *Mojica Pineda",CAM : Community Fee,,10.00
-03/01/2026,,2228,"Kaeson *Griffin-McClaskey, Angelina *Vaughan",CAM : Community Fee,,10.00
-03/01/2026,,0215,Haley Dixon,CAM : Community Fee,,10.00
-03/01/2026,,2232,LaJaida * Diamond,CAM : Community Fee,,10.00
-03/01/2026,,0138,James Dyer,CAM : Community Fee,,10.00
-03/01/2026,,2105,"BreShaun Luper, Julius Wilson",CAM : Community Fee,,10.00
-03/01/2026,,2209,Amy Roberts,CAM : Community Fee,,10.00
-03/01/2026,,2225,Tony *Davis,CAM : Community Fee,,10.00
-03/01/2026,,0207,Zachary * Baquis,CAM : Community Fee,,10.00
-03/01/2026,,2136,Kyle Kanzig,CAM : Community Fee,,10.00
-03/01/2026,,2238,Kimberly * Alvarez,CAM : Community Fee,,10.00
-03/01/2026,,0131,Jo Jo Parker,CAM : Community Fee,,10.00
-03/01/2026,,0213,"Brianna Garcia, Lorenzo Garcia",CAM : Community Fee,,10.00
-03/01/2026,,0134,Akasha *Taylor-Poitier,CAM : Community Fee,,10.00
 03/01/2026,,0217,Anna Douglas,CAM : Community Fee,,10.00
 03/01/2026,,2241,Ava * Russell,CAM : Community Fee,,10.00
-03/01/2026,,0338,"Paige Jason, Nehemiah White",CAM : Community Fee,,10.00
-03/01/2026,,0237,Cara Braden,CAM : Community Fee,,10.00
+03/01/2026,,0219,Nicholas * Hayes,CAM : Community Fee,,10.00
+03/01/2026,,0215,Haley Dixon,CAM : Community Fee,,10.00
 03/01/2026,,2133,"Patrick * Prince, Heaven * Swartout",CAM : Community Fee,,10.00
 03/01/2026,,2227,"Jordyn *Soto, Logan *Anderson",CAM : Community Fee,,10.00
+03/01/2026,,0338,"Paige Jason, Nehemiah White",CAM : Community Fee,,10.00
+03/01/2026,,0237,Cara Braden,CAM : Community Fee,,10.00
+03/01/2026,,0131,Jo Jo Parker,CAM : Community Fee,,10.00
+03/01/2026,,2222,Maria * Garcia,CAM : Community Fee,,10.00
 03/01/2026,,2343,Pamela Norris*,CAM : Community Fee,,10.00
-03/01/2026,,0219,Nicholas * Hayes,CAM : Community Fee,,10.00
+03/01/2026,,2232,LaJaida * Diamond,CAM : Community Fee,,10.00
+03/01/2026,,2209,Amy Roberts,CAM : Community Fee,,10.00
 03/01/2026,,2233,Javier Hernandez,CAM : Community Fee,,10.00
+03/01/2026,,0118,Amber Livingston,CAM : Community Fee,,10.00
+03/01/2026,,2228,"Kaeson *Griffin-McClaskey, Angelina *Vaughan",CAM : Community Fee,,10.00
+03/01/2026,,2225,Tony *Davis,CAM : Community Fee,,10.00
+03/01/2026,,2334,Shamea *Bowen,CAM : Community Fee,,10.00
+03/01/2026,,2340,"Ashley *Aviles, Jose *Aviles Gutierrez, Ma Guadalupe *Mojica Pineda",CAM : Community Fee,,10.00
+03/01/2026,,2124,McKenzie Smith,CAM : Community Fee,,10.00
+03/01/2026,,2136,Kyle Kanzig,CAM : Community Fee,,10.00
+03/01/2026,,0337,Montasia Jones,CAM : Community Fee,,3.00
+03/01/2026,,0138,James Dyer,CAM : Community Fee,,10.00
+03/01/2026,,2105,"BreShaun Luper, Julius Wilson",CAM : Community Fee,,10.00
 03/01/2026,,2131,Osman Hernandez,CAM : Community Fee,,10.00
-03/01/2026,,2101,Dianne Runnels,CAM : Community Fee,,10.00
-03/01/2026,,0121,Otelia McMillan*,CAM : Community Fee,,10.00
+03/01/2026,,2238,Kimberly * Alvarez,CAM : Community Fee,,10.00
+03/01/2026,,0213,"Brianna Garcia, Lorenzo Garcia",CAM : Community Fee,,10.00
+03/01/2026,,0207,Zachary * Baquis,CAM : Community Fee,,10.00
+03/01/2026,,0134,Akasha *Taylor-Poitier,CAM : Community Fee,,10.00
 03/01/2026,,0105,Toni Reed*,CAM : Community Fee,,10.00
+03/01/2026,,2101,Dianne Runnels,CAM : Community Fee,,10.00
 03/01/2026,,2112,Otis Bursey Jr*,CAM : Community Fee,,10.00
-03/01/2026,,0343,Kenneth Crocker,CAM : Community Fee,,10.00
+03/01/2026,,0121,Otelia McMillan*,CAM : Community Fee,,10.00
 03/01/2026,,0223,Adam * Grimes,CAM : Community Fee,,10.00
+03/01/2026,,0343,Kenneth Crocker,CAM : Community Fee,,10.00
 03/01/2026,,0102,Xerius *Jackson,Reversed CAM : Community Fee,double charged,-10.00
 03/01/2026,,2337,"Summer Bollier, America Meza",CAM : Community Fee,,0.00
 03/01/2026,,0120,Shaynice *Dorcena,CAM : Community Fee,,10.00
@@ -441,16 +484,26 @@ Charge - CAM : Community Fee,,,,,,
 03/06/2026,,0228,Kyler Faustner,CAM : Community Fee,,2.00
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",Reversed CAM : Community Fee,CAM : Community Fee,-10.00
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",CAM : Community Fee,,3.00
-Total: 194,,,,,,"1,723.00"
+03/12/2026,,0202,Martin Guevara,Reversed CAM : Community Fee,CAM : Community Fee,-10.00
+03/12/2026,,0202,Martin Guevara,CAM : Community Fee,,4.00
+03/15/2026,,2232,LaJaida * Diamond,Reversed CAM : Community Fee,CAM : Community Fee,-10.00
+03/15/2026,,2232,LaJaida * Diamond,CAM : Community Fee,,5.00
+03/16/2026,,0118,Amber Livingston,Reversed CAM : Community Fee,CAM : Community Fee,-10.00
+03/16/2026,,0118,Amber Livingston,CAM : Community Fee,,5.00
+03/16/2026,,0216,Anthony Bradshaw Jr,Reversed CAM : Community Fee,CAM : Community Fee,-10.00
+03/16/2026,,0216,Anthony Bradshaw Jr,CAM : Community Fee,,5.00
+03/16/2026,,2141,Jeramiah *Thornock,Reversed CAM : Community Fee,CAM : Community Fee,-10.00
+03/16/2026,,2141,Jeramiah *Thornock,CAM : Community Fee,,5.00
+Total: 204,,,,,,"1,697.00"
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Carport / Reserved Parking Rental,,,,,,
+03/01/2026,,0210,Betty Tucker,Reserved Parking,,25.00
 03/01/2026,,0138,James Dyer,Reserved Parking,,25.00
 03/01/2026,,2134,Samuel First,Reserved Parking,,25.00
-03/01/2026,,0210,Betty Tucker,Reserved Parking,,25.00
-03/01/2026,,0124,Alice Hammonds,Carport / Reserved Parking Rental,,25.00
-03/01/2026,,0135,Pamela Bennett,Reserved Parking,,25.00
 03/01/2026,,2234,Kevin Barrera,18-2,,25.00
 03/01/2026,,0131,Jo Jo Parker,Reserved Parking,,25.00
+03/01/2026,,0124,Alice Hammonds,Carport / Reserved Parking Rental,,25.00
+03/01/2026,,0135,Pamela Bennett,Reserved Parking,,25.00
 03/01/2026,,2244,Katherine Spencer,Reserved Parking,,25.00
 03/01/2026,,0133,Darold Tucker,Reserved Parking,,25.00
 03/01/2026,,0230,Kyle Strohecker,Reserved Parking x 2,,50.00
@@ -469,7 +522,12 @@ Charge - Cleaning Charges / Fees,,,,,,
 03/10/2026,,2138,Carmon Bertrand (EV),Carpet cleaning,,250.00
 03/11/2026,,0228,Kyler Faustner,Housekeeper,,100.00
 03/11/2026,,0228,Kyler Faustner,Carpert Cleaning,,200.00
-Total: 9,,,,,,"1,585.00"
+03/12/2026,,0202,Martin Guevara,Housekeeping,,150.00
+03/12/2026,,0202,Martin Guevara,carpet cleaning,,150.00
+03/16/2026,,0216,Anthony Bradshaw Jr,Housekeeping,,150.00
+03/16/2026,,0216,Anthony Bradshaw Jr,cleaning carpet,,150.00
+03/17/2026,,0118,Amber Livingston,Housekeeping,,200.00
+Total: 14,,,,,,"2,385.00"
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Insufficient Notice Penalty (Reletting Fee),,,,,,
 03/01/2026,,0228,Kyler Faustner,Insufficient Notice Penalty (Reletting Fee),,"1,015.75"
@@ -478,7 +536,12 @@ Charge - Insufficient Notice Penalty (Reletting Fee),,,,,,
 03/09/2026,,0343,Kenneth Crocker,Insufficient Notice Penalty (Reletting Fee),,947.75
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",Insufficient Notice Penalty (Reletting Fee),,"1,015.75"
 03/10/2026,,2138,Carmon Bertrand (EV),Insufficient Notice Penalty (Reletting Fee),,"1,232.50"
-Total: 6,,,,,,"4,211.75"
+03/12/2026,,2232,LaJaida * Diamond,Insufficient Notice Penalty (Reletting Fee),,849.15
+03/12/2026,,0202,Martin Guevara,Insufficient Notice Penalty (Reletting Fee),,896.75
+03/16/2026,,2141,Jeramiah *Thornock,Insufficient Notice Penalty (Reletting Fee),,849.15
+03/16/2026,,0118,Amber Livingston,Insufficient Notice Penalty (Reletting Fee),,845.75
+03/16/2026,,0216,Anthony Bradshaw Jr,Insufficient Notice Penalty (Reletting Fee),,738.65
+Total: 11,,,,,,"8,391.20"
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Keys / Locks Changes,,,,,,
 03/01/2026,,2343,Pamela Norris*,Keys / Locks Changes,,20.00
@@ -542,7 +605,11 @@ Charge - Late Charges,,,,,,
 03/06/2026,,2206,Elizabeth Tobar,Late Charges,,100.00
 03/09/2026,,0131,Jo Jo Parker,Reversed Late Charges,,-103.80
 03/09/2026,,0131,Jo Jo Parker,Reversed Late Charges,,-103.80
-Total: 57,,,,,,"3,860.30"
+03/11/2026,,2114,Pamela * Gutierrez,Reversed Late Charges,,-79.90
+03/12/2026,,0121,Otelia McMillan*,Reversed Late Charges,,-95.00
+03/13/2026,,0121,Otelia McMillan*,Late Charges,,95.00
+03/17/2026,,0121,Otelia McMillan*,Reversed Late Charges,,-95.00
+Total: 61,,,,,,"3,685.40"
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Lease Termination Fee,,,,,,
 03/01/2026,,0228,Kyler Faustner,Lease Termination Fee,,"1,500.00"
@@ -550,11 +617,16 @@ Charge - Lease Termination Fee,,,,,,
 03/04/2026,,0116,Elizabeth Gaffney*,Reversed Lease Termination Fee,,"-1,500.00"
 03/09/2026,,0343,Kenneth Crocker,Lease Termination Fee,,"1,500.00"
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",Lease Termination Fee,,"1,500.00"
-Total: 5,,,,,,"4,500.00"
+03/12/2026,,2232,LaJaida * Diamond,Lease Termination Fee,,"1,500.00"
+03/12/2026,,0202,Martin Guevara,Lease Termination Fee,,"1,500.00"
+03/16/2026,,2141,Jeramiah *Thornock,Lease Termination Fee,,"1,500.00"
+03/16/2026,,0118,Amber Livingston,Lease Termination Fee,,"1,500.00"
+03/16/2026,,0216,Anthony Bradshaw Jr,Lease Termination Fee,,"1,500.00"
+Total: 10,,,,,,"12,000.00"
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Month to Month Fee,,,,,,
-03/01/2026,,2125,Jason Allen,Month to Month Fee,,300.00
 03/01/2026,,0343,Kenneth Crocker,Month to Month Fee,,300.00
+03/01/2026,,2125,Jason Allen,Month to Month Fee,,300.00
 03/01/2026,,0215,Haley Dixon,Month to Month Fee,,300.00
 03/01/2026,,2337,"Summer Bollier, America Meza",Month to Month Fee,,0.00
 03/02/2026,,0215,Haley Dixon,Reversed Month to Month Fee,,-300.00
@@ -564,21 +636,21 @@ Charge - Month to Month Fee,,,,,,
 Total: 8,,,,,,39.00
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Monthly Pet Rent,,,,,,
-03/01/2026,,2101,Dianne Runnels,Pet Rent,,15.00
-03/01/2026,,0133,Darold Tucker,PETRENT,,20.00
-03/01/2026,,2126,Kathleen Davlin,Pet Rent,,20.00
 03/01/2026,,0343,Kenneth Crocker,Pet Rent,,15.00
 03/01/2026,,2211,"Jody Fowler, Damon Moore",Pet Rent x 2,,30.00
+03/01/2026,,2101,Dianne Runnels,Pet Rent,,15.00
+03/01/2026,,0133,Darold Tucker,PETRENT,,20.00
 03/01/2026,,0113,"Aaron Azlin, Stephanie Lukash",Pet Rent,,20.00
+03/01/2026,,2126,Kathleen Davlin,Pet Rent,,20.00
 03/01/2026,,0230,Kyle Strohecker,Pet Rent,,15.00
 03/01/2026,,0336,"Alena Dupire, Seth Snyder",Pet Rent,,15.00
-03/01/2026,,0229,Julie Larson*,Pet Rent,,15.00
-03/01/2026,,0230,Kyle Strohecker,Pet Rent,,15.00
 03/01/2026,,0211,"Blake Bounds, Alyssa Cox",Pet Rent,,15.00
+03/01/2026,,0229,Julie Larson*,Pet Rent,,15.00
 03/01/2026,,2103,Jane Porter,Pet Rent,,15.00
+03/01/2026,,0230,Kyle Strohecker,Pet Rent,,15.00
 03/01/2026,,0138,James Dyer,Pet Rent,,15.00
-03/01/2026,,2102,"Donna Cason, Michael Sinks",Pet Rent,,15.00
 03/01/2026,,2132,Nicholas Poindexter,Pet Rent,,15.00
+03/01/2026,,2102,"Donna Cason, Michael Sinks",Pet Rent,,15.00
 03/01/2026,,2124,McKenzie Smith,Pet Rent x 2,,30.00
 03/01/2026,,2240,Charles Foster,PETRENT,,30.00
 03/01/2026,,0208,Jeannie Henderson,Pet Rent,,15.00
@@ -593,8 +665,8 @@ Charge - MoveOut Damage charges,,,,,,
 03/09/2026,,2337,"Summer Bollier, America Meza",KEY,,50.00
 03/09/2026,,2337,"Summer Bollier, America Meza",Trash out,,350.00
 03/09/2026,,2337,"Summer Bollier, America Meza",Drill out lock,,50.00
-03/09/2026,,2337,"Summer Bollier, America Meza",Stains in carpet,,200.00
 03/09/2026,,2337,"Summer Bollier, America Meza",vertal blinds,,71.00
+03/09/2026,,2337,"Summer Bollier, America Meza",Stains in carpet,,200.00
 03/09/2026,,2337,"Summer Bollier, America Meza",2 blinds,,138.00
 03/09/2026,,0343,Kenneth Crocker,Trashout ,,450.00
 03/09/2026,,0343,Kenneth Crocker,3 Blinds,,250.00
@@ -604,181 +676,191 @@ Charge - MoveOut Damage charges,,,,,,
 03/10/2026,,2138,Carmon Bertrand (EV),Drill out lock,,50.00
 03/11/2026,,0228,Kyler Faustner,Trashout ,,200.00
 03/11/2026,,0228,Kyler Faustner,Key,,50.00
-Total: 14,,,,,,"2,209.00"
+03/12/2026,,0202,Martin Guevara,Keys,,50.00
+03/16/2026,,0216,Anthony Bradshaw Jr,Trashout,,250.00
+03/17/2026,,0118,Amber Livingston,Patio Door,,"1,200.00"
+03/17/2026,,0118,Amber Livingston,Trashout,,350.00
+03/17/2026,,0118,Amber Livingston,Front door frame,,150.00
+03/17/2026,,0118,Amber Livingston,3 Blinds,,175.00
+Total: 20,,,,,,"4,384.00"
+Date,Reference,Unit,Name,Description,Notes,Amount
+Charge - NSF Check Fee,,,,,,
+03/16/2026,,0228,"Shelbi Butler, Cameron Vanstavern",NSF Check Fee,,30.00
+Total: 1,,,,,,30.00
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Pest Control Fees,,,,,,
-03/01/2026,,2241,Ava * Russell,Pest Control Fees,,5.00
-03/01/2026,,0225,Sydney Moore,Pest Control Fees,,5.00
-03/01/2026,,2340,"Ashley *Aviles, Jose *Aviles Gutierrez, Ma Guadalupe *Mojica Pineda",Pest Control Fees,,5.00
-03/01/2026,,2112,Otis Bursey Jr*,Pest Control Rebill,,5.00
-03/01/2026,,2335,Heaven *Brown,Pest Control Fees,,5.00
-03/01/2026,,0335,"CARLOS * GOMEZ, Selin * Gomes",Pest Control Fees,,5.00
-03/01/2026,,2238,Kimberly * Alvarez,Pest Control Fees,,5.00
-03/01/2026,,0130,Virgina Hill *,Pest Control Fees,,5.00
-03/01/2026,,0340,"Jose Murillo, Martha Murillo Pavon",Pest Control Fees,,5.00
-03/01/2026,,0214,Dalea *Myles,Pest Control Fees,,5.00
 03/01/2026,,2118,Brian Perry*,Pest Control Fees,,5.00
-03/01/2026,,0223,Adam * Grimes,Pest Control Fees,,5.00
 03/01/2026,,2344,Athena *Cantu,Pest Control Fees,,5.00
 03/01/2026,,0219,Nicholas * Hayes,Pest Control Fees,,5.00
+03/01/2026,,0214,Dalea *Myles,Pest Control Fees,,5.00
+03/01/2026,,0340,"Jose Murillo, Martha Murillo Pavon",Pest Control Fees,,5.00
 03/01/2026,,0216,Anthony Bradshaw Jr,Pest Control Fees,,5.00
-03/01/2026,,0218,Jazmin Aviles,Pest Control Fees,,5.00
-03/01/2026,,0126,Bianca Martinez,Pest Control Fees,,5.00
 03/01/2026,,0118,Amber Livingston,Pest Control Fees,,5.00
-03/01/2026,,2228,"Kaeson *Griffin-McClaskey, Angelina *Vaughan",Pest Control Fees,,5.00
-03/01/2026,,2343,Pamela Norris*,Pest Control Fees,,5.00
-03/01/2026,,2209,Amy Roberts,Pest Control Fees,,5.00
-03/01/2026,,0127,Latreesha Green*,Pest Control Rebill,,5.00
+03/01/2026,,0218,Jazmin Aviles,Pest Control Fees,,5.00
+03/01/2026,,2335,Heaven *Brown,Pest Control Fees,,5.00
+03/01/2026,,2340,"Ashley *Aviles, Jose *Aviles Gutierrez, Ma Guadalupe *Mojica Pineda",Pest Control Fees,,5.00
+03/01/2026,,2112,Otis Bursey Jr*,Pest Control Rebill,,5.00
+03/01/2026,,0225,Sydney Moore,Pest Control Fees,,5.00
+03/01/2026,,0223,Adam * Grimes,Pest Control Fees,,5.00
 03/01/2026,,0103,Rebecca Mcknight,Pest Control Fees,,5.00
-03/01/2026,,2138,Carmon Bertrand (EV),Pest Control Fees,,2.00
 03/01/2026,,2124,McKenzie Smith,Pest Control Fees,,5.00
 03/01/2026,,0342,Ishmael Corral,Pest Control Fees,,5.00
+03/01/2026,,2138,Carmon Bertrand (EV),Pest Control Fees,,2.00
 03/01/2026,,2103,Jane Porter,Pest Control Fees,,5.00
+03/01/2026,,2209,Amy Roberts,Pest Control Fees,,5.00
+03/01/2026,,2238,Kimberly * Alvarez,Pest Control Fees,,5.00
+03/01/2026,,0335,"CARLOS * GOMEZ, Selin * Gomes",Pest Control Fees,,5.00
+03/01/2026,,2241,Ava * Russell,Pest Control Fees,,5.00
 03/01/2026,,0229,Julie Larson*,Pest Control Fees,,5.00
-03/01/2026,,0128,"Dylan Orr, Cameron Ruebeck",Pest Control Fees,,5.00
-03/01/2026,,2232,LaJaida * Diamond,Pest Control Fees,,5.00
-03/01/2026,,2133,"Patrick * Prince, Heaven * Swartout",Pest Control Fees,,5.00
+03/01/2026,,0130,Virgina Hill *,Pest Control Fees,,5.00
+03/01/2026,,0126,Bianca Martinez,Pest Control Fees,,5.00
+03/01/2026,,2343,Pamela Norris*,Pest Control Fees,,5.00
+03/01/2026,,0127,Latreesha Green*,Pest Control Rebill,,5.00
+03/01/2026,,2228,"Kaeson *Griffin-McClaskey, Angelina *Vaughan",Pest Control Fees,,5.00
 03/01/2026,,0233,Jayla Goodman,Pest Control Fees,,5.00
-03/01/2026,,0101,Trushondra Edd*,Pest Control Fees,,5.00
-03/01/2026,,2116,Guy Hall,PESTFEE,,5.00
-03/01/2026,,2204,Shirley * Wiley-maze,Pest Control Fees,,5.00
-03/01/2026,,0109,Krystal Jackson,Pest Control Fees,,5.00
+03/01/2026,,2242,"Jose Mejia, Olbin Rapalo Mejia",Pest Control Rebill,,5.00
 03/01/2026,,0236,Jessica Hardcastle,Pest Control Rebill,,5.00
-03/01/2026,,2143,Nichole * Rushing,Pest Control Fees,,5.00
+03/01/2026,,2231,Tessa Bench,Pest Control Rebill,,5.00
 03/01/2026,,2334,Shamea *Bowen,Pest Control Fees,,5.00
 03/01/2026,,0104,bobbi * Dowd,Pest Control Fees,,5.00
-03/01/2026,,2233,Javier Hernandez,Pest Control Fees,,5.00
-03/01/2026,,2231,Tessa Bench,Pest Control Rebill,,5.00
-03/01/2026,,2242,"Jose Mejia, Olbin Rapalo Mejia",Pest Control Rebill,,5.00
-03/01/2026,,0111,william * Witcher,Pest Control Fees,,5.00
-03/01/2026,,0138,James Dyer,Pest Control Rebill,,5.00
-03/01/2026,,2220,Jesus * Tovar Martinez,Pest Control Fees,,5.00
-03/01/2026,,2107,Jerome *Sutter,Pest Control Fees,,5.00
-03/01/2026,,0215,Haley Dixon,Pest Control Rebill,,5.00
-03/01/2026,,2114,Pamela * Gutierrez,Pest Control Fees,,5.00
-03/01/2026,,0213,"Brianna Garcia, Lorenzo Garcia",Pest Control Fees,,5.00
-03/01/2026,,2108,Margaret Sanders,Pest Control Fees,,5.00
+03/01/2026,,2116,Guy Hall,PESTFEE,,5.00
 03/01/2026,,2210,Jamie Cook*,Pest Control Fees,,5.00
-03/01/2026,,0201,"Tracy Cormier, Camreon Kinchen",Pest Control Rebill,,5.00
+03/01/2026,,0128,"Dylan Orr, Cameron Ruebeck",Pest Control Fees,,5.00
+03/01/2026,,0231,Elijah Mureithi,Pest Control Fees,,5.00
+03/01/2026,,2204,Shirley * Wiley-maze,Pest Control Fees,,5.00
+03/01/2026,,0111,william * Witcher,Pest Control Fees,,5.00
 03/01/2026,,0217,Anna Douglas,PESTFEE,,5.00
 03/01/2026,,0338,"Paige Jason, Nehemiah White",Pest Control Fees,,5.00
-03/01/2026,,0240,"Yeliah Houston, Bryson Jacobs",Pest Control Fees,,5.00
+03/01/2026,,2133,"Patrick * Prince, Heaven * Swartout",Pest Control Fees,,5.00
 03/01/2026,,0119,Shelly Pillars*,Pest Control Rebill,,5.00
+03/01/2026,,2232,LaJaida * Diamond,Pest Control Fees,,5.00
+03/01/2026,,0101,Trushondra Edd*,Pest Control Fees,,5.00
 03/01/2026,,0115,Bobby Howard,Pest Control Rebill,,5.00
-03/01/2026,,2115,Pearl Cross*,Pest Control Fees,,5.00
-03/01/2026,,0231,Elijah Mureithi,Pest Control Fees,,5.00
+03/01/2026,,0109,Krystal Jackson,Pest Control Fees,,5.00
+03/01/2026,,0213,"Brianna Garcia, Lorenzo Garcia",Pest Control Fees,,5.00
+03/01/2026,,2143,Nichole * Rushing,Pest Control Fees,,5.00
+03/01/2026,,0240,"Yeliah Houston, Bryson Jacobs",Pest Control Fees,,5.00
+03/01/2026,,0201,"Tracy Cormier, Camreon Kinchen",Pest Control Rebill,,5.00
+03/01/2026,,2108,Margaret Sanders,Pest Control Fees,,5.00
+03/01/2026,,2107,Jerome *Sutter,Pest Control Fees,,5.00
 03/01/2026,,2208,Jade *Brady,Pest Control Fees,,5.00
-03/01/2026,,0238,Scheane Brown,Pest Control Fees,,5.00
-03/01/2026,,2213,Adam Cunningham,Pest Control Fees,,5.00
-03/01/2026,,0117,Anthony *Byers,Pest Control Fees,,5.00
-03/01/2026,,0122,Charneice Ford,Pest Control Fees,,5.00
-03/01/2026,,0143,Caroline *Groff,Pest Control Fees,,5.00
-03/01/2026,,0135,Pamela Bennett,Pest Control Fees,,5.00
-03/01/2026,,2222,Maria * Garcia,Pest Control Fees,,5.00
-03/01/2026,,0134,Akasha *Taylor-Poitier,Pest Control Fees,,5.00
-03/01/2026,,2105,"BreShaun Luper, Julius Wilson",Pest Control Fees,,5.00
-03/01/2026,,2134,Samuel First,Pest Control Fees,,5.00
-03/01/2026,,0207,Zachary * Baquis,Pest Control Fees,,5.00
+03/01/2026,,2114,Pamela * Gutierrez,Pest Control Fees,,5.00
+03/01/2026,,0215,Haley Dixon,Pest Control Rebill,,5.00
+03/01/2026,,2115,Pearl Cross*,Pest Control Fees,,5.00
+03/01/2026,,2220,Jesus * Tovar Martinez,Pest Control Fees,,5.00
+03/01/2026,,2233,Javier Hernandez,Pest Control Fees,,5.00
+03/01/2026,,0138,James Dyer,Pest Control Rebill,,5.00
 03/01/2026,,0139,Connie *Whitten,Pest Control Fees,,5.00
+03/01/2026,,0238,Scheane Brown,Pest Control Fees,,5.00
 03/01/2026,,0131,Jo Jo Parker,Pest Control Fees,,5.00
-03/01/2026,,2101,Dianne Runnels,PESTFEE,,5.00
-03/01/2026,,2109,Zaida * Zuniga,Pest Control Fees,,5.00
 03/01/2026,,2217,Joseph *Williams,Pest Control Fees,,5.00
 03/01/2026,,2218,Tlaysia * Hughes,Pest Control Fees,,5.00
-03/01/2026,,2106,Laura *Rojas Ortiz,Pest Control Fees,,5.00
+03/01/2026,,2101,Dianne Runnels,PESTFEE,,5.00
+03/01/2026,,2109,Zaida * Zuniga,Pest Control Fees,,5.00
+03/01/2026,,0207,Zachary * Baquis,Pest Control Fees,,5.00
+03/01/2026,,0143,Caroline *Groff,Pest Control Fees,,5.00
+03/01/2026,,2213,Adam Cunningham,Pest Control Fees,,5.00
+03/01/2026,,0117,Anthony *Byers,Pest Control Fees,,5.00
+03/01/2026,,2134,Samuel First,Pest Control Fees,,5.00
+03/01/2026,,0122,Charneice Ford,Pest Control Fees,,5.00
+03/01/2026,,0208,Jeannie Henderson,Pest Control Rebill,,5.00
+03/01/2026,,0135,Pamela Bennett,Pest Control Fees,,5.00
+03/01/2026,,0334,"Herrera * Alan Leonel, Yesica * Rivas Flores",Pest Control Fees,,5.00
 03/01/2026,,0108,Erik Ojeda,Pest Control Fees,,5.00
 03/01/2026,,0112,Richard Revels Jr,Pest Control Fees,,5.00
-03/01/2026,,2132,Nicholas Poindexter,Pest Control Fees,,5.00
-03/01/2026,,2223,Adrienne Gelinas,Pest Control Fees,,5.00
-03/01/2026,,0114,Emmanuel * Brockelman,Pest Control Fees,,5.00
 03/01/2026,,0106,William JR. Walker*,Pest Control Fees,,5.00
-03/01/2026,,2244,Katherine Spencer,Pest Control Fees,,5.00
-03/01/2026,,0208,Jeannie Henderson,Pest Control Rebill,,5.00
 03/01/2026,,2212,Rick Kennedy,Pest Control Fees,,5.00
-03/01/2026,,0334,"Herrera * Alan Leonel, Yesica * Rivas Flores",Pest Control Fees,,5.00
+03/01/2026,,0114,Emmanuel * Brockelman,Pest Control Fees,,5.00
+03/01/2026,,0134,Akasha *Taylor-Poitier,Pest Control Fees,,5.00
+03/01/2026,,2105,"BreShaun Luper, Julius Wilson",Pest Control Fees,,5.00
+03/01/2026,,2223,Adrienne Gelinas,Pest Control Fees,,5.00
+03/01/2026,,2222,Maria * Garcia,Pest Control Fees,,5.00
+03/01/2026,,2132,Nicholas Poindexter,Pest Control Fees,,5.00
+03/01/2026,,2244,Katherine Spencer,Pest Control Fees,,5.00
 03/01/2026,,2216,Clayton *Lewis,Pest Control Fees,,5.00
+03/01/2026,,2106,Laura *Rojas Ortiz,Pest Control Fees,,5.00
 03/01/2026,,2219,Brandon Butler,Pest Control Fees,,5.00
-03/01/2026,,2144,"Luis *Gomez, Telma *Palma",Pest Control Fees,,5.00
+03/01/2026,,2234,Kevin Barrera,Pest Control Fees,,5.00
 03/01/2026,,0205,Jouen *Baggs,Pest Control Fees,,5.00
-03/01/2026,,2113,Pamela *Lewis,Pest Control Fees,,5.00
+03/01/2026,,2226,Ron * Vaughan,Pest Control Fees,,5.00
+03/01/2026,,0102,Xerius *Jackson,Pest Control Fees,,5.00
+03/01/2026,,2144,"Luis *Gomez, Telma *Palma",Pest Control Fees,,5.00
 03/01/2026,,2214,Emma Evans,Pest Control Fees,,5.00
 03/01/2026,,2131,Osman Hernandez,Pest Control Rebill,,5.00
-03/01/2026,,0129,Charles *DeHorney,Pest Control Fees,,5.00
-03/01/2026,,2234,Kevin Barrera,Pest Control Fees,,5.00
-03/01/2026,,2135,Chamia Bills,Pest Control Fees,,5.00
-03/01/2026,,2235,Dweh Wayne,Pest Control Rebill,,5.00
-03/01/2026,,2338,Jason Tillberg,Pest Control Fees,,5.00
-03/01/2026,,2129,Guillermo Rivera,Pest Control Fees,,5.00
-03/01/2026,,2225,Tony *Davis,Pest Control Fees,,5.00
-03/01/2026,,0121,Otelia McMillan*,Pest Control Fees,,5.00
-03/01/2026,,2127,BreeAnna * Hallman,Pest Control Fees,,5.00
-03/01/2026,,2121,"Debra Loving, Odell Hansen",Pest Control Fees,,5.00
-03/01/2026,,0227,"Brandon Kennedy, Korina Stanton",Pest Control Fees,,5.00
-03/01/2026,,2336,Kit Kong Hospitality LLC,Pest Control Rebill,,5.00
-03/01/2026,,2137,Jerry Cheshier,Pest Control Fees,,5.00
-03/01/2026,,2104,"Karen * Schloff, Bradley * Winquist",Pest Control Fees,,5.00
-03/01/2026,,0230,Kyle Strohecker,Pest Control Rebill,,5.00
-03/01/2026,,0209,Luke * Hampton,Pest Control Fees,,5.00
-03/01/2026,,0141,Vanessa Crawford,Pest Control Fees,,5.00
-03/01/2026,,0237,Cara Braden,Pest Control Fees,,5.00
-03/01/2026,,2230,Kit Kong Hospitality LLC,Pest Control Rebill,,5.00
-03/01/2026,,0102,Xerius *Jackson,Pest Control Fees,,5.00
-03/01/2026,,0110,Christle Cox,Pest Control Rebill,,5.00
-03/01/2026,,0137,Karenthiea Calvin,Pest Control Fees,,5.00
 03/01/2026,,2206,Elizabeth Tobar,Pest Control Fees,,5.00
+03/01/2026,,2135,Chamia Bills,Pest Control Fees,,5.00
+03/01/2026,,2225,Tony *Davis,Pest Control Fees,,5.00
+03/01/2026,,2113,Pamela *Lewis,Pest Control Fees,,5.00
+03/01/2026,,2129,Guillermo Rivera,Pest Control Fees,,5.00
+03/01/2026,,2338,Jason Tillberg,Pest Control Fees,,5.00
 03/01/2026,,2227,"Jordyn *Soto, Logan *Anderson",Pest Control Fees,,5.00
-03/01/2026,,2226,Ron * Vaughan,Pest Control Fees,,5.00
+03/01/2026,,2136,Kyle Kanzig,Pest Control Fees,,5.00
+03/01/2026,,2235,Dweh Wayne,Pest Control Rebill,,5.00
+03/01/2026,,0129,Charles *DeHorney,Pest Control Fees,,5.00
 03/01/2026,,0107,"Nathaniel Allman, Traciona Preston",Pest Control Fees,,2.00
 03/01/2026,,0124,Alice Hammonds,Pest Control Rebill,,5.00
 03/01/2026,,2111,tanya * Lamb,Pest Control Fees,,5.00
-03/01/2026,,2136,Kyle Kanzig,Pest Control Fees,,5.00
+03/01/2026,,0230,Kyle Strohecker,Pest Control Rebill,,5.00
+03/01/2026,,0209,Luke * Hampton,Pest Control Fees,,5.00
+03/01/2026,,0137,Karenthiea Calvin,Pest Control Fees,,5.00
+03/01/2026,,0141,Vanessa Crawford,Pest Control Fees,,5.00
+03/01/2026,,0237,Cara Braden,Pest Control Fees,,5.00
+03/01/2026,,2230,Kit Kong Hospitality LLC,Pest Control Rebill,,5.00
+03/01/2026,,0110,Christle Cox,Pest Control Rebill,,5.00
+03/01/2026,,2127,BreeAnna * Hallman,Pest Control Fees,,5.00
+03/01/2026,,2121,"Debra Loving, Odell Hansen",Pest Control Fees,,5.00
+03/01/2026,,0227,"Brandon Kennedy, Korina Stanton",Pest Control Fees,,5.00
 03/01/2026,,2237,Dikevous Whatley,Pest Control Fees,,5.00
-03/01/2026,,2240,Charles Foster,Pest Control Rebill,,5.00
-03/01/2026,,2243,Reginald Williams,Pest Control Fees,,5.00
-03/01/2026,,0136,Whitney George,Pest Control Fees,,5.00
-03/01/2026,,2221,Deja Oliver,Pest Control Fees,,5.00
-03/01/2026,,2130,"Kendrick *Barrett, Kerby *Craddock",Pest Control Fees,,5.00
-03/01/2026,,2139,Leaneasha * Crowell,Pest Control Fees,,5.00
-03/01/2026,,0210,Betty Tucker,Pest Control Rebill,,5.00
-03/01/2026,,2117,Christina Black,Pest Control Fees,,5.00
-03/01/2026,,2123,John * Rodriguez,Pest Control Fees,,5.00
-03/01/2026,,2207,Jared Bullard,Pest Control Fees,,5.00
-03/01/2026,,2333,"Amanda Sanders, Tiffany Sanders",Pest Control Fees,,5.00
-03/01/2026,,2145,Deonte * Wilson,Pest Control Fees,,5.00
-03/01/2026,,2215,Rosamond Williams,Pest Control Fees,,5.00
-03/01/2026,,0116,Elizabeth Gaffney*,Pest Control Fees,,5.00
-03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",Pest Control Fees,,5.00
-03/01/2026,,0239,Kit Kong Hospitality LLC,Pest Control Rebill,,5.00
-03/01/2026,,0226,Gerardo Deleon Vaga,Pest Control Fees,,5.00
-03/01/2026,,0202,Martin Guevara,Pest Control Rebill,,5.00
+03/01/2026,,2336,Kit Kong Hospitality LLC,Pest Control Rebill,,5.00
+03/01/2026,,2137,Jerry Cheshier,Pest Control Fees,,5.00
+03/01/2026,,2104,"Karen * Schloff, Bradley * Winquist",Pest Control Fees,,5.00
+03/01/2026,,0121,Otelia McMillan*,Pest Control Fees,,5.00
 03/01/2026,,2122,Jorge Gispanski,Pest Control Rebill,,5.00
+03/01/2026,,0202,Martin Guevara,Pest Control Rebill,,5.00
+03/01/2026,,2145,Deonte * Wilson,Pest Control Fees,,5.00
 03/01/2026,,2110,"Emma Madden*, Charles Madden",Pest Control Fees,,5.00
-03/01/2026,,2126,Kathleen Davlin,Pest Control Rebill,,5.00
-03/01/2026,,2339,Juan Mendoza,Pest Control Fees,,5.00
-03/01/2026,,0244,Jarrett Wilson,Pest Control Fees,,5.00
-03/01/2026,,0113,"Aaron Azlin, Stephanie Lukash",Pest Control Fees,,5.00
-03/01/2026,,0341,"Shelbi Cheek, Jaylon Morgan",Pest Control Fees,,5.00
-03/01/2026,,0343,Kenneth Crocker,Pest Control Fees,,5.00
+03/01/2026,,0116,Elizabeth Gaffney*,Pest Control Fees,,5.00
 03/01/2026,,2236,Shaizavia *Bailey,Pest Control Fees,,5.00
+03/01/2026,,0136,Whitney George,Pest Control Fees,,5.00
+03/01/2026,,2139,Leaneasha * Crowell,Pest Control Fees,,5.00
+03/01/2026,,2130,"Kendrick *Barrett, Kerby *Craddock",Pest Control Fees,,5.00
+03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",Pest Control Fees,,5.00
+03/01/2026,,2333,"Amanda Sanders, Tiffany Sanders",Pest Control Fees,,5.00
+03/01/2026,,0210,Betty Tucker,Pest Control Rebill,,5.00
+03/01/2026,,0226,Gerardo Deleon Vaga,Pest Control Fees,,5.00
+03/01/2026,,0239,Kit Kong Hospitality LLC,Pest Control Rebill,,5.00
 03/01/2026,,0206,Diane Barefield*,Pest Control Fees,,5.00
-03/01/2026,,2102,"Donna Cason, Michael Sinks",Pest Control Fees,,5.00
-03/01/2026,,0243,Beau Wastier,Pest Control Fees,,5.00
-03/01/2026,,0228,Kyler Faustner,Pest Control Fees,,5.00
-03/01/2026,,2211,"Jody Fowler, Damon Moore",Pest Control Fees,,5.00
+03/01/2026,,2215,Rosamond Williams,Pest Control Fees,,5.00
+03/01/2026,,2240,Charles Foster,Pest Control Rebill,,5.00
+03/01/2026,,0343,Kenneth Crocker,Pest Control Fees,,5.00
+03/01/2026,,2243,Reginald Williams,Pest Control Fees,,5.00
 03/01/2026,,2224,Nicholas Falcon,Pest Control Rebill,,5.00
-03/01/2026,,0123,Kaytee *Wells,Pest Control Fees,,5.00
-03/01/2026,,0132,Bibiana * David Julian,Pest Control Fees,,5.00
-03/01/2026,,0212,Kayla *Isaac,Pest Control Fees,,5.00
 03/01/2026,,2119,Christopher Bruce,Pest Control Fees,,5.00
 03/01/2026,,0241,Antonio Woodard,Pest Control Fees,,5.00
+03/01/2026,,0132,Bibiana * David Julian,Pest Control Fees,,5.00
+03/01/2026,,0244,Jarrett Wilson,Pest Control Fees,,5.00
+03/01/2026,,2339,Juan Mendoza,Pest Control Fees,,5.00
+03/01/2026,,2126,Kathleen Davlin,Pest Control Rebill,,5.00
+03/01/2026,,0123,Kaytee *Wells,Pest Control Fees,,5.00
+03/01/2026,,0243,Beau Wastier,Pest Control Fees,,5.00
+03/01/2026,,0341,"Shelbi Cheek, Jaylon Morgan",Pest Control Fees,,5.00
+03/01/2026,,0113,"Aaron Azlin, Stephanie Lukash",Pest Control Fees,,5.00
+03/01/2026,,2207,Jared Bullard,Pest Control Fees,,5.00
+03/01/2026,,0212,Kayla *Isaac,Pest Control Fees,,5.00
+03/01/2026,,2123,John * Rodriguez,Pest Control Fees,,5.00
+03/01/2026,,2221,Deja Oliver,Pest Control Fees,,5.00
 03/01/2026,,2141,Jeramiah *Thornock,Pest Control Fees,,5.00
 03/01/2026,,0221,Michelle *Hughes,Pest Control Fees,,5.00
-03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",Pest Control Fees,,5.00
-03/01/2026,,0337,Montasia Jones,Pest Control Fees,,2.00
+03/01/2026,,2117,Christina Black,Pest Control Fees,,5.00
+03/01/2026,,2102,"Donna Cason, Michael Sinks",Pest Control Fees,,5.00
+03/01/2026,,0228,Kyler Faustner,Pest Control Fees,,5.00
+03/01/2026,,2211,"Jody Fowler, Damon Moore",Pest Control Fees,,5.00
 03/01/2026,,0336,"Alena Dupire, Seth Snyder",Pest Control Fees,,5.00
 03/01/2026,,2239,Lakeisha Taylor,PESTFEE,,5.00
-03/01/2026,,0211,"Blake Bounds, Alyssa Cox",Pest Control Rebill,,5.00
 03/01/2026,,2125,Jason Allen,Pest Control Fees,,5.00
+03/01/2026,,0337,Montasia Jones,Pest Control Fees,,2.00
+03/01/2026,,0211,"Blake Bounds, Alyssa Cox",Pest Control Rebill,,5.00
+03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",Pest Control Fees,,5.00
 03/01/2026,,0105,Toni Reed*,Pest Control Fees,,5.00
 03/01/2026,,2239,Lakeisha Taylor,Pest Control Fees,,5.00
 03/01/2026,,0133,Darold Tucker,Pest Control Fees,,5.00
@@ -800,200 +882,212 @@ Charge - Pest Control Fees,,,,,,
 03/06/2026,,0228,Kyler Faustner,Pest Control Fees,,1.00
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",Reversed Pest Control Fees,Pest Control Fees,-5.00
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",Pest Control Fees,,1.00
-Total: 193,,,,,,867.00
+03/12/2026,,0202,Martin Guevara,Reversed Pest Control Rebill,Pest Control Rebill,-5.00
+03/12/2026,,0202,Martin Guevara,Pest Control Rebill,,2.00
+03/15/2026,,2232,LaJaida * Diamond,Reversed Pest Control Fees,Pest Control Fees,-5.00
+03/15/2026,,2232,LaJaida * Diamond,Pest Control Fees,,2.00
+03/16/2026,,0118,Amber Livingston,Reversed Pest Control Fees,Pest Control Fees,-5.00
+03/16/2026,,0118,Amber Livingston,Pest Control Fees,,3.00
+03/16/2026,,0216,Anthony Bradshaw Jr,Reversed Pest Control Fees,Pest Control Fees,-5.00
+03/16/2026,,0216,Anthony Bradshaw Jr,Pest Control Fees,,3.00
+03/16/2026,,2141,Jeramiah *Thornock,Reversed Pest Control Fees,Pest Control Fees,-5.00
+03/16/2026,,2141,Jeramiah *Thornock,Pest Control Fees,,3.00
+Total: 203,,,,,,855.00
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Pet Fees & Charges,,,,,,
 03/01/2026,,2121,"Debra Loving, Odell Hansen",Pet Fees & Charges- Brownie,,20.00
-03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",Pet Rent - Cat - Nova,,15.00
 03/01/2026,,0223,Adam * Grimes,Pet Rent - Cat - Luna,,15.00
+03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",Pet Rent - Cat - Nova,,15.00
 03/01/2026,,2221,Deja Oliver,Pet Rent - Dog - Milo,,15.00
 03/01/2026,,0223,Adam * Grimes,Pet Rent - Cat - Casper,,15.00
-03/01/2026,,2121,"Debra Loving, Odell Hansen",Pet Fees & Charges-Rocky,,20.00
 03/01/2026,,2127,BreeAnna * Hallman,Pet Rent - Dog - Simone,,15.00
+03/01/2026,,2121,"Debra Loving, Odell Hansen",Pet Fees & Charges-Rocky,,20.00
 03/01/2026,,0120,Shaynice *Dorcena,Pet Rent - Dog - Georgia ,,20.00
 03/02/2026,,0120,Shaynice *Dorcena,Reversed Pet Rent - Dog - Georgia ,,-20.00
-Total: 9,,,,,,115.00
+03/14/2026,,0107,"RICHARD GUNN, SAMANTHA GUNN",Pet Fee - Cat - Mulder,Cat,350.00
+03/14/2026,,0107,"RICHARD GUNN, SAMANTHA GUNN",Pet Fee - Cat - Spike,Cat,350.00
+Total: 11,,,,,,815.00
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Rent,,,,,,
 03/01/2026,,0102,Xerius *Jackson,Rent,,999.00
-03/01/2026,,0237,Cara Braden,Rent,,"1,190.00"
-03/01/2026,,2221,Deja Oliver,Rent,,945.00
 03/01/2026,,2214,Emma Evans,Rent,,"1,025.00"
-03/01/2026,,0132,Bibiana * David Julian,Rent,,999.00
-03/01/2026,,2224,Nicholas Falcon,Rent,,965.00
-03/01/2026,,0213,"Brianna Garcia, Lorenzo Garcia",Rent,,995.00
-03/01/2026,,0233,Jayla Goodman,Rent,,"1,200.00"
-03/01/2026,,2216,Clayton *Lewis,Rent,,799.00
-03/01/2026,,0121,Otelia McMillan*,Subsidy,,622.00
+03/01/2026,,2221,Deja Oliver,Rent,,945.00
+03/01/2026,,2204,Shirley * Wiley-maze,Rent,,"1,195.00"
+03/01/2026,,0237,Cara Braden,Rent,,"1,190.00"
 03/01/2026,,2143,Nichole * Rushing,Rent,,"1,195.00"
 03/01/2026,,0131,Jo Jo Parker,RENT,,"1,038.00"
-03/01/2026,,0341,"Shelbi Cheek, Jaylon Morgan",Rent,,"1,095.00"
-03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",Rent,,"1,034.00"
-03/01/2026,,2233,Javier Hernandez,Rent,,"1,220.00"
 03/01/2026,,0226,Gerardo Deleon Vaga,Rent,,999.00
-03/01/2026,,2119,Christopher Bruce,Rent,,950.00
-03/01/2026,,2237,Dikevous Whatley,Rent,,"1,195.00"
+03/01/2026,,2216,Clayton *Lewis,Rent,,799.00
+03/01/2026,,0121,Otelia McMillan*,Subsidy,,622.00
+03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",Rent,,"1,034.00"
 03/01/2026,,0212,Kayla *Isaac,Rent,,799.00
-03/01/2026,,0338,"Paige Jason, Nehemiah White",Rent,,"1,095.00"
-03/01/2026,,0116,Elizabeth Gaffney*,Rent,,925.00
-03/01/2026,,0134,Akasha *Taylor-Poitier,Rent,,"1,245.00"
-03/01/2026,,2220,Jesus * Tovar Martinez,Rent,,834.00
+03/01/2026,,2224,Nicholas Falcon,Rent,,965.00
+03/01/2026,,2237,Dikevous Whatley,Rent,,"1,195.00"
 03/01/2026,,0124,Alice Hammonds,Rent,,799.00
-03/01/2026,,2125,Jason Allen,Rent,,926.00
-03/01/2026,,2131,Osman Hernandez,Rent,,"1,220.00"
-03/01/2026,,2109,Zaida * Zuniga,Rent,,799.00
-03/01/2026,,0334,"Herrera * Alan Leonel, Yesica * Rivas Flores",Rent,,999.00
+03/01/2026,,0341,"Shelbi Cheek, Jaylon Morgan",Rent,,"1,095.00"
+03/01/2026,,0134,Akasha *Taylor-Poitier,Rent,,"1,245.00"
+03/01/2026,,2233,Javier Hernandez,Rent,,"1,220.00"
+03/01/2026,,2220,Jesus * Tovar Martinez,Rent,,834.00
+03/01/2026,,0116,Elizabeth Gaffney*,Rent,,925.00
+03/01/2026,,0338,"Paige Jason, Nehemiah White",Rent,,"1,095.00"
+03/01/2026,,2119,Christopher Bruce,Rent,,950.00
 03/01/2026,,2122,Jorge Gispanski,Rent,,"1,025.00"
-03/01/2026,,2133,"Patrick * Prince, Heaven * Swartout",Rent,,999.00
 03/01/2026,,2213,Adam Cunningham,Rent,,990.00
+03/01/2026,,0213,"Brianna Garcia, Lorenzo Garcia",Rent,,995.00
+03/01/2026,,0207,Zachary * Baquis,Rent,,"1,025.00"
+03/01/2026,,2133,"Patrick * Prince, Heaven * Swartout",Rent,,999.00
+03/01/2026,,2125,Jason Allen,Rent,,926.00
+03/01/2026,,2222,Maria * Garcia,Rent,,799.00
 03/01/2026,,0109,Krystal Jackson,Rent,,"1,025.00"
+03/01/2026,,0132,Bibiana * David Julian,Rent,,999.00
+03/01/2026,,0233,Jayla Goodman,Rent,,"1,200.00"
 03/01/2026,,0243,Beau Wastier,Rent,,"1,165.00"
 03/01/2026,,2218,Tlaysia * Hughes,Rent,,799.00
 03/01/2026,,2136,Kyle Kanzig,Rent,,"1,245.00"
 03/01/2026,,0217,Anna Douglas,RENT,,970.00
-03/01/2026,,0207,Zachary * Baquis,Rent,,"1,025.00"
-03/01/2026,,2204,Shirley * Wiley-maze,Rent,,"1,195.00"
-03/01/2026,,2222,Maria * Garcia,Rent,,799.00
-03/01/2026,,2110,"Emma Madden*, Charles Madden",Rent,,503.00
-03/01/2026,,0210,Betty Tucker,Rent,,799.00
-03/01/2026,,2141,Jeramiah *Thornock,Rent,,999.00
+03/01/2026,,2131,Osman Hernandez,Rent,,"1,220.00"
+03/01/2026,,2109,Zaida * Zuniga,Rent,,799.00
+03/01/2026,,0334,"Herrera * Alan Leonel, Yesica * Rivas Flores",Rent,,999.00
 03/01/2026,,0114,Emmanuel * Brockelman,Rent,,799.00
-03/01/2026,,2121,"Debra Loving, Odell Hansen",Rent,,950.00
-03/01/2026,,2236,Shaizavia *Bailey,Rent,,999.00
-03/01/2026,,0123,Kaytee *Wells,Rent,,799.00
-03/01/2026,,2230,Kit Kong Hospitality LLC,Rent,,"1,170.00"
-03/01/2026,,2243,Reginald Williams,Rent,,999.00
 03/01/2026,,2105,"BreShaun Luper, Julius Wilson",Rent,,995.00
 03/01/2026,,0127,Latreesha Green*,Rent,,"1,089.00"
+03/01/2026,,0210,Betty Tucker,Rent,,799.00
+03/01/2026,,2121,"Debra Loving, Odell Hansen",Rent,,950.00
 03/01/2026,,0105,Toni Reed*,Subsidy Rent,,799.00
 03/01/2026,,2225,Tony *Davis,Rent,,799.00
-03/01/2026,,0110,Christle Cox,Rent,,"1,025.00"
-03/01/2026,,0219,Nicholas * Hayes,Rent,,799.00
-03/01/2026,,0218,Jazmin Aviles,Rent,,799.00
-03/01/2026,,2336,Kit Kong Hospitality LLC,Rent,,"1,170.00"
-03/01/2026,,0238,Scheane Brown,RENT,,"1,065.00"
-03/01/2026,,2344,Athena *Cantu,Rent,,999.00
-03/01/2026,,0133,Darold Tucker,Rent,,"1,100.00"
-03/01/2026,,0228,Kyler Faustner,Rent,,"1,195.00"
-03/01/2026,,0221,Michelle *Hughes,Rent,,799.00
-03/01/2026,,2226,Ron * Vaughan,Rent,,799.00
-03/01/2026,,2211,"Jody Fowler, Damon Moore",Rent,,"1,025.00"
+03/01/2026,,2236,Shaizavia *Bailey,Rent,,999.00
+03/01/2026,,0123,Kaytee *Wells,Rent,,799.00
 03/01/2026,,0136,Whitney George,Rent,,"1,145.00"
+03/01/2026,,2110,"Emma Madden*, Charles Madden",Rent,,503.00
+03/01/2026,,0221,Michelle *Hughes,Rent,,799.00
+03/01/2026,,0218,Jazmin Aviles,Rent,,799.00
+03/01/2026,,0228,Kyler Faustner,Rent,,"1,195.00"
+03/01/2026,,0219,Nicholas * Hayes,Rent,,799.00
+03/01/2026,,2344,Athena *Cantu,Rent,,999.00
+03/01/2026,,2336,Kit Kong Hospitality LLC,Rent,,"1,170.00"
+03/01/2026,,0133,Darold Tucker,Rent,,"1,100.00"
+03/01/2026,,0238,Scheane Brown,RENT,,"1,065.00"
+03/01/2026,,0110,Christle Cox,Rent,,"1,025.00"
+03/01/2026,,2226,Ron * Vaughan,Rent,,799.00
+03/01/2026,,2230,Kit Kong Hospitality LLC,Rent,,"1,170.00"
+03/01/2026,,2211,"Jody Fowler, Damon Moore",Rent,,"1,025.00"
 03/01/2026,,0137,Karenthiea Calvin,Rent,,"1,195.00"
-03/01/2026,,2215,Rosamond Williams,Rent,,950.00
 03/01/2026,,2241,Ava * Russell,Rent,,999.00
-03/01/2026,,0206,Diane Barefield*,Subsidy Rent,,769.00
-03/01/2026,,0244,Jarrett Wilson,RENT,,"1,025.00"
-03/01/2026,,2232,LaJaida * Diamond,Rent,,999.00
-03/01/2026,,0107,"Nathaniel Allman, Traciona Preston",Rent,,274.00
-03/01/2026,,0231,Elijah Mureithi,Rent,,"1,165.00"
-03/01/2026,,2227,"Jordyn *Soto, Logan *Anderson",Rent,,799.00
-03/01/2026,,2126,Kathleen Davlin,Rent,,"1,025.00"
-03/01/2026,,0141,Vanessa Crawford,Rent,,"1,075.00"
-03/01/2026,,0225,Sydney Moore,Rent,,"1,034.00"
-03/01/2026,,0113,"Aaron Azlin, Stephanie Lukash",Rent,,925.00
-03/01/2026,,2112,Otis Bursey Jr*,Rent,,661.00
-03/01/2026,,2139,Leaneasha * Crowell,Rent,,999.00
-03/01/2026,,0202,Martin Guevara,RENT,,"1,055.00"
-03/01/2026,,2113,Pamela *Lewis,Rent,,799.00
-03/01/2026,,0336,"Alena Dupire, Seth Snyder",Rent,,"1,200.00"
-03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",Rent,,799.00
-03/01/2026,,0119,Shelly Pillars*,Rent,,950.00
-03/01/2026,,0240,"Yeliah Houston, Bryson Jacobs",Rent,,"1,095.00"
-03/01/2026,,0105,Toni Reed*,Rent,,142.00
-03/01/2026,,0121,Otelia McMillan*,Rent,,328.00
-03/01/2026,,2115,Pearl Cross*,Subsidy Rent,,669.00
-03/01/2026,,0115,Bobby Howard,Rent,,799.00
-03/01/2026,,0241,Antonio Woodard,Rent,,"1,215.00"
-03/01/2026,,2239,Lakeisha Taylor,Rent,,"1,000.00"
-03/01/2026,,2231,Tessa Bench,Rent,,"1,200.00"
+03/01/2026,,2141,Jeramiah *Thornock,Rent,,999.00
+03/01/2026,,2215,Rosamond Williams,Rent,,950.00
+03/01/2026,,2243,Reginald Williams,Rent,,999.00
 03/01/2026,,2206,Elizabeth Tobar,Rent,,"1,000.00"
 03/01/2026,,0118,Amber Livingston,Rent special,,995.00
 03/01/2026,,2117,Christina Black,Rent,,925.00
-03/01/2026,,0236,Jessica Hardcastle,Rent,,999.00
-03/01/2026,,0239,Kit Kong Hospitality LLC,Rent,,"1,115.00"
-03/01/2026,,2207,Jared Bullard,Rent,,940.00
-03/01/2026,,2340,"Ashley *Aviles, Jose *Aviles Gutierrez, Ma Guadalupe *Mojica Pineda",Rent,,"1,399.00"
-03/01/2026,,2145,Deonte * Wilson,Rent,,834.00
-03/01/2026,,2242,"Jose Mejia, Olbin Rapalo Mejia",Rent,,"1,195.00"
-03/01/2026,,2112,Otis Bursey Jr*,Subsidy Rent,,264.00
+03/01/2026,,0141,Vanessa Crawford,Rent,,"1,075.00"
+03/01/2026,,2126,Kathleen Davlin,Rent,,"1,025.00"
+03/01/2026,,2232,LaJaida * Diamond,Rent,,999.00
+03/01/2026,,2115,Pearl Cross*,Subsidy Rent,,669.00
+03/01/2026,,0244,Jarrett Wilson,RENT,,"1,025.00"
+03/01/2026,,2112,Otis Bursey Jr*,Rent,,661.00
+03/01/2026,,0113,"Aaron Azlin, Stephanie Lukash",Rent,,925.00
+03/01/2026,,0119,Shelly Pillars*,Rent,,950.00
+03/01/2026,,2139,Leaneasha * Crowell,Rent,,999.00
+03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",Rent,,799.00
+03/01/2026,,0121,Otelia McMillan*,Rent,,328.00
+03/01/2026,,0107,"Nathaniel Allman, Traciona Preston",Rent,,274.00
+03/01/2026,,0240,"Yeliah Houston, Bryson Jacobs",Rent,,"1,095.00"
+03/01/2026,,2113,Pamela *Lewis,Rent,,799.00
+03/01/2026,,0336,"Alena Dupire, Seth Snyder",Rent,,"1,200.00"
+03/01/2026,,0105,Toni Reed*,Rent,,142.00
+03/01/2026,,0202,Martin Guevara,RENT,,"1,055.00"
+03/01/2026,,0206,Diane Barefield*,Subsidy Rent,,769.00
+03/01/2026,,0231,Elijah Mureithi,Rent,,"1,165.00"
+03/01/2026,,2227,"Jordyn *Soto, Logan *Anderson",Rent,,799.00
+03/01/2026,,0115,Bobby Howard,Rent,,799.00
+03/01/2026,,0241,Antonio Woodard,Rent,,"1,215.00"
+03/01/2026,,0225,Sydney Moore,Rent,,"1,034.00"
+03/01/2026,,2239,Lakeisha Taylor,Rent,,"1,000.00"
+03/01/2026,,2231,Tessa Bench,Rent,,"1,200.00"
 03/01/2026,,2210,Jamie Cook*,Rent,,214.00
-03/01/2026,,0139,Connie *Whitten,Rent,,999.00
-03/01/2026,,0337,Montasia Jones,Rent,,418.00
+03/01/2026,,0236,Jessica Hardcastle,Rent,,999.00
+03/01/2026,,2112,Otis Bursey Jr*,Subsidy Rent,,264.00
 03/01/2026,,2223,Adrienne Gelinas,Rent,,905.00
+03/01/2026,,2207,Jared Bullard,Rent,,940.00
+03/01/2026,,0239,Kit Kong Hospitality LLC,Rent,,"1,115.00"
 03/01/2026,,0216,Anthony Bradshaw Jr,Rent,,834.00
-03/01/2026,,2238,Kimberly * Alvarez,Rent,,999.00
+03/01/2026,,0143,Caroline *Groff,Rent,,999.00
+03/01/2026,,2340,"Ashley *Aviles, Jose *Aviles Gutierrez, Ma Guadalupe *Mojica Pineda",Rent,,"1,399.00"
+03/01/2026,,0111,william * Witcher,Rent,,799.00
+03/01/2026,,0108,Erik Ojeda,Rent,,"1,025.00"
+03/01/2026,,2123,John * Rodriguez,Rent,,799.00
 03/01/2026,,2130,"Kendrick *Barrett, Kerby *Craddock",Rent,,999.00
 03/01/2026,,2333,"Amanda Sanders, Tiffany Sanders",Rent,,"1,195.00"
-03/01/2026,,2334,Shamea *Bowen,Rent,,999.00
 03/01/2026,,2110,"Emma Madden*, Charles Madden",Subsidy Rent,,502.00
-03/01/2026,,0342,Ishmael Corral,RENT,,"1,025.00"
-03/01/2026,,0108,Erik Ojeda,Rent,,"1,025.00"
-03/01/2026,,0101,Trushondra Edd*,Rent,,"1,095.00"
-03/01/2026,,0143,Caroline *Groff,Rent,,999.00
-03/01/2026,,2209,Amy Roberts,Rent,,925.00
-03/01/2026,,0111,william * Witcher,Rent,,799.00
-03/01/2026,,2339,Juan Mendoza,Rent,,"1,445.00"
-03/01/2026,,2228,"Kaeson *Griffin-McClaskey, Angelina *Vaughan",Rent,,799.00
-03/01/2026,,2123,John * Rodriguez,Rent,,799.00
 03/01/2026,,0117,Anthony *Byers,Rent,,799.00
+03/01/2026,,0342,Ishmael Corral,RENT,,"1,025.00"
+03/01/2026,,2334,Shamea *Bowen,Rent,,999.00
+03/01/2026,,0101,Trushondra Edd*,Rent,,"1,095.00"
+03/01/2026,,2228,"Kaeson *Griffin-McClaskey, Angelina *Vaughan",Rent,,799.00
+03/01/2026,,2339,Juan Mendoza,Rent,,"1,445.00"
 03/01/2026,,0112,Richard Revels Jr,Rent,,995.00
 03/01/2026,,2118,Brian Perry*,TCOG Rent,,243.00
-03/01/2026,,2338,Jason Tillberg,Rent,,"1,295.00"
-03/01/2026,,2212,Rick Kennedy,Rent,,995.00
-03/01/2026,,2108,Margaret Sanders,Rent,,945.00
-03/01/2026,,2135,Chamia Bills,Rent,,"1,095.00"
+03/01/2026,,0139,Connie *Whitten,Rent,,999.00
+03/01/2026,,0337,Montasia Jones,Rent,,418.00
+03/01/2026,,2209,Amy Roberts,Rent,,925.00
+03/01/2026,,2238,Kimberly * Alvarez,Rent,,999.00
+03/01/2026,,2145,Deonte * Wilson,Rent,,834.00
+03/01/2026,,2242,"Jose Mejia, Olbin Rapalo Mejia",Rent,,"1,195.00"
+03/01/2026,,0335,"CARLOS * GOMEZ, Selin * Gomes",Rent,,999.00
+03/01/2026,,2144,"Luis *Gomez, Telma *Palma",Rent,,999.00
+03/01/2026,,2127,BreeAnna * Hallman,Rent,,799.00
+03/01/2026,,0126,Bianca Martinez,Rent,,"1,295.00"
 03/01/2026,,0230,Kyle Strohecker,Rent,,999.00
-03/01/2026,,0227,"Brandon Kennedy, Korina Stanton",Rent,,"1,195.00"
-03/01/2026,,0122,Charneice Ford,Rent,,995.00
-03/01/2026,,0104,bobbi * Dowd,Rent,,999.00
-03/01/2026,,0209,Luke * Hampton,Rent,,799.00
-03/01/2026,,2138,Carmon Bertrand (EV),Rent,,468.00
-03/01/2026,,0205,Jouen *Baggs,Rent,,799.00
+03/01/2026,,2118,Brian Perry*,Rent,,682.00
 03/01/2026,,2116,Guy Hall,Rent,,885.00
+03/01/2026,,2135,Chamia Bills,Rent,,"1,095.00"
+03/01/2026,,0122,Charneice Ford,Rent,,995.00
+03/01/2026,,2138,Carmon Bertrand (EV),Rent,,468.00
+03/01/2026,,2338,Jason Tillberg,Rent,,"1,295.00"
+03/01/2026,,0205,Jouen *Baggs,Rent,,799.00
+03/01/2026,,2208,Jade *Brady,Rent,,799.00
+03/01/2026,,2111,tanya * Lamb,Rent,,799.00
+03/01/2026,,2134,Samuel First,RENT,,"1,050.00"
+03/01/2026,,2212,Rick Kennedy,Rent,,995.00
+03/01/2026,,2217,Joseph *Williams,Rent,,799.00
+03/01/2026,,0104,bobbi * Dowd,Rent,,999.00
+03/01/2026,,0106,William JR. Walker*,Rent,,875.00
+03/01/2026,,2101,Dianne Runnels,RENT,,"1,049.00"
+03/01/2026,,0130,Virgina Hill *,Rent,,"1,034.00"
+03/01/2026,,2335,Heaven *Brown,Rent,,999.00
+03/01/2026,,2104,"Karen * Schloff, Bradley * Winquist",Rent,,999.00
+03/01/2026,,0209,Luke * Hampton,Rent,,799.00
+03/01/2026,,0201,"Tracy Cormier, Camreon Kinchen",Rent,,"1,175.00"
+03/01/2026,,2137,Jerry Cheshier,Rent,,"1,395.00"
+03/01/2026,,2235,Dweh Wayne,Rent,,"1,195.00"
+03/01/2026,,2219,Brandon Butler,Rent,,"1,080.00"
+03/01/2026,,0227,"Brandon Kennedy, Korina Stanton",Rent,,"1,195.00"
+03/01/2026,,2210,Jamie Cook*,Subsidy Rent,,791.00
 03/01/2026,,0135,Pamela Bennett,Rent,,"1,200.00"
 03/01/2026,,0103,Rebecca Mcknight,Rent,,999.00
-03/01/2026,,2335,Heaven *Brown,Rent,,999.00
-03/01/2026,,2127,BreeAnna * Hallman,Rent,,799.00
-03/01/2026,,2208,Jade *Brady,Rent,,799.00
-03/01/2026,,2210,Jamie Cook*,Subsidy Rent,,791.00
-03/01/2026,,2137,Jerry Cheshier,Rent,,"1,395.00"
-03/01/2026,,2118,Brian Perry*,Rent,,682.00
-03/01/2026,,0130,Virgina Hill *,Rent,,"1,034.00"
-03/01/2026,,0201,"Tracy Cormier, Camreon Kinchen",Rent,,"1,175.00"
-03/01/2026,,2101,Dianne Runnels,RENT,,"1,049.00"
-03/01/2026,,2217,Joseph *Williams,Rent,,799.00
-03/01/2026,,2134,Samuel First,RENT,,"1,050.00"
-03/01/2026,,2219,Brandon Butler,Rent,,"1,080.00"
-03/01/2026,,2111,tanya * Lamb,Rent,,799.00
-03/01/2026,,2235,Dweh Wayne,Rent,,"1,195.00"
-03/01/2026,,0106,William JR. Walker*,Rent,,875.00
-03/01/2026,,2104,"Karen * Schloff, Bradley * Winquist",Rent,,999.00
-03/01/2026,,2129,Guillermo Rivera,Rent,,"1,075.00"
-03/01/2026,,0128,"Dylan Orr, Cameron Ruebeck",Rent,,"1,195.00"
-03/01/2026,,2144,"Luis *Gomez, Telma *Palma",Rent,,999.00
-03/01/2026,,0335,"CARLOS * GOMEZ, Selin * Gomes",Rent,,999.00
+03/01/2026,,2107,Jerome *Sutter,Rent,,799.00
+03/01/2026,,0340,"Jose Murillo, Martha Murillo Pavon",Rent,,"1,195.00"
+03/01/2026,,2108,Margaret Sanders,Rent,,945.00
 03/01/2026,,0211,"Blake Bounds, Alyssa Cox",Rent,,945.00
 03/01/2026,,0129,Charles *DeHorney,Rent,,"1,050.00"
-03/01/2026,,0126,Bianca Martinez,Rent,,"1,295.00"
+03/01/2026,,0128,"Dylan Orr, Cameron Ruebeck",Rent,,"1,195.00"
+03/01/2026,,2129,Guillermo Rivera,Rent,,"1,075.00"
 03/01/2026,,2114,Pamela * Gutierrez,Rent,,799.00
-03/01/2026,,0340,"Jose Murillo, Martha Murillo Pavon",Rent,,"1,195.00"
-03/01/2026,,2107,Jerome *Sutter,Rent,,799.00
-03/01/2026,,0215,Haley Dixon,Rent,,980.00
-03/01/2026,,2343,Pamela Norris*,Rent,,960.00
-03/01/2026,,2234,Kevin Barrera,Rent,,"1,070.00"
+03/01/2026,,0229,Julie Larson*,RENT,,139.00
 03/01/2026,,0206,Diane Barefield*,Rent,,176.00
-03/01/2026,,2115,Pearl Cross*,Rent,,336.00
 03/01/2026,,0343,Kenneth Crocker,Rent,,"1,115.00"
+03/01/2026,,2240,Charles Foster,Rent,,"1,115.00"
+03/01/2026,,0215,Haley Dixon,Rent,,980.00
 03/01/2026,,2103,Jane Porter,Rent,,"1,060.00"
+03/01/2026,,0208,Jeannie Henderson,Rent,,975.00
 03/01/2026,,2132,Nicholas Poindexter,Rent,,"1,100.00"
 03/01/2026,,2102,"Donna Cason, Michael Sinks",RENT,,"1,002.00"
-03/01/2026,,2240,Charles Foster,Rent,,"1,115.00"
 03/01/2026,,2124,McKenzie Smith,Rent,,995.00
-03/01/2026,,0208,Jeannie Henderson,Rent,,975.00
-03/01/2026,,2244,Katherine Spencer,Rent,,"1,095.00"
 03/01/2026,,0223,Adam * Grimes,Rent,,799.00
-03/01/2026,,0229,Julie Larson*,RENT,,139.00
+03/01/2026,,2244,Katherine Spencer,Rent,,"1,095.00"
+03/01/2026,,2343,Pamela Norris*,Rent,,960.00
+03/01/2026,,2234,Kevin Barrera,Rent,,"1,070.00"
+03/01/2026,,2115,Pearl Cross*,Rent,,336.00
 03/01/2026,,0138,James Dyer,Rent,,"1,195.00"
 03/01/2026,,0229,Julie Larson*,SUBSIDY TCOG,,876.00
 03/01/2026,,2337,"Summer Bollier, America Meza",Rent,,0.00
@@ -1012,171 +1106,181 @@ Charge - Rent,,,,,,
 03/06/2026,,0228,Kyler Faustner,Rent,,231.00
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",Reversed Rent,Rent,"-1,195.00"
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",Rent,,347.00
-Total: 197,,,,,,"174,949.00"
+03/12/2026,,0202,Martin Guevara,Reversed RENT,RENT,"-1,055.00"
+03/12/2026,,0202,Martin Guevara,RENT,,408.00
+03/15/2026,,2232,LaJaida * Diamond,Reversed Rent,Rent,-999.00
+03/15/2026,,2232,LaJaida * Diamond,Rent,,483.00
+03/16/2026,,0118,Amber Livingston,Reversed Rent special,Rent special,-995.00
+03/16/2026,,0118,Amber Livingston,Rent special,,514.00
+03/16/2026,,0216,Anthony Bradshaw Jr,Reversed Rent,Rent,-834.00
+03/16/2026,,0216,Anthony Bradshaw Jr,Rent,,430.00
+03/16/2026,,2141,Jeramiah *Thornock,Reversed Rent,Rent,-999.00
+03/16/2026,,2141,Jeramiah *Thornock,Rent,,516.00
+Total: 207,,,,,,"172,418.00"
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Renters Insurance Premium,,,,,,
-03/01/2026,,0214,Dalea *Myles,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,0214,Dalea *Myles,rskrls 02/25/26-02/28/26,RiskRelease Charge: 02/25/2026 - 02/28/2026,2.29
-03/01/2026,,0212,Kayla *Isaac,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0214,Dalea *Myles,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2226,Ron * Vaughan,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0227,"Brandon Kennedy, Korina Stanton",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2133,"Patrick * Prince, Heaven * Swartout",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2114,Pamela * Gutierrez,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2224,Nicholas Falcon,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0217,Anna Douglas,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0215,Haley Dixon,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2212,Rick Kennedy,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0119,Shelly Pillars*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0228,Kyler Faustner,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0244,Jarrett Wilson,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0342,Ishmael Corral,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2117,Christina Black,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2134,Samuel First,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0223,Adam * Grimes,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0141,Vanessa Crawford,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2222,Maria * Garcia,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2112,Otis Bursey Jr*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0219,Nicholas * Hayes,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0118,Amber Livingston,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0236,Jessica Hardcastle,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2211,"Jody Fowler, Damon Moore",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,0240,"Yeliah Houston, Bryson Jacobs",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,0201,"Tracy Cormier, Camreon Kinchen",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0132,Bibiana * David Julian,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0141,Vanessa Crawford,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2112,Otis Bursey Jr*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2109,Zaida * Zuniga,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2222,Maria * Garcia,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0215,Haley Dixon,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0228,Kyler Faustner,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2224,Nicholas Falcon,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2212,Rick Kennedy,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2117,Christina Black,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2127,BreeAnna * Hallman,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0118,Amber Livingston,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0223,Adam * Grimes,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2204,Shirley * Wiley-maze,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0244,Jarrett Wilson,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0217,Anna Douglas,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2226,Ron * Vaughan,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2231,Tessa Bench,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2334,Shamea *Bowen,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0338,"Paige Jason, Nehemiah White",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0119,Shelly Pillars*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2233,Javier Hernandez,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0114,Emmanuel * Brockelman,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2124,McKenzie Smith,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2134,Samuel First,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2244,Katherine Spencer,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0134,Akasha *Taylor-Poitier,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2219,Brandon Butler,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2137,Jerry Cheshier,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,0233,Jayla Goodman,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2211,"Jody Fowler, Damon Moore",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2136,Kyle Kanzig,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0342,Ishmael Corral,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2208,Jade *Brady,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0227,"Brandon Kennedy, Korina Stanton",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2107,Jerome *Sutter,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2204,Shirley * Wiley-maze,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2231,Tessa Bench,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2238,Kimberly * Alvarez,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2240,Charles Foster,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0338,"Paige Jason, Nehemiah White",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0114,Emmanuel * Brockelman,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2227,"Jordyn *Soto, Logan *Anderson",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2109,Zaida * Zuniga,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2127,BreeAnna * Hallman,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2124,McKenzie Smith,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,2141,Jeramiah *Thornock,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,0241,Antonio Woodard,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2238,Kimberly * Alvarez,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2133,"Patrick * Prince, Heaven * Swartout",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0213,"Brianna Garcia, Lorenzo Garcia",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0236,Jessica Hardcastle,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2227,"Jordyn *Soto, Logan *Anderson",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2114,Pamela * Gutierrez,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0219,Nicholas * Hayes,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2129,Guillermo Rivera,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2125,Jason Allen,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0216,Anthony Bradshaw Jr,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2335,Heaven *Brown,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0336,"Alena Dupire, Seth Snyder",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2137,Jerry Cheshier,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2107,Jerome *Sutter,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2208,Jade *Brady,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0132,Bibiana * David Julian,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0212,Kayla *Isaac,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2334,Shamea *Bowen,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2136,Kyle Kanzig,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2244,Katherine Spencer,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,2119,Christopher Bruce,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2240,Charles Foster,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0124,Alice Hammonds,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0202,Martin Guevara,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0243,Beau Wastier,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,0116,Elizabeth Gaffney*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2125,Jason Allen,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0336,"Alena Dupire, Seth Snyder",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,0143,Caroline *Groff,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0335,"CARLOS * GOMEZ, Selin * Gomes",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2209,Amy Roberts,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0122,Charneice Ford,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0106,William JR. Walker*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2105,"BreShaun Luper, Julius Wilson",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2217,Joseph *Williams,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0202,Martin Guevara,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2335,Heaven *Brown,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0213,"Brianna Garcia, Lorenzo Garcia",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0124,Alice Hammonds,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2233,Javier Hernandez,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2129,Guillermo Rivera,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2219,Brandon Butler,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0134,Akasha *Taylor-Poitier,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0216,Anthony Bradshaw Jr,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0243,Beau Wastier,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,2144,"Luis *Gomez, Telma *Palma",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0122,Charneice Ford,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,0207,Zachary * Baquis,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0109,Krystal Jackson,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2113,Pamela *Lewis,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2116,Guy Hall,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2106,Laura *Rojas Ortiz,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0335,"CARLOS * GOMEZ, Selin * Gomes",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2104,"Karen * Schloff, Bradley * Winquist",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2110,"Emma Madden*, Charles Madden",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2217,Joseph *Williams,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2215,Rosamond Williams,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0237,Cara Braden,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0111,william * Witcher,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2229,Martina Guillen solis,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2105,"BreShaun Luper, Julius Wilson",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2209,Amy Roberts,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2237,Dikevous Whatley,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2207,Jared Bullard,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2343,Pamela Norris*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2130,"Kendrick *Barrett, Kerby *Craddock",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,0225,Sydney Moore,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0109,Krystal Jackson,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0238,Scheane Brown,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2218,Tlaysia * Hughes,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0110,Christle Cox,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2108,Margaret Sanders,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2225,Tony *Davis,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0128,"Dylan Orr, Cameron Ruebeck",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0106,William JR. Walker*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2220,Jesus * Tovar Martinez,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,0229,Julie Larson*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,2239,Lakeisha Taylor,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2338,Jason Tillberg,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2108,Margaret Sanders,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0237,Cara Braden,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0128,"Dylan Orr, Cameron Ruebeck",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,0226,Gerardo Deleon Vaga,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2130,"Kendrick *Barrett, Kerby *Craddock",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2218,Tlaysia * Hughes,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0111,william * Witcher,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0238,Scheane Brown,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2116,Guy Hall,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2220,Jesus * Tovar Martinez,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2237,Dikevous Whatley,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2207,Jared Bullard,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2229,Martina Guillen solis,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2115,Pearl Cross*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2206,Elizabeth Tobar,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0337,Montasia Jones,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2343,Pamela Norris*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2215,Rosamond Williams,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0110,Christle Cox,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0209,Luke * Hampton,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0136,Whitney George,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0103,Rebecca Mcknight,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2110,"Emma Madden*, Charles Madden",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2214,Emma Evans,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2225,Tony *Davis,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0231,Elijah Mureithi,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0105,Toni Reed*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0340,"Jose Murillo, Martha Murillo Pavon",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2221,Deja Oliver,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0133,Darold Tucker,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2106,Laura *Rojas Ortiz,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0102,Xerius *Jackson,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,2243,Reginald Williams,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2339,Juan Mendoza,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0135,Pamela Bennett,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0343,Kenneth Crocker,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0127,Latreesha Green*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2104,"Karen * Schloff, Bradley * Winquist",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2216,Clayton *Lewis,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2113,Pamela *Lewis,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0113,"Aaron Azlin, Stephanie Lukash",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0117,Anthony *Byers,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2111,tanya * Lamb,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2205,Kaytee *Wells,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0341,"Shelbi Cheek, Jaylon Morgan",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,2235,Dweh Wayne,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,0115,Bobby Howard,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,2234,Kevin Barrera,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2205,Kaytee *Wells,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0107,"Nathaniel Allman, Traciona Preston",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2340,"Ashley *Aviles, Jose *Aviles Gutierrez, Ma Guadalupe *Mojica Pineda",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2131,Osman Hernandez,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0112,Richard Revels Jr,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0126,Bianca Martinez,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2213,Adam Cunningham,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2138,Carmon Bertrand (EV),rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2228,"Kaeson *Griffin-McClaskey, Angelina *Vaughan",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0232,Mariah *Davis,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2139,Leaneasha * Crowell,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0129,Charles *DeHorney,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2135,Chamia Bills,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0131,Jo Jo Parker,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0108,Erik Ojeda,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0101,Trushondra Edd*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0341,"Shelbi Cheek, Jaylon Morgan",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0221,Michelle *Hughes,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0230,Kyle Strohecker,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0218,Jazmin Aviles,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0142,Jessica *Steveson,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2145,Deonte * Wilson,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0211,"Blake Bounds, Alyssa Cox",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,2333,"Amanda Sanders, Tiffany Sanders",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0205,Jouen *Baggs,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0334,"Herrera * Alan Leonel, Yesica * Rivas Flores",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2123,John * Rodriguez,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2236,Shaizavia *Bailey,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,0104,bobbi * Dowd,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,2242,"Jose Mejia, Olbin Rapalo Mejia",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2103,Jane Porter,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2236,Shaizavia *Bailey,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,2223,Adrienne Gelinas,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2232,LaJaida * Diamond,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0137,Karenthiea Calvin,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0133,Darold Tucker,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2206,Elizabeth Tobar,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0127,Latreesha Green*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0117,Anthony *Byers,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0113,"Aaron Azlin, Stephanie Lukash",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0105,Toni Reed*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0102,Xerius *Jackson,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0231,Elijah Mureithi,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2338,Jason Tillberg,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0343,Kenneth Crocker,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0101,Trushondra Edd*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0136,Whitney George,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2145,Deonte * Wilson,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2103,Jane Porter,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0221,Michelle *Hughes,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0340,"Jose Murillo, Martha Murillo Pavon",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2139,Leaneasha * Crowell,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,2126,Kathleen Davlin,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2138,Carmon Bertrand (EV),rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0230,Kyle Strohecker,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0218,Jazmin Aviles,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0137,Karenthiea Calvin,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0142,Jessica *Steveson,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,2143,Nichole * Rushing,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,2121,"Debra Loving, Odell Hansen",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
-03/01/2026,,0121,Otelia McMillan*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0108,Erik Ojeda,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2111,tanya * Lamb,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2214,Emma Evans,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0337,Montasia Jones,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2216,Clayton *Lewis,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2115,Pearl Cross*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0211,"Blake Bounds, Alyssa Cox",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0131,Jo Jo Parker,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0135,Pamela Bennett,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0232,Mariah *Davis,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2135,Chamia Bills,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0126,Bianca Martinez,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2213,Adam Cunningham,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2131,Osman Hernandez,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0112,Richard Revels Jr,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,0138,James Dyer,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0107,"Nathaniel Allman, Traciona Preston",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2121,"Debra Loving, Odell Hansen",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2232,LaJaida * Diamond,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2340,"Ashley *Aviles, Jose *Aviles Gutierrez, Ma Guadalupe *Mojica Pineda",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2221,Deja Oliver,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2339,Juan Mendoza,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0121,Otelia McMillan*,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2123,John * Rodriguez,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0205,Jouen *Baggs,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0129,Charles *DeHorney,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0334,"Herrera * Alan Leonel, Yesica * Rivas Flores",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0209,Luke * Hampton,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,2228,"Kaeson *Griffin-McClaskey, Angelina *Vaughan",rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
+03/01/2026,,0103,Rebecca Mcknight,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,2205,Kaytee *Wells,Reversed rskrls 03/01/26-03/31/26,,-16.00
 03/01/2026,,0123,Kaytee *Wells,rskrls 03/01/26-03/31/26,RiskRelease Charge: 03/01/2026 - 03/31/2026,16.00
 03/02/2026,,0120,Shaynice *Dorcena,rskrls 03/02/26-03/31/26,RiskRelease Charge: 03/02/2026 - 03/31/2026,15.48
@@ -1192,180 +1296,180 @@ Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Trash Service Fee,,,,,,
 03/01/2026,,0228,Kyler Faustner,Trash Service Fee,,15.00
 03/01/2026,,0114,Emmanuel * Brockelman,Trash Service Fee,,15.00
+03/01/2026,,0128,"Dylan Orr, Cameron Ruebeck",Trash Service Fee,,15.00
+03/01/2026,,2334,Shamea *Bowen,Trash Service Fee,,15.00
+03/01/2026,,2235,Dweh Wayne,Trash Rebill,,15.00
+03/01/2026,,0122,Charneice Ford,Trash Service Fee,,15.00
+03/01/2026,,2102,"Donna Cason, Michael Sinks",Trash Service Fee,,15.00
+03/01/2026,,2115,Pearl Cross*,Trash Rebill,,10.00
 03/01/2026,,0136,Whitney George,Trash Service Fee,,15.00
+03/01/2026,,0231,Elijah Mureithi,Trash Service Fee,,15.00
+03/01/2026,,2230,Kit Kong Hospitality LLC,Trash Rebill,,15.00
+03/01/2026,,2129,Guillermo Rivera,Trash Service Fee,,15.00
+03/01/2026,,2244,Katherine Spencer,Trash Service Fee,,15.00
+03/01/2026,,2227,"Jordyn *Soto, Logan *Anderson",Trash Service Fee,,15.00
+03/01/2026,,0111,william * Witcher,Trash Service Fee,,15.00
+03/01/2026,,0209,Luke * Hampton,Trash Service Fee,,15.00
+03/01/2026,,2145,Deonte * Wilson,Trash Service Fee,,15.00
+03/01/2026,,2137,Jerry Cheshier,Trash Service Fee,,15.00
+03/01/2026,,0104,bobbi * Dowd,Trash Service Fee,,15.00
+03/01/2026,,2239,Lakeisha Taylor,Trash Rebill,,15.00
+03/01/2026,,0123,Kaytee *Wells,Trash Service Fee,,15.00
+03/01/2026,,0106,William JR. Walker*,Trash Rebill,,15.00
 03/01/2026,,2104,"Karen * Schloff, Bradley * Winquist",Trash Service Fee,,15.00
 03/01/2026,,2243,Reginald Williams,Trash Service Fee,,15.00
 03/01/2026,,0236,Jessica Hardcastle,Trash Rebill,,15.00
 03/01/2026,,2226,Ron * Vaughan,Trash Service Fee,,15.00
-03/01/2026,,0112,Richard Revels Jr,Trash Service Fee,,15.00
-03/01/2026,,2129,Guillermo Rivera,Trash Service Fee,,15.00
-03/01/2026,,2115,Pearl Cross*,Trash Rebill,,10.00
 03/01/2026,,2113,Pamela *Lewis,Trash Service Fee,,15.00
-03/01/2026,,2235,Dweh Wayne,Trash Rebill,,15.00
-03/01/2026,,0231,Elijah Mureithi,Trash Service Fee,,15.00
-03/01/2026,,2230,Kit Kong Hospitality LLC,Trash Rebill,,15.00
+03/01/2026,,0112,Richard Revels Jr,Trash Service Fee,,15.00
 03/01/2026,,2225,Tony *Davis,Trash Service Fee,,15.00
-03/01/2026,,2239,Lakeisha Taylor,Trash Rebill,,15.00
-03/01/2026,,2334,Shamea *Bowen,Trash Service Fee,,15.00
-03/01/2026,,2102,"Donna Cason, Michael Sinks",Trash Service Fee,,15.00
-03/01/2026,,0111,william * Witcher,Trash Service Fee,,15.00
-03/01/2026,,0209,Luke * Hampton,Trash Service Fee,,15.00
-03/01/2026,,0106,William JR. Walker*,Trash Rebill,,15.00
-03/01/2026,,0122,Charneice Ford,Trash Service Fee,,15.00
-03/01/2026,,0123,Kaytee *Wells,Trash Service Fee,,15.00
-03/01/2026,,2244,Katherine Spencer,Trash Service Fee,,15.00
-03/01/2026,,2137,Jerry Cheshier,Trash Service Fee,,15.00
-03/01/2026,,0104,bobbi * Dowd,Trash Service Fee,,15.00
-03/01/2026,,0128,"Dylan Orr, Cameron Ruebeck",Trash Service Fee,,15.00
-03/01/2026,,2145,Deonte * Wilson,Trash Service Fee,,15.00
-03/01/2026,,2227,"Jordyn *Soto, Logan *Anderson",Trash Service Fee,,15.00
-03/01/2026,,0134,Akasha *Taylor-Poitier,Trash Service Fee,,15.00
-03/01/2026,,2139,Leaneasha * Crowell,Trash Service Fee,,15.00
-03/01/2026,,2221,Deja Oliver,Trash Service Fee,,15.00
-03/01/2026,,0208,Jeannie Henderson,Trash Rebill,,15.00
-03/01/2026,,2135,Chamia Bills,Trash Service Fee,,15.00
-03/01/2026,,0206,Diane Barefield*,Trash Service Fee,,15.00
-03/01/2026,,2222,Maria * Garcia,Trash Service Fee,,15.00
-03/01/2026,,0207,Zachary * Baquis,Trash Service Fee,,15.00
-03/01/2026,,2217,Joseph *Williams,Trash Service Fee,,15.00
-03/01/2026,,2131,Osman Hernandez,Trash Rebill,,15.00
-03/01/2026,,2112,Otis Bursey Jr*,Trash Service Fee,,15.00
-03/01/2026,,2335,Heaven *Brown,Trash Service Fee,,15.00
-03/01/2026,,0341,"Shelbi Cheek, Jaylon Morgan",Trash Service Fee,,15.00
-03/01/2026,,0335,"CARLOS * GOMEZ, Selin * Gomes",Trash Service Fee,,15.00
-03/01/2026,,0227,"Brandon Kennedy, Korina Stanton",Trash Service Fee,,15.00
-03/01/2026,,0202,Martin Guevara,Trash Rebill,,15.00
-03/01/2026,,2343,Pamela Norris*,Trash Service Fee,,15.00
 03/01/2026,,2228,"Kaeson *Griffin-McClaskey, Angelina *Vaughan",Trash Service Fee,,15.00
-03/01/2026,,0243,Beau Wastier,Trash Service Fee,,15.00
-03/01/2026,,2136,Kyle Kanzig,Trash Service Fee,,15.00
-03/01/2026,,2106,Laura *Rojas Ortiz,Trash Service Fee,,15.00
-03/01/2026,,2132,Nicholas Poindexter,Trash Service Fee,,15.00
-03/01/2026,,0226,Gerardo Deleon Vaga,Trash Service Fee,,15.00
-03/01/2026,,0102,Xerius *Jackson,Trash Service Fee,,15.00
-03/01/2026,,2339,Juan Mendoza,Trash Service Fee,,15.00
-03/01/2026,,2333,"Amanda Sanders, Tiffany Sanders",Trash Service Fee,,15.00
-03/01/2026,,0108,Erik Ojeda,Trash Service Fee,,15.00
-03/01/2026,,0103,Rebecca Mcknight,Trash Service Fee,,15.00
+03/01/2026,,2222,Maria * Garcia,Trash Service Fee,,15.00
 03/01/2026,,2224,Nicholas Falcon,Trash Rebill,,15.00
-03/01/2026,,2240,Charles Foster,Trash Rebill,,15.00
-03/01/2026,,2138,Carmon Bertrand (EV),Trash Service Fee,,5.00
+03/01/2026,,2136,Kyle Kanzig,Trash Service Fee,,15.00
+03/01/2026,,0227,"Brandon Kennedy, Korina Stanton",Trash Service Fee,,15.00
+03/01/2026,,2343,Pamela Norris*,Trash Service Fee,,15.00
+03/01/2026,,0202,Martin Guevara,Trash Rebill,,15.00
+03/01/2026,,0102,Xerius *Jackson,Trash Service Fee,,15.00
+03/01/2026,,2112,Otis Bursey Jr*,Trash Service Fee,,15.00
+03/01/2026,,0134,Akasha *Taylor-Poitier,Trash Service Fee,,15.00
+03/01/2026,,2135,Chamia Bills,Trash Service Fee,,15.00
+03/01/2026,,2131,Osman Hernandez,Trash Rebill,,15.00
+03/01/2026,,2217,Joseph *Williams,Trash Service Fee,,15.00
+03/01/2026,,0206,Diane Barefield*,Trash Service Fee,,15.00
+03/01/2026,,2333,"Amanda Sanders, Tiffany Sanders",Trash Service Fee,,15.00
+03/01/2026,,2106,Laura *Rojas Ortiz,Trash Service Fee,,15.00
+03/01/2026,,0226,Gerardo Deleon Vaga,Trash Service Fee,,15.00
+03/01/2026,,0207,Zachary * Baquis,Trash Service Fee,,15.00
 03/01/2026,,0116,Elizabeth Gaffney*,Trash Service Fee,,15.00
 03/01/2026,,2117,Christina Black,Trash Service Fee,,15.00
+03/01/2026,,2138,Carmon Bertrand (EV),Trash Service Fee,,5.00
+03/01/2026,,0103,Rebecca Mcknight,Trash Service Fee,,15.00
+03/01/2026,,2240,Charles Foster,Trash Rebill,,15.00
+03/01/2026,,2339,Juan Mendoza,Trash Service Fee,,15.00
 03/01/2026,,2340,"Ashley *Aviles, Jose *Aviles Gutierrez, Ma Guadalupe *Mojica Pineda",Trash Service Fee,,15.00
+03/01/2026,,0341,"Shelbi Cheek, Jaylon Morgan",Trash Service Fee,,15.00
+03/01/2026,,0335,"CARLOS * GOMEZ, Selin * Gomes",Trash Service Fee,,15.00
+03/01/2026,,0108,Erik Ojeda,Trash Service Fee,,15.00
+03/01/2026,,2221,Deja Oliver,Trash Service Fee,,15.00
+03/01/2026,,0243,Beau Wastier,Trash Service Fee,,15.00
+03/01/2026,,2335,Heaven *Brown,Trash Service Fee,,15.00
+03/01/2026,,2139,Leaneasha * Crowell,Trash Service Fee,,15.00
+03/01/2026,,0208,Jeannie Henderson,Trash Rebill,,15.00
+03/01/2026,,2132,Nicholas Poindexter,Trash Service Fee,,15.00
 03/01/2026,,2127,BreeAnna * Hallman,Trash Service Fee,,15.00
 03/01/2026,,2116,Guy Hall,Trash Rebill,,15.00
 03/01/2026,,2238,Kimberly * Alvarez,Trash Service Fee,,15.00
-03/01/2026,,2207,Jared Bullard,Trash Service Fee,,15.00
-03/01/2026,,2114,Pamela * Gutierrez,Trash Service Fee,,15.00
-03/01/2026,,0219,Nicholas * Hayes,Trash Service Fee,,15.00
-03/01/2026,,2233,Javier Hernandez,Trash Service Fee,,15.00
-03/01/2026,,0129,Charles *DeHorney,Trash Service Fee,,15.00
-03/01/2026,,0126,Bianca Martinez,Trash Service Fee,,15.00
-03/01/2026,,2130,"Kendrick *Barrett, Kerby *Craddock",Trash Service Fee,,15.00
-03/01/2026,,2336,Kit Kong Hospitality LLC,Trash Rebill,,15.00
-03/01/2026,,0214,Dalea *Myles,Trash Service Fee,,15.00
-03/01/2026,,0132,Bibiana * David Julian,Trash Service Fee,,15.00
-03/01/2026,,2123,John * Rodriguez,Trash Service Fee,,15.00
 03/01/2026,,2241,Ava * Russell,Trash Service Fee,,15.00
 03/01/2026,,0221,Michelle *Hughes,Trash Service Fee,,15.00
-03/01/2026,,2124,McKenzie Smith,Trash Service Fee,,15.00
-03/01/2026,,2141,Jeramiah *Thornock,Trash Service Fee,,15.00
-03/01/2026,,2133,"Patrick * Prince, Heaven * Swartout",Trash Service Fee,,15.00
-03/01/2026,,2119,Christopher Bruce,Trash Service Fee,,15.00
-03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",Trash Service Fee,,15.00
+03/01/2026,,2114,Pamela * Gutierrez,Trash Service Fee,,15.00
 03/01/2026,,2144,"Luis *Gomez, Telma *Palma",Trash Service Fee,,15.00
+03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",Trash Service Fee,,15.00
 03/01/2026,,2338,Jason Tillberg,Trash Service Fee,,15.00
 03/01/2026,,0205,Jouen *Baggs,Trash Service Fee,,15.00
-03/01/2026,,2209,Amy Roberts,Trash Service Fee,,15.00
-03/01/2026,,0337,Montasia Jones,Trash Service Fee,,5.00
-03/01/2026,,0217,Anna Douglas,Trash Rebill,,15.00
-03/01/2026,,2111,tanya * Lamb,Trash Service Fee,,15.00
+03/01/2026,,2130,"Kendrick *Barrett, Kerby *Craddock",Trash Service Fee,,15.00
 03/01/2026,,2122,Jorge Gispanski,Trash Rebill,,15.00
+03/01/2026,,0132,Bibiana * David Julian,Trash Service Fee,,15.00
+03/01/2026,,0126,Bianca Martinez,Trash Service Fee,,15.00
+03/01/2026,,0129,Charles *DeHorney,Trash Service Fee,,15.00
 03/01/2026,,0130,Virgina Hill *,Trash Service Fee,,15.00
-03/01/2026,,0239,Kit Kong Hospitality LLC,Trash Rebill,,15.00
+03/01/2026,,2207,Jared Bullard,Trash Service Fee,,15.00
+03/01/2026,,2233,Javier Hernandez,Trash Service Fee,,15.00
+03/01/2026,,2336,Kit Kong Hospitality LLC,Trash Rebill,,15.00
+03/01/2026,,0214,Dalea *Myles,Trash Service Fee,,15.00
 03/01/2026,,0233,Jayla Goodman,Trash Service Fee,,15.00
+03/01/2026,,0337,Montasia Jones,Trash Service Fee,,5.00
+03/01/2026,,2123,John * Rodriguez,Trash Service Fee,,15.00
+03/01/2026,,0217,Anna Douglas,Trash Rebill,,15.00
+03/01/2026,,2141,Jeramiah *Thornock,Trash Service Fee,,15.00
 03/01/2026,,0237,Cara Braden,Trash Service Fee,,15.00
-03/01/2026,,2232,LaJaida * Diamond,Trash Service Fee,,15.00
-03/01/2026,,2216,Clayton *Lewis,Trash Service Fee,,15.00
-03/01/2026,,2108,Margaret Sanders,Trash Service Fee,,15.00
-03/01/2026,,0225,Sydney Moore,Trash Service Fee,,15.00
-03/01/2026,,0244,Jarrett Wilson,Trash Service Fee,,15.00
-03/01/2026,,0229,Julie Larson*,Trash Service Fee,,15.00
-03/01/2026,,0212,Kayla *Isaac,Trash Service Fee,,15.00
-03/01/2026,,0105,Toni Reed*,Trash Service Fee,,15.00
-03/01/2026,,0240,"Yeliah Houston, Bryson Jacobs",Trash Service Fee,,15.00
-03/01/2026,,2109,Zaida * Zuniga,Trash Service Fee,,15.00
-03/01/2026,,2101,Dianne Runnels,Trash Rebill,,15.00
-03/01/2026,,2212,Rick Kennedy,Trash Service Fee,,15.00
-03/01/2026,,0210,Betty Tucker,Trash Rebill,,15.00
-03/01/2026,,0211,"Blake Bounds, Alyssa Cox",Trash Rebill,,15.00
-03/01/2026,,0343,Kenneth Crocker,Trash Rebill,,15.00
-03/01/2026,,2134,Samuel First,Trash Rebill,,15.00
+03/01/2026,,2111,tanya * Lamb,Trash Service Fee,,15.00
+03/01/2026,,2119,Christopher Bruce,Trash Service Fee,,15.00
+03/01/2026,,2124,McKenzie Smith,Trash Service Fee,,15.00
+03/01/2026,,2133,"Patrick * Prince, Heaven * Swartout",Trash Service Fee,,15.00
+03/01/2026,,2209,Amy Roberts,Trash Service Fee,,15.00
+03/01/2026,,0239,Kit Kong Hospitality LLC,Trash Rebill,,15.00
+03/01/2026,,0219,Nicholas * Hayes,Trash Service Fee,,15.00
 03/01/2026,,0119,Shelly Pillars*,Trash Rebill,,15.00
-03/01/2026,,2125,Jason Allen,Trash Service Fee,,15.00
-03/01/2026,,0241,Antonio Woodard,Trash Service Fee,,15.00
-03/01/2026,,0334,"Herrera * Alan Leonel, Yesica * Rivas Flores",Trash Service Fee,,15.00
-03/01/2026,,2215,Rosamond Williams,Trash Service Fee,,15.00
-03/01/2026,,0127,Latreesha Green*,Trash Rebill,,15.00
 03/01/2026,,2105,"BreShaun Luper, Julius Wilson",Trash Service Fee,,15.00
 03/01/2026,,0213,"Brianna Garcia, Lorenzo Garcia",Trash Service Fee,,15.00
+03/01/2026,,0127,Latreesha Green*,Trash Rebill,,15.00
 03/01/2026,,2107,Jerome *Sutter,Trash Service Fee,,15.00
-03/01/2026,,0201,"Tracy Cormier, Camreon Kinchen",Trash Rebill,,15.00
+03/01/2026,,0340,"Jose Murillo, Martha Murillo Pavon",Trash Service Fee,,15.00
+03/01/2026,,0215,Haley Dixon,Trash Rebill,,15.00
+03/01/2026,,0118,Amber Livingston,Trash Service Fee,,15.00
+03/01/2026,,0241,Antonio Woodard,Trash Service Fee,,15.00
+03/01/2026,,2134,Samuel First,Trash Rebill,,15.00
+03/01/2026,,2125,Jason Allen,Trash Service Fee,,15.00
 03/01/2026,,0338,"Paige Jason, Nehemiah White",Trash Service Fee,,15.00
 03/01/2026,,2208,Jade *Brady,Trash Service Fee,,15.00
-03/01/2026,,0223,Adam * Grimes,Trash Service Fee,,15.00
+03/01/2026,,2215,Rosamond Williams,Trash Service Fee,,15.00
 03/01/2026,,2344,Athena *Cantu,Trash Service Fee,,15.00
-03/01/2026,,0215,Haley Dixon,Trash Rebill,,15.00
+03/01/2026,,2109,Zaida * Zuniga,Trash Service Fee,,15.00
+03/01/2026,,2108,Margaret Sanders,Trash Service Fee,,15.00
+03/01/2026,,0225,Sydney Moore,Trash Service Fee,,15.00
+03/01/2026,,0343,Kenneth Crocker,Trash Rebill,,15.00
+03/01/2026,,0240,"Yeliah Houston, Bryson Jacobs",Trash Service Fee,,15.00
+03/01/2026,,0210,Betty Tucker,Trash Rebill,,15.00
+03/01/2026,,2101,Dianne Runnels,Trash Rebill,,15.00
+03/01/2026,,2216,Clayton *Lewis,Trash Service Fee,,15.00
+03/01/2026,,2232,LaJaida * Diamond,Trash Service Fee,,15.00
+03/01/2026,,2212,Rick Kennedy,Trash Service Fee,,15.00
+03/01/2026,,0211,"Blake Bounds, Alyssa Cox",Trash Rebill,,15.00
+03/01/2026,,0223,Adam * Grimes,Trash Service Fee,,15.00
 03/01/2026,,2143,Nichole * Rushing,Trash Service Fee,,15.00
 03/01/2026,,2219,Brandon Butler,Trash Service Fee,,15.00
-03/01/2026,,0118,Amber Livingston,Trash Service Fee,,15.00
-03/01/2026,,2204,Shirley * Wiley-maze,Trash Service Fee,,15.00
-03/01/2026,,0340,"Jose Murillo, Martha Murillo Pavon",Trash Service Fee,,15.00
-03/01/2026,,2236,Shaizavia *Bailey,Trash Service Fee,,15.00
 03/01/2026,,2220,Jesus * Tovar Martinez,Trash Service Fee,,15.00
-03/01/2026,,0115,Bobby Howard,Trash Rebill,,15.00
-03/01/2026,,0342,Ishmael Corral,Trash Service Fee,,15.00
+03/01/2026,,2236,Shaizavia *Bailey,Trash Service Fee,,15.00
+03/01/2026,,0229,Julie Larson*,Trash Service Fee,,15.00
+03/01/2026,,0334,"Herrera * Alan Leonel, Yesica * Rivas Flores",Trash Service Fee,,15.00
+03/01/2026,,2204,Shirley * Wiley-maze,Trash Service Fee,,15.00
+03/01/2026,,0201,"Tracy Cormier, Camreon Kinchen",Trash Rebill,,15.00
+03/01/2026,,0105,Toni Reed*,Trash Service Fee,,15.00
+03/01/2026,,0212,Kayla *Isaac,Trash Service Fee,,15.00
+03/01/2026,,0244,Jarrett Wilson,Trash Service Fee,,15.00
+03/01/2026,,0139,Connie *Whitten,Trash Service Fee,,15.00
 03/01/2026,,2213,Adam Cunningham,Trash Service Fee,,15.00
 03/01/2026,,2239,Lakeisha Taylor,Trash Service Fee,,15.00
-03/01/2026,,0124,Alice Hammonds,Trash Rebill,,15.00
 03/01/2026,,2218,Tlaysia * Hughes,Trash Service Fee,,15.00
-03/01/2026,,2121,"Debra Loving, Odell Hansen",Trash Service Fee,,15.00
-03/01/2026,,2237,Dikevous Whatley,Trash Service Fee,,15.00
+03/01/2026,,0238,Scheane Brown,Trash Service Fee,,15.00
+03/01/2026,,2234,Kevin Barrera,Trash Service Fee,,15.00
 03/01/2026,,2231,Tessa Bench,Trash Rebill,,15.00
 03/01/2026,,0109,Krystal Jackson,Trash Service Fee,,15.00
+03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",Trash Service Fee,,15.00
+03/01/2026,,0342,Ishmael Corral,Trash Service Fee,,15.00
 03/01/2026,,2206,Elizabeth Tobar,Trash Rebill,,15.00
-03/01/2026,,0238,Scheane Brown,Trash Service Fee,,15.00
-03/01/2026,,0110,Christle Cox,Trash Rebill,,15.00
-03/01/2026,,0139,Connie *Whitten,Trash Service Fee,,15.00
-03/01/2026,,0121,Otelia McMillan*,Trash Service Fee,,15.00
-03/01/2026,,2103,Jane Porter,Trash Service Fee,,15.00
-03/01/2026,,0101,Trushondra Edd*,Trash Service Fee,,15.00
+03/01/2026,,0124,Alice Hammonds,Trash Rebill,,15.00
+03/01/2026,,2237,Dikevous Whatley,Trash Service Fee,,15.00
 03/01/2026,,0218,Jazmin Aviles,Trash Service Fee,,15.00
-03/01/2026,,2234,Kevin Barrera,Trash Service Fee,,15.00
-03/01/2026,,0336,"Alena Dupire, Seth Snyder",Trash Service Fee,,15.00
-03/01/2026,,2223,Adrienne Gelinas,Trash Service Fee,,15.00
-03/01/2026,,0107,"Nathaniel Allman, Traciona Preston",Trash Service Fee,,5.00
-03/01/2026,,0141,Vanessa Crawford,Trash Service Fee,,15.00
-03/01/2026,,0216,Anthony Bradshaw Jr,Trash Service Fee,,15.00
 03/01/2026,,0117,Anthony *Byers,Trash Service Fee,,15.00
 03/01/2026,,2214,Emma Evans,Trash Service Fee,,15.00
-03/01/2026,,0143,Caroline *Groff,Trash Service Fee,,15.00
-03/01/2026,,0137,Karenthiea Calvin,Trash Service Fee,,15.00
 03/01/2026,,0105,Toni Reed*,Trash Rebill,,15.00
-03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",Trash Service Fee,,15.00
 03/01/2026,,2242,"Jose Mejia, Olbin Rapalo Mejia",Trash Rebill,,15.00
-03/01/2026,,2211,"Jody Fowler, Damon Moore",Trash Service Fee,,15.00
-03/01/2026,,0138,James Dyer,Trash Service Fee,,15.00
-03/01/2026,,0135,Pamela Bennett,Trash Service Fee,,15.00
-03/01/2026,,2118,Brian Perry*,Trash Service Fee,,15.00
+03/01/2026,,0143,Caroline *Groff,Trash Service Fee,,15.00
+03/01/2026,,0110,Christle Cox,Trash Rebill,,15.00
+03/01/2026,,0216,Anthony Bradshaw Jr,Trash Service Fee,,15.00
+03/01/2026,,0137,Karenthiea Calvin,Trash Service Fee,,15.00
+03/01/2026,,2121,"Debra Loving, Odell Hansen",Trash Service Fee,,15.00
+03/01/2026,,0121,Otelia McMillan*,Trash Service Fee,,15.00
+03/01/2026,,2103,Jane Porter,Trash Service Fee,,15.00
+03/01/2026,,0141,Vanessa Crawford,Trash Service Fee,,15.00
+03/01/2026,,0107,"Nathaniel Allman, Traciona Preston",Trash Service Fee,,5.00
+03/01/2026,,0101,Trushondra Edd*,Trash Service Fee,,15.00
+03/01/2026,,0115,Bobby Howard,Trash Rebill,,15.00
+03/01/2026,,2223,Adrienne Gelinas,Trash Service Fee,,15.00
+03/01/2026,,0336,"Alena Dupire, Seth Snyder",Trash Service Fee,,15.00
 03/01/2026,,2126,Kathleen Davlin,Trash Service Fee,,15.00
 03/01/2026,,0113,"Aaron Azlin, Stephanie Lukash",Trash Service Fee,,15.00
 03/01/2026,,0131,Jo Jo Parker,Trash Service Fee,,15.00
-03/01/2026,,0133,Darold Tucker,Trash Service Fee,,15.00
+03/01/2026,,2118,Brian Perry*,Trash Service Fee,,15.00
+03/01/2026,,0138,James Dyer,Trash Service Fee,,15.00
+03/01/2026,,2211,"Jody Fowler, Damon Moore",Trash Service Fee,,15.00
 03/01/2026,,2210,Jamie Cook*,Trash Service Fee,,15.00
-03/01/2026,,2110,"Emma Madden*, Charles Madden",Trash Service Fee,,15.00
+03/01/2026,,0135,Pamela Bennett,Trash Service Fee,,15.00
+03/01/2026,,0133,Darold Tucker,Trash Service Fee,,15.00
 03/01/2026,,0230,Kyle Strohecker,Trash Rebill,,15.00
+03/01/2026,,2110,"Emma Madden*, Charles Madden",Trash Service Fee,,15.00
 03/01/2026,,0102,Xerius *Jackson,Reversed Trash Service Fee,double charged,-15.00
 03/01/2026,,2337,"Summer Bollier, America Meza",Trash Rebill,,0.00
 03/01/2026,,0120,Shaynice *Dorcena,Trash Service Fee,,15.00
@@ -1387,7 +1491,17 @@ Charge - Trash Service Fee,,,,,,
 03/06/2026,,0228,Kyler Faustner,Trash Service Fee,,3.00
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",Reversed Trash Service Fee,Trash Service Fee,-15.00
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",Trash Service Fee,,4.00
-Total: 197,,,,,,"2,595.00"
+03/12/2026,,0202,Martin Guevara,Reversed Trash Rebill,Trash Rebill,-15.00
+03/12/2026,,0202,Martin Guevara,Trash Rebill,,6.00
+03/15/2026,,2232,LaJaida * Diamond,Reversed Trash Service Fee,Trash Service Fee,-15.00
+03/15/2026,,2232,LaJaida * Diamond,Trash Service Fee,,7.00
+03/16/2026,,0118,Amber Livingston,Reversed Trash Service Fee,Trash Service Fee,-15.00
+03/16/2026,,0118,Amber Livingston,Trash Service Fee,,8.00
+03/16/2026,,0216,Anthony Bradshaw Jr,Reversed Trash Service Fee,Trash Service Fee,-15.00
+03/16/2026,,0216,Anthony Bradshaw Jr,Trash Service Fee,,8.00
+03/16/2026,,2141,Jeramiah *Thornock,Reversed Trash Service Fee,Trash Service Fee,-15.00
+03/16/2026,,2141,Jeramiah *Thornock,Trash Service Fee,,8.00
+Total: 207,,,,,,"2,557.00"
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Utility Admin Fee Income,,,,,,
 03/01/2026,,0120,Shaynice *Dorcena,Resident New Account Fee,,10.00
@@ -1397,185 +1511,189 @@ Charge - Utility Admin Fee Income,,,,,,
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",Resident Final Account Fee,,10.00
 03/10/2026,,2138,Carmon Bertrand (EV),Resident Final Account Fee,,10.00
 03/11/2026,,0228,Kyler Faustner,Resident Final Account Fee,,10.00
-Total: 7,,,,,,70.00
+03/12/2026,,0132,Gerardo Castillo,Resident Final Account Fee,,10.00
+03/12/2026,,0202,Martin Guevara,Resident Final Account Fee,,10.00
+03/16/2026,,0216,Anthony Bradshaw Jr,Resident Final Account Fee,,10.00
+03/17/2026,,0118,Amber Livingston,Resident Final Account Fee,,10.00
+Total: 11,,,,,,110.00
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Washer/Dryer Rental,,,,,,
 03/01/2026,,0337,Montasia Jones,Washer/Dryer Rental,,32.00
 Total: 1,,,,,,32.00
 Date,Reference,Unit,Name,Description,Notes,Amount
 Charge - Water / Sewer,,,,,,
-03/01/2026,,0338,"Paige Jason, Nehemiah White",Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
 03/01/2026,,0110,Christle Cox,Water / Sewer - 1/17/2026 - 2/17/2026,,86.28
-03/01/2026,,0228,Kyler Faustner,Water / Sewer - 1/17/2026 - 2/17/2026,,66.90
-03/01/2026,,0233,Jayla Goodman,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
-03/01/2026,,0226,Gerardo Deleon Vaga,Water / Sewer - 1/17/2026 - 2/17/2026,,66.90
-03/01/2026,,0126,Bianca Martinez,Water / Sewer - 1/17/2026 - 2/17/2026,,214.04
-03/01/2026,,2340,"Ashley *Aviles, Jose *Aviles Gutierrez, Ma Guadalupe *Mojica Pineda",Water / Sewer - 1/17/2026 - 2/17/2026,,43.23
-03/01/2026,,2112,Otis Bursey Jr*,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,2116,Guy Hall,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,2241,Ava * Russell,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
-03/01/2026,,2207,Jared Bullard,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2117,Christina Black,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,0230,Kyle Strohecker,Water / Sewer - 1/17/2026 - 2/17/2026,,96.33
-03/01/2026,,0239,Kit Kong Hospitality LLC,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
-03/01/2026,,2109,Zaida * Zuniga,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,2138,Carmon Bertrand (EV),Water / Sewer - 1/17/2026 - 2/17/2026,,125.76
-03/01/2026,,0117,Anthony *Byers,Water / Sewer - 1/17/2026 - 2/17/2026,,51.52
-03/01/2026,,0111,william * Witcher,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,0243,Beau Wastier,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
-03/01/2026,,2216,Clayton *Lewis,Water / Sewer - 1/17/2026 - 2/17/2026,,14.84
-03/01/2026,,0208,Jeannie Henderson,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,0133,Darold Tucker,Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
-03/01/2026,,2338,Jason Tillberg,Water / Sewer - 1/17/2026 - 2/17/2026,,66.90
-03/01/2026,,2217,Joseph *Williams,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,0202,Martin Guevara,Water / Sewer - 1/17/2026 - 2/17/2026,,121.39
-03/01/2026,,2344,Athena *Cantu,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
-03/01/2026,,0101,Trushondra Edd*,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
-03/01/2026,,2127,BreeAnna * Hallman,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2118,Brian Perry*,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2205,Kaytee *Wells,Water / Sewer - 1/17/2026 - 2/17/2026,,17.44
-03/01/2026,,0118,Amber Livingston,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,0116,Elizabeth Gaffney*,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2236,Shaizavia *Bailey,Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
-03/01/2026,,0109,Krystal Jackson,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2101,Dianne Runnels,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
-03/01/2026,,0143,Caroline *Groff,Water / Sewer - 1/17/2026 - 2/17/2026,,92.02
+03/01/2026,,0211,"Blake Bounds, Alyssa Cox",Water / Sewer - 1/17/2026 - 2/17/2026,,67.49
+03/01/2026,,0240,"Yeliah Houston, Bryson Jacobs",Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,0334,"Herrera * Alan Leonel, Yesica * Rivas Flores",Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
 03/01/2026,,2339,Juan Mendoza,Water / Sewer - 1/17/2026 - 2/17/2026,,66.90
+03/01/2026,,0229,Julie Larson*,Water / Sewer - 1/17/2026 - 2/17/2026,,66.90
 03/01/2026,,2114,Pamela * Gutierrez,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
 03/01/2026,,0343,Kenneth Crocker,Water / Sewer - 1/17/2026 - 2/17/2026,,149.47
-03/01/2026,,0209,Luke * Hampton,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,0238,Scheane Brown,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
-03/01/2026,,0119,Shelly Pillars*,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2226,Ron * Vaughan,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,0229,Julie Larson*,Water / Sewer - 1/17/2026 - 2/17/2026,,66.90
 03/01/2026,,0225,Sydney Moore,Water / Sewer - 1/17/2026 - 2/17/2026,,66.90
-03/01/2026,,0128,"Dylan Orr, Cameron Ruebeck",Water / Sewer - 1/17/2026 - 2/17/2026,,96.33
-03/01/2026,,2215,Rosamond Williams,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,0215,Haley Dixon,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2113,Pamela *Lewis,Water / Sewer - 1/17/2026 - 2/17/2026,,111.63
+03/01/2026,,0111,william * Witcher,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,2244,Katherine Spencer,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,0107,"Nathaniel Allman, Traciona Preston",Water / Sewer - 1/17/2026 - 2/17/2026,,82.21
 03/01/2026,,0213,"Brianna Garcia, Lorenzo Garcia",Water / Sewer - 1/17/2026 - 2/17/2026,,82.21
-03/01/2026,,2110,"Emma Madden*, Charles Madden",Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2214,Emma Evans,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2134,Samuel First,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
-03/01/2026,,0217,Anna Douglas,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2334,Shamea *Bowen,Water / Sewer - 1/17/2026 - 2/17/2026,,83.34
-03/01/2026,,2135,Chamia Bills,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
 03/01/2026,,0142,Jessica *Steveson,Water / Sewer - 1/17/2026 - 2/17/2026,,9.56
 03/01/2026,,0212,Kayla *Isaac,Water / Sewer - 1/17/2026 - 2/17/2026,,74.50
-03/01/2026,,2212,Rick Kennedy,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,2136,Kyle Kanzig,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
-03/01/2026,,2208,Jade *Brady,Water / Sewer - 1/17/2026 - 2/17/2026,,35.97
-03/01/2026,,2107,Jerome *Sutter,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,2102,"Donna Cason, Michael Sinks",Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,2143,Nichole * Rushing,Water / Sewer - 1/17/2026 - 2/17/2026,,149.47
+03/01/2026,,0104,bobbi * Dowd,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
+03/01/2026,,2220,Jesus * Tovar Martinez,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,2116,Guy Hall,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,0143,Caroline *Groff,Water / Sewer - 1/17/2026 - 2/17/2026,,92.02
+03/01/2026,,0233,Jayla Goodman,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
+03/01/2026,,2241,Ava * Russell,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
+03/01/2026,,2117,Christina Black,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,0209,Luke * Hampton,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,2126,Kathleen Davlin,Water / Sewer - 1/17/2026 - 2/17/2026,,86.28
 03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",Water / Sewer - 1/17/2026 - 2/17/2026,,96.33
+03/01/2026,,2107,Jerome *Sutter,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
 03/01/2026,,0127,Latreesha Green*,Water / Sewer - 1/17/2026 - 2/17/2026,,96.33
-03/01/2026,,0124,Alice Hammonds,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,2108,Margaret Sanders,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,2334,Shamea *Bowen,Water / Sewer - 1/17/2026 - 2/17/2026,,83.34
+03/01/2026,,0128,"Dylan Orr, Cameron Ruebeck",Water / Sewer - 1/17/2026 - 2/17/2026,,96.33
+03/01/2026,,2215,Rosamond Williams,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,2135,Chamia Bills,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
+03/01/2026,,2134,Samuel First,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
+03/01/2026,,0217,Anna Douglas,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,0201,"Tracy Cormier, Camreon Kinchen",Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
+03/01/2026,,2127,BreeAnna * Hallman,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,0118,Amber Livingston,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,0241,Antonio Woodard,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
+03/01/2026,,0215,Haley Dixon,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,2113,Pamela *Lewis,Water / Sewer - 1/17/2026 - 2/17/2026,,111.63
+03/01/2026,,0202,Martin Guevara,Water / Sewer - 1/17/2026 - 2/17/2026,,121.39
+03/01/2026,,2238,Kimberly * Alvarez,Water / Sewer - 1/17/2026 - 2/17/2026,,125.76
+03/01/2026,,0338,"Paige Jason, Nehemiah White",Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,0226,Gerardo Deleon Vaga,Water / Sewer - 1/17/2026 - 2/17/2026,,66.90
+03/01/2026,,2217,Joseph *Williams,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,0230,Kyle Strohecker,Water / Sewer - 1/17/2026 - 2/17/2026,,96.33
+03/01/2026,,2207,Jared Bullard,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
 03/01/2026,,0218,Jazmin Aviles,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
 03/01/2026,,0227,"Brandon Kennedy, Korina Stanton",Water / Sewer - 1/17/2026 - 2/17/2026,,96.33
 03/01/2026,,2225,Tony *Davis,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,0341,"Shelbi Cheek, Jaylon Morgan",Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
-03/01/2026,,2223,Adrienne Gelinas,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,0211,"Blake Bounds, Alyssa Cox",Water / Sewer - 1/17/2026 - 2/17/2026,,67.49
-03/01/2026,,2126,Kathleen Davlin,Water / Sewer - 1/17/2026 - 2/17/2026,,86.28
-03/01/2026,,2143,Nichole * Rushing,Water / Sewer - 1/17/2026 - 2/17/2026,,149.47
-03/01/2026,,2131,Osman Hernandez,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
-03/01/2026,,0115,Bobby Howard,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,0336,"Alena Dupire, Seth Snyder",Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
+03/01/2026,,0216,Anthony Bradshaw Jr,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,0231,Elijah Mureithi,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
+03/01/2026,,2121,"Debra Loving, Odell Hansen",Water / Sewer - 1/17/2026 - 2/17/2026,,82.21
+03/01/2026,,2344,Athena *Cantu,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
+03/01/2026,,2338,Jason Tillberg,Water / Sewer - 1/17/2026 - 2/17/2026,,66.90
+03/01/2026,,0101,Trushondra Edd*,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
+03/01/2026,,0228,Kyler Faustner,Water / Sewer - 1/17/2026 - 2/17/2026,,66.90
+03/01/2026,,0119,Shelly Pillars*,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,0208,Jeannie Henderson,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,2112,Otis Bursey Jr*,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,0117,Anthony *Byers,Water / Sewer - 1/17/2026 - 2/17/2026,,51.52
+03/01/2026,,2104,"Karen * Schloff, Bradley * Winquist",Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,0131,Jo Jo Parker,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,2106,Laura *Rojas Ortiz,Water / Sewer - 1/17/2026 - 2/17/2026,,46.24
+03/01/2026,,2340,"Ashley *Aviles, Jose *Aviles Gutierrez, Ma Guadalupe *Mojica Pineda",Water / Sewer - 1/17/2026 - 2/17/2026,,43.23
+03/01/2026,,2133,"Patrick * Prince, Heaven * Swartout",Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
+03/01/2026,,2221,Deja Oliver,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,0133,Darold Tucker,Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
+03/01/2026,,2214,Emma Evans,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,2110,"Emma Madden*, Charles Madden",Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,0124,Alice Hammonds,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,2108,Margaret Sanders,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
 03/01/2026,,2237,Dikevous Whatley,Water / Sewer - 1/17/2026 - 2/17/2026,,66.90
-03/01/2026,,0342,Ishmael Corral,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
-03/01/2026,,2213,Adam Cunningham,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,0205,Jouen *Baggs,Water / Sewer - 1/17/2026 - 2/17/2026,,19.79
-03/01/2026,,0337,Montasia Jones,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
-03/01/2026,,2232,LaJaida * Diamond,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
-03/01/2026,,0210,Betty Tucker,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,0104,bobbi * Dowd,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
-03/01/2026,,0201,"Tracy Cormier, Camreon Kinchen",Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
-03/01/2026,,2220,Jesus * Tovar Martinez,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,0335,"CARLOS * GOMEZ, Selin * Gomes",Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
-03/01/2026,,0135,Pamela Bennett,Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
-03/01/2026,,2130,"Kendrick *Barrett, Kerby *Craddock",Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
-03/01/2026,,0220,Kyle *Kinas,Water / Sewer - 1/17/2026 - 2/17/2026,,3.55
-03/01/2026,,2209,Amy Roberts,Water / Sewer - 1/17/2026 - 2/17/2026,,82.21
-03/01/2026,,2129,Guillermo Rivera,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
-03/01/2026,,0207,Zachary * Baquis,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,0103,Rebecca Mcknight,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
 03/01/2026,,0108,Erik Ojeda,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,0337,Montasia Jones,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
+03/01/2026,,2101,Dianne Runnels,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,2208,Jade *Brady,Water / Sewer - 1/17/2026 - 2/17/2026,,35.97
+03/01/2026,,2212,Rick Kennedy,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,0109,Krystal Jackson,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,2136,Kyle Kanzig,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
+03/01/2026,,0116,Elizabeth Gaffney*,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,2105,"BreShaun Luper, Julius Wilson",Water / Sewer - 1/17/2026 - 2/17/2026,,64.74
+03/01/2026,,2236,Shaizavia *Bailey,Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
+03/01/2026,,2131,Osman Hernandez,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
+03/01/2026,,0113,"Aaron Azlin, Stephanie Lukash",Water / Sewer - 1/17/2026 - 2/17/2026,,53.70
 03/01/2026,,2337,"Summer Bollier, America Meza",Water / Sewer - 1/17/2026 - 2/17/2026,,155.19
 03/01/2026,,2343,Pamela Norris*,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
-03/01/2026,,0113,"Aaron Azlin, Stephanie Lukash",Water / Sewer - 1/17/2026 - 2/17/2026,,53.70
+03/01/2026,,0342,Ishmael Corral,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
+03/01/2026,,0205,Jouen *Baggs,Water / Sewer - 1/17/2026 - 2/17/2026,,19.79
+03/01/2026,,0219,Nicholas * Hayes,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,2216,Clayton *Lewis,Water / Sewer - 1/17/2026 - 2/17/2026,,14.84
+03/01/2026,,2205,Kaytee *Wells,Water / Sewer - 1/17/2026 - 2/17/2026,,17.44
+03/01/2026,,0243,Beau Wastier,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
+03/01/2026,,2119,Christopher Bruce,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,0335,"CARLOS * GOMEZ, Selin * Gomes",Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
 03/01/2026,,2124,McKenzie Smith,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,2242,"Jose Mejia, Olbin Rapalo Mejia",Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,2226,Ron * Vaughan,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,0238,Scheane Brown,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,0336,"Alena Dupire, Seth Snyder",Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
+03/01/2026,,0132,Bibiana * David Julian,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
+03/01/2026,,0244,Jarrett Wilson,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
+03/01/2026,,0235,Lyndon Hardin,Water / Sewer - 1/17/2026 - 2/17/2026,,108.51
+03/01/2026,,0341,"Shelbi Cheek, Jaylon Morgan",Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,2102,"Donna Cason, Michael Sinks",Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",Water / Sewer - 1/17/2026 - 2/17/2026,,86.28
+03/01/2026,,2141,Jeramiah *Thornock,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
+03/01/2026,,2335,Heaven *Brown,Water / Sewer - 1/17/2026 - 2/17/2026,,150.81
+03/01/2026,,2138,Carmon Bertrand (EV),Water / Sewer - 1/17/2026 - 2/17/2026,,125.76
+03/01/2026,,2219,Brandon Butler,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,0126,Bianca Martinez,Water / Sewer - 1/17/2026 - 2/17/2026,,214.04
+03/01/2026,,2209,Amy Roberts,Water / Sewer - 1/17/2026 - 2/17/2026,,82.21
+03/01/2026,,2129,Guillermo Rivera,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
+03/01/2026,,2118,Brian Perry*,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
 03/01/2026,,2210,Jamie Cook*,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
 03/01/2026,,2122,Jorge Gispanski,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2233,Javier Hernandez,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
-03/01/2026,,0136,Whitney George,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
-03/01/2026,,0132,Bibiana * David Julian,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
-03/01/2026,,2224,Nicholas Falcon,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,0139,Connie *Whitten,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
-03/01/2026,,2119,Christopher Bruce,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2204,Shirley * Wiley-maze,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
-03/01/2026,,0235,Lyndon Hardin,Water / Sewer - 1/17/2026 - 2/17/2026,,108.51
-03/01/2026,,0107,"Nathaniel Allman, Traciona Preston",Water / Sewer - 1/17/2026 - 2/17/2026,,82.21
-03/01/2026,,0219,Nicholas * Hayes,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
 03/01/2026,,2139,Leaneasha * Crowell,Water / Sewer - 1/17/2026 - 2/17/2026,,66.90
 03/01/2026,,2206,Elizabeth Tobar,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,0222,"Christopher * Dahl, Courtney * Howell",Water / Sewer - 1/17/2026 - 2/17/2026,,86.28
-03/01/2026,,2234,Kevin Barrera,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
-03/01/2026,,0240,"Yeliah Houston, Bryson Jacobs",Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
-03/01/2026,,2105,"BreShaun Luper, Julius Wilson",Water / Sewer - 1/17/2026 - 2/17/2026,,64.74
-03/01/2026,,2121,"Debra Loving, Odell Hansen",Water / Sewer - 1/17/2026 - 2/17/2026,,82.21
-03/01/2026,,2133,"Patrick * Prince, Heaven * Swartout",Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
-03/01/2026,,0216,Anthony Bradshaw Jr,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,0334,"Herrera * Alan Leonel, Yesica * Rivas Flores",Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
-03/01/2026,,0231,Elijah Mureithi,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
-03/01/2026,,2244,Katherine Spencer,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
-03/01/2026,,0129,Charles *DeHorney,Water / Sewer - 1/17/2026 - 2/17/2026,,25.09
-03/01/2026,,2238,Kimberly * Alvarez,Water / Sewer - 1/17/2026 - 2/17/2026,,125.76
-03/01/2026,,0241,Antonio Woodard,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
-03/01/2026,,2221,Deja Oliver,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,0131,Jo Jo Parker,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
-03/01/2026,,2104,"Karen * Schloff, Bradley * Winquist",Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
-03/01/2026,,2106,Laura *Rojas Ortiz,Water / Sewer - 1/17/2026 - 2/17/2026,,46.24
-03/01/2026,,0141,Vanessa Crawford,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
+03/01/2026,,0239,Kit Kong Hospitality LLC,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
+03/01/2026,,0139,Connie *Whitten,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,2137,Jerry Cheshier,Water / Sewer - 1/17/2026 - 2/17/2026,,96.33
+03/01/2026,,0210,Betty Tucker,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,2232,LaJaida * Diamond,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
 03/01/2026,,2243,Reginald Williams,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
-03/01/2026,,0122,Charneice Ford,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2240,Charles Foster,Water / Sewer - 1/17/2026 - 2/17/2026,,96.33
-03/01/2026,,0137,Karenthiea Calvin,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
-03/01/2026,,0134,Akasha *Taylor-Poitier,Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
-03/01/2026,,0223,Adam * Grimes,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,2228,"Kaeson *Griffin-McClaskey, Angelina *Vaughan",Water / Sewer - 1/17/2026 - 2/17/2026,,82.21
-03/01/2026,,2145,Deonte * Wilson,Water / Sewer - 1/17/2026 - 2/17/2026,,56.33
-03/01/2026,,0121,Otelia McMillan*,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2336,Kit Kong Hospitality LLC,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
-03/01/2026,,2115,Pearl Cross*,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,0138,James Dyer,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,2234,Kevin Barrera,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
 03/01/2026,,2123,John * Rodriguez,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
 03/01/2026,,2125,Jason Allen,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,0130,Virgina Hill *,Water / Sewer - 1/17/2026 - 2/17/2026,,66.90
-03/01/2026,,2211,"Jody Fowler, Damon Moore",Water / Sewer - 1/17/2026 - 2/17/2026,,115.71
-03/01/2026,,0340,"Jose Murillo, Martha Murillo Pavon",Water / Sewer - 1/17/2026 - 2/17/2026,,120.04
-03/01/2026,,0244,Jarrett Wilson,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
-03/01/2026,,2137,Jerry Cheshier,Water / Sewer - 1/17/2026 - 2/17/2026,,96.33
-03/01/2026,,2218,Tlaysia * Hughes,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,2219,Brandon Butler,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,0237,Cara Braden,Water / Sewer - 1/17/2026 - 2/17/2026,,120.04
-03/01/2026,,2111,tanya * Lamb,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
-03/01/2026,,0236,Jessica Hardcastle,Water / Sewer - 1/17/2026 - 2/17/2026,,121.39
-03/01/2026,,0105,Toni Reed*,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,2231,Tessa Bench,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
+03/01/2026,,0114,Emmanuel * Brockelman,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,0138,James Dyer,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,2204,Shirley * Wiley-maze,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
 03/01/2026,,0106,William JR. Walker*,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
 03/01/2026,,2132,Nicholas Poindexter,Water / Sewer - 1/17/2026 - 2/17/2026,,121.39
 03/01/2026,,2230,Kit Kong Hospitality LLC,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
-03/01/2026,,2335,Heaven *Brown,Water / Sewer - 1/17/2026 - 2/17/2026,,150.81
 03/01/2026,,2103,Jane Porter,Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
-03/01/2026,,0206,Diane Barefield*,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
-03/01/2026,,2333,"Amanda Sanders, Tiffany Sanders",Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
+03/01/2026,,2145,Deonte * Wilson,Water / Sewer - 1/17/2026 - 2/17/2026,,56.33
+03/01/2026,,0121,Otelia McMillan*,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
 03/01/2026,,2235,Dweh Wayne,Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
-03/01/2026,,2141,Jeramiah *Thornock,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
-03/01/2026,,0114,Emmanuel * Brockelman,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,2211,"Jody Fowler, Damon Moore",Water / Sewer - 1/17/2026 - 2/17/2026,,115.71
+03/01/2026,,0340,"Jose Murillo, Martha Murillo Pavon",Water / Sewer - 1/17/2026 - 2/17/2026,,120.04
+03/01/2026,,0206,Diane Barefield*,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,0134,Akasha *Taylor-Poitier,Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
+03/01/2026,,0220,Kyle *Kinas,Water / Sewer - 1/17/2026 - 2/17/2026,,3.55
+03/01/2026,,2223,Adrienne Gelinas,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,2333,"Amanda Sanders, Tiffany Sanders",Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
+03/01/2026,,2130,"Kendrick *Barrett, Kerby *Craddock",Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
+03/01/2026,,0135,Pamela Bennett,Water / Sewer - 1/17/2026 - 2/17/2026,,91.96
+03/01/2026,,2228,"Kaeson *Griffin-McClaskey, Angelina *Vaughan",Water / Sewer - 1/17/2026 - 2/17/2026,,82.21
+03/01/2026,,0223,Adam * Grimes,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
 03/01/2026,,0112,Richard Revels Jr,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,0137,Karenthiea Calvin,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
+03/01/2026,,2336,Kit Kong Hospitality LLC,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
+03/01/2026,,2115,Pearl Cross*,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,0130,Virgina Hill *,Water / Sewer - 1/17/2026 - 2/17/2026,,66.90
+03/01/2026,,2111,tanya * Lamb,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,2213,Adam Cunningham,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
 03/01/2026,,2222,Maria * Garcia,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,0207,Zachary * Baquis,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,0103,Rebecca Mcknight,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
+03/01/2026,,2233,Javier Hernandez,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
+03/01/2026,,2109,Zaida * Zuniga,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,2242,"Jose Mejia, Olbin Rapalo Mejia",Water / Sewer - 1/17/2026 - 2/17/2026,,90.61
+03/01/2026,,0136,Whitney George,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
+03/01/2026,,0115,Bobby Howard,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,2224,Nicholas Falcon,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
+03/01/2026,,0237,Cara Braden,Water / Sewer - 1/17/2026 - 2/17/2026,,120.04
+03/01/2026,,0129,Charles *DeHorney,Water / Sewer - 1/17/2026 - 2/17/2026,,25.09
+03/01/2026,,0141,Vanessa Crawford,Water / Sewer - 1/17/2026 - 2/17/2026,,61.19
+03/01/2026,,0236,Jessica Hardcastle,Water / Sewer - 1/17/2026 - 2/17/2026,,121.39
+03/01/2026,,0122,Charneice Ford,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,2240,Charles Foster,Water / Sewer - 1/17/2026 - 2/17/2026,,96.33
+03/01/2026,,2218,Tlaysia * Hughes,Water / Sewer - 1/17/2026 - 2/17/2026,,56.85
+03/01/2026,,2231,Tessa Bench,Water / Sewer - 1/17/2026 - 2/17/2026,,62.53
+03/01/2026,,0105,Toni Reed*,Water / Sewer - 1/17/2026 - 2/17/2026,,52.78
 03/01/2026,,2337,"Summer Bollier, America Meza",Water / Sewer - 2/18/2026 - 3/1/2026,,58.20
 03/01/2026,,2337,"Summer Bollier, America Meza",Reversed Water / Sewer - 2/18/2026 - 3/1/2026,,-58.20
 03/01/2026,,2205,Kaytee *Wells,Reversed Water / Sewer - 1/17/2026 - 2/17/2026,,-17.44
@@ -1586,17 +1704,22 @@ Charge - Water / Sewer,,,,,,
 03/06/2026,,0228,Kyler Faustner,Water / Sewer - 2/18/2026 - 3/6/2026,,35.54
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",Water / Sewer - 2/18/2026 - 3/9/2026,,60.21
 03/10/2026,,2138,Carmon Bertrand (EV),Water / Sewer - 2/18/2026 - 3/10/2026,,82.53
-Total: 182,,,,,,"12,581.44"
+03/12/2026,,0202,Martin Guevara,Water / Sewer - 2/18/2026 - 3/12/2026,,87.25
+03/15/2026,,2232,LaJaida * Diamond,Water / Sewer - 2/18/2026 - 3/15/2026,,50.81
+03/16/2026,,0118,Amber Livingston,Water / Sewer - 2/18/2026 - 3/16/2026,,47.97
+03/16/2026,,0216,Anthony Bradshaw Jr,Water / Sewer - 2/18/2026 - 3/16/2026,,47.97
+03/16/2026,,2141,Jeramiah *Thornock,Water / Sewer - 2/18/2026 - 3/16/2026,,51.63
+Total: 187,,,,,,"12,867.07"
 Date,Reference,Unit,Name,Description,Notes,Amount
 Credit - Concession - Rent,,,,,,
 03/01/2026,,0214,Dalea *Myles,$99 Total Move-In,,799.00
-03/01/2026,,2145,Deonte * Wilson,Concession - Rent $799 rent special,,35.00
-03/01/2026,,0207,Zachary * Baquis,Concession - Rent,,226.00
-03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",Concession to reduce to $999 on Special ,,35.00
 03/01/2026,,2220,Jesus * Tovar Martinez,Concession - Rent $799 rent special,,35.00
-03/01/2026,,0216,Anthony Bradshaw Jr,Concession - Rent,,35.00
+03/01/2026,,0125,"Brianna Bolivar, Lorenzo Garcia",Concession to reduce to $999 on Special ,,35.00
+03/01/2026,,0207,Zachary * Baquis,Concession - Rent,,226.00
 03/01/2026,,0132,Bibiana * David Julian,Special - Reduce rent,,235.00
 03/01/2026,,0225,Sydney Moore,Concession - Rent $999 rent special,,35.00
+03/01/2026,,2145,Deonte * Wilson,Concession - Rent $799 rent special,,35.00
+03/01/2026,,0216,Anthony Bradshaw Jr,Concession - Rent,,35.00
 03/01/2026,,2121,"Debra Loving, Odell Hansen",Concession - Rent - Move in Special,,151.00
 03/02/2026,,2339,Juan Mendoza,Concession - Rent,Double charge Posting Error,"1,445.00"
 03/03/2026,,0139,Connie *Whitten,Concession - Rent,On time cleaning unit when she moved in ,100.00
@@ -1604,7 +1727,9 @@ Credit - Concession - Rent,,,,,,
 03/05/2026,,0216,Anthony Bradshaw Jr,Reversed Concession - Rent,,-35.00
 03/05/2026,,2121,"Debra Loving, Odell Hansen",Reversed Concession - Rent - Move in Special,,-151.00
 03/05/2026,,2227,"Jordyn *Soto, Logan *Anderson",Concession - Rent,Double charge in rent ,799.00
-Total: 15,,,,,,"3,843.00"
+03/16/2026,,0216,Anthony Bradshaw Jr,Concession - Rent,,18.00
+03/17/2026,,0121,Otelia McMillan*,Concession - Rent,Going through the ledger there was some over charged for rent and late charges that we can't charge if they are on houseing,159.38
+Total: 17,,,,,,"4,020.38"
 Date,Reference,Unit,Name,Description,Notes,Amount
 Credit - Employee Unit Rent Allowance,,,,,,
 03/01/2026,,0126,Bianca Martinez,Employee Unit Rent Allowance,,279.00
@@ -1617,13 +1742,32 @@ Credit - Renters Insurance Premium Credit,,,,,,
 03/01/2026,,2116,Guy Hall,rskrls 02/15/26-02/28/26,RiskRelease Credit: 02/15/2026 - 02/28/2026,8.00
 03/01/2026,,2205,Kaytee *Wells,rskrls 03/01/26-03/31/26,RiskRelease Credit: 03/01/2026 - 03/31/2026,16.00
 03/01/2026,,2205,Kaytee *Wells,Reversed rskrls 03/01/26-03/31/26,,-16.00
-Total: 6,,,,,,42.29
+03/16/2026,,0213,"Brianna Garcia, Lorenzo Garcia",rskrls 02/01/26-02/28/26,RiskRelease Credit: 02/01/2026 - 02/28/2026,16.00
+03/16/2026,,0107,"Nathaniel Allman, Traciona Preston",rskrls 03/03/26-03/31/26,RiskRelease Credit: 03/03/2026 - 03/31/2026,14.97
+03/16/2026,,0213,"Brianna Garcia, Lorenzo Garcia",rskrls 03/01/26-03/31/26,RiskRelease Credit: 03/01/2026 - 03/31/2026,16.00
+03/16/2026,,0343,Kenneth Crocker,rskrls 03/05/26-03/31/26,RiskRelease Credit: 03/05/2026 - 03/31/2026,13.94
+03/16/2026,,0227,"Brandon Kennedy, Korina Stanton",rskrls 03/10/26-03/31/26,RiskRelease Credit: 03/10/2026 - 03/31/2026,11.35
+03/16/2026,,2138,Carmon Bertrand (EV),rskrls 03/02/26-03/31/26,RiskRelease Credit: 03/02/2026 - 03/31/2026,15.48
+03/16/2026,,0228,Kyler Faustner,rskrls 03/07/26-03/31/26,RiskRelease Credit: 03/07/2026 - 03/31/2026,12.90
+03/16/2026,,0202,Martin Guevara,rskrls 03/13/26-03/31/26,RiskRelease Credit: 03/13/2026 - 03/31/2026,9.81
+03/16/2026,,0107,"Nathaniel Allman, Traciona Preston",Reversed rskrls 03/03/26-03/31/26,,-14.97
+03/16/2026,,0202,Martin Guevara,Reversed rskrls 03/13/26-03/31/26,,-9.81
+03/16/2026,,0213,"Brianna Garcia, Lorenzo Garcia",Reversed rskrls 03/01/26-03/31/26,,-16.00
+03/16/2026,,0213,"Brianna Garcia, Lorenzo Garcia",Reversed rskrls 02/01/26-02/28/26,,-16.00
+03/16/2026,,2138,Carmon Bertrand (EV),Reversed rskrls 03/02/26-03/31/26,,-15.48
+03/16/2026,,0343,Kenneth Crocker,Reversed rskrls 03/05/26-03/31/26,,-13.94
+03/16/2026,,0228,Kyler Faustner,Reversed rskrls 03/07/26-03/31/26,,-12.90
+03/16/2026,,0227,"Brandon Kennedy, Korina Stanton",Reversed rskrls 03/10/26-03/31/26,,-11.35
+Total: 22,,,,,,42.29
 Date,Reference,Unit,Name,Description,Notes,Amount
 Deposit Applied to Balance - Deposit Applied to Balance,,,,,,
 03/09/2026,,0107,"Nathaniel Allman, Traciona Preston",Deposit Applied 486028400: Security Deposit,,300.00
 03/09/2026,,0227,"Brandon Kennedy, Korina Stanton",Deposit Applied 163976: Security Deposit,,500.00
 03/11/2026,,0228,Kyler Faustner,Deposit Applied 19-748570584: Payment,,350.00
-Total: 3,,,,,,"1,150.00"
+03/12/2026,,0202,Martin Guevara,Deposit Applied Conversion: Security Deposits,,300.00
+03/16/2026,,0216,Anthony Bradshaw Jr,Deposit Applied 22-105921574: Payment,,100.00
+03/17/2026,,0118,Amber Livingston,Deposit Applied 19-759246620: Security Deposit,,300.00
+Total: 6,,,,,,"1,850.00"
 Date,Reference,Unit,Name,Description,Notes,Amount
 Payment - Payment,,,,,,
 03/01/2026,RS5692615428187,2208,Jade *Brady,Payment,,869.97
@@ -1791,7 +1935,33 @@ Payment - Payment,,,,,,
 03/10/2026,529591911,0236,Jessica Hardcastle,Payment,,"1,272.00"
 03/10/2026,61613168,2239,Lakeisha Taylor,Payment,,"1,000.00"
 03/10/2026,61613173,2239,Lakeisha Taylor,Payment,,175.29
-Total: 165,,,,,,"125,732.52"
+03/11/2026,19820023825,2114,Pamela * Gutierrez,Payment,,146.77
+03/11/2026,19820023823,2114,Pamela * Gutierrez,Payment,,500.00
+03/11/2026,19820023824,2114,Pamela * Gutierrez,Payment,,350.00
+03/11/2026,529710690,2126,Kathleen Davlin,Payment,,584.78
+03/11/2026,22119717152,0104,bobbi * Dowd,Payment,,175.00
+03/11/2026,529717952,0137,Karenthiea Calvin,Payment,,380.00
+03/11/2026,529726940,2207,Jared Bullard,Payment,,150.00
+03/12/2026,529743997,2216,Clayton *Lewis,Payment,,525.00
+03/12/2026,529748957,0204,Tahya Phillips,Payment,,100.00
+03/12/2026,529766291,0229,Julie Larson*,Payment,,100.00
+03/12/2026,22109458717,2228,"Kaeson *Griffin-McClaskey, Angelina *Vaughan",Payment,,488.28
+03/12/2026,529799731,0228,"Shelbi Butler, Cameron Vanstavern",Payment,,149.00
+03/12/2026,529805304,2237,Dikevous Whatley,Payment,,840.00
+03/12/2026,529806332,0129,Charles *DeHorney,Payment,,"1,200.00"
+03/13/2026,529835717,2222,Maria * Garcia,Payment,,986.75
+03/13/2026,529839168,2204,Shirley * Wiley-maze,Payment,,"1,427.00"
+03/13/2026,22119717181,0134,Akasha *Taylor-Poitier,Payment,,"1,000.00"
+03/13/2026,22119717182,0134,Akasha *Taylor-Poitier,Payment,,12.00
+03/14/2026,529910992,0107,"RICHARD GUNN, SAMANTHA GUNN",Payment,,149.00
+03/14/2026,22-119717203,0124,Alice Hammonds,Payment,,79.80
+03/15/2026,529937883,2134,Samuel First,Payment,,"1,000.00"
+03/16/2026,529993431,2140,Marrissa Edd,Payment,,99.00
+03/16/2026,R-529799731,0228,"Shelbi Butler, Cameron Vanstavern",Reversed ACH 529799731:Payment,Return Code(s): R01,-149.00
+03/17/2026,change,0124,Alice Hammonds,Payment,,0.10
+03/17/2026,530111467,0134,Akasha *Taylor-Poitier,Payment,,499.59
+03/18/2026,530118469,0231,Elijah Mureithi,Payment,,400.00
+Total: 191,,,,,,"136,925.59"
 Date,Reference,Unit,Name,Description,Notes,Amount
 Payment - Payment On Behalf Of Resident,,,,,,
 03/02/2026,089958,0119,Shelly Pillars*,Payment On Behalf Of Resident,Grayson Housing,785.00
@@ -1812,4 +1982,8 @@ Payment - Payment On Behalf Of Resident,,,,,,
 03/03/2026,G02032,0106,William JR. Walker*,Payment On Behalf Of Resident,TCOG Payment,507.00
 03/06/2026,34528,0237,Cara Braden,Payment On Behalf Of Resident,Resale Barn,686.10
 03/09/2026,34542,0209,Luke * Hampton,Payment On Behalf Of Resident,Resale Barn ,834.00
-Total: 18,,,,,,"12,616.10"
+03/13/2026,34556,0131,Jo Jo Parker,Payment On Behalf Of Resident,Resale Barn,"2,076.00"
+03/13/2026,4835,0209,Luke * Hampton,Payment On Behalf Of Resident,ST. Vincent Church,154.00
+03/14/2026,34563,2211,"Jody Fowler, Damon Moore",Payment On Behalf Of Resident,Payment On Behalf Of Resident from Lakeway Christian Community Resale Barn,"2,629.32"
+03/17/2026,34579,2123,John * Rodriguez,Payment On Behalf Of Resident,Payment On Behalf Of Resident Resale Barn Lakeway Christian Community,"1,668.00"
+Total: 22,,,,,,"19,143.42"

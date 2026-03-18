@@ -348,19 +348,42 @@ def load_transaction_list(folder: str) -> pd.DataFrame:
             df["_prop"] = derive_property(fname)
             df["Source_File"] = fname
 
-            # Keep only valid data rows: Unit must be a number
-            df = df[df["Unit"].astype(str).str.strip().str.match(r"^\d+$")].copy()
+            # Forward-fill section headers (e.g. "Credit - Concession - Rent",
+            # "Charge - Rent") which ResMan writes into the first (Date) column.
+            # Only keep rows that belong to a concession-relevant "Credit - " section.
+            # Excluded sections:
+            #   "Credit - Renters Insurance Premium Credit" — these are resident
+            #   insurance PAYMENT rows (Description='Payment'), not concessions.
+            NON_CONCESSION_SECTIONS = {
+                "Credit - Renters Insurance Premium Credit",
+            }
+            date_col = df.iloc[:, 0].astype(str).str.strip()
+            df["_section"] = date_col.where(
+                date_col.str.match(r"^(Credit|Charge) - ")
+            ).ffill()
+            df = df[
+                df["_section"].str.startswith("Credit - ", na=False) &
+                ~df["_section"].isin(NON_CONCESSION_SECTIONS) &
+                df["Unit"].astype(str).str.strip().str.match(r"^\d+$")
+            ].copy()
 
             df["Property"]   = df["_prop"]
             df["Unit"]       = df["Unit"].apply(clean_unit)
             df["Amount"]     = df["Amount"].apply(clean_currency)
             df["Is_Reversal"] = df["Amount"] < 0
             df["Description"] = df.get("Description", pd.Series(dtype=str)).fillna("").str.strip()
-            df["Name"]        = df.get("Name",        pd.Series(dtype=str)).fillna("Unknown")
-            df["Date"]        = df.get("Date",        pd.Series(dtype=str)).apply(parse_date)
+            # Strip ResMan status markers (* = NTV, ** = MTM) from resident names.
+            # Use full replace (not lstrip) because a cell can contain comma-joined names
+            # where an interior name carries the marker e.g. "Jane Doe, *John Smith"
+            df["Name"]        = df.get("Name", pd.Series(dtype=str)).fillna("Unknown") \
+                                   .str.replace(r"\*+", "", regex=True).str.strip()
+            df["Date"]        = df.get("Date", pd.Series(dtype=str)).apply(parse_date)
 
             rdate = df.columns[df.columns.str.strip() == "Reverse Date"]
             df["Reverse Date"] = df[rdate[0]] if len(rdate) else ""
+
+            # Drop internal working columns before returning
+            df = df.drop(columns=["_section", "_prop"], errors="ignore")
 
             all_data.append(df)
             print(f"  [OK] Transactions: {fname}  ({len(df)} rows)")
@@ -461,6 +484,9 @@ def load_edits(folder: str) -> pd.DataFrame:
 
                     if not is_reversal and not is_amt_change:
                         continue
+                    # Skip reversals of $0 transactions — no real revenue impact
+                    if is_reversal and orig_amt == 0.0:
+                        continue
 
                     revenue_impact = -orig_amt if is_reversal else (edited_amt - orig_amt)
                     event_type     = "Reversal" if is_reversal else "Amount Change"
@@ -469,7 +495,7 @@ def load_edits(folder: str) -> pd.DataFrame:
                         "Property":        prop,
                         "Manager_Login":   current_manager,
                         "Unit":            unit,
-                        "Resident":        str(row.get("Name", "Unknown")),
+                        "Resident":        re.sub(r"\*+", "", str(row.get("Name", "Unknown"))).strip(),
                         "Category":        str(row.get("Category", "Unknown")),
                         "Description":     str(row.get("Description", "")),
                         "Original_Amount": orig_amt,
@@ -545,7 +571,8 @@ def load_transaction_projection(folder: str, audit_month: str = AUDIT_MONTH) -> 
             for _, row in data.iterrows():
                 raw_unit  = str(row[0]).strip()
                 unit_num  = clean_unit(raw_unit)
-                resident  = raw_unit.split(" - ", 1)[1].strip() if " - " in raw_unit else "Unknown"
+                # Strip ResMan status markers (* = NTV, ** = MTM) from resident name
+                resident  = re.sub(r"\*+", "", raw_unit.split(" - ", 1)[1]).strip() if " - " in raw_unit else "Unknown"
                 unit_type = str(row[1]).strip() if pd.notna(row[1]) else ""
                 category  = str(row[2]).strip() if pd.notna(row[2]) else ""
                 amount    = clean_currency(row[month_col_idx])
@@ -629,9 +656,9 @@ def load_rent_roll(folder: str) -> pd.DataFrame:
                     continue
 
                 if re.match(r"^\d+$", c0):
-                    # Unit header row
+                    # Unit header row — strip ResMan status markers (* = NTV, ** = MTM)
                     current_unit        = clean_unit(c0)
-                    current_resident    = c5 if c5 not in ("", "nan") else "Unknown"
+                    current_resident    = re.sub(r"\*+", "", c5).strip() if c5 not in ("", "nan") else "Unknown"
                     current_type        = c2
                     current_status      = c10
                     current_mkt_rent    = clean_currency(c12)
@@ -768,7 +795,8 @@ def run_johns_engine(df_trans: pd.DataFrame, df_leases: pd.DataFrame,
     Rules implemented
     -----------------
     R1  Post-Term Credit           : credit posted after lease end date (CRITICAL)
-    R2  Missing Lease              : credit with no lease on file (HIGH)
+    R2  Missing Lease              : credit posted but unit has no active lease on the
+                                         Rent Roll (Lease_End is in the past or absent) (HIGH)
     R3  Large Credit (>=$700)      : any single credit >= $700 (CRITICAL)
     R4  Non-Standard Description   : freeform description, no approved keyword (MEDIUM)
     R5  Missing Addendum / No RR Setup : credit posted but NO concession row on
@@ -808,13 +836,27 @@ def run_johns_engine(df_trans: pd.DataFrame, df_leases: pd.DataFrame,
     # Build lookups
     # ------------------------------------------------------------------
 
-    # Lease lookup: (prop, unit) -> most recent lease row
+    # Lease lookup: (prop, unit) -> most recent lease row from New & Renewed Leases
+    # Used only for R1 (Post-Term Credit) date comparison.
     lease_lookup = {}
     if df_leases is not None and not df_leases.empty:
         for _, row in df_leases.sort_values("Lease Start", ascending=False).iterrows():
             key = (row["Property"], row["Unit"])
             if key not in lease_lookup:
                 lease_lookup[key] = row
+
+    # Rent Roll lease-end lookup: (prop, unit) -> lease_end date
+    # Used for R2 (Missing Lease) — checks whether a unit currently has an active
+    # lease. This is far more reliable than checking only new/renewed leases for
+    # the current month, which would miss all ongoing leases signed in prior months.
+    rr_lease_end_lookup   = {}
+    rr_lease_start_lookup = {}
+    if df_rent_roll is not None and not df_rent_roll.empty:
+        for (prop, unit), grp in df_rent_roll.groupby(["Property", "Unit"]):
+            lease_end_val   = grp["Lease_End"].dropna().max()
+            lease_start_val = grp["Lease_Start"].dropna().min()
+            rr_lease_end_lookup[(prop, unit)]   = lease_end_val
+            rr_lease_start_lookup[(prop, unit)] = lease_start_val
 
     # Rent Roll concession lookup: (prop, unit) -> approved monthly concession $ (positive)
     # Only negative-amount rows matching concession keywords are counted
@@ -872,10 +914,24 @@ def run_johns_engine(df_trans: pd.DataFrame, df_leases: pd.DataFrame,
                     row["Amount"], src))
 
         # R2 — Missing Lease
-        if net_actual > 0 and lease_row is None:
+        # A unit is considered to have an active lease if its Lease_End on the
+        # Rent Roll is today or in the future (or is missing/blank, which means
+        # MTM or no end date set). Flag only if Lease_End is clearly in the past.
+        rr_lease_end = rr_lease_end_lookup.get((prop, unit))
+        rr_lease_start = rr_lease_start_lookup.get((prop, unit))
+        today = pd.Timestamp.today().normalize()
+        has_active_lease = (
+            rr_lease_end is None
+            or pd.isna(rr_lease_end)
+            or pd.Timestamp(rr_lease_end) >= today
+        )
+        if net_actual > 0 and not has_active_lease:
+            lease_end_str = pd.Timestamp(rr_lease_end).date() if rr_lease_end and pd.notna(rr_lease_end) else "unknown"
+            lease_start_str = pd.Timestamp(rr_lease_start).date() if rr_lease_start and pd.notna(rr_lease_start) else "unknown"
             flags.append(make_flag(prop, unit, resident, "Missing Lease",
-                f"${net_actual:.2f} net credit posted but no lease record found "
-                f"for Unit {unit} at {prop}. Cannot verify authorization.",
+                f"${net_actual:.2f} net credit posted but Unit {unit} at {prop} "
+                f"has no active lease on the Rent Roll "
+                f"(Lease: {lease_start_str} – {lease_end_str}). Cannot verify authorization.",
                 net_actual, src))
 
         # R3 — Large Credit (>= $700 single transaction)
@@ -915,10 +971,10 @@ def run_johns_engine(df_trans: pd.DataFrame, df_leases: pd.DataFrame,
 
         # R5 — Missing Addendum: credit posted but no concession on Rent Roll
         if in_tx and not in_rr:
+            mkt_ctx = f" (Market rent: ${market:.2f})" if market > 0 else ""
             flags.append(make_flag(prop, unit, resident, "Missing Addendum",
                 f"${posted_amt:.2f} credit posted to Transaction List but unit "
-                f"has NO concession row on the Rent Roll. No lease addendum evident. "
-                f"(Market rent: ${market:.2f})",
+                f"has NO concession row on the Rent Roll. No lease addendum evident.{mkt_ctx}",
                 posted_amt, src))
 
         # R6 — Amount Mismatch: both exist but amounts differ
@@ -1014,6 +1070,11 @@ def run_daniels_engine(
 
         # 3.2 -- AMOUNT CONSISTENCY: flag within the same Property + Unit Type + Category
         # (comparing same unit type only avoids false positives across 1BR vs 2BR etc.)
+        # NOTE: "Rent" is excluded from Minor variance — rent legitimately varies between
+        # units of the same type (different lease terms, negotiated rates). Significant rent
+        # outliers (>=20% and >=$5) are still caught by Major variance. Rent mismatches
+        # against the Rent Roll are fully covered by Stage 2 "Posted vs Recurring Mismatch".
+        RENT_KEYWORDS = {"rent"}
         for (prop, unit_type, category), grp in proj.groupby(["Property", "Unit_Type", "Category"]):
             if not category or not unit_type:
                 continue
@@ -1025,11 +1086,21 @@ def run_daniels_engine(
                 continue
             mode_amt = mode_val.iloc[0]
 
+            is_rent = category.lower().strip() in RENT_KEYWORDS
+            is_optional = any(kw in category.lower() for kw in OPTIONAL_CHARGE_KEYWORDS)
             for _, row in active.iterrows():
                 var     = abs(row["Amount"] - mode_amt)
                 pct_var = var / mode_amt
                 if var >= 1.0:
-                    rule = "Major Charge Amount Variance" if (pct_var >= 0.20 and var >= 5.0) \
+                    is_major = pct_var >= 0.20 and var >= 5.0
+                    # Skip rent variance entirely — already covered by Stage 2
+                    # "Posted vs Recurring Mismatch" which compares against actual Rent Roll
+                    if is_rent:
+                        continue
+                    # Skip optional charges — Fee Schedule Check owns their amount validation
+                    if is_optional:
+                        continue
+                    rule = "Major Charge Amount Variance" if is_major \
                            else "Minor Charge Amount Variance"
                     flags.append(make_flag(prop, row["Unit"], row["Resident"], rule,
                         f"'{category}' ({unit_type}): Unit ${row['Amount']:.2f} vs "
@@ -1069,7 +1140,7 @@ def run_daniels_engine(
                         "Concession >$500 for 2+ Months",
                         f"${amt:.2f}/mo for {months} months "
                         f"(>{CONCESSION_HIGH_MONTHS} months above ${CONCESSION_HIGH_AMT}).",
-                        amt * months, src))
+                        amt, src))   # monthly amount only — months are in Detail
 
     # =========================================================================
     # STAGE 2 -- POSTED RENT ROLL AUDIT
@@ -1330,14 +1401,22 @@ def calculate_exposure(flags_df: pd.DataFrame) -> dict:
         .agg(Count="count", Total_Exposure="sum")
         .reset_index()
     )
+    # Deduped exposure: take the max Amount_Impact per (Property, Unit) to avoid
+    # counting the same financial event twice when multiple engines flag the same unit
+    # (e.g. John R5 + Daniel "Manual Posting" both flag the same $349 credit).
+    # This is a conservative floor; Total_Exposure is the raw ceiling.
+    deduped_exposure = round(
+        df.groupby(["Property", "Unit"])["Amount_Impact"].max().sum(), 2
+    )
     totals = pd.DataFrame([{
         "Total_Units_Audited": df["Unit"].nunique(),
         "Total_Exceptions":    len(df),
         "Total_Exposure":      round(df["Amount_Impact"].sum(), 2),
+        "Deduped_Exposure":    deduped_exposure,
         "Critical_Flags":      (df["Risk_Level"] == RISK_CRITICAL).sum(),
         "High_Flags":          (df["Risk_Level"] == RISK_HIGH).sum(),
         "Medium_Flags":        (df["Risk_Level"] == RISK_MEDIUM).sum(),
-        "Error_Pct":           round(len(df) / max(df["Unit"].nunique(), 1) * 100, 1),
+        "Avg_Flags_Per_Unit":   round(len(df) / max(df["Unit"].nunique(), 1), 1),
     }])
 
     return {"by_property": by_prop, "by_rule": by_rule,
