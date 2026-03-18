@@ -42,6 +42,11 @@ from ui.tabs.rent_roll_tab import render_rent_roll_tab
 from ui.tabs.projection_tab import render_projection_tab
 from ui.tabs.findings_tab import render_findings_tab
 from ui.tabs.report_tab import render_report_tab
+from ui.tabs.concession_tab import render_concession_tab
+from ui.tabs.revenue_integrity_tab import render_revenue_integrity_tab
+from ui.tabs.overrides_tab import render_overrides_tab
+from ui.tabs.exposure_tab import render_exposure_tab
+from ui.tabs.fee_schedule_tab import render_fee_schedule_tab
 
 # Import data loader
 from utils.data_loader import load_resman_csvs_from_data_dir
@@ -160,6 +165,7 @@ def initialize_session_state():
         "audit_prompt": None,
         "custom_prompt": None,
         "saved_api_key": os.environ.get("OPENAI_API_KEY", ""),
+        "resman_results": None,
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -279,11 +285,25 @@ def render_new_sidebar():
     has_data = bool(uploaded_files) or bool(st.session_state.get("resman_concession_docs"))
     run_audit_btn = st.sidebar.button("🚀 Run AI Audit", type="primary", disabled=not has_data)
 
+    st.sidebar.markdown("---")
+    st.sidebar.subheader("🔬 Forensic Rules Engine")
+    run_forensic_btn = st.sidebar.button(
+        "🚀 Run Forensic Audit (v4 Rules)",
+        type="secondary",
+        use_container_width=True,
+        help=(
+            "Runs John's 9 concession rules + Daniel's 2-stage revenue integrity "
+            "engine against CSV files in data/transactions/, data/leases/, "
+            "data/recurring/, data/rent_rolls/, data/edits/, and data/activity/."
+        ),
+    )
+
     return {
         "api_key": api_key,
         "model": model,
         "uploaded_files": uploaded_files or [],
         "run_audit": run_audit_btn,
+        "run_forensic": run_forensic_btn,
     }
 
 
@@ -548,7 +568,19 @@ def main():
                 except Exception as e:
                     st.error(f"Audit agent error: {e}")
 
+    # Run Forensic audit when button pressed
+    if sidebar.get("run_forensic"):
+        with st.spinner("🔬 Running forensic rules engine (v4)…"):
+            try:
+                from engine.resman_rules import run_resman_audit
+                results = run_resman_audit(data_dir="data")
+                st.session_state["resman_results"] = results
+                st.success("✅ Forensic audit complete — new tabs available below.")
+            except Exception as e:
+                st.error(f"Forensic engine error: {e}")
+
     audit_result = st.session_state.get("audit_result")
+    resman_results = st.session_state.get("resman_results")
 
     # --- Tab structure ---
     tabs_labels: List[str] = []
@@ -559,6 +591,17 @@ def main():
     tabs_labels += ["🔍 AI Findings", "📄 Full Report", "⚙️ Prompt Editor"]
     if parsed_docs:
         tabs_labels.append("🗂️ Raw Data")
+
+    # Forensic audit tabs (only shown after forensic audit has been run)
+    if resman_results is not None:
+        tabs_labels += [
+            "📈 Executive Summary",
+            "🔍 Concession Audit (John)",
+            "⚙️ Revenue Integrity (Daniel)",
+            "👤 Manager Overrides",
+            "💰 Exposure Drilldowns",
+            "📋 Fee Schedule Check",
+        ]
 
     tabs = st.tabs(tabs_labels)
     tab_idx = 0
@@ -628,6 +671,117 @@ def main():
                         st.dataframe(doc.dataframe, use_container_width=True)
                     else:
                         st.text(doc.raw_text[:3000] if doc.raw_text else "No content extracted.")
+        tab_idx += 1
+
+    # --- Forensic audit tabs ---
+    if resman_results is not None:
+        import pandas as _pd
+
+        johns_flags = resman_results.get("johns_flags", _pd.DataFrame())
+        daniels_flags = resman_results.get("daniels_flags", _pd.DataFrame())
+        fee_flags = resman_results.get("fee_flags", _pd.DataFrame())
+        all_flags = resman_results.get("all_flags", _pd.DataFrame())
+        manager_ranking = resman_results.get("manager_ranking", _pd.DataFrame())
+        override_log = resman_results.get("override_log", _pd.DataFrame())
+        exposure = resman_results.get("exposure", {})
+
+        from config.fee_schedules import RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM
+
+        RISK_COLORS = {
+            RISK_CRITICAL: "#FF4B4B",
+            RISK_HIGH: "#FFA500",
+            RISK_MEDIUM: "#FFD700",
+        }
+
+        def _color_risk_v4(val):
+            color = RISK_COLORS.get(val, "#FFFFFF")
+            return f"background-color: {color}; color: black; font-weight: bold;"
+
+        # Tab: Executive Summary
+        with tabs[tab_idx]:
+            st.header("Portfolio Health Snapshot — Forensic Audit")
+            totals = exposure.get("totals", _pd.DataFrame())
+
+            if not totals.empty:
+                row = totals.iloc[0]
+                c1, c2, c3, c4, c5 = st.columns(5)
+                c1.metric("Units Audited", int(row.get("Total_Units_Audited", 0)))
+                c2.metric("Total Exceptions", int(row.get("Total_Exceptions", 0)))
+                c3.metric("Financial Exposure", f"${row.get('Total_Exposure', 0):,.2f}")
+                c4.metric("Error Rate", f"{row.get('Error_Pct', 0):.1f}%")
+                c5.metric("Critical Flags", int(row.get("Critical_Flags", 0)))
+
+                st.divider()
+                rc1, rc2, rc3 = st.columns(3)
+                rc1.metric("🔴 CRITICAL", int(row.get("Critical_Flags", 0)))
+                rc2.metric("🟠 HIGH", int(row.get("High_Flags", 0)))
+                rc3.metric("🟡 MEDIUM", int(row.get("Medium_Flags", 0)))
+
+            st.divider()
+            st.subheader("All Exceptions")
+            if not all_flags.empty:
+                f_cols = st.columns(3)
+                with f_cols[0]:
+                    risk_f = st.multiselect(
+                        "Risk Level",
+                        [RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM],
+                        default=[RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM],
+                        key="exec_risk",
+                    )
+                with f_cols[1]:
+                    prop_opts = ["All"] + sorted(all_flags["Property"].dropna().unique().tolist())
+                    prop_f = st.selectbox("Property", prop_opts, key="exec_prop")
+                with f_cols[2]:
+                    rule_opts = ["All"] + sorted(all_flags["Rule"].dropna().unique().tolist())
+                    rule_f = st.selectbox("Rule", rule_opts, key="exec_rule")
+
+                view = all_flags[all_flags["Risk_Level"].isin(risk_f)]
+                if prop_f != "All":
+                    view = view[view["Property"] == prop_f]
+                if rule_f != "All":
+                    view = view[view["Rule"] == rule_f]
+
+                if "Risk_Level" in view.columns:
+                    st.dataframe(
+                        view.style.applymap(_color_risk_v4, subset=["Risk_Level"]),
+                        use_container_width=True,
+                        hide_index=True,
+                    )
+                else:
+                    st.dataframe(view, use_container_width=True, hide_index=True)
+                st.caption(f"{len(view):,} records shown")
+            else:
+                st.success("✅ No exceptions found — clean portfolio!")
+        tab_idx += 1
+
+        # Tab: Concession Audit (John)
+        with tabs[tab_idx]:
+            render_concession_tab(
+                parsed_docs=None,
+                resman_docs=None,
+                johns_flags=johns_flags,
+            )
+        tab_idx += 1
+
+        # Tab: Revenue Integrity (Daniel)
+        with tabs[tab_idx]:
+            render_revenue_integrity_tab(daniels_flags)
+        tab_idx += 1
+
+        # Tab: Manager Overrides
+        with tabs[tab_idx]:
+            render_overrides_tab(manager_ranking, override_log)
+        tab_idx += 1
+
+        # Tab: Exposure Drilldowns
+        with tabs[tab_idx]:
+            render_exposure_tab(exposure, override_log)
+        tab_idx += 1
+
+        # Tab: Fee Schedule Check
+        with tabs[tab_idx]:
+            render_fee_schedule_tab(fee_flags)
+        tab_idx += 1
 
     st.markdown("---")
     st.caption(f"{settings.APP_TITLE} | {datetime.now().strftime('%Y-%m-%d %H:%M')}")
