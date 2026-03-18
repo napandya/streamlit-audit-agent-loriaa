@@ -1,6 +1,9 @@
 """
 Export functionality for audit data
 """
+import os
+import tempfile
+
 import streamlit as st
 import pandas as pd
 from typing import List
@@ -262,3 +265,154 @@ def generate_transactions_dataframe(transactions: List[RecurringTransaction]) ->
         })
     
     return pd.DataFrame(data)
+
+
+# ---------------------------------------------------------------------------
+# v4 Forensic Audit Excel Export
+# ---------------------------------------------------------------------------
+
+def export_audit_workbook(results: dict, output_path: str) -> str:
+    """
+    Generate a color-coded multi-sheet Excel workbook from resman_results.
+
+    Sheets:
+      John's Flags            — John's 9 concession rule violations
+      Daniel's Flags          — Daniel's 2-stage revenue integrity flags
+      Fee Schedule Violations — per-property fee amount violations
+      Manager Overrides       — manager edit/reversal leaderboard
+      Override Detail Log     — raw override event log
+      Exposure Summary        — by_property, by_rule, by_risk rollups
+
+    Risk color coding: CRITICAL=#FF4B4B, HIGH=#FFA500, MEDIUM=#FFD700
+
+    Parameters
+    ----------
+    results:
+        Dict returned by ``engine.resman_rules.run_resman_audit``.
+    output_path:
+        Destination ``.xlsx`` file path.
+
+    Returns
+    -------
+    str: The path written (same as *output_path*).
+    """
+    try:
+        from openpyxl import load_workbook
+        from openpyxl.styles import PatternFill, Font, Alignment
+        from openpyxl.utils import get_column_letter
+    except ImportError:
+        raise ImportError(
+            "openpyxl is required for Excel export. "
+            "Install with: pip install openpyxl"
+        )
+
+    RISK_FILLS = {
+        "CRITICAL": PatternFill("solid", fgColor="FF4B4B"),
+        "HIGH": PatternFill("solid", fgColor="FFA500"),
+        "MEDIUM": PatternFill("solid", fgColor="FFD700"),
+    }
+    HEADER_FILL = PatternFill("solid", fgColor="1F4E79")
+    HEADER_FONT = Font(bold=True, color="FFFFFF", size=11)
+
+    johns_flags = results.get("johns_flags", pd.DataFrame())
+    daniels_flags = results.get("daniels_flags", pd.DataFrame())
+    fee_flags = results.get("fee_flags", pd.DataFrame())
+    manager_ranking = results.get("manager_ranking", pd.DataFrame())
+    override_log = results.get("override_log", pd.DataFrame())
+    exposure = results.get("exposure", {})
+
+    os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+
+    with pd.ExcelWriter(output_path, engine="openpyxl") as writer:
+        if not johns_flags.empty:
+            johns_flags.to_excel(writer, sheet_name="John's Flags", index=False)
+        if not daniels_flags.empty:
+            daniels_flags.to_excel(writer, sheet_name="Daniel's Flags", index=False)
+        if not fee_flags.empty:
+            fee_flags.to_excel(writer, sheet_name="Fee Schedule Violations", index=False)
+        if not manager_ranking.empty:
+            manager_ranking.to_excel(writer, sheet_name="Manager Overrides", index=False)
+        if not override_log.empty:
+            override_log.to_excel(writer, sheet_name="Override Detail Log", index=False)
+        for key, label in [
+            ("by_property", "Exposure by Property"),
+            ("by_rule", "Exposure by Rule"),
+            ("by_risk", "Exposure by Risk"),
+        ]:
+            df_exp = exposure.get(key, pd.DataFrame())
+            if not df_exp.empty:
+                df_exp.to_excel(writer, sheet_name=label, index=False)
+
+    # Post-process: apply colour coding and header formatting
+    wb = load_workbook(output_path)
+
+    flag_sheets = ["John's Flags", "Daniel's Flags", "Fee Schedule Violations"]
+
+    for sheet_name in wb.sheetnames:
+        ws = wb[sheet_name]
+
+        # Header row formatting
+        for cell in ws[1]:
+            cell.fill = HEADER_FILL
+            cell.font = HEADER_FONT
+            cell.alignment = Alignment(horizontal="center", vertical="center")
+        ws.freeze_panes = "A2"
+
+        # Risk column color coding (flag sheets only)
+        if sheet_name in flag_sheets:
+            risk_col_idx = None
+            for col_idx, cell in enumerate(ws[1], start=1):
+                if str(cell.value).strip() == "Risk_Level":
+                    risk_col_idx = col_idx
+                    break
+
+            if risk_col_idx is not None:
+                for row in ws.iter_rows(min_row=2, max_row=ws.max_row):
+                    risk_cell = row[risk_col_idx - 1]
+                    fill = RISK_FILLS.get(str(risk_cell.value or ""), None)
+                    if fill:
+                        risk_cell.fill = fill
+
+        # Auto-fit column widths
+        for col_idx in range(1, ws.max_column + 1):
+            col_letter = get_column_letter(col_idx)
+            max_len = len(str(ws.cell(row=1, column=col_idx).value or ""))
+            for row_idx in range(2, min(ws.max_row + 1, 200)):
+                val = ws.cell(row=row_idx, column=col_idx).value
+                if val:
+                    max_len = max(max_len, min(len(str(val)), 60))
+            ws.column_dimensions[col_letter].width = max(max_len + 2, 10)
+
+    wb.save(output_path)
+    return output_path
+
+
+def render_excel_download_button(results: dict) -> None:
+    """
+    Streamlit helper — generates an Excel audit workbook and renders a
+    ``st.download_button`` for the ``.xlsx`` file.
+
+    Parameters
+    ----------
+    results:
+        Dict returned by ``engine.resman_rules.run_resman_audit``.
+    """
+    ts = datetime.now().strftime("%Y%m%d_%H%M")
+    fname = f"LNJ_Audit_{ts}.xlsx"
+
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        tmp_path = os.path.join(tmp_dir, fname)
+        try:
+            export_audit_workbook(results, tmp_path)
+            with open(tmp_path, "rb") as f:
+                xlsx_bytes = f.read()
+        except Exception as exc:
+            st.error(f"Excel export failed: {exc}")
+            return
+
+    st.download_button(
+        label="⬇️ Download Audit Workbook (.xlsx)",
+        data=xlsx_bytes,
+        file_name=fname,
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    )

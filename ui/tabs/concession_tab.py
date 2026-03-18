@@ -18,9 +18,66 @@ from engine.concession_audit import (
 )
 from ingestion.parsers import ParsedDocument
 
+# v4 risk colours (also used by _render_johns_flags)
+_V4_RISK_COLORS = {
+    "CRITICAL": "#FF4B4B",
+    "HIGH": "#FFA500",
+    "MEDIUM": "#FFD700",
+}
+
+
+def _v4_color_risk(val: str) -> str:
+    color = _V4_RISK_COLORS.get(val, "#FFFFFF")
+    return f"background-color: {color}; color: black; font-weight: bold;"
+
 
 # ---------------------------------------------------------------------------
-# Internal helpers
+# v4 rendering path (johns_flags DataFrame)
+# ---------------------------------------------------------------------------
+
+def _render_johns_flags(johns_flags: pd.DataFrame) -> None:
+    """Render John's 9 concession rules output (v4 schema)."""
+    st.subheader("🔍 Concession Audit — John's 9 Rules")
+
+    if johns_flags.empty:
+        st.success("✅ No concession violations detected.")
+        return
+
+    total_exposure = johns_flags["Amount_Impact"].sum()
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Total Flags", f"{len(johns_flags):,}")
+    col2.metric("Financial Exposure", f"${total_exposure:,.2f}")
+    col3.metric(
+        "Critical Flags",
+        int((johns_flags["Risk_Level"] == "CRITICAL").sum()),
+    )
+
+    st.divider()
+    st.subheader("Rule Summary")
+    rule_summary = (
+        johns_flags.groupby(["Rule", "Risk_Level"])
+        .agg(Count=("Rule", "count"), Exposure=("Amount_Impact", "sum"))
+        .reset_index()
+        .sort_values("Exposure", ascending=False)
+    )
+    st.dataframe(
+        rule_summary.style.applymap(_v4_color_risk, subset=["Risk_Level"]),
+        use_container_width=True,
+        hide_index=True,
+    )
+
+    st.divider()
+    st.subheader("Unit-Level Flags")
+    st.dataframe(
+        johns_flags.style.applymap(_v4_color_risk, subset=["Risk_Level"]),
+        use_container_width=True,
+        hide_index=True,
+    )
+    st.caption(f"Total Exposure: **${total_exposure:,.2f}**")
+
+
+# ---------------------------------------------------------------------------
+# Internal helpers (legacy path)
 # ---------------------------------------------------------------------------
 
 def _row_color(flags: list[str]) -> str:
@@ -134,6 +191,7 @@ def _highlighted_table(df: pd.DataFrame) -> None:
 def render_concession_tab(
     parsed_docs: Optional[List[ParsedDocument]],
     resman_docs: Optional[list[tuple[str, pd.DataFrame]]] = None,
+    johns_flags: Optional[pd.DataFrame] = None,
 ) -> None:
     """
     Render the Concession Audit tab.
@@ -145,7 +203,21 @@ def render_concession_tab(
     resman_docs:
         List of ``(property_name, dataframe)`` tuples auto-loaded from
         ``data/``.
+    johns_flags:
+        DataFrame from ``engine.resman_rules.run_johns_engine`` (v4 schema).
+        When provided, renders the v4 John's-rules view instead of the legacy
+        per-row anomaly view.
     """
+    # ------------------------------------------------------------------
+    # NEW PATH: v4 johns_flags DataFrame
+    # ------------------------------------------------------------------
+    if johns_flags is not None and isinstance(johns_flags, pd.DataFrame):
+        _render_johns_flags(johns_flags)
+        return
+
+    # ------------------------------------------------------------------
+    # LEGACY PATH: resman_docs tuples
+    # ------------------------------------------------------------------
     st.subheader("🏠 Rule-Based Concession Check")
     st.caption(
         "This is an **automated rule-based pre-check** that runs instantly on loaded data. "
