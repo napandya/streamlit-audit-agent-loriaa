@@ -7,23 +7,7 @@ import pandas as pd
 import streamlit as st
 
 from config.fee_schedules import RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM
-
-RISK_COLORS = {
-    RISK_CRITICAL: "#FF4B4B",
-    RISK_HIGH: "#FFA500",
-    RISK_MEDIUM: "#FFD700",
-}
-
-
-def _color_risk(val: str) -> str:
-    color = RISK_COLORS.get(val, "#FFFFFF")
-    return f"background-color: {color}; color: black; font-weight: bold;"
-
-
-def _styled(df: pd.DataFrame) -> object:
-    if df.empty or "Risk_Level" not in df.columns:
-        return df
-    return df.style.applymap(_color_risk, subset=["Risk_Level"])
+from utils.risk_styles import styled_df
 
 
 def render_exposure_tab(
@@ -46,7 +30,7 @@ def render_exposure_tab(
         if by_prop.empty:
             st.info("No data.")
         else:
-            st.dataframe(_styled(by_prop), use_container_width=True, hide_index=True)
+            st.dataframe(styled_df(by_prop), use_container_width=True, hide_index=True)
             st.caption(
                 f"Total: **${by_prop['Total_Exposure'].sum():,.2f}** across "
                 f"{by_prop['Property'].nunique()} properties"
@@ -57,7 +41,7 @@ def render_exposure_tab(
         if by_rule.empty:
             st.info("No data.")
         else:
-            st.dataframe(_styled(by_rule), use_container_width=True, hide_index=True)
+            st.dataframe(styled_df(by_rule), use_container_width=True, hide_index=True)
 
     with tabs[2]:
         st.subheader("Exposure by Risk Level")

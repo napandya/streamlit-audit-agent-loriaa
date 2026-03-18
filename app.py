@@ -743,7 +743,7 @@ def main():
 
                 if "Risk_Level" in view.columns:
                     st.dataframe(
-                        view.style.applymap(_color_risk_v4, subset=["Risk_Level"]),
+                        view.style.map(_color_risk_v4, subset=["Risk_Level"]),
                         use_container_width=True,
                         hide_index=True,
                     )
