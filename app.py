@@ -48,9 +48,6 @@ from ui.tabs.overrides_tab import render_overrides_tab
 from ui.tabs.exposure_tab import render_exposure_tab
 from ui.tabs.fee_schedule_tab import render_fee_schedule_tab
 
-# Import data loader
-from utils.data_loader import load_resman_csvs_from_data_dir
-
 # Import config
 from config import settings
 
@@ -160,10 +157,6 @@ def initialize_session_state():
         "parsed_docs": [],
         "audit_result": None,
         "audit_timestamp": None,
-        "resman_concession_docs": [],
-        "_resman_docs_loaded": False,
-        "audit_prompt": None,
-        "custom_prompt": None,
         "saved_api_key": os.environ.get("OPENAI_API_KEY", ""),
         "resman_results": None,
     }
@@ -213,90 +206,103 @@ def load_files(
 
 
 # ---------------------------------------------------------------------------
-# Sidebar — new version with OpenAI key + model selector
+# Sidebar — v4-style with LiveNjoy branding; AI features below forensic button
 # ---------------------------------------------------------------------------
 
 def render_new_sidebar():
-    """Render the updated sidebar with OpenAI controls."""
-    st.sidebar.title(f"{settings.APP_ICON} {settings.APP_TITLE}")
-    st.sidebar.markdown("---")
+    """Render the sidebar matching the v4 layout."""
+    from config.fee_schedules import APPROVED_CODES as _APPROVED_CODES
 
-    # OpenAI API key
-    st.sidebar.subheader("🔑 OpenAI API Key")
-    env_key = os.environ.get("OPENAI_API_KEY", "")
-    saved_key = st.session_state.get("saved_api_key", env_key)
-    api_key_input = st.sidebar.text_input(
-        "API Key (or set OPENAI_API_KEY env var)",
-        value=saved_key,
-        type="password",
-        help="Required to run the AI audit agent.",
-    )
+    with st.sidebar:
+        st.image("https://img.icons8.com/fluency/96/property.png", width=60)
+        st.title("LiveNjoy Audit Bot")
+        st.markdown("**Version:** 2.0  \n**Engine:** John + Daniel Rules")
+        st.divider()
 
-    # Save / Cancel buttons
-    btn_col1, btn_col2 = st.sidebar.columns(2)
-    with btn_col1:
-        if st.button("💾 Save", key="save_api_key"):
-            if api_key_input.strip():
-                st.session_state["saved_api_key"] = api_key_input.strip()
-                st.sidebar.success("Saved OpenAI key for this session")
-            else:
-                st.sidebar.warning("Please enter an API key first")
-    with btn_col2:
-        if st.button("✖ Cancel", key="cancel_api_key"):
-            st.session_state["saved_api_key"] = env_key
-            st.rerun()
+        st.markdown("**Approved Concession Codes**")
+        for code in sorted(_APPROVED_CODES):
+            st.markdown(f"- `{code}`")
+        st.divider()
 
-    api_key = st.session_state.get("saved_api_key", api_key_input)
+        run_forensic_btn = st.button(
+            "🚀 Run Full Forensic Audit",
+            type="primary",
+            use_container_width=True,
+        )
+        st.divider()
 
-    # Model selector
-    model = st.sidebar.selectbox(
-        "Model",
-        options=["o3", "o4-mini", "gpt-4.1", "gpt-4.1-mini", "gpt-4o", "gpt-4o-mini"],
-        index=0,
-        help="o3 = best reasoning; o4-mini = fast reasoning; gpt-4.1 = latest GPT",
-    )
+        st.markdown("**File Setup Guide**")
+        st.markdown(
+            "Copy your exports into these folders:"
+            "\n```"
+            "\nexports/Transaction List Reports/"
+            "\n  → data/transactions/"
+            "\nexports/New & Renewed Leases/"
+            "\n  → data/leases/"
+            "\nexports/Edited Transactions by User/"
+            "\n  → data/edits/"
+            "\nexports/Transaction Projections/"
+            "\n  → data/recurring/"
+            "\nexports/Rent Rolls/"
+            "\n  → data/rent_rolls/"
+            "\nexports/Resident Activity/"
+            "\n  → data/activity/"
+            "\n```"
+            "\n⚠️ Resident Ledgers are PDFs — not processed by the bot."
+        )
+        st.divider()
 
-    st.sidebar.markdown("---")
+        # --- AI Audit section (secondary) ---
+        st.subheader("🤖 AI Audit (Optional)")
 
-    # File uploader
-    st.sidebar.subheader("📤 Upload Files")
-    uploaded_files = st.sidebar.file_uploader(
-        "Upload audit documents",
-        type=["csv", "xlsx", "xls", "pdf", "docx"],
-        accept_multiple_files=True,
-        help="Supported: CSV, Excel, PDF, Word (.docx)",
-    )
+        env_key = os.environ.get("OPENAI_API_KEY", "")
+        saved_key = st.session_state.get("saved_api_key", env_key)
+        api_key_input = st.text_input(
+            "OpenAI API Key",
+            value=saved_key,
+            type="password",
+            help="Required to run the AI audit agent.",
+        )
 
-    # Show detected document types
-    if uploaded_files:
-        st.sidebar.markdown("**Detected document types:**")
-        from ingestion.parsers import detect_document_type
-        for uf in uploaded_files:
-            dtype = detect_document_type(uf.name)
-            badge = {
-                "rent_roll": "📋",
-                "projection": "📊",
-                "concession": "💰",
-                "unknown": "❓",
-            }.get(dtype, "❓")
-            st.sidebar.markdown(f"{badge} `{uf.name}` → **{dtype}**")
+        btn_col1, btn_col2 = st.columns(2)
+        with btn_col1:
+            if st.button("💾 Save", key="save_api_key"):
+                if api_key_input.strip():
+                    st.session_state["saved_api_key"] = api_key_input.strip()
+                    st.success("Saved")
+                else:
+                    st.warning("Enter a key first")
+        with btn_col2:
+            if st.button("✖ Cancel", key="cancel_api_key"):
+                st.session_state["saved_api_key"] = env_key
+                st.rerun()
 
-    st.sidebar.markdown("---")
-    has_data = bool(uploaded_files) or bool(st.session_state.get("resman_concession_docs"))
-    run_audit_btn = st.sidebar.button("🚀 Run AI Audit", type="primary", disabled=not has_data)
+        api_key = st.session_state.get("saved_api_key", api_key_input)
 
-    st.sidebar.markdown("---")
-    st.sidebar.subheader("🔬 Forensic Rules Engine")
-    run_forensic_btn = st.sidebar.button(
-        "🚀 Run Forensic Audit (v4 Rules)",
-        type="secondary",
-        use_container_width=True,
-        help=(
-            "Runs John's 9 concession rules + Daniel's 2-stage revenue integrity "
-            "engine against CSV files in data/transactions/, data/leases/, "
-            "data/recurring/, data/rent_rolls/, data/edits/, and data/activity/."
-        ),
-    )
+        model = st.selectbox(
+            "Model",
+            options=["o3", "o4-mini", "gpt-4.1", "gpt-4.1-mini", "gpt-4o", "gpt-4o-mini"],
+            index=0,
+            help="o3 = best reasoning; o4-mini = fast reasoning; gpt-4.1 = latest GPT",
+        )
+
+        st.markdown("**Upload Files for AI Audit**")
+        uploaded_files = st.file_uploader(
+            "Upload audit documents",
+            type=["csv", "xlsx", "xls", "pdf", "docx"],
+            accept_multiple_files=True,
+            help="Supported: CSV, Excel, PDF, Word (.docx)",
+        )
+
+        if uploaded_files:
+            from ingestion.parsers import detect_document_type
+            for uf in uploaded_files:
+                dtype = detect_document_type(uf.name)
+                badge = {"rent_roll": "📋", "projection": "📊", "concession": "💰"}.get(dtype, "❓")
+                st.markdown(f"{badge} `{uf.name}` → **{dtype}**")
+
+        has_data = bool(uploaded_files)
+        run_audit_btn = st.button("🚀 Run AI Audit", type="secondary", disabled=not has_data)
 
     return {
         "api_key": api_key,
@@ -308,188 +314,39 @@ def render_new_sidebar():
 
 
 # ---------------------------------------------------------------------------
-# Default audit prompt (used as starting point for the editor)
-# ---------------------------------------------------------------------------
-
-_DEFAULT_AUDIT_PROMPT = (
-    "You are a senior property management audit expert.\n\n"
-    "CONTEXT — HYBRID AUDIT PIPELINE:\n"
-    "A deterministic rules engine has ALREADY pre-scanned every concession CSV.\n"
-    "The DATA SUMMARY contains per-property stats and flagged findings with evidence rows.\n"
-    "For non-concession docs (rent rolls, projections): full summary data is included.\n\n"
-    "YOUR JOB:\n"
-    "1. Review every deterministic finding and provide expert narrative analysis.\n"
-    "2. Identify cross-property PATTERNS the rules engine cannot detect.\n"
-    "3. Assess business risk and prioritise findings by real-world impact.\n\n"
-    "PER-PROPERTY SECTIONS:\n"
-    "  ## <Property Name> — <filename>\n"
-    "  ### Finding: <title>\n"
-    "  **Severity:** 🔴 Critical / 🟠 High / 🟡 Medium / 🟢 Low\n"
-    "  **Affected Units:** <unit numbers>\n"
-    "  **Citation:** [Source: <filename>, Row <number>]\n"
-    "  **Description:** <what was found>\n"
-    "  **Reasoning:** <complete chain of reasoning>\n"
-    "  **Recommended Action:** <corrective action>\n\n"
-    "DETERMINISTIC RULES: CONC-001 (>$1K), CONC-002 ($999), CONC-003 (move-in), "
-    "CONC-004 (reversed), CONC-005 (duplicate units), CONC-006 (generic desc), "
-    "CONC-007 (high property total), CONC-008 (negative amounts).\n\n"
-    "Start with an Executive Summary, then one section per property, end with Recommendations."
-)
-
-
-# ---------------------------------------------------------------------------
-# Prompt Editor tab
-# ---------------------------------------------------------------------------
-
-def _render_prompt_editor_tab(audit_result):
-    """Render the prompt editor tab with the prompt used and ability to edit/re-run."""
-    st.subheader("⚙️ Audit Prompt Editor")
-    st.caption(
-        "View and customize the prompt sent to the AI audit agent. "
-        "Edit the prompt below, then click **Re-run Audit with Custom Prompt** in the sidebar."
-    )
-
-    # Show the prompt that was used for the last audit
-    last_prompt = st.session_state.get("audit_prompt")
-    if last_prompt:
-        with st.expander("📋 Prompt used in last audit run", expanded=False):
-            st.code(last_prompt, language="markdown")
-
-    # Editable prompt
-    st.markdown("### ✏️ Edit Prompt")
-    st.markdown(
-        "Modify the instructions below to change what the AI looks for. "
-        "The **DATA SUMMARY** (your CSV data) is automatically appended — "
-        "you only need to edit the instructions."
-    )
-
-    current_custom = st.session_state.get("custom_prompt") or ""
-    default_value = current_custom if current_custom else _DEFAULT_AUDIT_PROMPT
-
-    edited_prompt = st.text_area(
-        "Audit prompt (instructions to the AI agent)",
-        value=default_value,
-        height=400,
-        key="prompt_editor_textarea",
-    )
-
-    col1, col2, col3 = st.columns([1, 1, 2])
-    with col1:
-        if st.button("💾 Save Custom Prompt", type="primary"):
-            st.session_state.custom_prompt = edited_prompt
-            st.success("Custom prompt saved. Click **🚀 Run AI Audit** in the sidebar to use it.")
-    with col2:
-        if st.button("🔄 Reset to Default"):
-            st.session_state.custom_prompt = None
-            st.rerun()
-
-    st.markdown("---")
-
-    # Quick prompt suggestions
-    st.markdown("### 💡 Prompt Templates")
-    st.markdown("Click to load a pre-built prompt into the editor:")
-
-    templates = {
-        "🔍 Deep Concession Analysis": (
-            "You are a forensic property auditor specializing in concession analysis. "
-            "Examine every concession in the data. For each one:\n"
-            "1. Identify the type (move-in special, rent reduction, employee allowance, etc.)\n"
-            "2. Calculate the effective rent after concession\n"
-            "3. Flag any concession that reduces rent below $999\n"
-            "4. Flag duplicate concessions on the same unit\n"
-            "5. Flag reversed concessions that may not have been properly re-applied\n"
-            "6. Check if employee units have additional unauthorized concessions\n\n"
-            "For EVERY finding, provide:\n"
-            "- Citation: `[Source: <filename>, Row <number>]`\n"
-            "- Why: Complete reasoning chain explaining the issue\n"
-            "- Impact: Estimated monthly revenue impact\n"
-            "- Action: Specific recommended next step\n\n"
-            "Format as a structured Markdown report grouped by severity."
-        ),
-        "📊 Revenue Risk Focus": (
-            "You are a property management CFO reviewing concession data for revenue leakage. "
-            "Focus specifically on:\n"
-            "1. Total concession dollar amount by property\n"
-            "2. Concessions as a percentage of gross rent\n"
-            "3. Units with the largest absolute concession amounts\n"
-            "4. Patterns that suggest systemic pricing issues (e.g., many $999 specials)\n"
-            "5. Concessions without reverse dates (permanent revenue loss)\n\n"
-            "For EVERY finding, provide:\n"
-            "- Citation: `[Source: <filename>, Row <number>]`\n"
-            "- Why: Complete reasoning chain\n"
-            "- Financial impact: Dollar amount at risk\n\n"
-            "Format as a Markdown report with an executive summary, "
-            "findings by severity, and specific dollar-amount recommendations."
-        ),
-        "🏢 Compliance & Policy Check": (
-            "You are an internal auditor checking for policy compliance in property concessions. "
-            "Verify the following policies:\n"
-            "1. All concessions must have proper descriptions (flag generic ones)\n"
-            "2. Move-in specials should not exceed one month's rent\n"
-            "3. Employee unit allowances must be documented and limited\n"
-            "4. No unit should have more than 2 active concessions\n"
-            "5. All concessions over $500 must have notes explaining the reason\n"
-            "6. Reversed concessions must have a matching original entry\n\n"
-            "For EVERY finding, provide:\n"
-            "- Citation: `[Source: <filename>, Row <number>]`\n"
-            "- Policy violated: Which rule was broken\n"
-            "- Why: Evidence and reasoning\n"
-            "- Remediation: Specific corrective action\n\n"
-            "Format as a Markdown report suitable for a compliance review meeting."
-        ),
-    }
-
-    for label, template in templates.items():
-        if st.button(label, key=f"template_{label}"):
-            st.session_state.custom_prompt = template
-            st.rerun()
-
-
-# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
 def main():
     initialize_session_state()
 
-    # Auto-load ResMan concession CSVs from data/ at startup (once per session)
-    if not st.session_state["_resman_docs_loaded"]:
-        with st.spinner("Loading concession data from data/ directory…"):
-            st.session_state["resman_concession_docs"] = load_resman_csvs_from_data_dir()
-        st.session_state["_resman_docs_loaded"] = True
-
     sidebar = render_new_sidebar()
     canonical_model: CanonicalModel = st.session_state.canonical_model
     audit_log: AuditLog = st.session_state.audit_log
 
     uploaded_files = sidebar["uploaded_files"]
-    resman_docs = st.session_state.get("resman_concession_docs", [])
 
-    # --- Audit status banner ---
-    audit_result = st.session_state.get("audit_result")
-    if resman_docs or uploaded_files:
-        if audit_result:
-            st.success("✅ **AI Audit Complete** — Review findings in the tabs below.", icon="🤖")
-        else:
-            st.info(
-                "📂 **Data loaded.** Click **🚀 Run AI Audit** in the sidebar to analyze all CSV files.",
-                icon="💡",
-            )
-    st.markdown("---")
+    # --- Header ---
+    st.title("📊 LiveNjoy — Master Audit Dashboard")
+    st.markdown(
+        "Automated **Concession Audit** (John's Rules: Post-Term, Missing Addendum, "
+        "Amount Mismatch, Not Properly Posted, Large Credit, Non-Standard Description) + "
+        "**Recurring Revenue Integrity Audit** (Daniel's 2-Stage Engine)"
+    )
+    st.divider()
 
-    # Welcome screen — only when no uploaded files AND no auto-loaded concession data
-    if not uploaded_files and not resman_docs:
-        st.info(
-            "👆 **Get started:** Upload one or more files using the sidebar, then click **Run AI Audit**.\n\n"
-            "Supported file types: CSV, Excel (.xlsx/.xls), PDF, Word (.docx)\n\n"
-            "Sample fixtures are available in `data/samples/`:\n"
-            "- `rent_roll_sample.csv` — example rent roll\n"
-            "- `projection_sample.csv` — example recurring transaction projection\n"
-            "- `recurring_transaction_projection.pdf` — example PDF report"
-        )
-        return
+    # Run Forensic audit when button pressed
+    if sidebar.get("run_forensic"):
+        with st.spinner("🔬 Running forensic rules engine…"):
+            try:
+                from engine.resman_rules import run_resman_audit
+                results = run_resman_audit(data_dir="data")
+                st.session_state["resman_results"] = results
+                st.success("✅ Forensic audit complete — dashboard updated.")
+            except Exception as e:
+                st.error(f"Forensic engine error: {e}")
 
-    # Load files when they first appear or change
+    # Load uploaded files
     file_names = [f.name for f in uploaded_files]
     if file_names != st.session_state.get("_last_file_names"):
         st.session_state["_last_file_names"] = file_names
@@ -510,34 +367,6 @@ def main():
 
     parsed_docs: List[ParsedDocument] = st.session_state.parsed_docs
 
-    # Convert auto-loaded resman CSVs into ParsedDocument objects so the AI
-    # engine can analyse them (resman_docs are (property_name, df) tuples).
-    if resman_docs and not any(d.document_type == "concession" for d in parsed_docs):
-        import pandas as pd
-        for prop_name, rdf in resman_docs:
-            parsed_docs.append(
-                ParsedDocument(
-                    file_name=f"{prop_name} Transaction List (Credits) - Feb 2026.csv",
-                    file_type="csv",
-                    raw_text=rdf.to_string(index=False),
-                    dataframe=rdf,
-                    document_type="concession",
-                )
-            )
-        st.session_state.parsed_docs = parsed_docs
-
-    # Detect content types
-    doc_types = {d.document_type for d in parsed_docs}
-    has_rent_roll = "rent_roll" in doc_types
-    has_projection = "projection" in doc_types
-
-    rent_roll_doc: Optional[ParsedDocument] = next(
-        (d for d in parsed_docs if d.document_type == "rent_roll"), None
-    )
-    projection_doc: Optional[ParsedDocument] = next(
-        (d for d in parsed_docs if d.document_type == "projection"), None
-    )
-
     # Run AI audit when button pressed
     if sidebar["run_audit"]:
         api_key = sidebar["api_key"]
@@ -548,18 +377,12 @@ def main():
             )
         else:
             os.environ["AUDIT_MODEL"] = sidebar["model"]
-            custom_prompt = st.session_state.get("custom_prompt")
             with st.spinner("🤖 Running AI audit agent… this may take a minute…"):
                 try:
                     engine = LangGraphEngine(api_key=api_key)
-                    result = engine.run(
-                        canonical_model,
-                        parsed_docs=parsed_docs,
-                        custom_prompt=custom_prompt,
-                    )
+                    result = engine.run(canonical_model, parsed_docs=parsed_docs)
                     st.session_state.audit_result = result
                     st.session_state.audit_timestamp = datetime.now()
-                    st.session_state.audit_prompt = result.prompt_used
                     st.success(
                         f"✅ Audit complete at {st.session_state.audit_timestamp.strftime('%Y-%m-%d %H:%M:%S')}"
                     )
@@ -568,31 +391,17 @@ def main():
                 except Exception as e:
                     st.error(f"Audit agent error: {e}")
 
-    # Run Forensic audit when button pressed
-    if sidebar.get("run_forensic"):
-        with st.spinner("🔬 Running forensic rules engine (v4)…"):
-            try:
-                from engine.resman_rules import run_resman_audit
-                results = run_resman_audit(data_dir="data")
-                st.session_state["resman_results"] = results
-                st.success("✅ Forensic audit complete — new tabs available below.")
-            except Exception as e:
-                st.error(f"Forensic engine error: {e}")
-
     audit_result = st.session_state.get("audit_result")
     resman_results = st.session_state.get("resman_results")
 
-    # --- Tab structure ---
-    tabs_labels: List[str] = []
-    if has_rent_roll:
-        tabs_labels.append("📋 Rent Roll")
-    if has_projection:
-        tabs_labels.append("📊 Projections")
-    tabs_labels += ["🔍 AI Findings", "📄 Full Report", "⚙️ Prompt Editor"]
-    if parsed_docs:
-        tabs_labels.append("🗂️ Raw Data")
+    # --- No results yet: show prompt ---
+    if resman_results is None and audit_result is None and not uploaded_files:
+        st.info("👈 Click **Run Full Forensic Audit** in the sidebar to begin.")
+        return
 
-    # Forensic audit tabs (only shown after forensic audit has been run)
+    # --- Build tab list ---
+    # Forensic audit tabs are PRIMARY (shown first when available)
+    tabs_labels: List[str] = []
     if resman_results is not None:
         tabs_labels += [
             "📈 Executive Summary",
@@ -600,80 +409,38 @@ def main():
             "⚙️ Revenue Integrity (Daniel)",
             "👤 Manager Overrides",
             "💰 Exposure Drilldowns",
+            "🗂️ Risk Matrix",
             "📋 Fee Schedule Check",
         ]
+
+    # AI audit tabs (secondary — shown after forensic tabs)
+    doc_types = {d.document_type for d in parsed_docs}
+    has_rent_roll = "rent_roll" in doc_types
+    has_projection = "projection" in doc_types
+    rent_roll_doc: Optional[ParsedDocument] = next(
+        (d for d in parsed_docs if d.document_type == "rent_roll"), None
+    )
+    projection_doc: Optional[ParsedDocument] = next(
+        (d for d in parsed_docs if d.document_type == "projection"), None
+    )
+
+    if has_rent_roll:
+        tabs_labels.append("📋 Rent Roll")
+    if has_projection:
+        tabs_labels.append("📊 Projections")
+    if audit_result is not None or uploaded_files:
+        tabs_labels += ["🔍 AI Findings", "📄 Full Report"]
+    if parsed_docs:
+        tabs_labels.append("🗂️ Raw Data")
+
+    if not tabs_labels:
+        st.info("👈 Click **Run Full Forensic Audit** in the sidebar to begin.")
+        return
 
     tabs = st.tabs(tabs_labels)
     tab_idx = 0
 
-    if has_rent_roll:
-        with tabs[tab_idx]:
-            render_rent_roll_tab(rent_roll_doc)
-        tab_idx += 1
-
-    if has_projection:
-        with tabs[tab_idx]:
-            render_projection_tab(projection_doc)
-
-            # --- Portfolio risk metrics ---
-            if (
-                projection_doc is not None
-                and projection_doc.dataframe is not None
-                and not projection_doc.dataframe.empty
-            ):
-                rent_roll_df = (
-                    rent_roll_doc.dataframe
-                    if rent_roll_doc is not None and rent_roll_doc.dataframe is not None
-                    else None
-                )
-                try:
-                    filtered_df = compute_metrics(projection_doc.dataframe, rent_roll_df)
-                    if not filtered_df.empty:
-                        st.markdown("---")
-                        st.subheader("📊 Portfolio Risk Metrics")
-                        m1, m2, m3 = st.columns(3)
-                        m1.metric(
-                            "Monthly Leakage",
-                            f"${filtered_df['Monthly_Projection'].abs().sum():,.2f}",
-                        )
-                        m2.metric(
-                            "Units Tracked",
-                            f"{len(filtered_df)}",
-                        )
-                        m3.metric(
-                            "Total Portfolio Risk",
-                            f"${filtered_df['Total_Lease_Loss'].abs().sum():,.2f}",
-                        )
-                except Exception as e:
-                    st.warning(f"Could not compute portfolio risk metrics: {e}")
-
-        tab_idx += 1
-
-    with tabs[tab_idx]:
-        render_findings_tab(audit_result, parsed_docs=parsed_docs)
-    tab_idx += 1
-
-    with tabs[tab_idx]:
-        render_report_tab(audit_result, st.session_state.get("audit_timestamp"))
-    tab_idx += 1
-
-    # --- Prompt Editor tab ---
-    with tabs[tab_idx]:
-        _render_prompt_editor_tab(audit_result)
-    tab_idx += 1
-
-    if parsed_docs:
-        with tabs[tab_idx]:
-            st.subheader("🗂️ Raw Data")
-            for doc in parsed_docs:
-                with st.expander(f"{doc.file_name} ({doc.document_type})", expanded=False):
-                    if doc.dataframe is not None and not doc.dataframe.empty:
-                        st.dataframe(doc.dataframe, use_container_width=True)
-                    else:
-                        st.text(doc.raw_text[:3000] if doc.raw_text else "No content extracted.")
-        tab_idx += 1
-
-    # --- Forensic audit tabs ---
+    # ── Forensic audit tabs ────────────────────────────────────────────────
     if resman_results is not None:
         import pandas as _pd
 
@@ -687,19 +454,19 @@ def main():
 
         from config.fee_schedules import RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM
 
-        RISK_COLORS = {
+        RISK_COLORS_MAP = {
             RISK_CRITICAL: "#FF4B4B",
             RISK_HIGH: "#FFA500",
             RISK_MEDIUM: "#FFD700",
         }
 
         def _color_risk_v4(val):
-            color = RISK_COLORS.get(val, "#FFFFFF")
+            color = RISK_COLORS_MAP.get(val, "#FFFFFF")
             return f"background-color: {color}; color: black; font-weight: bold;"
 
-        # Tab: Executive Summary
+        # Tab 1: Executive Summary
         with tabs[tab_idx]:
-            st.header("Portfolio Health Snapshot — Forensic Audit")
+            st.header("Portfolio Health Snapshot")
             totals = exposure.get("totals", _pd.DataFrame())
 
             if not totals.empty:
@@ -710,7 +477,6 @@ def main():
                 c3.metric("Financial Exposure", f"${row.get('Total_Exposure', 0):,.2f}")
                 c4.metric("Error Rate", f"{row.get('Error_Pct', 0):.1f}%")
                 c5.metric("Critical Flags", int(row.get("Critical_Flags", 0)))
-
                 st.divider()
                 rc1, rc2, rc3 = st.columns(3)
                 rc1.metric("🔴 CRITICAL", int(row.get("Critical_Flags", 0)))
@@ -754,7 +520,7 @@ def main():
                 st.success("✅ No exceptions found — clean portfolio!")
         tab_idx += 1
 
-        # Tab: Concession Audit (John)
+        # Tab 2: Concession Audit (John)
         with tabs[tab_idx]:
             render_concession_tab(
                 parsed_docs=None,
@@ -763,24 +529,128 @@ def main():
             )
         tab_idx += 1
 
-        # Tab: Revenue Integrity (Daniel)
+        # Tab 3: Revenue Integrity (Daniel)
         with tabs[tab_idx]:
             render_revenue_integrity_tab(daniels_flags)
         tab_idx += 1
 
-        # Tab: Manager Overrides
+        # Tab 4: Manager Overrides
         with tabs[tab_idx]:
             render_overrides_tab(manager_ranking, override_log)
         tab_idx += 1
 
-        # Tab: Exposure Drilldowns
+        # Tab 5: Exposure Drilldowns
         with tabs[tab_idx]:
             render_exposure_tab(exposure, override_log)
         tab_idx += 1
 
-        # Tab: Fee Schedule Check
+        # Tab 6: Risk Matrix
+        with tabs[tab_idx]:
+            st.header("Risk Matrix — Severity by Property")
+            if all_flags.empty:
+                st.success("No flags — nothing to display.")
+            else:
+                pivot = (
+                    all_flags.groupby(["Property", "Risk_Level"])
+                    .agg(Count=("Rule", "count"), Exposure=("Amount_Impact", "sum"))
+                    .reset_index()
+                    .pivot_table(
+                        index="Property",
+                        columns="Risk_Level",
+                        values=["Count", "Exposure"],
+                        fill_value=0,
+                    )
+                )
+                pivot.columns = [f"{v}_{c}" for v, c in pivot.columns]
+                pivot = pivot.reset_index()
+                st.dataframe(pivot, use_container_width=True)
+
+                st.divider()
+                st.subheader("Resident-Level Drilldown")
+                props = sorted(all_flags["Property"].dropna().unique().tolist())
+                selected_prop = st.selectbox("Select Property", ["All"] + props, key="risk_matrix_prop")
+                drilldown = (
+                    all_flags if selected_prop == "All"
+                    else all_flags[all_flags["Property"] == selected_prop]
+                )
+                drilldown_sorted = drilldown.sort_values(
+                    ["Risk_Level", "Amount_Impact"],
+                    key=lambda col: (
+                        col.map({RISK_CRITICAL: 0, RISK_HIGH: 1, RISK_MEDIUM: 2})
+                        if col.name == "Risk_Level"
+                        else col
+                    ),
+                    ascending=[True, False],
+                )
+                st.dataframe(
+                    drilldown_sorted.style.map(_color_risk_v4, subset=["Risk_Level"])
+                    if "Risk_Level" in drilldown_sorted.columns
+                    else drilldown_sorted,
+                    use_container_width=True,
+                    hide_index=True,
+                )
+                st.caption(
+                    f"{len(drilldown_sorted):,} exceptions | "
+                    f"Exposure: **${drilldown_sorted['Amount_Impact'].sum():,.2f}**"
+                )
+        tab_idx += 1
+
+        # Tab 7: Fee Schedule Check
         with tabs[tab_idx]:
             render_fee_schedule_tab(fee_flags)
+        tab_idx += 1
+
+    # ── AI audit tabs ──────────────────────────────────────────────────────
+    if has_rent_roll:
+        with tabs[tab_idx]:
+            render_rent_roll_tab(rent_roll_doc)
+        tab_idx += 1
+
+    if has_projection:
+        with tabs[tab_idx]:
+            render_projection_tab(projection_doc)
+
+            if (
+                projection_doc is not None
+                and projection_doc.dataframe is not None
+                and not projection_doc.dataframe.empty
+            ):
+                rent_roll_df = (
+                    rent_roll_doc.dataframe
+                    if rent_roll_doc is not None and rent_roll_doc.dataframe is not None
+                    else None
+                )
+                try:
+                    filtered_df = compute_metrics(projection_doc.dataframe, rent_roll_df)
+                    if not filtered_df.empty:
+                        st.markdown("---")
+                        st.subheader("📊 Portfolio Risk Metrics")
+                        m1, m2, m3 = st.columns(3)
+                        m1.metric("Monthly Leakage", f"${filtered_df['Monthly_Projection'].abs().sum():,.2f}")
+                        m2.metric("Units Tracked", f"{len(filtered_df)}")
+                        m3.metric("Total Portfolio Risk", f"${filtered_df['Total_Lease_Loss'].abs().sum():,.2f}")
+                except Exception as e:
+                    st.warning(f"Could not compute portfolio risk metrics: {e}")
+        tab_idx += 1
+
+    if audit_result is not None or uploaded_files:
+        with tabs[tab_idx]:
+            render_findings_tab(audit_result, parsed_docs=parsed_docs)
+        tab_idx += 1
+
+        with tabs[tab_idx]:
+            render_report_tab(audit_result, st.session_state.get("audit_timestamp"))
+        tab_idx += 1
+
+    if parsed_docs:
+        with tabs[tab_idx]:
+            st.subheader("🗂️ Raw Data")
+            for doc in parsed_docs:
+                with st.expander(f"{doc.file_name} ({doc.document_type})", expanded=False):
+                    if doc.dataframe is not None and not doc.dataframe.empty:
+                        st.dataframe(doc.dataframe, use_container_width=True)
+                    else:
+                        st.text(doc.raw_text[:3000] if doc.raw_text else "No content extracted.")
         tab_idx += 1
 
     st.markdown("---")
