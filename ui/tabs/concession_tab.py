@@ -17,18 +17,7 @@ from engine.concession_audit import (
     worst_severity,
 )
 from ingestion.parsers import ParsedDocument
-
-# v4 risk colours (also used by _render_johns_flags)
-_V4_RISK_COLORS = {
-    "CRITICAL": "#FF4B4B",
-    "HIGH": "#FFA500",
-    "MEDIUM": "#FFD700",
-}
-
-
-def _v4_color_risk(val: str) -> str:
-    color = _V4_RISK_COLORS.get(val, "#FFFFFF")
-    return f"background-color: {color}; color: black; font-weight: bold;"
+from utils.risk_styles import color_risk as _v4_color_risk
 
 
 # ---------------------------------------------------------------------------
@@ -61,7 +50,7 @@ def _render_johns_flags(johns_flags: pd.DataFrame) -> None:
         .sort_values("Exposure", ascending=False)
     )
     st.dataframe(
-        rule_summary.style.applymap(_v4_color_risk, subset=["Risk_Level"]),
+        rule_summary.style.map(_v4_color_risk, subset=["Risk_Level"]),
         use_container_width=True,
         hide_index=True,
     )
@@ -69,7 +58,7 @@ def _render_johns_flags(johns_flags: pd.DataFrame) -> None:
     st.divider()
     st.subheader("Unit-Level Flags")
     st.dataframe(
-        johns_flags.style.applymap(_v4_color_risk, subset=["Risk_Level"]),
+        johns_flags.style.map(_v4_color_risk, subset=["Risk_Level"]),
         use_container_width=True,
         hide_index=True,
     )

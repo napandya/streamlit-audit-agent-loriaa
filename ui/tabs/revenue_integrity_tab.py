@@ -6,43 +6,8 @@ from __future__ import annotations
 import pandas as pd
 import streamlit as st
 
-from config.fee_schedules import RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM
-
-RISK_COLORS = {
-    RISK_CRITICAL: "#FF4B4B",
-    RISK_HIGH: "#FFA500",
-    RISK_MEDIUM: "#FFD700",
-}
-
-STAGE1_RULES = {
-    "Missing Standard Charge",
-    "Major Charge Amount Variance",
-    "Minor Charge Amount Variance",
-    "Recurring Concession >$700",
-    "Concession >$500 for 2+ Months",
-    "Concession No Expiration",
-    "Post-Term Credit",
-}
-STAGE2_RULES = {
-    "Negative Net Rent",
-    "$0 Net Rent (Recent Move-in)",
-    "$0 Net Rent (Not Recent)",
-    "Manual Posting Without Setup",
-    "Invalid Credit Code",
-    "Posted vs Recurring Mismatch",
-    "Misc Tenant Credit",
-}
-
-
-def _color_risk(val: str) -> str:
-    color = RISK_COLORS.get(val, "#FFFFFF")
-    return f"background-color: {color}; color: black; font-weight: bold;"
-
-
-def _styled(df: pd.DataFrame) -> object:
-    if df.empty or "Risk_Level" not in df.columns:
-        return df
-    return df.style.applymap(_color_risk, subset=["Risk_Level"])
+from engine.resman_rules import STAGE1_RULES, STAGE2_RULES
+from utils.risk_styles import styled_df
 
 
 def _stage_section(flags: pd.DataFrame, title: str) -> None:
@@ -57,11 +22,11 @@ def _stage_section(flags: pd.DataFrame, title: str) -> None:
         .sort_values("Exposure", ascending=False)
     )
     st.subheader("Rule Summary")
-    st.dataframe(_styled(rule_summary), use_container_width=True, hide_index=True)
+    st.dataframe(styled_df(rule_summary), use_container_width=True, hide_index=True)
 
     st.divider()
     st.subheader("Unit-Level Flags")
-    st.dataframe(_styled(flags), use_container_width=True, hide_index=True)
+    st.dataframe(styled_df(flags), use_container_width=True, hide_index=True)
     st.caption(f"Total Exposure: **${flags['Amount_Impact'].sum():,.2f}** | {len(flags):,} flags")
 
 

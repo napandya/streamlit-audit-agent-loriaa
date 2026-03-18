@@ -9,6 +9,13 @@ Handles loading from the 6 ResMan export subfolders:
   data/rent_rolls/    — Rent Rolls
   data/activity/      — Resident Activity
 
+NOTE: ``engine/resman_rules.py`` contains its own specialised loaders that
+parse each report type with the correct ``skiprows`` and column renaming.
+Those specialised loaders are used by the production orchestrator
+(``run_resman_audit``).  This module provides a **generic utility** for any
+future code that needs raw DataFrames from these subfolders without the
+report-type-specific parsing.
+
 Does NOT modify ingestion/resman_client.py or ingestion/loader.py.
 """
 
@@ -18,7 +25,7 @@ import os
 
 import pandas as pd
 
-from config.fee_schedules import PROPERTY_MAP
+from utils.csv_helpers import derive_property, read_csv_robust
 
 # ---------------------------------------------------------------------------
 # REPORT TYPE SUBFOLDER NAMES
@@ -31,54 +38,6 @@ REPORT_SUBFOLDERS = [
     "rent_rolls",
     "activity",
 ]
-
-
-# ---------------------------------------------------------------------------
-# Internal helpers
-# ---------------------------------------------------------------------------
-
-def _derive_property(filename: str) -> str:
-    """
-    Map a ResMan export filename to the canonical full property name.
-
-    Resolution order:
-    1. First word of filename matches a short code in PROPERTY_MAP.
-    2. Keyword scan on the lowercased filename.
-    3. Fallback: return the first word of the filename unchanged.
-    """
-    keyword_map = {
-        "crossing": "Crossings at Irving",
-        "irving": "Crossings at Irving",
-        "taylor": "Parks on Taylor",
-        "highland": "Highland Park",
-        "prada": "La Prada",
-        "village": "Village Green",
-        "valencia": "Valencia Plaza",
-        "western": "Western Station",
-    }
-
-    first_word = filename.split(" ")[0].replace(",", "").upper()
-    if first_word in PROPERTY_MAP:
-        return PROPERTY_MAP[first_word]
-
-    fname_lower = filename.lower()
-    for keyword, prop in keyword_map.items():
-        if keyword in fname_lower:
-            return prop
-
-    return filename.split(" ")[0]
-
-
-def _read_csv_robust(fpath: str, **kwargs) -> pd.DataFrame:
-    """Try encodings: utf-8-sig → cp1252 → latin-1 (ResMan Windows exports)."""
-    for enc in ("utf-8-sig", "cp1252", "latin-1"):
-        try:
-            return pd.read_csv(fpath, encoding=enc, **kwargs)
-        except UnicodeDecodeError:
-            continue
-    raise ValueError(
-        f"Could not decode '{fpath}' with utf-8-sig, cp1252, or latin-1."
-    )
 
 
 # ---------------------------------------------------------------------------
@@ -122,9 +81,9 @@ def load_subfolder(
 
     for fname in sorted(csv_files):
         fpath = os.path.join(subfolder_path, fname)
-        prop_name = _derive_property(fname)
+        prop_name = derive_property(fname)
         try:
-            df = _read_csv_robust(fpath, dtype=str, low_memory=False)
+            df = read_csv_robust(fpath, dtype=str, low_memory=False)
             df["_property_name"] = prop_name
             df["_source_file"] = fname
             df["_report_type"] = report_type

@@ -5,7 +5,7 @@ Authors: John B. (Concession Rules) + Daniel Twito (Revenue Integrity Rules)
 Company: LiveNjoy Residential  |  System: ResMan
 
 Implements:
-  - John's 9 concession rules  (run_johns_engine)
+  - John's 7 active concession rules (R4 disabled)  (run_johns_engine)
   - Daniel's 2-stage revenue integrity engine  (run_daniels_engine)
   - Fee schedule amount validation  (run_fee_schedule_check)
   - Manager override leaderboard  (run_manager_override_audit)
@@ -19,7 +19,6 @@ from __future__ import annotations
 
 import os
 import re
-import warnings
 from datetime import datetime
 
 import numpy as np
@@ -37,8 +36,7 @@ from config.fee_schedules import (
     RISK_MEDIUM,
     STANDARD_CHARGE_THRESHOLD,
 )
-
-warnings.filterwarnings("ignore")
+from utils.csv_helpers import derive_property, read_csv_robust
 
 # ---------------------------------------------------------------------------
 # RISK MAP — rule name → risk level
@@ -119,7 +117,7 @@ def _parse_date(val):
     if pd.isna(val) or str(val).strip() in ("", "nan"):
         return None
     try:
-        return pd.to_datetime(val, infer_datetime_format=True)
+        return pd.to_datetime(val, format="mixed", dayfirst=False)
     except Exception:
         return None
 
@@ -131,34 +129,7 @@ def _is_date_string(s: str) -> bool:
 
 def _derive_property(filename: str) -> str:
     """Map a ResMan export filename to the canonical full property name."""
-    code_map = {
-        "CAI": "Crossings at Irving",
-        "POT": "Parks on Taylor",
-        "HP": "Highland Park",
-        "LP": "La Prada",
-        "VG": "Village Green",
-        "VPA": "Valencia Plaza",
-        "VP": "Valencia Plaza",
-        "WST": "Western Station",
-    }
-    keyword_map = {
-        "crossing": "Crossings at Irving",
-        "irving": "Crossings at Irving",
-        "taylor": "Parks on Taylor",
-        "highland": "Highland Park",
-        "prada": "La Prada",
-        "village": "Village Green",
-        "valencia": "Valencia Plaza",
-        "western": "Western Station",
-    }
-    first_word = filename.split(" ")[0].replace(",", "").upper()
-    if first_word in code_map:
-        return code_map[first_word]
-    fname_lower = filename.lower()
-    for keyword, prop in keyword_map.items():
-        if keyword in fname_lower:
-            return prop
-    return filename.split(" ")[0]
+    return derive_property(filename)
 
 
 def _make_flag(
@@ -195,12 +166,7 @@ def _csv_files(folder: str) -> list[str]:
 
 def _read_csv(fpath: str, **kwargs) -> pd.DataFrame:
     """Try utf-8-sig → cp1252 → latin-1 (Windows ResMan exports)."""
-    for enc in ("utf-8-sig", "cp1252", "latin-1"):
-        try:
-            return pd.read_csv(fpath, encoding=enc, **kwargs)
-        except UnicodeDecodeError:
-            continue
-    raise ValueError(f"Could not decode '{fpath}'.")
+    return read_csv_robust(fpath, **kwargs)
 
 
 def _load_transaction_list(folder: str) -> pd.DataFrame:
@@ -532,7 +498,7 @@ def run_johns_engine(
     df_rent_roll: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     """
-    John's concession audit rules.
+    John's concession audit rules — 7 active rules (R4 disabled).
 
     R1  Post-Term Credit        — credit posted after lease end date (CRITICAL)
     R2  Missing Lease           — credit with no lease on file (HIGH)

@@ -7,23 +7,7 @@ import pandas as pd
 import streamlit as st
 
 from config.fee_schedules import PROPERTY_FEE_SCHEDULE, RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM
-
-RISK_COLORS = {
-    RISK_CRITICAL: "#FF4B4B",
-    RISK_HIGH: "#FFA500",
-    RISK_MEDIUM: "#FFD700",
-}
-
-
-def _color_risk(val: str) -> str:
-    color = RISK_COLORS.get(val, "#FFFFFF")
-    return f"background-color: {color}; color: black; font-weight: bold;"
-
-
-def _styled(df: pd.DataFrame) -> object:
-    if df.empty or "Risk_Level" not in df.columns:
-        return df
-    return df.style.applymap(_color_risk, subset=["Risk_Level"])
+from utils.risk_styles import styled_df
 
 
 def render_fee_schedule_tab(fee_flags: pd.DataFrame) -> None:
@@ -55,11 +39,11 @@ def render_fee_schedule_tab(fee_flags: pd.DataFrame) -> None:
 
         st.divider()
         st.subheader("Violations by Property")
-        st.dataframe(_styled(summary), use_container_width=True, hide_index=True)
+        st.dataframe(styled_df(summary), use_container_width=True, hide_index=True)
 
         st.divider()
         st.subheader("Unit-Level Violations")
-        st.dataframe(_styled(fee_flags), use_container_width=True, hide_index=True)
+        st.dataframe(styled_df(fee_flags), use_container_width=True, hide_index=True)
         st.caption(f"{len(fee_flags):,} violations | "
                    f"Total Variance: **${fee_flags['Amount_Impact'].sum():,.2f}**")
 
