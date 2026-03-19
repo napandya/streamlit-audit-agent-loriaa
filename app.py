@@ -478,13 +478,21 @@ def main():
                 c1.metric("Units Audited", int(row.get("Total_Units_Audited", 0)))
                 c2.metric("Total Exceptions", int(row.get("Total_Exceptions", 0)))
                 c3.metric("Financial Exposure", f"${row.get('Deduped_Exposure', row.get('Total_Exposure', 0)):,.2f}")
-                c4.metric("Error Rate", f"{row.get('Error_Pct', 0):.1f}%")
+                c4.metric("Avg Flags / Unit", f"{row.get('Avg_Flags_Per_Unit', 0):.1f}")
                 c5.metric("Critical Flags", int(row.get("Critical_Flags", 0)))
+                st.caption(
+                    f"Financial Exposure shows the conservative deduped figure "
+                    f"(max impact per unit across all engines: "
+                    f"**${row.get('Deduped_Exposure', row.get('Total_Exposure', 0)):,.2f}**). "
+                    f"Raw sum across all flags: **${row.get('Total_Exposure', 0):,.2f}**."
+                )
+
                 st.divider()
+                st.subheader("Flags by Risk Level")
                 rc1, rc2, rc3 = st.columns(3)
                 rc1.metric("🔴 CRITICAL", int(row.get("Critical_Flags", 0)))
-                rc2.metric("🟠 HIGH", int(row.get("High_Flags", 0)))
-                rc3.metric("🟡 MEDIUM", int(row.get("Medium_Flags", 0)))
+                rc2.metric("🟠 HIGH",     int(row.get("High_Flags", 0)))
+                rc3.metric("🟡 MEDIUM",   int(row.get("Medium_Flags", 0)))
 
             st.divider()
             st.subheader("All Exceptions")

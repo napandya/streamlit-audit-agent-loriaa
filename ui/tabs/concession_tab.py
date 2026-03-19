@@ -63,7 +63,11 @@ def _render_johns_flags(johns_flags: pd.DataFrame) -> None:
         use_container_width=True,
         hide_index=True,
     )
-    st.caption(f"Total Exposure: **${total_exposure:,.2f}**")
+    st.caption(
+        f"John's rules exposure (raw sum): **${total_exposure:,.2f}**. "
+        "Note: some units may also appear in Daniel's engine — the Executive Summary "
+        "deduplicates by taking the max impact per unit."
+    )
 
 
 # ---------------------------------------------------------------------------
