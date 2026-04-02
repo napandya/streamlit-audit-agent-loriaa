@@ -83,7 +83,7 @@ CONCESSION_HIGH_MONTHS    = 2
 STANDARD_CHARGE_THRESHOLD = 0.90
 RECENT_MOVEIN_DAYS        = 60
 
-AUDIT_MONTH = "Mar 2026"   # update each month
+AUDIT_MONTH = "Apr 2026"   # update each month
 
 # Categories exempt from "Missing Standard Charge" — these are unit-specific add-ons.
 # Per Daniel Twito: parking, pet fees, and washer/dryer are not universal.
