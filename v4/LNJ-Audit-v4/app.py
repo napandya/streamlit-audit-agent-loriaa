@@ -47,7 +47,7 @@ def styled_df(df: pd.DataFrame, risk_col: str = "Risk_Level") -> object:
     if df.empty:
         return df
     if risk_col in df.columns:
-        return df.style.applymap(color_risk, subset=[risk_col])
+        return df.style.map(color_risk, subset=[risk_col])
     return df
 
 
