@@ -1,5 +1,5 @@
 # LNJ Audit Bot — Full Project Context
-**Last updated:** March 11, 2026 (afternoon — March 2026 audit run complete)
+**Last updated:** May 1, 2026 — Final April 2026 report generated from full Apr 1–30 CSVs and sent to John Barajas. Awaiting his sign-off.
 **Paste this into a new Copilot Chat to resume exactly where we left off.**
 
 ---
@@ -99,6 +99,52 @@ Uses **Rent Roll concession rows** (negative-amount lines with concession keywor
 **Last run results (Feb 2026):** 198 flags (60 Missing Addendum, 42 Large Credit, 25 Amount Mismatch, 68 Invalid Code, 2 Missing Lease, 1 Post-Term)  
 **R4 now disabled** — Invalid Code flags will no longer appear in future runs.
 
+---
+
+## ⚠️ Critical Bug Fixed — April 30, 2026
+
+**Bug 1 (ROOT CAUSE — load_transaction_list):**  
+ResMan Transaction List CSVs contain multiple section types: `Credit`, `Charge`, `Payment`, `Deposit Applied to Balance`, `Deposit Refund`, `Deposit - Security Deposit`, `Payment - Payment On Behalf Of Resident`.
+
+The section forward-fill (`ffill()`) only reassigned `_section` when rows matched `^(Credit|Charge) - `.  
+All other section headers (Payment, Deposit, etc.) left `_section = NaN`, which `ffill()` silently replaced with the last Credit section label.  
+Result: **every payment and deposit row in the file was classified as a Credit and ingested as a concession** — up to 340 payment rows per property (1,456+ total across 7 properties).
+
+This caused:
+- R5 "Missing Addendum" to fire for every unit making a payment (no RR concession setup exists for a payment)
+- R3 "Large Credit ≥$700" to fire for every rent payment ≥$700
+- R2 "Missing Lease" to fire for some payment-bearing units
+- Daniel's "Manual Posting Without Setup" to fire similarly
+- Confirmed example: unit 0313 Village Green (Tuesday Greene) had $1,862.21 payment flagged as a missing-addendum credit
+
+**Fix:** Changed the section detection regex from `r"^(Credit|Charge) - "` to `r"^(Credit|Charge|Payment|Deposit)"` so ALL section header types properly reset the `_section` column and prevent Payment/Deposit rows from inheriting a Credit label.
+
+**Bug 2 (run_daniels_engine — Posted vs Recurring Mismatch):**  
+The Projection rent query used `r"\brent\b"` which also matched `Concession - Rent` category rows (negative amounts). These were subtracted from `recurring_rent`, making it artificially low vs. the Rent Roll's rent-only `posted_rent`. Result: every unit with a concession setup generated a false "Posted vs Recurring Mismatch" flag.
+
+**Fix:** Added `~contains("concession")` and `(Amount > 0)` filters to the Projection rent query so it reflects gross rent only — matching how `posted_rent` is computed from the Rent Roll.
+
+**Bug 6 — R5 Missing Addendum rule disabled (April 30, 2026, per John):**  
+John confirmed that all flagged addenda exist — they are saved as PDFs in ResMan's Documents section, which is not accessible from CSV exports. The Rent Roll concession row is not a reliable proxy for addendum existence.  
+
+**Fix:** R5 is now fully disabled. The `if in_tx and not in_rr` block is commented out. The rule will not fire until a data source for addendum status becomes available (e.g. a ResMan document API or a manual tracker John provides).
+`Credit - Resident Referral` transactions (one-time referral bonuses) were being evaluated by the R5 Missing Addendum cross-check. Since referral credits never have a Rent Roll concession row by design, every referral credit generated a false CRITICAL "Missing Addendum" flag.  
+
+**Fix:** Added `Credit - Resident Referral` to a skip-set (`_R5_SKIP_SECTIONS`) in `run_johns_engine()`. This section is now excluded from the `tx_credit_lookup` so it cannot trigger R5.  
+NOTE: `_section` column is now preserved on `df_trans` (not dropped in `load_transaction_list`) so engines can filter by section type.
+
+**Bug 3B (R5 Missing Addendum — Employee Unit Rent Allowance false positive):**  
+`Credit - Employee Unit Rent Allowance` transactions (HR-approved employee unit discounts, code `EMPL`) were also being evaluated by R5. These never have a Rent Roll concession row setup in the standard way. Result: multiple false CRITICAL flags per employee unit each month.  
+
+**Fix:** Added `Credit - Employee Unit Rent Allowance` to the same `_R5_SKIP_SECTIONS` set.  
+Employee unit credits are still audited via Daniel's "Manual Posting Without Setup" rule, which correctly flags them when they lack a Projection concession row setup.
+
+**Bug 5 (Fee Schedule Check — multi-space optional fees flagged as violations):**  
+Units renting multiple parking spaces (e.g. 3 × $35 = $105/mo at Crossings at Irving) were flagged as "Fee Schedule Violation" because the check compared the unit's total parking charge against the single-space schedule rate ($35), producing a $70 variance.  
+
+**Fix:** For `optional: True` fees in `PROPERTY_FEE_SCHEDULE`, the check now skips if the unit's charge is an exact whole multiple of the per-unit fee rate (i.e. `actual_amt % fee_amount == 0`). Mandatory fees (Billing, Trash, Pest, etc.) are not affected.  
+Example: CAI Units 157 ($105) and 222 ($105) are now correctly skipped. CAI Unit 181 ($100) is still flagged — $100 is not an exact multiple of $35.
+
 **One rule still NOT implemented** — "Incorrect Frequency Setup" — requires a separate data source showing approved concession term (one-time / 12-month / MTM). ResMan does not export this. Still waiting on John to provide a tracker.
 
 ---
@@ -172,14 +218,45 @@ Reads the Edited Transactions by User files, tracks all manager reversals and am
 
 ---
 
-## Last Full Run Results (March 11, 2026 @ 13:41)
+## Last Full Run Results (May 1, 2026 @ 13:42) — FINAL APRIL 2026 OUTPUT — sent to John
+
+```
+42/42 files loaded (full Apr 1–30, 2026 CSVs from Daniel)
+375   transaction rows
+69    John flags
+302   Daniel flags
+169   Fee Schedule flags
+15    managers | 1,225 events | $-221,888.56 revenue impact
+281   units audited | 540 total exceptions
+$95,729.96 total exposure | 19 CRITICAL flags
+Output: output/LNJ_Audit_20260501_1342.xlsx
+```
+
+Verification (verify_final.py): 7/8 checks passed. All of John's reported issues confirmed resolved.
+Awaiting John's sign-off.
+
+### Previous Run (April 30, 2026 @ 12:25) — POST R5 DISABLE (superseded)
 
 ```
 42/42 files loaded
-3,676 John flags
+375   transaction rows (Credit sections only — payment rows correctly excluded)
+95    John flags
+302   Daniel flags
+194   Fee Schedule flags
+16    managers | 514 events | $-105,396.31 revenue impact
+284   units audited | 591 total exceptions
+$103,338.16 total exposure | 56 CRITICAL flags
+Output: output/LNJ_Audit_20260430_1119.xlsx
+```
+
+### Previous Run (March 11, 2026 @ 13:41) — BUGGY OUTPUT (do not use)
+
+```
+42/42 files loaded
+3,676 John flags  ← caused by Bug 1 (payment rows leaking into credits)
 964   Daniel flags
 218   Fee Schedule flags
-16    managers | 359 override events | $-63,702.03 revenue impact
+16    managers | 359 events | $-63,702.03 revenue impact
 629   units audited | 4,858 total exceptions
 $7,286,676.98 total exposure | 2,691 CRITICAL flags
 Output: output/LNJ_Audit_20260311_1341.xlsx
@@ -188,6 +265,10 @@ Output: output/LNJ_Audit_20260311_1341.xlsx
 ⚠️ NOTE: John flag count jumped from 198 → 3,676. Suspected cause: March Transaction List
 export includes full transaction history (not just March), causing historical transactions
 to be re-flagged. Confirm date range with Daniel — Transaction List should be Mar 1–11, 2026 only.
+
+**Root cause confirmed April 30, 2026:** The 3,676 was NOT a date-range issue.
+It was Bug 1 (payment rows leaking into credits — see above). March files happened to have
+similar file structure; April files exposed it clearly. The bug existed in all prior runs.
 
 ### Previous Run (Feb 2026 — March 4, 2026 @ 11:53)
 ```
@@ -290,14 +371,16 @@ All headers are dark blue with white bold text. Header row is frozen. Columns ar
 
 ---
 
-## Next Run — April 2026
+## Next Run — May 2026
 
-1. Drop 42 CSV files into their matching `data/` subfolders (replace March files)
-2. Change `AUDIT_MONTH = "Apr 2026"` in `audit_bot.py`
+1. Drop 42 CSV files into their matching `data/` subfolders (replace April files)
+2. Change `AUDIT_MONTH = "May 2026"` in `audit_bot.py`
 3. Run: `.venv\Scripts\python.exe audit_bot.py`
 4. Dashboard: `.venv\Scripts\streamlit.exe run app.py` → http://localhost:8501
 
-**File naming note:** March files used full names (e.g. `Crossings at Irving Transaction List.csv`). Bot handles both short-code and full-name formats automatically.
+**Both bugs are now fixed** — output is reliable. The April 30 run is the first clean output.
+
+**File naming note:** March/April files used full names (e.g. `Crossings at Irving Transaction List.csv`). Bot handles both short-code and full-name formats automatically.
 
 ⚠️ Before next run — confirm with Daniel that Transaction List export is filtered to the audit month only (Mar 1–31), not full history. March run produced 3,676 John flags vs 198 in Feb, likely due to full history export.
 

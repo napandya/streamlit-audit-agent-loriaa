@@ -354,12 +354,21 @@ def load_transaction_list(folder: str) -> pd.DataFrame:
             # Excluded sections:
             #   "Credit - Renters Insurance Premium Credit" — these are resident
             #   insurance PAYMENT rows (Description='Payment'), not concessions.
+            #
+            # IMPORTANT: ALL section header types must be captured in the ffill so
+            # that non-Credit sections (Payment, Deposit, etc.) properly reset the
+            # section label.  Without this, Payment/Deposit rows that appear after
+            # a Credit section inherit the last Credit section label via ffill and
+            # are wrongly treated as concession credits.
+            # Covers: Payment - Payment, Payment - Payment On Behalf Of Resident,
+            #         Deposit Applied to Balance - ..., Deposit Refund - ...,
+            #         Deposit - Security Deposit (seen across all 7 properties).
             NON_CONCESSION_SECTIONS = {
                 "Credit - Renters Insurance Premium Credit",
             }
             date_col = df.iloc[:, 0].astype(str).str.strip()
             df["_section"] = date_col.where(
-                date_col.str.match(r"^(Credit|Charge) - ")
+                date_col.str.match(r"^(Credit|Charge|Payment|Deposit)")
             ).ffill()
             df = df[
                 df["_section"].str.startswith("Credit - ", na=False) &
@@ -383,7 +392,9 @@ def load_transaction_list(folder: str) -> pd.DataFrame:
             df["Reverse Date"] = df[rdate[0]] if len(rdate) else ""
 
             # Drop internal working columns before returning
-            df = df.drop(columns=["_section", "_prop"], errors="ignore")
+            # Note: _section is kept (not dropped) so downstream engines can
+            # identify credit type (Concession vs Referral vs Employee Unit).
+            df = df.drop(columns=["_prop"], errors="ignore")
 
             all_data.append(df)
             print(f"  [OK] Transactions: {fname}  ({len(df)} rows)")
@@ -872,11 +883,19 @@ def run_johns_engine(df_trans: pd.DataFrame, df_leases: pd.DataFrame,
             rr_src_lookup[(prop, unit)]  = grp["Source_File"].iloc[0]
 
     # Transaction List credit lookup: (prop, unit) -> total active credits posted
+    # Excludes Resident Referral and Employee Unit Rent Allowance sections:
+    # - Referral credits are one-time bonuses with no corresponding RR concession row by design
+    # - Employee Unit Allowances are HR-approved and don't always have an RR concession setup
+    _R5_SKIP_SECTIONS = {"Credit - Resident Referral", "Credit - Employee Unit Rent Allowance"}
     tx_credit_lookup = {}   # (prop, unit) -> total credit
     tx_src_lookup    = {}
     tx_res_lookup    = {}
     if not df_trans.empty:
-        active = df_trans[~df_trans["Is_Reversal"] & (df_trans["Amount"] > 0)]
+        active = df_trans[
+            ~df_trans["Is_Reversal"] &
+            (df_trans["Amount"] > 0) &
+            ~df_trans["_section"].isin(_R5_SKIP_SECTIONS)
+        ]
         for (prop, unit), grp in active.groupby(["Property", "Unit"]):
             tx_credit_lookup[(prop, unit)] = grp["Amount"].sum()
             tx_src_lookup[(prop, unit)]    = grp["Source_File"].iloc[0]
@@ -969,16 +988,16 @@ def run_johns_engine(df_trans: pd.DataFrame, df_leases: pd.DataFrame,
         src = tx_src_lookup.get((prop, unit), rr_src_lookup.get((prop, unit), ""))
         market = rr_market_lookup.get((prop, unit), 0.0)
 
-        # R5 — Missing Addendum: credit posted but no concession on Rent Roll
-        if in_tx and not in_rr:
-            mkt_ctx = f" (Market rent: ${market:.2f})" if market > 0 else ""
-            flags.append(make_flag(prop, unit, resident, "Missing Addendum",
-                f"${posted_amt:.2f} credit posted to Transaction List but unit "
-                f"has NO concession row on the Rent Roll. No lease addendum evident.{mkt_ctx}",
-                posted_amt, src))
+        # R5 — Missing Addendum: DISABLED (April 30, 2026)
+        # Addenda are stored as PDFs in ResMan's Documents section, which is not
+        # accessible from CSV exports. The Rent Roll concession row is not a
+        # reliable proxy for addendum existence — John confirmed all flagged
+        # addenda exist. This rule generated only false positives.
+        # if in_tx and not in_rr:
+        #     ...
 
         # R6 — Amount Mismatch: both exist but amounts differ
-        elif in_tx and in_rr:
+        if in_tx and in_rr:
             delta    = abs(posted_amt - approved_amt)
             pct_diff = delta / approved_amt if approved_amt > 0 else 0
             if delta > 10 and pct_diff > 0.10:
@@ -1226,11 +1245,20 @@ def run_daniels_engine(
                     r"\brent\b|\bbase\b", na=False, regex=True)]
                 posted_rent = rent_rows["Amount"].sum()
 
+                # Exclude concession/credit rows from the rent query so that
+                # recurring_rent reflects the gross rent charge only — matching
+                # how posted_rent is calculated from the Rent Roll (which already
+                # excludes concession rows).  Without this exclusion, units with a
+                # "Concession - Rent" entry in the Projection would produce a
+                # false "Posted vs Recurring Mismatch" flag every month.
                 proj_sub = df_projection[
                     (df_projection["Property"] == prop) &
                     (df_projection["Unit"] == unit) &
                     df_projection["Category"].str.lower().str.contains(
-                        r"\brent\b|\bbase\b", na=False, regex=True)
+                        r"\brent\b|\bbase\b", na=False, regex=True) &
+                    ~df_projection["Category"].str.lower().str.contains(
+                        "concession", na=False) &
+                    (df_projection["Amount"] > 0)
                 ]
                 recurring_rent = proj_sub["Amount"].sum()
 
@@ -1318,6 +1346,14 @@ def run_fee_schedule_check(df_projection: pd.DataFrame) -> pd.DataFrame:
 
                 actual_amt = matching["Amount"].iloc[0]
                 variance   = abs(actual_amt - fee["amount"])
+
+                # For optional per-item fees (parking, pets, W/D), a resident may
+                # have multiple units (e.g. 3 parking spaces at $35 = $105/mo).
+                # Skip only if the charge is an exact whole multiple of the per-unit
+                # fee rate and the fee is flagged optional in the schedule.
+                if (fee.get("optional", False) and fee["amount"] > 0
+                        and round(actual_amt % fee["amount"], 2) == 0.0):
+                    continue
 
                 if variance >= 1.0:
                     flags.append(make_flag(
